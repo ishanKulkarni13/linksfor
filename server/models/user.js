@@ -63,17 +63,13 @@ const userSchema = new mongoose.Schema({
             default: false,
         },
         bage: {
-            type: String,
-            default: "blue",
-            enum: ['blue', 'gold', "red"],
+            type: String
         },
         description: {
-            type: String,
-            default: "A verified Account"
+            type: String
         },
         verifiedAt: {
-            type: Date,
-            default: Date.now
+            type: Date
         }
     },
     trees: {
@@ -89,10 +85,6 @@ const userSchema = new mongoose.Schema({
         },
     },
     treeTheme: {
-        // selectedTheme: {
-        //     type: String,
-        //     default: "tree-blue-modern",
-        // },
         customThemeConfig: {
             background: {
                 type: String,
@@ -128,6 +120,6 @@ const userSchema = new mongoose.Schema({
     },
 }, { timestamps: true });
 
-const userModel = mongoose.model("User", schema);
+const userModel = mongoose.model("User", userSchema);
 
 export default userModel;
