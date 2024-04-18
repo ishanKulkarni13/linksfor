@@ -1,16 +1,10 @@
-class ErrorHandelar extends Error{
-    constructor(message,statusCode){
-        super(message);
-        this.statusCode = statusCode;
 
-    }
-}
-
-const errorMiddleware = (err,req,res,next)=> {
-   message = err.message || "internal server erroe";
-   statusCode = err.statusCode || 500;
-
-   return res.status(statusCode).json({message})
-}
-
-export default ErrorHandelar;
+export const errorMiddleware = (err,req,res,next)=> {
+    err.message = err.message || "internal server error";
+    err.statusCode = err.statusCode || 500;
+    return res.status(err.statusCode).json({
+     success:false,
+     message: err.message
+    });
+ }
+ 

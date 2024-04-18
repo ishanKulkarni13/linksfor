@@ -14,9 +14,6 @@ const treeSchema = mongoose.Schema({
     treeLockConfig: {
         password: {
             type: String,
-            default: function () {
-                return `${this.name}_${Math.floor(Math.random() * 10000)}`;
-            },
             minLength: [3, "Password must be of at least 3 characters"],
         }
     },

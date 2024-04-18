@@ -73,12 +73,6 @@ const userSchema = new mongoose.Schema({
         }
     },
     trees: {
-        ownedtrees: [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'tree',
-            }
-        ],
         ProfileDefaultTree: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'tree',

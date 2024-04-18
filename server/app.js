@@ -13,6 +13,7 @@ import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import path from 'path';
 import { createTree } from './controllers/tree.js';
+import { errorMiddleware } from './middlewares/error.js';
 // import { GoogleStrategyConfig, GoogleStrategyVerifyFunction } from './config/passport.js';
 // passport.use(new GoogleStrategy(GoogleStrategyConfig, GoogleStrategyVerifyFunction ));
 
@@ -34,6 +35,6 @@ app.use("/", homeRouter);
 app.use("/user", userRouter);
 app.use("/auth", authRouter);
 app.use("/tree", treeRouter);
-
-app.get("/create", createTree)
+app.use(errorMiddleware)
+app.set('view engine', 'ejs');
 export default app;

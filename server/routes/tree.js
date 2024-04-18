@@ -1,8 +1,14 @@
 import express from "express";
-import { createTree } from "../controllers/tree.js";
+import { HandelCreateTreeGet,createTree, getAllTrees, getUserTrees } from "../controllers/tree.js";
+import { verfyIsAdminLoggedIn } from "../middlewares/verifyAdmin.js";
+import { verifyIsUserLggedIn } from "../middlewares/verifyIsUserLggedIn.js";
 
 const router = express.Router();
 
-router.get("/create", createTree)
+router.get("/create",HandelCreateTreeGet);
+router.post("/create",createTree);
+router.get("/userTrees",verifyIsUserLggedIn, getUserTrees)
+router.get("/all",verfyIsAdminLoggedIn, getAllTrees)
+
 
 export default router;

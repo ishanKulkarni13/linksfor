@@ -1,8 +1,8 @@
 import express from "express";
-const router = express.Router();
 import { handelPassportGoogleLoginCallback, logout, handelLogin } from "../controllers/auth.js";
 import passport from "passport";
 
+const router = express.Router();
 const callbackConfig = { session: true, failureRedirect: "/login", }
 const googleLoginConfig = { scope: ["profile", "email"] }
 

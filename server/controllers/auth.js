@@ -1,28 +1,28 @@
 import app from "../app.js";
-import ErrorHandelar from "../middlewares/error.js";
-import {configPassport} from "../config/passport.js"
+import ErrorHandelar from "../utils/error.js";
+import { configPassport } from "../config/passport.js"
 configPassport()
 
 
 export const handelLogin = async (req, res, next) => {
-
-    try {if(req.user){
-        res.json({
-            sucess:true,
-            isUserLOggedIn: true,
-            authMethod: await req.user.authMethod,
-        })
-    }else{
-        res.json({
-            sucess:true,
-            isUserLOggedIn: false,
-        })
-    }
+    try {
+        if (req.user) {
+            res.json({
+                sucess: true,
+                isUserLOggedIn: true,
+                authMethod: await req.user.authMethod,
+            })
+        } else {
+            res.json({
+                sucess: true,
+                isUserLOggedIn: false,
+            })
+        }
     } catch (error) {
         next(new ErrorHandelar("Error occured while retriving user info"))
     }
 
-    
+
 }
 
 export const handelPassportGoogleLoginCallback = (req, res, next) => {
