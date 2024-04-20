@@ -1,17 +1,40 @@
 import dotenv from 'dotenv';
-dotenv.config();
-
 import User from "../models/user.js";
 import Tree from "../models/tree.js";
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+import LocalStrategy from "passport-local"
+import ErrorHandelar from '../utils/error.js';
 
+dotenv.config();
 export function configPassport() {
-    passport.serializeUser((userID, cb) => {
-        cb(null, userID)
+    passport.serializeUser((req, user, cb) => {
+        try {
+            console.log("inside serilie");
+            cb(null, user._id);
+        } catch (error) {
+            cb(`Error occured while serializing`, false)
+            req.res.clearCookie('connect.sid');
+        }
     });
-    passport.deserializeUser(async (userID, cb) => {
-        cb(null, userID)
+    passport.deserializeUser(async (req, userID, cb) => {
+        console.log("inside deserilize");
+        try {
+            let user = await User.findById(userID);
+            if (user) {
+                return cb(null, user)
+            }
+            console.log(`Error occured while deserializing: User not found, loggin out...`);
+            req.logout(() => {  
+                cb("Error occurred while deserializing user", false);
+            });
+            console.log("end of deserializeUser");
+        } catch (error) {
+            console.log("erroe in catch in deserializeUser, loggin out...", error);
+            req.logout(() => {  
+                cb("Error occurred while deserializing user", false);
+            });;
+        }
     })
 }
 
@@ -21,7 +44,7 @@ const GoogleStrategyConfig = {
     callbackURL: process.env.GOOGLE_OAUTH_CALLBACK_URL,
 };
 
-const GoogleStrategyVerifyFunction = async (accessToken, refreshToken, user, cb) => {
+const googleStrategyVerifyFunction = async (accessToken, refreshToken, user, cb) => {
     try {
         let { provider, id, name, emails, photos } = user;
         name = name.givenName
@@ -32,13 +55,44 @@ const GoogleStrategyVerifyFunction = async (accessToken, refreshToken, user, cb)
         if (!user) {
             // Passing photo: remained...
             user = await User.create({ name, email, googleOAuthID: id, authMethod: 'google' });
-            let tree = await Tree.create({ owner: user._id, treeName: `${user.name}'s tree` });
+            let tree = await Tree.create({ owner: user._id, treeName: `@${user.name}` });
             await User.findByIdAndUpdate(user._id, { $set: { 'trees.ProfileDefaultTree': tree._id } });
         }
-        return cb(null, user._id)
+        return cb(null, user)
     } catch (error) {
-        cb(error, null)
+        cb(error, false)
     }
 }
 
-passport.use(new GoogleStrategy(GoogleStrategyConfig, GoogleStrategyVerifyFunction));
+
+
+
+passport.use(new GoogleStrategy(GoogleStrategyConfig, googleStrategyVerifyFunction));
+
+// local strategy
+
+const LocalStrategyVerifyFunction = async (username, password, cb) => {
+    if (!(username) && !password) {
+        return cb(new ErrorHandelar("Email or username along with password is not provided"), false)
+    }
+    try {
+
+        const user = await User.findOne({ username }).select('+password');
+        if (!user) {
+            return cb(new ErrorHandelar("userName is invalid"), false)
+        }
+
+        let isPasswordValid = await user.isValidPassword(password, user);
+        if (isPasswordValid) {
+            return cb(null, user)
+        } else {
+            return cb(new ErrorHandelar("Password is invalid"), false)
+        }
+
+    } catch (error) {
+        cb(error, false)
+    }
+
+}
+
+passport.use(new LocalStrategy(LocalStrategyVerifyFunction))

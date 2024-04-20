@@ -1,5 +1,4 @@
 todo/
-
 # Ignore node_modules directory
 node_modules/
 ./server/node_modules/

@@ -8,8 +8,8 @@ export const HandelCreateTreeGet = (req, res, next) => {
 
 export const getUserTrees = async (req, res, next) => {
     try {
-        let userID = req.user;
-        let trees = await Tree.find({ owner: userID })
+        let user = req.user;
+        let trees = await Tree.find({ owner: user._id })
         res.json(trees)
     } catch (error) {
         next(new ErrorHandelar(error))
@@ -17,21 +17,19 @@ export const getUserTrees = async (req, res, next) => {
 }
 
 export const createTree = async (req, res, next) => {
-    let userID = req.user
+    let user = req.user
     let { treePicture, treeName, treeDescription, treeContent, theme } = req.body;
     if (!treeName) { return next(new ErrorHandelar("Tree name is a mandatory field which is not provided")) };
 
     try {
-        let tree = await Tree.create({ owner: userID, treeName });
-        let user = await User.findById(userID)
+        let tree = await Tree.create({ owner: user._id, treeName });
         if (!(user.trees.ProfileDefaultTree)) {
-            user =await  User.findByIdAndUpdate(userID,{ $set: { 'trees.ProfileDefaultTree': tree._id } },{ new: true });
+            user = await  User.findByIdAndUpdate(user._id,{ $set: { 'trees.ProfileDefaultTree': tree._id } },{ new: true });
         }
         res.json({tree, user})
     } catch (error) {
         next(error)
     }
-
 }
 
 export const getAllTrees = async (req, res, next) => {
