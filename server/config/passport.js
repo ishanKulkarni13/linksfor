@@ -5,6 +5,7 @@ import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import LocalStrategy from "passport-local"
 import ErrorHandelar from '../utils/error.js';
+import { uploadToCloudinary } from '../utils/cloudinary.js';
 
 dotenv.config();
 export function configPassport() {
@@ -25,13 +26,13 @@ export function configPassport() {
                 return cb(null, user)
             }
             console.log(`Error occured while deserializing: User not found, loggin out...`);
-            req.logout(() => {  
+            req.logout(() => {
                 cb("Error occurred while deserializing user", false);
             });
             console.log("end of deserializeUser");
         } catch (error) {
             console.log("erroe in catch in deserializeUser, loggin out...", error);
-            req.logout(() => {  
+            req.logout(() => {
                 cb("Error occurred while deserializing user", false);
             });;
         }
@@ -53,8 +54,12 @@ const googleStrategyVerifyFunction = async (accessToken, refreshToken, user, cb)
 
         user = await User.findOne({ googleOAuthID: id });
         if (!user) {
-            // Passing photo: remained...
-            user = await User.create({ name, email, googleOAuthID: id, authMethod: 'google' });
+            let { public_id, url } = await uploadToCloudinary(googleProfilePhoto);
+            let profilePic;
+            if (public_id && url) {
+                profilePic = { public_id, url }
+            }
+            user = await User.create({ name, email, profilePic, googleOAuthID: id, authMethod: 'google' });
             let tree = await Tree.create({ owner: user._id, treeName: `@${user.name}` });
             await User.findByIdAndUpdate(user._id, { $set: { 'trees.ProfileDefaultTree': tree._id } });
         }

@@ -6,11 +6,12 @@
     <title>local login</title>
 </head>
 <body>
-    <form action="/auth/local/regester", method="post">
+    <form action="/auth/local/regester", method="post", enctype="multipart/form-data">
         <input type="text", name="name", placeholder="name">
         <input type="text", name="username", placeholder="username">
         <input type="text", name="email", placeholder="email">
-        <input type="password", name="password", placeholder="password">
+        <input type="text", name="password", placeholder="password">
+        <input type="file" name="profPhoto" id="">
         <button type="submit">Regester</button>
     </form>
 </body>

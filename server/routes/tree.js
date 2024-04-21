@@ -8,7 +8,6 @@ const router = express.Router();
 router.get("/create",HandelCreateTreeGet);
 router.post("/create",createTree);
 router.get("/userTrees",verifyIsUserLggedIn, getUserTrees)
-router.get("/all",verfyIsAdminLoggedIn, getAllTrees)
 
 
 export default router;

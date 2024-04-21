@@ -3,6 +3,9 @@ todo/
 node_modules/
 ./server/node_modules/
 
+# ignore the tempFIles folder 
+tempFIles/
+
 # Ignore .env files
 .env
 

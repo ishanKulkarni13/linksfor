@@ -1,6 +1,7 @@
 import express from "express";
 import { handelPassportGoogleLoginCallback, logout, handelLogin, handelRegester, localLoginPage, handelPassportlocalRegester, localRegesterPage } from "../controllers/auth.js";
 import passport from "passport";
+import { Multerupload } from "../middlewares/multer.js";
 
 const dummymid = (req,res,next)=>{
     res.send("hi from dummymid!")
@@ -18,7 +19,7 @@ router.get("/google", passport.authenticate("google", googleLoginConfig));
 router.get("/google/callback", passport.authenticate("google", callbackConfig), handelPassportGoogleLoginCallback)
 // for local auth
 router.get("/local/regester", localRegesterPage);
-router.post("/local/regester", handelPassportlocalRegester);
+router.post("/local/regester", Multerupload.single("profPhoto") , handelPassportlocalRegester);
 
 router.get("/local/login", localLoginPage);
 router.post("/local/login", passport.authenticate("local", {failureRedirect:"/regester", successRedirect:"/"}) , dummymid);
