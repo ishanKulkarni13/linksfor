@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt"
-import ErrorHandelar from "../utils/error.js";
+import ErrorHandler from "../utils/error.js";
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -120,7 +120,7 @@ userSchema.pre("save", async function (next) {
         if (this.isModified("googleOAuthID") && this.googleOAuthID && this.isNew) {
             const isGoogleOAuthIDUserExist = await userModel.findOne({ googleOAuthID: this.googleOAuthID });
             if (isGoogleOAuthIDUserExist && isGoogleOAuthIDUserExist._id.toString() !== this._id.toString()) {
-                next(new ErrorHandelar("This google id is already used to regester"))
+                next(new ErrorHandler("This google id is already used to regester"))
             }
         }
 
@@ -142,7 +142,7 @@ userSchema.pre("save", async function (next) {
             console.log('this.name is:',this.name);
             const isValidName = /^[a-zA-Z]+(?:[ a-zA-Z0-9_.-]+){0,2}$/.test(this.name);
             if (!isValidName || this.name.length > 30) {
-                return next(new ErrorHandelar("Invalid name format or length in DB"));
+                return next(new ErrorHandler("Invalid name format or length in DB"));
             }
         }
 
@@ -151,7 +151,7 @@ userSchema.pre("save", async function (next) {
         if (this.isModified("email") || this.isNew) {
             const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email);
             if (!isValidEmail) {
-                return next(new ErrorHandelar("Invalid email format"));
+                return next(new ErrorHandler("Invalid email format"));
             }
             this.email = this.email.toLowerCase();
         }
@@ -160,7 +160,7 @@ userSchema.pre("save", async function (next) {
         if (this.isModified("username") || this.isNew) {
             const isValidUsername = /^[a-zA-Z][a-zA-Z0-9_.-]{2,29}$/.test(this.username);
             if (!isValidUsername) {
-                return next(new ErrorHandelar("Invalid username format"));
+                return next(new ErrorHandler("Invalid username format"));
             }
             this.username = this.username.toLowerCase();
         }

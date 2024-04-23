@@ -1,4 +1,4 @@
-import ErrorHandelar from "./error.js";
+import ErrorHandler from "./error.js";
 
 export const tryCatch = (Passedfunction) => async (req, res, next) => {
     try {

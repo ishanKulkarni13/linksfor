@@ -4,7 +4,7 @@ import Tree from "../models/tree.js";
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import LocalStrategy from "passport-local"
-import ErrorHandelar from '../utils/error.js';
+import ErrorHandler from '../utils/error.js';
 import { uploadToCloudinary } from '../utils/cloudinary.js';
 
 dotenv.config();
@@ -78,20 +78,20 @@ passport.use(new GoogleStrategy(GoogleStrategyConfig, googleStrategyVerifyFuncti
 
 const LocalStrategyVerifyFunction = async (username, password, cb) => {
     if (!(username) && !password) {
-        return cb(new ErrorHandelar("Email or username along with password is not provided"), false)
+        return cb(new ErrorHandler("Email or username along with password is not provided"), false)
     }
     try {
 
         const user = await User.findOne({ username }).select('+password');
         if (!user) {
-            return cb(new ErrorHandelar("userName is invalid"), false)
+            return cb(new ErrorHandler("userName is invalid"), false)
         }
 
         let isPasswordValid = await user.isValidPassword(password, user);
         if (isPasswordValid) {
             return cb(null, user)
         } else {
-            return cb(new ErrorHandelar("Password is invalid"), false)
+            return cb(new ErrorHandler("Password is invalid"), false)
         }
 
     } catch (error) {
