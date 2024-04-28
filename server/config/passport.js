@@ -6,8 +6,9 @@ import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import LocalStrategy from "passport-local"
 import ErrorHandler from '../utils/error.js';
 import { uploadToCloudinary } from '../utils/cloudinary.js';
-
 dotenv.config();
+
+// serializeUser and deserializeUser
 export function configPassport() {
     passport.serializeUser((req, user, cb) => {
         try {
@@ -39,12 +40,13 @@ export function configPassport() {
     })
 }
 
+
+// Google Strategy
 const GoogleStrategyConfig = {
     clientID: process.env.GOOGLE_OAUTH_CLIENT_ID,
     clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
     callbackURL: process.env.GOOGLE_OAUTH_CALLBACK_URL,
 };
-
 const googleStrategyVerifyFunction = async (accessToken, refreshToken, user, cb) => {
     try {
         let { provider, id, name, emails, photos } = user;
@@ -68,14 +70,10 @@ const googleStrategyVerifyFunction = async (accessToken, refreshToken, user, cb)
         cb(error, false)
     }
 }
-
-
-
-
 passport.use(new GoogleStrategy(GoogleStrategyConfig, googleStrategyVerifyFunction));
 
-// local strategy
 
+// local strategy
 const LocalStrategyVerifyFunction = async (username, password, cb) => {
     if (!(username) && !password) {
         return cb(new ErrorHandler("Email or username along with password is not provided"), false)
@@ -83,6 +81,7 @@ const LocalStrategyVerifyFunction = async (username, password, cb) => {
     try {
 
         const user = await User.findOne({ username }).select('+password');
+        console.log("user i", user);
         if (!user) {
             return cb(new ErrorHandler("userName is invalid"), false)
         }
@@ -99,5 +98,4 @@ const LocalStrategyVerifyFunction = async (username, password, cb) => {
     }
 
 }
-
 passport.use(new LocalStrategy(LocalStrategyVerifyFunction))

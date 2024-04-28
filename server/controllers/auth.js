@@ -34,7 +34,10 @@ export const handelLogin = async (req, res, next) => {
 }
 
 export const handelPassportGoogleLoginCallback = (req, res, next) => {
-    res.redirect("/")
+    res.json({
+        sucess: "true",
+        message: "Done"
+    })
 }
 
 export const logout = (req, res, next) => {
@@ -71,14 +74,6 @@ export const handelPassportlocalRegester = async (req, res, next) => {
     }
 
     try {
-        const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.toLowerCase());
-        if (!isValidEmail) {
-            return next(new ErrorHandelar("Invalid email format"));
-        }
-        const isValidUsername = /^[a-zA-Z][a-zA-Z0-9_-]{2,29}$/.test(username.toLowerCase());
-        if (!isValidUsername) {
-            return next(new ErrorHandelar("Invalid username format"));
-        }
         username = username.toLowerCase();
         email = email.toLowerCase();
         let emailUser = await User.findOne({ email });
@@ -117,7 +112,11 @@ export const handelPassportlocalRegester = async (req, res, next) => {
         user = await User.create({ name, username, email, profilePic, password, authMethod: 'email' });
         let tree = await Tree.create({ owner: user._id, treeName: `@${user.name}` });
         await User.findByIdAndUpdate(user._id, { $set: { 'trees.ProfileDefaultTree': tree._id } });
-        res.redirect("/auth/local/login")
+        res.json({
+            sucess: true,
+            message: "User created sucessfuully",
+            user
+        })
     } catch (error) {
         return next(error)
     }

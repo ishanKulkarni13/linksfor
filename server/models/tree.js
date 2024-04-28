@@ -88,8 +88,15 @@ const treeSchema = mongoose.Schema({
     },
     theme: {
         selectedTheme: {
-            type: String,
-            default: "tree-blue-modern",
+            themeID: {
+                type: Number,
+                default: 10000
+            },
+            theamName: {
+                type: String,
+                default: "modern-blue"
+            }
+
         },
         customThemeConfig: {
             background: {
@@ -114,6 +121,15 @@ const treeSchema = mongoose.Schema({
             }
         }
     },
-}, { timestamps: true })
+}, { timestamps: true });
 
-export default mongoose.model("Tree", treeSchema);
+
+
+treeSchema.pre("save", async function (next) {
+            
+})
+
+
+const treeModel = mongoose.model("Tree", treeSchema);
+
+export default treeModel;

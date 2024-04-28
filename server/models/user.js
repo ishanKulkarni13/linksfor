@@ -21,8 +21,14 @@ const userSchema = new mongoose.Schema({
         unique: [true, "UID already exist"],
     },
     profilePic: {
-        public_id: String,
-        url: String,
+        public_id: {
+            type: String, 
+            default: "uiccf1wbzyioazqgve5q"
+        },
+        url: {
+            type: String,
+            default: 'http://res.cloudinary.com/kakashib2k/image/upload/v1713685024/uiccf1wbzyioazqgve5q.png'
+        },
     },
     email: {
         type: String,
@@ -125,26 +131,29 @@ userSchema.pre("save", async function (next) {
         }
 
         if (!this.username) {
-            console.log("Generating a username in pre hook as the username is not given to the DB");
             let tempUserName = this.name.split(' ')[0].toLowerCase().replace(/\s+/g, '_');
             let isUsernameExists = await userModel.exists({ username: { $regex: new RegExp(tempUserName, "i") } });
+            let count = 0;
             while (isUsernameExists) {
-                tempUserName = `${this.name.split(' ')[0].toLowerCase().replace(/\s+/g, '_')}_${Math.floor(Math.random() * 10000)}`;
+                tempUserName = `${this.name.split(' ')[0].toLowerCase().replace(/\s+/g, '_')}_${Math.floor(Math.random() * 1000)}${count}`;
                 isUsernameExists = await userModel.exists({ username: { $regex: new RegExp(tempUserName, "i") } });
-
+                count++;
+                if(count>10){
+                    next(new ErrorHandler());
+                }
             }
             this.username = tempUserName.toLowerCase();
             console.log(this.username, tempUserName);
         }
 
         // Validate name format and length
-        if (this.isModified("name") || this.isNew) {
-            console.log('this.name is:',this.name);
-            const isValidName = /^[a-zA-Z]+(?:[ a-zA-Z0-9_.-]+){0,2}$/.test(this.name);
-            if (!isValidName || this.name.length > 30) {
-                return next(new ErrorHandler("Invalid name format or length in DB"));
-            }
-        }
+        // if (this.isModified("name") || this.isNew) {
+        //     console.log('this.name is:',this.name);
+        //     const isValidName = /^[a-zA-Z]+(?:[ a-zA-Z0-9_.-]+){0,2}$/.test(this.name);
+        //     if (!isValidName || this.name.length > 30) {
+        //         return next(new ErrorHandler("Invalid name format or length in DB"));
+        //     }
+        // }
 
 
         // Validate email format
@@ -157,13 +166,13 @@ userSchema.pre("save", async function (next) {
         }
 
         // Validate username format
-        if (this.isModified("username") || this.isNew) {
-            const isValidUsername = /^[a-zA-Z][a-zA-Z0-9_.-]{2,29}$/.test(this.username);
-            if (!isValidUsername) {
-                return next(new ErrorHandler("Invalid username format"));
-            }
-            this.username = this.username.toLowerCase();
-        }
+        // if (this.isModified("username") || this.isNew) {
+        //     const isValidUsername = /^[a-zA-Z][a-zA-Z0-9_.-]{2,29}$/.test(this.username);
+        //     if (!isValidUsername) {
+        //         return next(new ErrorHandler("Invalid username format"));
+        //     }
+        //     this.username = this.username.toLowerCase();
+        // }
 
 
         // Hash the password if it exists and is modified or if it's a new user
