@@ -34,10 +34,8 @@ export const handelLogin = async (req, res, next) => {
 }
 
 export const handelPassportGoogleLoginCallback = (req, res, next) => {
-    res.json({
-        sucess: "true",
-        message: "Done"
-    })
+    const frontendUrl = process.env.FRONTEND_URL
+    res.redirect(`${frontendUrl}`)
 }
 
 export const logout = (req, res, next) => {

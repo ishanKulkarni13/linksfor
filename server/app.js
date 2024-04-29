@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import cookieParser from "cookie-parser";
 import express from "express";
+import cors from 'cors'
 import cookieSession from "express-session";
 import userRouter from "./routes/user.js";
 import authRouter from "./routes/auth.js";
@@ -15,9 +16,19 @@ import { verfyIsAdminLoggedIn } from './middlewares/verifyAdmin.js';
 import { verifyIsUserLggedIn } from './middlewares/verifyIsUserLggedIn.js';
 import { searchUserByUsername } from './controllers/search.js';
 
+const app = express()
 dotenv.config();
-const app = express();
 
+// {
+//     origin:'http://localhost:3000',
+//     methods:'GET,POST,PUT,DELETE',
+//     credentials: true
+// }
+app.use(cors({
+    origin:'http://localhost:3000',
+    methods:'GET,POST,PUT,DELETE',
+    credentials: true
+}));
 app.use(cookieSession(cookieSessionConfig));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -31,7 +42,7 @@ app.use("/auth", authRouter);
 app.use("/user", verifyIsUserLggedIn, userRouter);
 app.use("/tree", verifyIsUserLggedIn, treeRouter);
 app.use("/admin", verfyIsAdminLoggedIn, adminRouter);
-app.use(errorMiddleware)
+// app.use(errorMiddleware)
 app.set('view engine', 'ejs');
 
 export default app;
