@@ -75,25 +75,34 @@ passport.use(new GoogleStrategy(GoogleStrategyConfig, googleStrategyVerifyFuncti
 
 // local strategy
 const LocalStrategyVerifyFunction = async (username, password, cb) => {
-    if (!(username) && !password) {
-        return cb(new ErrorHandler("Email or username along with password is not provided"), false)
+    console.log(username, password);
+    if (!username) {
+        console.log("1224");
+        return cb(new ErrorHandler("Username is not provided"), false)
+    } else if (!password){
+        console.log("12aa24");
+        return cb(new ErrorHandler("Password is not provided"), false)
     }
     try {
 
         const user = await User.findOne({ username }).select('+password');
         console.log("user i", user);
         if (!user) {
+            console.log("12ww24");
             return cb(new ErrorHandler("userName is invalid"), false)
         }
 
         let isPasswordValid = await user.isValidPassword(password, user);
         if (isPasswordValid) {
-            return cb(null, user)
+            console.log(`user logged in sucess`, user);
+            return cb(null, user);
         } else {
+            console.log("12qweer24");
             return cb(new ErrorHandler("Password is invalid"), false)
         }
 
     } catch (error) {
+        console.log('error in LocalStrategyVerifyFunction', error);
         cb(error, false)
     }
 

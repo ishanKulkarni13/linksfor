@@ -42,7 +42,7 @@ app.use("/auth", authRouter);
 app.use("/user", verifyIsUserLggedIn, userRouter);
 app.use("/tree", verifyIsUserLggedIn, treeRouter);
 app.use("/admin", verfyIsAdminLoggedIn, adminRouter);
-// app.use(errorMiddleware)
+app.use(errorMiddleware)
 app.set('view engine', 'ejs');
 
 export default app;
