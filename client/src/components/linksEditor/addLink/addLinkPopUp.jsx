@@ -1,0 +1,202 @@
+"use client";
+import styles from "./addLink.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { useRouter } from "next/navigation";
+import * as z from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import GoogleButton from "@/components/buttons/google/googleButton";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import {
+  SelectValue,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+  Select,
+} from "@/components/ui/select";
+import { Toaster, toast } from "sonner";
+
+const formSchema = z
+  .object({
+    URL: z.string().min(1),
+    title: z.string().min(1),
+  })
+  .refine(
+    (data) => {
+      return data.URL != data.title;
+    },
+    {
+      message: "The URL cant be same as the title, lol",
+      path: ["URL"],
+    }
+  );
+
+export default function AddLinkPopUp({ close,setLinks }) {
+  const { push } = useRouter();
+
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      URL: "",
+      title: "",
+    },
+  });
+
+  // handel form submit
+  const handleSubmit = async (values) => {
+    console.log(`form submitted`);
+    console.log("got values as", values);
+    toast("form submitted");
+    // function to fetch
+    const handelAddLink = async(URL,title)=>{
+      try {
+        console.log('posing')
+        let res = await fetch("http://localhost:4000/tree/edit/addLink/8809746353", {
+          method: "POST",
+          cache: "no-store",
+          body: JSON.stringify({
+            URL,title
+          }),
+          credentials: "include",
+          headers: {
+            Accept: "applications/json",
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Credentials": true,
+          },
+        });
+        console.log("posted 14444");
+        toast('posted')
+        console.log(res);
+
+        if (res.ok) {
+          toast("res.ok is true");
+          console.log("converting res-json to js");
+          let responseData = await res.json();
+          console.log("coverted res-json to js");
+          return { success: true, error: false, response: responseData };
+        } else {
+          console.log("res.ok is false");
+          console.log("converting res-json to js");
+          let responseData = await res.json();
+          console.log("coverted res-json to js");
+          return { success: false, error: false, response: responseData };
+        }
+
+      } catch (error) {
+        toast.error(error)
+        console.log("error while posting data", error);
+        return { success: false, error: true, response: error };
+      }
+    }
+    //calling function and gettting data
+    let { success, response, error } = await handelAddLink(
+      values.URL,
+      values.title
+    );
+    if (success) {
+      console.log('Added link');
+      toast.success('Added Link')
+      console.log("here is the user", response);
+      setLinks(response.links)
+      close()
+    } else{
+      if (error) {
+        // if catched error in fetch
+        console.log("Some error occured", error);
+      } else{
+        //no error in fetch and success is false(from server)
+        toast.error(`Link not added: ${response.message}`)
+        console.log("Link not added", response.message );
+      }
+    }
+    
+  };
+
+  return (
+    <>
+    <div className={`${styles.blur}` } ></div>
+      <div className={`${styles.container}` }>
+        <div className={styles.popUpContainer}>
+          <div className={styles.top}>
+            <div className={styles.popUpTitle}>
+              <p>Add Link</p>
+            </div>
+            <button className={styles.closeButton} onClick={close}>
+              <FontAwesomeIcon icon={faXmark} />
+            </button>
+          </div>
+
+          <div className={styles.popUpFormContainer}>
+            {/* <div className={` ${styles.formContainer}`}> */}
+            {/* <div className={`${styles.regesterFormContainer}`}> */}
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(handleSubmit)}
+                className={styles.form}
+              >
+                <FormField
+                  control={form.control}
+                  name="URL"
+                  render={({ field }) => {
+                    return (
+                      <FormItem className={styles.inputContainer}>
+                        <FormLabel className={styles.lable}>URL</FormLabel>
+                        <FormControl>
+                          <Input
+                            className={styles.URLInput}
+                            placeholder="URL"
+                            type="text"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    );
+                  }}
+                />
+                <FormField
+                  control={form.control}
+                  name="title"
+                  render={({ field }) => {
+                    return (
+                      <FormItem className={styles.inputContainer}>
+                        <FormLabel className={styles.lable}>Title</FormLabel>
+                        <FormControl>
+                          <Input
+                            className={styles.titleInput}
+                            placeholder="Title"
+                            type="text"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    );
+                  }}
+                />
+                <button type="submit" className={styles.doneButton}>
+                  <FontAwesomeIcon className={styles.doneIcon} icon={faCheck} />{" "}
+                  <span className={styles.doneText}>Done</span>
+                </button>
+              </form>
+            </Form>
+            {/* </div> */}
+
+            {/* </div> */}
+          </div>
+        </div>
+      </div>
+      <Toaster richColors />
+    </>
+  );
+}

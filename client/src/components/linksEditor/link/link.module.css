@@ -1,0 +1,76 @@
+.DNDItem{
+    width:inherit;
+    margin-bottom: 15px;
+}
+
+.linkContainer{
+    /* min-width: fit-content; */
+    width: inherit;
+    padding: 10px;
+    background-color: var(--backgroundSecondary);
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.552);
+    box-shadow: 0px 0px 3px white;
+}
+
+
+.link{
+    width: inherit ;
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    border-radius: 15px;
+    gap: 10px;
+}
+
+
+.left, .right{
+    min-width: fit-content;
+    width: 25px;
+}
+
+.DNDIcon{
+    font-size: 20px;
+    width: auto;
+    padding: 10px 5px;
+    cursor: grab;
+    touch-action: none;
+    /* border: 1px solid green; */
+}
+.right{
+    justify-self: flex-end;
+    margin: 0px 0px 0px auto;
+}
+.centre{
+    width:max-content;
+    display: flex;
+    justify-content: left;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.titleContainer{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 10px;
+}
+
+.URLContainer{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 10px;
+}
+
+.OtherOptionsContainer{
+    min-width: fit-content;
+
+}
+
+.OtherOptionsContainer span{
+    margin: 2px;
+    padding: 2px;
+    width: 4px;
+    height: 2px;
+}

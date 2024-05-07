@@ -67,7 +67,7 @@ export const createTree = async (req, res, next) => {
     }
 }
 
-export const editTree = (req,res,next)=>{
+export const editTree = (req, res, next) => {
     res.send("welcome to the editTree feature")
 }
 
@@ -75,3 +75,69 @@ export const getAllTrees = async (req, res, next) => {
     let trees = await Tree.find({})
     res.json(trees)
 }
+
+export const getAdminAllTreeLinks = async (req, res, next) => {
+    const userID = req.user._id;
+    let treeUID = req.params.treeUID;
+
+    try {
+        let tree = await Tree.findOne({ UID: treeUID, owner: userID });
+    
+        if(!tree){ return next(new ErrorHandelar('Tree not found'))};
+        
+        res.json({ success: true, links:tree.treeContent.links})
+    } catch (error) {
+        console.log(error);
+        next(error)
+    }
+}
+
+export const addLink = async (req, res, next) => {
+    let { URL, title } = req.body;
+    const userID = req.user._id;
+    let treeUID = req.params.linkUID
+    let updatedLinkObject = {type: "link",title,URL};
+
+
+    try {
+        // let isTreeOfUser = await Tree
+        let UpdatedTree = await Tree.findOneAndUpdate({ UID: treeUID, owner: userID }, { $push: { 'treeContent.links': { $each: [updatedLinkObject], $position: 0 } } }, { new: true });
+        if(!UpdatedTree){ return next(new ErrorHandelar('Tree not found'))}
+        console.log(UpdatedTree.treeContent.links);
+        res.json({ success: true, links:UpdatedTree.treeContent.links})
+
+    } catch (error) {
+    console.log(error);
+    next(error)
+}
+}
+
+export const deleteLink = async (req, res, next) => {
+    const userID = req.user._id;
+    let {linkUID, treeUID} = req.body;
+    if(!linkUID){return next(new ErrorHandelar("Didn't got linkUID"))}
+    if(!treeUID) {return next(new ErrorHandelar("Didn't got treeUID"))}
+
+    try {
+        const tree = await Tree.findOne({ UID: treeUID, owner: userID });
+
+        if (!tree) {return next(new ErrorHandelar("Tree Not Found", 404))}
+
+        // Find the index of the link object with the specified _id
+        const linkIndex = tree.treeContent.links.findIndex(link => link.UID === linkUID);
+
+        if (linkIndex === -1) {return next(new ErrorHandelar("Link Not Found", 404))}
+
+        // Remove the link object from the links array
+        tree.treeContent.links.splice(linkIndex, 1);
+
+        await tree.save();
+
+        res.json({ success: true, links: tree.treeContent.links });
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+}
+
+

@@ -1,0 +1,38 @@
+.container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    /* display: flex;
+    align-items: start; */
+    gap: 15px;
+}
+
+.linksEditorContainer {
+    margin-top: 70px;
+}
+
+.treePreviewContainer {
+    z-index: -1;
+    position: sticky;
+    top: 0%;
+    right: 0%;
+    width: auto;
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-left: 1px solid white;
+}
+
+@media (width <=1024px) {
+    .container {
+        display: block;
+    }
+
+    .linksEditorContainer {
+        margin: 90px 15px;
+    }
+
+    .treePreviewContainer {
+        display: none;
+    }
+}

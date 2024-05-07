@@ -1,0 +1,25 @@
+.addHeaderButton{
+    width: 10rem;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 50px;
+    font-weight: bold;
+}
+
+.addHeaderButton{
+    background-color: var(--primary);
+    color: black;
+}
+
+.popUpContainer{
+    position: fixed;
+    top: 0px;
+    background-color: var(--primary);
+    height: 100dvh;
+    width: 100vw;
+    z-index: 51;
+    color: black;
+}

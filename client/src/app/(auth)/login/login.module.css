@@ -1,0 +1,32 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100dvh;
+    border: 2px solid black;
+}
+.titleContainer > h1{
+    font-size: 45px;
+    font-weight: bolder;
+}
+.loginFormContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 45vw;
+}
+.loginFormContainer  input{
+    color: white;
+}
+
+.otherLoginWaysContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.loginWithGoogleContiner{
+    width: 45vw;
+}

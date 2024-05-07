@@ -1,0 +1,21 @@
+.topBarContainer{
+    position: fixed;
+    top: 0%;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: var(--background);
+    z-index: 30;
+    border-bottom: 1px solid white;
+}
+
+
+.logoContainer{
+    width: 25px;
+}
+
+.profileContainer{
+    width: 25px;
+}

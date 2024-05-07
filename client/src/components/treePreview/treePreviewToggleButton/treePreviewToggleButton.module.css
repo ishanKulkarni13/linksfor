@@ -1,0 +1,41 @@
+.toggleButton{
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 50px;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    z-index: 32;
+    background-color: var(--primary);
+    color: black;
+    font-weight: 600;
+    border-radius: 50px;
+    padding: 15px;
+}
+
+.popUpCOntainer{
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    height: 100dvh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 10px solid yellowgreen;
+    z-index: 31;
+}
+
+.treePreviewComponentContainer{
+    height: 100dvh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+

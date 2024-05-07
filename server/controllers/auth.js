@@ -62,6 +62,7 @@ export const localLoginPage = (req, res, next) => {
 export const handelPassportlocalRegester = async (req, res, next) => {
 
     let { email, name, username, password } = req.body;
+    console.log( email, name, username, password);
     let user;
     if (!password) {
         return next(new ErrorHandelar("Password is not provided"))
@@ -114,7 +115,8 @@ export const handelPassportlocalRegester = async (req, res, next) => {
             sucess: true,
             message: "User created sucessfuully",
             user
-        })
+        });
+        
     } catch (error) {
         return next(error)
     }

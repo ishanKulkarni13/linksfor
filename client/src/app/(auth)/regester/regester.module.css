@@ -1,0 +1,43 @@
+.regesterContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 25px;
+    height: 100dvh;
+    border: 5px solid white;
+}
+.titleContainer > h1{
+    font-size: 45px;
+    font-weight: bolder;
+}
+.regesterFormContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: inherit;
+    /* border: 10px solid palegoldenrod; */
+}
+
+.regesterFormContainer input{
+    color: white;
+}
+
+.otherRegesterWaysContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.regesterButton{
+    height: 50px;
+    border-radius: 50px;
+    background-color: white;
+    color: black;
+}
+
+.regesterWithGoogleContiner{
+    width: 45vw;
+}

@@ -6,6 +6,13 @@ const treeSchema = mongoose.Schema({
         ref: 'User',
         required: true,
     },
+    UID:{
+        type: String,
+        default: function () {
+            return `${Math.floor(Math.random() * 10000000000)}`;
+        },
+        unique: [true, "UID already exist"],
+    },
     treevisibility: {
         type: String,
         default: "public",
@@ -35,7 +42,12 @@ const treeSchema = mongoose.Schema({
     treeContent: {
         links: [
             {
-                linkTitle: {
+                type: {
+                    type: String,
+                    default: "link",
+                    enum: ['link', 'header'],
+                },
+                title: {
                     type: String,
                     require: true,
                 },
@@ -43,28 +55,34 @@ const treeSchema = mongoose.Schema({
                     type: String,
                     require: true,
                 },
+                UID: {
+                    type: String,
+                    default: function () {
+                        return `${Math.floor(Math.random() * 100000)}`;
+                    }
+                },
                 thumbnail: {
                     publis_id: String,
                     url: String,
                 },
-                linkConfig: {
-                    layout: {
-                        type: String,
-                        default: "classic",
-                        enum: ['classic', 'featured'],
-                    },
-                    linkLockConfig: {
-                        islocked: {
-                            type: Boolean,
-                            default: false,
-                        },
-                        lockType: {
-                            type: String,
-                            default: "password",
-                            enum: ['password', 'subscribe'],
-                        }
-                    },
+                // linkConfig: {
+                layout: {
+                    type: String,
+                    // default: "classic",
+                    enum: ['classic', 'featured'],
                 },
+                linkLockConfig: {
+                    islocked: {
+                        type: Boolean,
+                        // default: false,
+                    },
+                    lockType: {
+                        type: String,
+                        // default: "password",
+                        enum: ['password', 'subscribe'],
+                    }
+                },
+                // },
 
             }
         ],
@@ -126,7 +144,7 @@ const treeSchema = mongoose.Schema({
 
 
 treeSchema.pre("save", async function (next) {
-            
+
 })
 
 

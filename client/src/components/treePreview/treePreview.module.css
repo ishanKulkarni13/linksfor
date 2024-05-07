@@ -1,0 +1,18 @@
+.container{
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+    background-color: inherit;
+}
+
+.preview{
+    height: inherit;
+    width: inherit;
+    border-radius: inherit;
+}
+
+.iframe{
+    height: inherit;
+    width: inherit;
+    border-radius: inherit;
+}
