@@ -82,10 +82,10 @@ export const getAdminAllTreeLinks = async (req, res, next) => {
 
     try {
         let tree = await Tree.findOne({ UID: treeUID, owner: userID });
-    
-        if(!tree){ return next(new ErrorHandelar('Tree not found'))};
-        
-        res.json({ success: true, links:tree.treeContent.links})
+
+        if (!tree) { return next(new ErrorHandelar('Tree not found')) };
+
+        res.json({ success: true, links: tree.treeContent.links })
     } catch (error) {
         console.log(error);
         next(error)
@@ -96,37 +96,37 @@ export const addLink = async (req, res, next) => {
     let { URL, title } = req.body;
     const userID = req.user._id;
     let treeUID = req.params.linkUID
-    let updatedLinkObject = {type: "link",title,URL};
+    let updatedLinkObject = { type: "link", title, URL };
 
 
     try {
         // let isTreeOfUser = await Tree
         let UpdatedTree = await Tree.findOneAndUpdate({ UID: treeUID, owner: userID }, { $push: { 'treeContent.links': { $each: [updatedLinkObject], $position: 0 } } }, { new: true });
-        if(!UpdatedTree){ return next(new ErrorHandelar('Tree not found'))}
+        if (!UpdatedTree) { return next(new ErrorHandelar('Tree not found')) }
         console.log(UpdatedTree.treeContent.links);
-        res.json({ success: true, links:UpdatedTree.treeContent.links})
+        res.json({ success: true, links: UpdatedTree.treeContent.links })
 
     } catch (error) {
-    console.log(error);
-    next(error)
-}
+        console.log(error);
+        next(error)
+    }
 }
 
 export const deleteLink = async (req, res, next) => {
     const userID = req.user._id;
-    let {linkUID, treeUID} = req.body;
-    if(!linkUID){return next(new ErrorHandelar("Didn't got linkUID"))}
-    if(!treeUID) {return next(new ErrorHandelar("Didn't got treeUID"))}
+    let { linkUID, treeUID } = req.body;
+    if (!linkUID) { return next(new ErrorHandelar("Didn't got linkUID")) }
+    if (!treeUID) { return next(new ErrorHandelar("Didn't got treeUID")) }
 
     try {
         const tree = await Tree.findOne({ UID: treeUID, owner: userID });
 
-        if (!tree) {return next(new ErrorHandelar("Tree Not Found", 404))}
+        if (!tree) { return next(new ErrorHandelar("Tree Not Found", 404)) }
 
         // Find the index of the link object with the specified _id
         const linkIndex = tree.treeContent.links.findIndex(link => link.UID === linkUID);
 
-        if (linkIndex === -1) {return next(new ErrorHandelar("Link Not Found", 404))}
+        if (linkIndex === -1) { return next(new ErrorHandelar("Link Not Found", 404)) }
 
         // Remove the link object from the links array
         tree.treeContent.links.splice(linkIndex, 1);
@@ -139,5 +139,50 @@ export const deleteLink = async (req, res, next) => {
         next(error);
     }
 }
+
+export const updateLinksOrder = async (req, res, next) => {
+    const userID = req.user._id;
+
+    let treeUID;
+    if (!(req.params.treeUID) || !(req.body.treeUID)) {
+        return next(new ErrorHandelar("treeUID not provided"));
+    } else {
+        treeUID = req.body.treeUID || req.params.treeUID;
+    }
+
+    let linksUIDArray = req.body.linksUIDArray;
+    if (!linksUIDArray) {
+        return next(new ErrorHandelar("linksUIDArray not provided"));
+    }
+
+    try {
+        const tree = await Tree.findOne({ UID: treeUID, owner: userID });
+
+        if (!tree) {
+            return next(new ErrorHandelar("Tree Not Found", 404));
+        }
+
+        // Map through the linksUIDArray to update the order of links in treeContent.links
+        tree.treeContent.links = linksUIDArray.map((linkUID) => {
+            // Find the link object in the existing links array by its UID
+            const link = tree.treeContent.links.find(link => link.UID === linkUID);
+            // Return the link object if found, or null otherwise
+
+            if(!link){ console.log("didn't found a link with the uid ", linkUID)}
+            return link || null;
+        }).filter(link => link !== null); // Filter out any null entries
+
+        // Save the updated tree to the database
+        await tree.save();
+
+        // Send the updated links back in the response
+        res.json({ success: true, links: tree.treeContent.links });
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+}
+
+
 
 

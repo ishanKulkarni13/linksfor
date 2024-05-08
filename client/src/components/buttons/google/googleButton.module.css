@@ -5,12 +5,14 @@
     justify-content: center;
     align-items: center;
     border-radius: 50px;
-    border: 1px solid black;
+    border: 1px solid rgb(254, 254, 254);
     text-align: center;
+    
 
 }
 
 .container > p{
     size: 20px;
     font-weight:600;
+
 }

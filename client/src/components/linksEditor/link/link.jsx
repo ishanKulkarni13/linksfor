@@ -2,7 +2,7 @@ import { Reorder, useDragControls } from "framer-motion";
 import EditLinkPanel from "../editLinkPanels/editLinkPanel";
 import styles from "./link.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGripVertical } from "@fortawesome/free-solid-svg-icons";
+import { faGripVertical, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export default function Link({ link , deleteLink}) {
   let { type, title, URL, UID, thumbnail, layout, linkLockConfig } = link;
@@ -31,14 +31,14 @@ export default function Link({ link , deleteLink}) {
 
             <div className={styles.centre}>
               <div className={styles.titleContainer}>
-                {/* <input type="text" value={title} /> */}
-                <div>{title}</div>
-                <span>E</span>
+                <input className={styles.titleInput} type="text" value={title}  />
+                {/* <div>{title}</div> */}
+                <button><FontAwesomeIcon icon={faPen} /></button>
               </div>
               <div className={styles.URLContainer}>
-                {/* <input type="text" value={URL} /> */}
-                <div>{URL}</div>
-                <span>E</span>
+                <input className={styles.URLInput}  type="text" value={URL} />
+                {/* <div>{URL}</div> */}
+                <button><FontAwesomeIcon icon={faPen} /></button>
               </div>
               <div className={styles.OtherOptionsContainer}>
                 <span>A</span>
@@ -52,7 +52,7 @@ export default function Link({ link , deleteLink}) {
             </div>
 
             <div className={styles.right}>
-              <button className={styles.deleteButton} onClick={handelDeleteButtonClick} >D</button>
+              <button className={styles.deleteButton} onClick={handelDeleteButtonClick} > <FontAwesomeIcon icon={faTrash} /> </button>
             </div>
           </div>
 

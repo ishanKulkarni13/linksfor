@@ -47,6 +47,7 @@
     justify-content: left;
     align-items: flex-start;
     flex-direction: column;
+    gap: 5px;
 }
 
 .titleContainer{
@@ -56,6 +57,14 @@
     gap: 10px;
 }
 
+.titleInput, .URLInput{
+    max-width:150px;
+    background-color: inherit;
+    /* border: 1px solid var(--primary); */
+    border-radius: 25px;
+    padding: 1px 10px;
+}
+
 .URLContainer{
     display: flex;
     justify-content: left;
@@ -63,6 +72,9 @@
     gap: 10px;
 }
 
+.URLInput{
+    width: 125px;
+}
 .OtherOptionsContainer{
     min-width: fit-content;
 

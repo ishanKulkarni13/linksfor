@@ -6,7 +6,7 @@ const sessionStorage = MongoStore.create({
     dbName: process.env.MONGO_DB_NAME,
     collectionName: "sessions",
     // ttl:  30 * 60, // temp
-    ttl: 1 * 24 * 60 * 60, //1d in sec as user will not configure the tree or other things daily
+    ttl: 7 * 24 * 60 * 60,
 })
 
 export const cookieSessionConfig = {

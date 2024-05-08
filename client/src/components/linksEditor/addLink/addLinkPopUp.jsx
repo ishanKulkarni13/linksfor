@@ -54,14 +54,10 @@ export default function AddLinkPopUp({ close,setLinks }) {
 
   // handel form submit
   const handleSubmit = async (values) => {
-    console.log(`form submitted`);
-    console.log("got values as", values);
-    toast("form submitted");
-    // function to fetch
     const handelAddLink = async(URL,title)=>{
       try {
         console.log('posing')
-        let res = await fetch("http://localhost:4000/tree/edit/addLink/8809746353", {
+        let res = await fetch("http://localhost:4000/tree/edit/addLink/4293827989", {
           method: "POST",
           cache: "no-store",
           body: JSON.stringify({
@@ -74,27 +70,16 @@ export default function AddLinkPopUp({ close,setLinks }) {
             "Access-Control-Allow-Credentials": true,
           },
         });
-        console.log("posted 14444");
-        toast('posted')
-        console.log(res);
-
         if (res.ok) {
-          toast("res.ok is true");
-          console.log("converting res-json to js");
           let responseData = await res.json();
-          console.log("coverted res-json to js");
           return { success: true, error: false, response: responseData };
         } else {
-          console.log("res.ok is false");
-          console.log("converting res-json to js");
           let responseData = await res.json();
-          console.log("coverted res-json to js");
           return { success: false, error: false, response: responseData };
         }
 
       } catch (error) {
-        toast.error(error)
-        console.log("error while posting data", error);
+        toast.error(error.message)
         return { success: false, error: true, response: error };
       }
     }
@@ -105,8 +90,6 @@ export default function AddLinkPopUp({ close,setLinks }) {
     );
     if (success) {
       console.log('Added link');
-      toast.success('Added Link')
-      console.log("here is the user", response);
       setLinks(response.links)
       close()
     } else{

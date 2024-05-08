@@ -7,16 +7,47 @@ import AddLinkButton from "./addLink/addLinkButton";
 import AddHeaderButton from "./addHeader/addHeaderButton";
 import TreePreview from "../treePreview/treePreview";
 import TreePreviewToggleButton from "../treePreview/treePreviewToggleButton/treePreviewToggleButton";
+import { useDebounce } from "@/hooks/debounce";
 
 export default function LinksEditor() {
-  const treeUID = `8809746353`;
+  const treeUID = `4293827989`;
+  const [areLinksFetched, setAreLinksFetched] = useState();
   const [links, setLinks] = useState([
     {
       title: "Loading",
       URL: "loading",
-      UID: "111111",
+      UID: "1111111",
+    },
+    {
+      title: "Loading",
+      URL: "loading",
+      UID: "2222222222",
+    },
+    {
+      title: "Loading",
+      URL: "loading",
+      UID: "33333333",
     },
   ]);
+  const [reorderedLinksUID, setReorderedLinksUID] = useState();
+  const debouncelinksUIDOrder = useDebounce(reorderedLinksUID, 3000);
+
+  const updateLinks = async () => {
+    let { success, response, error } = await getAllLinks(treeUID);
+    if (success) {
+      setLinks(response.links);
+      setAreLinksFetched(true)
+    } else {
+      if (error) {
+        // if catched error in fetch
+        toast.error("Error occured while fetching data");
+        console.log("Error occured while fetching data", error);
+      } else {
+        //no error in fetch and success is false(from server)
+        toast.error(`Link not added: ${response.message}`);
+      }
+    }
+  };
 
   const getAllLinks = async (treeUID) => {
     try {
@@ -45,24 +76,8 @@ export default function LinksEditor() {
     }
   };
 
-  const updateLinks = async () => {
-    let { success, response, error } = await getAllLinks(treeUID);
-    if (success) {
-      setLinks(response.links);
-    } else {
-      if (error) {
-        // if catched error in fetch
-        toast.error("Error occured while fetching data")
-        console.log("Error occured while fetching data", error);
-      } else {
-        //no error in fetch and success is false(from server)
-        toast.error(`Link not added: ${response.message}`);
-      }
-    }
-  };
-
   const deleteLink = async (linkUID) => {
-    const treeUID = `8809746353`;
+    const treeUID = `4293827989`;
     try {
       console.log("posing");
       let res = await fetch(
@@ -86,31 +101,68 @@ export default function LinksEditor() {
       console.log(res);
 
       if (res.ok) {
-        toast("res.ok is true");
-        console.log("converting res-json to js");
         let responseData = await res.json();
-        console.log("coverted res-json to js");
-        // return { success: true, error: false, response: responseData };
         setLinks(responseData.links);
       } else {
-        console.log("res.ok is false");
-        console.log("converting res-json to js");
         let responseData = await res.json();
-        console.log("coverted res-json to js");
-        // return { success: false, error: false, response: responseData };
         toast.error(responseData.message);
       }
     } catch (error) {
-      toast.error(error);
+      toast.error(error.message);
       console.log("catched error", error);
-      // return { success: false, error: true, response: error };
-      toast.error("Some Error Occured");
     }
   };
+
+  function handelLinksOrderChange(value) {
+    setLinks(value);
+    let GeneratedLinksUIDArray = value.map((link) => link.UID);
+    console.log("created GeneratedLinksUIDArray:", GeneratedLinksUIDArray);
+    setReorderedLinksUID(GeneratedLinksUIDArray)
+  }
+
+  async function sendLinksUIDToBackend(linksUIDArray) {
+    toast.info(`sendLinksUIDToBackend function is running`);
+    try {
+      const res = await fetch(
+        `http://localhost:4000/tree/edit/editLinksOrder/${treeUID}`,
+        {
+          method: "POST",
+          cache: "no-store",
+          body: JSON.stringify({
+            treeUID,
+            linksUIDArray,
+          }),
+          credentials: "include",
+          headers: {
+            Accept: "applications/json",
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Credentials": true,
+          },
+        }
+      );
+
+      if (res.ok) {
+        const responseData = await res.json();
+      } else {
+        const responseData = await res.json();
+        toast.error(responseData.message);
+      }
+    } catch (error) {
+      console.error("Error updating links order:", error);
+      toast.error("Error updating links order");
+    }
+  }
 
   useEffect(() => {
     updateLinks();
   }, []);
+
+  useEffect(() => {
+    if(areLinksFetched){
+    sendLinksUIDToBackend(debouncelinksUIDOrder);
+    }
+
+  }, [debouncelinksUIDOrder]);
 
   return (
     <div className={styles.linksEditorContainer}>
@@ -122,7 +174,7 @@ export default function LinksEditor() {
 
       <Reorder.Group
         values={links}
-        onReorder={setLinks}
+        onReorder={handelLinksOrderChange}
         layoutScroll
         className={styles.linksContainer}
       >
@@ -131,7 +183,7 @@ export default function LinksEditor() {
         ))}
       </Reorder.Group>
       <TreePreviewToggleButton />
-      <Toaster position="bottom" expand={false} richColors />
+      <Toaster position="bottom" expand={true} richColors />
     </div>
   );
 }
