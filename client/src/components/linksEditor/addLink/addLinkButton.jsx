@@ -2,7 +2,7 @@ import styles from "./addLink.module.css";
 import AddLinkPopUp from "./addLinkPopUp";
 import { useState } from "react";
 
-export default function AddLinkButton({links, setLinks}) {
+export default function AddLinkButton({links, setLinks, treeUID}) {
     const [isPopUpActive, useIsPopUpActive] = useState(false);
   function handleAddLinkButtonCLick(e) {
     useIsPopUpActive(true)
@@ -19,7 +19,7 @@ export default function AddLinkButton({links, setLinks}) {
         <div>+</div>
         <p>Add Link</p>
       </button>
-      {isPopUpActive && <AddLinkPopUp setLinks={setLinks} close={closeAddLinkPopUp}  />}
+      {isPopUpActive && <AddLinkPopUp setLinks={setLinks} close={closeAddLinkPopUp}  treeUID={treeUID}/>}
     </>
   );
 }

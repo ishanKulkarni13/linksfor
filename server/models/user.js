@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt"
 import ErrorHandler from "../utils/error.js";
+import Tree from "./tree.js"
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -77,9 +78,9 @@ const userSchema = new mongoose.Schema({
         }
     },
     trees: {
-        ProfileDefaultTree: {
+        profileDefaultTree: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'tree',
+            ref: 'Tree',
         },
     },
     treeTheme: {

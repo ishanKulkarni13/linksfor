@@ -144,7 +144,7 @@ export const updateLinksOrder = async (req, res, next) => {
     const userID = req.user._id;
 
     let treeUID;
-    if (!(req.params.treeUID) || !(req.body.treeUID)) {
+    if (!(req.params.treeUID) && !(req.body.treeUID)) {
         return next(new ErrorHandelar("treeUID not provided"));
     } else {
         treeUID = req.body.treeUID || req.params.treeUID;
@@ -168,7 +168,7 @@ export const updateLinksOrder = async (req, res, next) => {
             const link = tree.treeContent.links.find(link => link.UID === linkUID);
             // Return the link object if found, or null otherwise
 
-            if(!link){ console.log("didn't found a link with the uid ", linkUID)}
+            if (!link) { console.log("didn't found a link with the uid ", linkUID) }
             return link || null;
         }).filter(link => link !== null); // Filter out any null entries
 
@@ -183,6 +183,47 @@ export const updateLinksOrder = async (req, res, next) => {
     }
 }
 
+export const editTreeLinkTitleAndURL = async (req, res, next) => {
+    const userID = req.user._id;
 
+    let {URL, title, linkUID} = req.body;
+    if(!(URL) || !(title)){ return next(new ErrorHandelar("URL or title not provided, nothing to change"));}
+    if(!linkUID){return next(new ErrorHandelar("linkUID not provided"));}
 
+    let treeUID;
+    if (!(req.params.treeUID) && !(req.body.treeUID)) {
+        return next(new ErrorHandelar("treeUID not provided"));
+    } else {
+        treeUID = req.body.treeUID || req.params.treeUID;
+    }
+    console.log(URL, title, linkUID, treeUID)
+    try {
+        // Find the tree belonging to the user
+        const tree = await Tree.findOne({ UID: treeUID, owner: userID });
 
+        if (!tree) {
+            return next(new ErrorHandelar("Tree Not Found", 404));
+        }
+
+        // Find the link within the tree
+        let link = tree.treeContent.links.find(link => link.UID === linkUID);
+        if (!link) {return next(new ErrorHandelar("Link Not Found", 404));}
+
+        // Update the link's properties if provided
+        if (URL) {
+            link.URL = URL;
+        }
+        if (title) {
+            link.title = title;
+        }
+
+        // Save the updated tree to the database
+        await tree.save();
+
+        // Send the updated link back in the response
+        res.json({ success: true, link: link });
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+}

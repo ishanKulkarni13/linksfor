@@ -1,0 +1,40 @@
+import React from 'react'
+
+let tree;
+const getTreeByUsername = async (username)=>{
+    try {
+        let res = await fetch(
+          `http://localhost:4000/search/tree/username/${username}`,
+          {
+            method: "GET",
+            cache: "no-store",
+            credentials: "include",
+            headers: {
+              Accept: "applications/json",
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Credentials": true,
+            },
+          }
+        );
+        if (res.ok) {
+          let responseData = await res.json();
+        tree = responseData.tree;
+        console.log(tree.treeContent.links);
+        } else {
+          let responseData = await res.json();
+        console.log('error occured in getTreeByUsername', responseData);
+        }
+      } catch (error) {
+          console.log('error catched in getTreeByUsername', error.message);
+        return { success: false, error: true, response: error };
+      }
+}
+export default async function page() {
+    await getTreeByUsername(`nikhil`)
+  return (
+    <div>
+        <p>cheak console</p>
+    </div>
+  )
+}
+

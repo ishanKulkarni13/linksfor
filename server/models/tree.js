@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import User from './user.js'
 const treeSchema = mongoose.Schema({
     owner: {
         type: mongoose.Schema.Types.ObjectId,
@@ -13,7 +13,7 @@ const treeSchema = mongoose.Schema({
         },
         unique: [true, "UID already exist"],
     },
-    treevisibility: {
+    treeVisibility: {
         type: String,
         default: "public",
         enum: ['public', 'private', "password-protected"],

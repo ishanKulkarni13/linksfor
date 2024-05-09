@@ -58,7 +58,7 @@
 }
 
 .titleInput, .URLInput{
-    max-width:150px;
+    width:200px;
     background-color: inherit;
     /* border: 1px solid var(--primary); */
     border-radius: 25px;
@@ -72,9 +72,6 @@
     gap: 10px;
 }
 
-.URLInput{
-    width: 125px;
-}
 .OtherOptionsContainer{
     min-width: fit-content;
 

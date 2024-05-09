@@ -10,7 +10,7 @@ import TreePreviewToggleButton from "../treePreview/treePreviewToggleButton/tree
 import { useDebounce } from "@/hooks/debounce";
 
 export default function LinksEditor() {
-  const treeUID = `4293827989`;
+  const treeUID = `5856295082`;
   const [areLinksFetched, setAreLinksFetched] = useState();
   const [links, setLinks] = useState([
     {
@@ -77,11 +77,10 @@ export default function LinksEditor() {
   };
 
   const deleteLink = async (linkUID) => {
-    const treeUID = `4293827989`;
     try {
       console.log("posing");
       let res = await fetch(
-        `http://localhost:4000/tree/edit/deleteLink/ggggggggggggg`,
+        `http://localhost:4000/tree/edit/deleteLink/${treeUID}`,
         {
           method: "POST",
           cache: "no-store",
@@ -97,8 +96,6 @@ export default function LinksEditor() {
           },
         }
       );
-      console.log("posted");
-      console.log(res);
 
       if (res.ok) {
         let responseData = await res.json();
@@ -167,7 +164,7 @@ export default function LinksEditor() {
   return (
     <div className={styles.linksEditorContainer}>
       <div className={styles.addLinkAndHeaderContainer}>
-        <AddLinkButton setLinks={setLinks} />
+        <AddLinkButton setLinks={setLinks} treeUID={treeUID} />
         {/* <AddLinkButton /> */}
         <AddHeaderButton />
       </div>
@@ -179,7 +176,7 @@ export default function LinksEditor() {
         className={styles.linksContainer}
       >
         {links.map((link, index) => (
-          <Link key={link.UID} link={link} deleteLink={deleteLink} />
+          <Link key={link.UID} link={link} treeUID={treeUID} deleteLink={deleteLink} />
         ))}
       </Reorder.Group>
       <TreePreviewToggleButton />

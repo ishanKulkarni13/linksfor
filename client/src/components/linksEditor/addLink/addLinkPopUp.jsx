@@ -41,7 +41,7 @@ const formSchema = z
     }
   );
 
-export default function AddLinkPopUp({ close,setLinks }) {
+export default function AddLinkPopUp({ close,setLinks, treeUID }) {
   const { push } = useRouter();
 
   const form = useForm({
@@ -57,7 +57,7 @@ export default function AddLinkPopUp({ close,setLinks }) {
     const handelAddLink = async(URL,title)=>{
       try {
         console.log('posing')
-        let res = await fetch("http://localhost:4000/tree/edit/addLink/4293827989", {
+        let res = await fetch(`http://localhost:4000/tree/edit/addLink/${treeUID}`, {
           method: "POST",
           cache: "no-store",
           body: JSON.stringify({

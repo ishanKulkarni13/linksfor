@@ -110,7 +110,7 @@ export const handelPassportlocalRegester = async (req, res, next) => {
 
         user = await User.create({ name, username, email, profilePic, password, authMethod: 'email' });
         let tree = await Tree.create({ owner: user._id, treeName: `@${user.name}` });
-        await User.findByIdAndUpdate(user._id, { $set: { 'trees.ProfileDefaultTree': tree._id } });
+        await User.findByIdAndUpdate(user._id, { $set: { 'trees.profileDefaultTree': tree._id } });
         res.json({
             sucess: true,
             message: "User created sucessfuully",

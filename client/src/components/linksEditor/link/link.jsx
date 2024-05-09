@@ -2,22 +2,70 @@ import { Reorder, useDragControls } from "framer-motion";
 import EditLinkPanel from "../editLinkPanels/editLinkPanel";
 import styles from "./link.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGripVertical, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faGripVertical,
+  faPen,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
+import { toast } from "sonner";
 
-export default function Link({ link , deleteLink}) {
-  let { type, title, URL, UID, thumbnail, layout, linkLockConfig } = link;
-
-  const handelDeleteButtonClick = ()=>{
-    deleteLink(link.UID);
-    console.log('link', link);
-    console.log('linkUID', link.UID);
-  }  
-
-
+export default function Link({ link, deleteLink , treeUID}) {
+  const [linkData, setLinkData] = useState(link);
   const controls = useDragControls();
+
+  const handelDeleteButtonClick = () => {
+    deleteLink(link.UID);
+  };
+
+  const handleInputChange = (e) => setLinkData(prev => ({...prev, [e.target.name]: e.target.value}))
+
+  const handleSubmit = async(event) => {
+    event.preventDefault();
+    console.log(linkData);
+    await sendLinkTitleAndURLToBackend()
+  }
+
+  const sendLinkTitleAndURLToBackend = async()=>{
+    toast.info(`sendLinkTitleAndURLToBackend function is running`);
+    let {title, URL, UID} = linkData;
+    try {
+      const res = await fetch(
+        `http://localhost:4000/tree/edit/editTitleAndURL/${treeUID}`,
+        {
+          method: "POST",
+          cache: "no-store",
+          body: JSON.stringify({
+            treeUID,
+            linkUID: UID,
+            title,
+            URL
+          }),
+          credentials: "include",
+          headers: {
+            Accept: "applications/json",
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Credentials": true,
+          },
+        }
+      );
+
+      if (res.ok) {
+        const responseData = await res.json();
+        console.log('responce from sending Title and Input to DB', responseData);
+      } else {
+        const responseData = await res.json();
+        toast.error(responseData.message);
+      }
+    } catch (error) {
+      console.error("Error in sending Title and Input to DB", error);
+      toast.error("Error in sending Title and Input to DB");
+    }
+  }
+
+
   return (
     <>
-      {/* <div className={styles.container}> */}
       <Reorder.Item
         className={styles.DNDItem}
         value={link}
@@ -27,18 +75,35 @@ export default function Link({ link , deleteLink}) {
       >
         <div className={styles.linkContainer}>
           <div className={styles.link}>
-            <div className={`${styles.left}, ${styles.DNDIcon}`} onPointerDown={(e) => controls.start(e)} ><FontAwesomeIcon icon={faGripVertical} /> </div>
+            <div
+              className={`${styles.left}, ${styles.DNDIcon}`}
+              onPointerDown={(e) => controls.start(e)}
+            >
+              <FontAwesomeIcon icon={faGripVertical} />{" "}
+            </div>
 
-            <div className={styles.centre}>
+            <form className={styles.centre} onSubmit={handleSubmit}>
               <div className={styles.titleContainer}>
-                <input className={styles.titleInput} type="text" value={title}  />
-                {/* <div>{title}</div> */}
-                <button><FontAwesomeIcon icon={faPen} /></button>
+                <input
+                  className={styles.titleInput}
+                  type="text"
+                  name="title"
+                  value={linkData.title}
+                  onChange={handleInputChange}
+                />
+                <button><FontAwesomeIcon type="submit" icon={faPen} /></button>
               </div>
               <div className={styles.URLContainer}>
-                <input className={styles.URLInput}  type="text" value={URL} />
-                {/* <div>{URL}</div> */}
-                <button><FontAwesomeIcon icon={faPen} /></button>
+                <input
+                  className={styles.URLInput}
+                  type="text"
+                  name="URL"
+                  value={linkData.URL}
+                  onChange={handleInputChange}
+                />
+                <button>
+                  <FontAwesomeIcon icon={faPen} type="submit" />
+                </button>
               </div>
               <div className={styles.OtherOptionsContainer}>
                 <span>A</span>
@@ -49,17 +114,22 @@ export default function Link({ link , deleteLink}) {
                 <span>A</span>
                 <span>A</span>
               </div>
-            </div>
+            </form>
 
             <div className={styles.right}>
-              <button className={styles.deleteButton} onClick={handelDeleteButtonClick} > <FontAwesomeIcon icon={faTrash} /> </button>
+              <button
+                className={styles.deleteButton}
+                onClick={handelDeleteButtonClick}
+              >
+                {" "}
+                <FontAwesomeIcon icon={faTrash} />{" "}
+              </button>
             </div>
           </div>
 
           {/* <EditLinkPanel className={styles.editPanelContainer} /> */}
         </div>
       </Reorder.Item>
-      {/* </div> */}
     </>
   );
 }
