@@ -25,6 +25,7 @@ import {
   Select,
 } from "@/components/ui/select";
 import { Toaster, toast } from "sonner";
+import { backendBaseURL } from "@/constants";
 
 const formSchema = z
   .object({
@@ -57,7 +58,7 @@ export default function AddLinkPopUp({ close,setLinks, treeUID }) {
     const handelAddLink = async(URL,title)=>{
       try {
         console.log('posing')
-        let res = await fetch(`http://localhost:4000/tree/edit/addLink/${treeUID}`, {
+        let res = await fetch(`${backendBaseURL}/tree/edit/addLink/${treeUID}`, {
           method: "POST",
           cache: "no-store",
           body: JSON.stringify({

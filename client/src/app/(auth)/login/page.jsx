@@ -1,5 +1,6 @@
 "use client";
 import styles from "./login.module.css";
+import {backendBaseURL} from "@/constants/index"
 import { useRouter } from "next/navigation";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -22,6 +23,7 @@ import {
   SelectItem,
   Select,
 } from "@/components/ui/select";
+import { Toaster, toast } from "sonner";
 
 const formSchema = z
   .object({
@@ -49,16 +51,18 @@ export default function Login() {
       password: "",
     },
   });
-
+  
   //   const accountType = form.watch("accountType");
-
+  
   const handleSubmit = async (values) => {
     console.log(`form submitted`);
     console.log("got values as", values);
-
+    
     async function postFormData(username, password) {
       try {
-        let res = await fetch("http://localhost:4000/auth/local/login", {
+        username = username.toLowerCase();
+        toast.info(username)
+        let res = await fetch(`${backendBaseURL}/auth/local/login`, {
           method: "POST",
           cache: "no-store",
           body: JSON.stringify({
@@ -71,25 +75,19 @@ export default function Login() {
             "Content-Type": "application/json",
             "Access-Control-Allow-Credentials": true,
           },
-          redirect: "follow",
         });
         console.log(res);
         if (res.ok) {
-          console.log("res.ok is true");
-          console.log("converting res-json to js");
           let responseData = await res.json();
-          console.log("coverted res-json to js");
           return { success: true, error: false, response: responseData };
         } else {
-          console.log("res.ok is false");
-          console.log("converting res-json to js");
           let responseData = await res.json();
-          console.log("coverted res-json to js");
           return { success: false, error: false, response: responseData };
         }
       } catch (error) {
+        toast.error(`some error occured`)
         console.log("error while posting data", error);
-        return { success: false, error: true, response: error };
+        return { success: false, error: error, response: error };
       }
     }
     let { success, response, error } = await postFormData(
@@ -97,15 +95,14 @@ export default function Login() {
       values.password
     );
     if (success) {
-      console.log('login sucessful');
-      console.log("here is the user", response);
-      push('/me');
+      toast.success('login sucessful');
+      push('/admin/me');
     } else{
       if (error) {
-        console.log("Some error occured", error);
+        toast.error(`Some error occured ${response.message}`);
       push('/login');
       } else{
-        console.log("User not logged in", response.message );
+        toast.error(`${response.message}`);
       }
     }
   };
@@ -170,6 +167,7 @@ export default function Login() {
           </div>
         </div>
       </div>
+      <Toaster/>
     </main>
   );
 }

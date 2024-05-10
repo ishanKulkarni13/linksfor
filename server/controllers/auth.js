@@ -35,28 +35,28 @@ export const handelLogin = async (req, res, next) => {
 
 export const handelPassportGoogleLoginCallback = (req, res, next) => {
     const frontendUrl = process.env.FRONTEND_URL
-    res.redirect(`${frontendUrl}`)
+    res.redirect(`${frontendUrl}/admin`)
 }
 
 export const logout = (req, res, next) => {
     try {
         req.logout(function (err) {
-            if (err) { return next(new ErrorHandelar("error occure while logging out from logout function")); }
+            if (err) { return next(new ErrorHandelar("Error occure while logging out")); }
             res.json({
                 sucess: true,
                 message: "logged out"
             })
         });
     } catch (error) {
-        return next(new ErrorHandelar("some error occure while logging out"))
+        return next(new ErrorHandelar("Some error occure while logging out"))
     }
 }
 
 export const localRegesterPage = (req, res, next) => {
-    res.render("localRegester")
+    res.json({message: 'feature not completed'})
 }
 export const localLoginPage = (req, res, next) => {
-    res.render("localLogin")
+    res.json({message: 'feature not completed'})
 };
 
 export const handelPassportlocalRegester = async (req, res, next) => {
@@ -109,7 +109,7 @@ export const handelPassportlocalRegester = async (req, res, next) => {
 
 
         user = await User.create({ name, username, email, profilePic, password, authMethod: 'email' });
-        let tree = await Tree.create({ owner: user._id, treeName: `@${user.name}` });
+        let tree = await Tree.create({ owner: user._id, treeName: `@${user.name}`, treePicture:{URL:user.profilePic.URL} });
         await User.findByIdAndUpdate(user._id, { $set: { 'trees.profileDefaultTree': tree._id } });
         res.json({
             sucess: true,

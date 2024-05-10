@@ -62,8 +62,8 @@ const googleStrategyVerifyFunction = async (accessToken, refreshToken, user, cb)
                 profilePic = { public_id, url }
             }
             user = await User.create({ name, email, profilePic, googleOAuthID: id, authMethod: 'google' });
-            let tree = await Tree.create({ owner: user._id, treeName: `@${user.name}` });
-            await User.findByIdAndUpdate(user._id, { $set: { 'trees.ProfileDefaultTree': tree._id } });
+            let tree = await Tree.create({ owner: user._id, treeName: `@${user.name}` , treePicture:{URL:user.profilePic.URL}});
+            await User.findByIdAndUpdate(user._id, { $set: { 'trees.profileDefaultTree': tree._id } });
         }
         return cb(null, user)
     } catch (error) {
@@ -77,27 +77,21 @@ passport.use(new GoogleStrategy(GoogleStrategyConfig, googleStrategyVerifyFuncti
 const LocalStrategyVerifyFunction = async (username, password, cb) => {
     console.log(username, password);
     if (!username) {
-        console.log("1224");
         return cb(new ErrorHandler("Username is not provided"), false)
     } else if (!password){
-        console.log("12aa24");
         return cb(new ErrorHandler("Password is not provided"), false)
     }
     try {
 
         const user = await User.findOne({ username }).select('+password');
-        console.log("user i", user);
         if (!user) {
-            console.log("12ww24");
             return cb(new ErrorHandler("userName is invalid"), false)
         }
 
         let isPasswordValid = await user.isValidPassword(password, user);
         if (isPasswordValid) {
-            console.log(`user logged in sucess`, user);
             return cb(null, user);
         } else {
-            console.log("12qweer24");
             return cb(new ErrorHandler("Password is invalid"), false)
         }
 

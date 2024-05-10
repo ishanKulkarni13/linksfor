@@ -1,5 +1,6 @@
 "use client";
 import styles from "./regester.module.css";
+import {backendBaseURL} from "@/constants/index"
 import { useRouter } from "next/navigation";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -60,16 +61,13 @@ export default function Home() {
     },
   });
 
-  //   const accountType = form.watch("accountType");
-
   const handleSubmit = async (values) => {
     toast(`form submitted`);
     console.log("got values as", values);
     async function postFormData(name ,username, email, password) {
       try {
-
-        toast('posing')
-        let res = await fetch("http://localhost:4000/auth/local/regester", {
+        username = username.toLowerCase();
+        let res = await fetch(`${backendBaseURL}/auth/local/regester`, {
           method: "POST",
           cache: "no-store",
           body: JSON.stringify({
@@ -85,25 +83,16 @@ export default function Home() {
             "Access-Control-Allow-Credentials": true,
           },
         });
-        toast('posted')
-        console.log(res);
         if (res.ok) {
-          toast("res.ok is true");
-          console.log("converting res-json to js");
           let responseData = await res.json();
-          console.log("coverted res-json to js");
           return { success: true, error: false, response: responseData };
         } else {
-          console.log("res.ok is false");
-          console.log("converting res-json to js");
           let responseData = await res.json();
-          console.log("coverted res-json to js");
           return { success: false, error: false, response: responseData };
         }
       } catch (error) {
-        toast(error)
-        console.log("error while posting data", error);
-        return { success: false, error: true, response: error };
+        toast,error(error.message)
+        return { success: false, error: error, response: error };
       }
     }
     let { success, response, error } = await postFormData(
@@ -113,12 +102,11 @@ export default function Home() {
       values.password
     );
     if (success) {
-      console.log('regester sucessful');
-      console.log("here is the user", response);
+      toast.success("Regestered sucessful")
       push('/login');
     } else{
       if (error) {
-        console.log("Some error occured", error);
+        toast.error(`some error occured, ${response.message}`)
       push('/regester');
       } else{
         console.log("User not regestered", response.message );

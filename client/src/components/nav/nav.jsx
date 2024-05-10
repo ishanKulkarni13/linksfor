@@ -1,6 +1,6 @@
 import styles from "./nav.module.css";
 import NavItem from "@/components/nav/navItem/navItem";
-import { navLinks } from "@/constants/nav";
+import { navLinks } from "@/constants/index";
 export default function Nav() {
   return (
     <nav className={styles.nav}>

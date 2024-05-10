@@ -2,13 +2,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
+import {backendBaseURL} from "@/constants/index"
 export default function Me() {
   const [user, setUser] = useState(false);
   useEffect(() => {
     async function getUserInfo() {
       try {
-        let res = await fetch("http://localhost:4000/user/userInfo", {
+        let res = await fetch(`${backendBaseURL}/user/userInfo`, {
           method: "GET",
           credentials: "include",
           headers: {

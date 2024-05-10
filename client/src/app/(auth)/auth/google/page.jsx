@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from "react";
-
+import {backendBaseURL} from "@/constants/index"
 export default function GoogleLogin() {
 
     useEffect( ()=>{

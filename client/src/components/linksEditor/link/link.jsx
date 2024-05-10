@@ -1,4 +1,5 @@
 import { Reorder, useDragControls } from "framer-motion";
+import {backendBaseURL} from "@/constants/index"
 import EditLinkPanel from "../editLinkPanels/editLinkPanel";
 import styles from "./link.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -31,7 +32,7 @@ export default function Link({ link, deleteLink , treeUID}) {
     let {title, URL, UID} = linkData;
     try {
       const res = await fetch(
-        `http://localhost:4000/tree/edit/editTitleAndURL/${treeUID}`,
+        `${backendBaseURL}/tree/edit/editTitleAndURL/${treeUID}`,
         {
           method: "POST",
           cache: "no-store",

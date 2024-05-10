@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
             type: String, 
             default: "uiccf1wbzyioazqgve5q"
         },
-        url: {
+        URL: {
             type: String,
             default: 'http://res.cloudinary.com/kakashib2k/image/upload/v1713685024/uiccf1wbzyioazqgve5q.png'
         },

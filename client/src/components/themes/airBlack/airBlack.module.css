@@ -1,0 +1,13 @@
+.container{
+ margin: 100px 15px; 
+}
+
+.profileContainer{
+    height: 150px;
+    width: auto;
+}
+
+.linksContainer{
+    margin-top: 50px;
+    width: auto;
+}

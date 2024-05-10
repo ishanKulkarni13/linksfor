@@ -1,4 +1,5 @@
 import styles from "@/components/linksEditor/linksEditor.module.css";
+import {backendBaseURL} from "@/constants/index"
 import { Reorder, useDragControls } from "framer-motion";
 import { useEffect, useState } from "react";
 import Link from "@/components/linksEditor/link/link";
@@ -10,7 +11,7 @@ import TreePreviewToggleButton from "../treePreview/treePreviewToggleButton/tree
 import { useDebounce } from "@/hooks/debounce";
 
 export default function LinksEditor() {
-  const treeUID = `5856295082`;
+  const treeUID = `1148359071`;
   const [areLinksFetched, setAreLinksFetched] = useState();
   const [links, setLinks] = useState([
     {
@@ -52,7 +53,7 @@ export default function LinksEditor() {
   const getAllLinks = async (treeUID) => {
     try {
       let res = await fetch(
-        `http://localhost:4000/tree/adminAllTreeLinks/${treeUID}`,
+        `${backendBaseURL}/tree/adminAllTreeLinks/${treeUID}`,
         {
           method: "GET",
           cache: "no-store",
@@ -80,7 +81,7 @@ export default function LinksEditor() {
     try {
       console.log("posing");
       let res = await fetch(
-        `http://localhost:4000/tree/edit/deleteLink/${treeUID}`,
+        `${backendBaseURL}/tree/edit/deleteLink/${treeUID}`,
         {
           method: "POST",
           cache: "no-store",
@@ -121,7 +122,7 @@ export default function LinksEditor() {
     toast.info(`sendLinksUIDToBackend function is running`);
     try {
       const res = await fetch(
-        `http://localhost:4000/tree/edit/editLinksOrder/${treeUID}`,
+        `${backendBaseURL}/tree/edit/editLinksOrder/${treeUID}`,
         {
           method: "POST",
           cache: "no-store",

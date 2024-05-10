@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./admin.module.css"
-
+import {backendBaseURL} from "@/constants/index"
 import { useEffect, useState } from "react";
 
 export default function Me() {
@@ -9,7 +9,7 @@ export default function Me() {
   useEffect(() => {
     async function getUserInfo() {
       try {
-        let res = await fetch("http://localhost:4000/user/userInfo", {
+        let res = await fetch(`${backendBaseURL}/user/userInfo`, {
           method: "GET",
           credentials: "include",
           headers: {

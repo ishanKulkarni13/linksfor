@@ -29,14 +29,21 @@ const treeSchema = mongoose.Schema({
         required: true
     },
     treePicture: {
-        publis_id: {
+        public_id: {
             type: String,
         },
-        url: {
+        URL: {
             type: String,
         },
+        style:{
+            type: String,
+            default:"classic"
+        }
     },
-    treeDescription: {
+    treeBio: {
+        type: String,
+    },
+    treeDescription: { // for AI chat bot 
         type: String,
     },
     treeContent: {
@@ -63,7 +70,7 @@ const treeSchema = mongoose.Schema({
                 },
                 thumbnail: {
                     publis_id: String,
-                    url: String,
+                    URL: String,
                 },
                 // linkConfig: {
                 layout: {
