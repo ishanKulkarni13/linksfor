@@ -5,17 +5,17 @@ import { faLink, faUser } from "@fortawesome/free-solid-svg-icons";
 export default function TopBar() {
   return (
     <div className={styles.topBarContainer}>
-      <div className={styles.logoContainer}>
+      {/* <div className={styles.logoContainer}>
         <FontAwesomeIcon icon={faLink} />
-      </div>
+      </div> */}
       <Nav />
-      <div className={styles.profileContainer}>
+      {/* <div className={styles.profileContainer}>
         <div className={styles.profile}>
           <div className={styles.profileImgContainer}>
             <FontAwesomeIcon icon={faUser} />
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

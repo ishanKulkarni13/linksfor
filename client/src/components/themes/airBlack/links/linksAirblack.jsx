@@ -4,7 +4,7 @@ export default function LinksAirblack({links}) {
   return (
     <div className={styles.container} >
       {
-        links.map((link)=> {return ( <LinkAirblack link={link}/>)})
+        links.map((link)=> {return ( <LinkAirblack  key={link.title} link={link}/>)})
       }
     </div>
   )

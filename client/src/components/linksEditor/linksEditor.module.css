@@ -1,6 +1,14 @@
+.container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
 .linksEditorContainer{
-    width: auto;
-    padding: 10px 100px;
+    padding: calc(var(--topBarHeight) + 30px) 50px;
+    height: 100dvh;
+    overflow-y: scroll;
+    position: relative;
+    border-right: 1px solid white;
 }
 
 .addLinkAndHeaderContainer{
@@ -11,39 +19,35 @@
     gap: 25px;
 }
 
-/* .addHeaderButton{
-    width: 10rem;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border-radius: 50px;
-    font-weight: bold;
-}
-
-.addLinkButton{
-    background-color: var(--primary);
-    color: black;
-}
-
-.addHeaderButton{
-    border: 1px solid white;
-} */
-
 .linksContainer{
     margin-top: 20px;
     width: inherit;
     gap: 20px;
 }
 
-@media (width<1204px){
-    .linksEditorContainer{
-        padding: 0px;
-        margin-top: 10px;
-    }
 
-    .linksContainer{
-        padding: 0px;
+
+.treePreviewContainer {
+    position: sticky;
+    z-index: 1;
+    bottom: 0%;
+    right: 0%;
+    padding-top: var(--topBarHeight);
+    height: 100dvh;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+}
+
+@media (width<1204px){
+
+    .container {
+        display: block
+    }
+    
+    .treePreviewContainer{
+        display: none;
     }
 }

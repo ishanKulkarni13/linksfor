@@ -29,7 +29,7 @@ export default function Me() {
     getUserInfo();
   }, []);
   return (
-    <main>
+    <main className={styles.container}>
       <h3>Your Info</h3>
       <ul>
         <li>

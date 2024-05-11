@@ -106,7 +106,7 @@ export default function Link({ link, deleteLink , treeUID}) {
                   <FontAwesomeIcon icon={faPen} type="submit" />
                 </button>
               </div>
-              <div className={styles.OtherOptionsContainer}>
+              {/* <div className={styles.OtherOptionsContainer}>
                 <span>A</span>
                 <span>B</span>
                 <span>C</span>
@@ -114,7 +114,7 @@ export default function Link({ link, deleteLink , treeUID}) {
                 <span>A</span>
                 <span>A</span>
                 <span>A</span>
-              </div>
+              </div> */}
             </form>
 
             <div className={styles.right}>

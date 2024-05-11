@@ -5,7 +5,7 @@ export default function TreePreview({refresh}) {
   return (
     <div className={styles.container} >
       <div className={styles.preview} >
-        <iframe className={styles.iframe}  src="/regester" title="tree Preview" ></iframe>
+        <iframe className={styles.iframe}  src="/siddhu" title="tree Preview" scrolling="yes" ></iframe>
       </div>
     </div>
   )

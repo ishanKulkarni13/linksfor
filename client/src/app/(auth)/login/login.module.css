@@ -27,6 +27,23 @@
     align-items: center;
     flex-direction: column;
 }
+
+
+.loginButton{
+    height: 45px;
+    background-color: var(--primary);
+    color: black;
+    border-radius: 50px;
+    transition: transform 250ms;
+}
+.loginButton:hover{
+    transform: scale(1.025);
+}
+
+.orText{
+    margin: 10px 0px;
+}
+
 .loginWithGoogleContiner{
     width: 45vw;
 }

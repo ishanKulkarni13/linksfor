@@ -1,5 +1,6 @@
+'use client'
 import styles from "@/components/linksEditor/linksEditor.module.css";
-import {backendBaseURL} from "@/constants/index"
+import { backendBaseURL } from "@/constants/index";
 import { Reorder, useDragControls } from "framer-motion";
 import { useEffect, useState } from "react";
 import Link from "@/components/linksEditor/link/link";
@@ -9,9 +10,15 @@ import AddHeaderButton from "./addHeader/addHeaderButton";
 import TreePreview from "../treePreview/treePreview";
 import TreePreviewToggleButton from "../treePreview/treePreviewToggleButton/treePreviewToggleButton";
 import { useDebounce } from "@/hooks/debounce";
+import { useLocalstorage } from "@/hooks/localStorage";
+import { useRouter } from "next/navigation";
 
 export default function LinksEditor() {
-  const treeUID = `1148359071`;
+  // const treeUID = `1148359071`;
+
+  const {push} = useRouter();
+  const { setItem, getItem , removeItem} = useLocalstorage(`selectedTree`);
+  const [treeUID, setTreeUID] = useState();
   const [areLinksFetched, setAreLinksFetched] = useState();
   const [links, setLinks] = useState([
     {
@@ -33,19 +40,86 @@ export default function LinksEditor() {
   const [reorderedLinksUID, setReorderedLinksUID] = useState();
   const debouncelinksUIDOrder = useDebounce(reorderedLinksUID, 3000);
 
+
+  const getDefaultTreeUID = async ()=>{
+    try {
+      let res = await fetch(
+        `${backendBaseURL}/tree/user-default-treeUID`,
+        {
+          method: "GET",
+          cache: "no-store",
+          credentials: "include",
+          headers: {
+            Accept: "applications/json",
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Credentials": true,
+          },
+        }
+      );
+      if (res.ok) {
+        let responseData = await res.json();
+        return { success: true, error: false, response: responseData, statusCode: res.status };
+      } else {
+        let responseData = await res.json();
+        return { success: false, error: false, response: responseData, statusCode: res.status };
+      }
+    } catch (error) {
+      return { success: false, error: error, response: error};
+    }
+  }
+
+  const updateTreeUID = async () => {
+    let UID = getItem();
+
+    if (!UID) {
+      let { success, response, error, statusCode } = await getDefaultTreeUID();
+      if (success) {
+        console.log('got treeUID', response.treeUID);
+        UID = response.treeUID;
+      } else{
+        if (error) {
+          // if catched error in fetch
+          console.log("Some error occured", error);
+          toast.error(`Some error occured: ${error.message}`)
+        } else{
+          //no error in fetch and success is false(from server)
+          toast.error(`${response.message}`)
+          if(statusCode === 404){
+            removeItem()
+           return  push("/admin/selectTree?removeSelectedTree")
+          }
+          console.log("cant get treEUID", response.message );
+
+        }
+      }
+      console.log("setting selected tree cookie as no tree was selected");
+      setItem(UID);
+    }
+
+    setTreeUID(UID)
+  };
+
+
   const updateLinks = async () => {
-    let { success, response, error } = await getAllLinks(treeUID);
+    let { success, response, error , statusCode} = await getAllLinks(treeUID);
     if (success) {
       setLinks(response.links);
-      setAreLinksFetched(true)
+      setAreLinksFetched(true);
     } else {
       if (error) {
         // if catched error in fetch
+        setLinks([])
         toast.error("Error occured while fetching data");
         console.log("Error occured while fetching data", error);
       } else {
         //no error in fetch and success is false(from server)
+        setLinks([])
         toast.error(`Link not added: ${response.message}`);
+        console.log(`code in updateLinks`,statusCode);
+        if(statusCode === 400 || statusCode === 401){
+          removeItem()
+          push("/admin/selectTree?removeSelectedTree")
+        }
       }
     }
   };
@@ -70,7 +144,7 @@ export default function LinksEditor() {
         return { success: true, error: false, response: responseData };
       } else {
         let responseData = await res.json();
-        return { success: false, error: false, response: responseData };
+        return { success: false, error: false, response: responseData , statusCode: res.status };
       }
     } catch (error) {
       return { success: false, error: true, response: error };
@@ -115,7 +189,7 @@ export default function LinksEditor() {
     setLinks(value);
     let GeneratedLinksUIDArray = value.map((link) => link.UID);
     console.log("created GeneratedLinksUIDArray:", GeneratedLinksUIDArray);
-    setReorderedLinksUID(GeneratedLinksUIDArray)
+    setReorderedLinksUID(GeneratedLinksUIDArray);
   }
 
   async function sendLinksUIDToBackend(linksUIDArray) {
@@ -151,37 +225,55 @@ export default function LinksEditor() {
     }
   }
 
-  useEffect(() => {
-    updateLinks();
+  useEffect( () => {
+    updateTreeUID()
   }, []);
+  
+  useEffect(()=>{
+    if(treeUID){
+    updateLinks();
+    }
+  }, [treeUID])
 
   useEffect(() => {
-    if(areLinksFetched){
-    sendLinksUIDToBackend(debouncelinksUIDOrder);
+    if (areLinksFetched) {
+      sendLinksUIDToBackend(debouncelinksUIDOrder);
     }
-
   }, [debouncelinksUIDOrder]);
 
   return (
-    <div className={styles.linksEditorContainer}>
-      <div className={styles.addLinkAndHeaderContainer}>
-        <AddLinkButton setLinks={setLinks} treeUID={treeUID} />
-        {/* <AddLinkButton /> */}
-        <AddHeaderButton />
-      </div>
+    <>
+      <div className={styles.container}>
+        <div className={styles.linksEditorContainer}>
+          <div className={styles.addLinkAndHeaderContainer}>
+            <AddLinkButton setLinks={setLinks} treeUID={treeUID} />
+            {/* <AddLinkButton /> */}
+            <AddHeaderButton />
+          </div>
 
-      <Reorder.Group
-        values={links}
-        onReorder={handelLinksOrderChange}
-        layoutScroll
-        className={styles.linksContainer}
-      >
-        {links.map((link, index) => (
-          <Link key={link.UID} link={link} treeUID={treeUID} deleteLink={deleteLink} />
-        ))}
-      </Reorder.Group>
+          <Reorder.Group
+            values={links}
+            onReorder={handelLinksOrderChange}
+            layoutScroll
+            className={styles.linksContainer}
+          >
+            {links.map((link, index) => (
+              <Link
+                key={link.UID}
+                link={link}
+                treeUID={treeUID}
+                deleteLink={deleteLink}
+              />
+            ))}
+          </Reorder.Group>
+        </div>
+
+        <div className={styles.treePreviewContainer}>
+          <TreePreview />
+        </div>
+      </div>
       <TreePreviewToggleButton />
       <Toaster position="bottom" expand={true} richColors />
-    </div>
+    </>
   );
 }

@@ -74,18 +74,18 @@ passport.use(new GoogleStrategy(GoogleStrategyConfig, googleStrategyVerifyFuncti
 
 
 // local strategy
-const LocalStrategyVerifyFunction = async (username, password, cb) => {
-    console.log(username, password);
-    if (!username) {
-        return cb(new ErrorHandler("Username is not provided"), false)
+const LocalStrategyVerifyFunction = async (email, password, cb) => {
+    console.log(email, password);
+    if (!email) {
+        return cb(new ErrorHandler("email is not provided"), false)
     } else if (!password){
         return cb(new ErrorHandler("Password is not provided"), false)
     }
     try {
 
-        const user = await User.findOne({ username }).select('+password');
+        const user = await User.findOne({ email }).select('+password');
         if (!user) {
-            return cb(new ErrorHandler("userName is invalid"), false)
+            return cb(new ErrorHandler("email is invalid"), false)
         }
 
         let isPasswordValid = await user.isValidPassword(password, user);
@@ -101,4 +101,4 @@ const LocalStrategyVerifyFunction = async (username, password, cb) => {
     }
 
 }
-passport.use(new LocalStrategy(LocalStrategyVerifyFunction))
+passport.use(new LocalStrategy({ usernameField: "email", passwordField: "password" }, LocalStrategyVerifyFunction))

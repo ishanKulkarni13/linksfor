@@ -1,6 +1,6 @@
 "use client";
 import styles from "./login.module.css";
-import {backendBaseURL} from "@/constants/index"
+import { backendBaseURL } from "@/constants/index";
 import { useRouter } from "next/navigation";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -27,46 +27,41 @@ import { Toaster, toast } from "sonner";
 
 const formSchema = z
   .object({
-    username: z.string(),
+    email: z.string().email(),
     password: z.string().min(3),
   })
-  .refine(
-    (data) => {
-      return true; // temp
-    },
-    {
-      message: "lol bro",
-      path: ["password"],
-    }
-  );
+  // .refine(
+  //   (data) => {
+  //     return true; // temp
+  //   },
+  //   {
+  //     message: "lol bro",
+  //     path: ["password"],
+  //   }
+  // );
 
 export default function Login() {
-
-  const {push} = useRouter()
+  const { push } = useRouter();
 
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      email: "",
       password: "",
     },
   });
-  
-  //   const accountType = form.watch("accountType");
-  
+
+
   const handleSubmit = async (values) => {
-    console.log(`form submitted`);
-    console.log("got values as", values);
-    
-    async function postFormData(username, password) {
+
+    async function postFormData(email, password) {
       try {
-        username = username.toLowerCase();
-        toast.info(username)
+        email = email.toLowerCase();
         let res = await fetch(`${backendBaseURL}/auth/local/login`, {
           method: "POST",
           cache: "no-store",
           body: JSON.stringify({
-            username,
+            email,
             password,
           }),
           credentials: "include",
@@ -76,7 +71,6 @@ export default function Login() {
             "Access-Control-Allow-Credentials": true,
           },
         });
-        console.log(res);
         if (res.ok) {
           let responseData = await res.json();
           return { success: true, error: false, response: responseData };
@@ -85,23 +79,21 @@ export default function Login() {
           return { success: false, error: false, response: responseData };
         }
       } catch (error) {
-        toast.error(`some error occured`)
-        console.log("error while posting data", error);
         return { success: false, error: error, response: error };
       }
     }
     let { success, response, error } = await postFormData(
-      values.username,
+      values.email,
       values.password
     );
     if (success) {
-      toast.success('login sucessful');
-      push('/admin/me');
-    } else{
+      toast.success("login sucessful");
+      push("/admin/me");
+    } else {
       if (error) {
         toast.error(`Some error occured ${response.message}`);
-      push('/login');
-      } else{
+        push("/login");
+      } else {
         toast.error(`${response.message}`);
       }
     }
@@ -120,13 +112,13 @@ export default function Login() {
           >
             <FormField
               control={form.control}
-              name="username"
+              name="email"
               render={({ field }) => {
                 return (
                   <FormItem>
-                    <FormLabel>Username</FormLabel>
+                    <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="Username" type="text" {...field} />
+                      <Input placeholder="Email" type="text" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -153,21 +145,21 @@ export default function Login() {
               }}
             />
 
-            <Button type="submit" className="w-full">
-              Regester
-            </Button>
+            <button type="submit" className={styles.loginButton}>
+              Login
+            </button>
           </form>
         </Form>
       </div>
       <div className={`${styles.otherLoginWaysContainer}`}>
-        <span>OR</span>
+        <span className={`${styles.orText}`} >OR</span>
         <div className={`${styles.otherLoginWays}`}>
           <div className={`${styles.loginWithGoogleContiner}`}>
             <GoogleButton />
           </div>
         </div>
       </div>
-      <Toaster/>
+      <Toaster richColors={true}/>
     </main>
   );
 }

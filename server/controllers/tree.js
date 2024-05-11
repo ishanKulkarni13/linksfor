@@ -2,6 +2,21 @@ import ErrorHandelar from "../utils/error.js";
 import User from "../models/user.js";
 import Tree from "../models/tree.js";
 
+export const getUserDefaultTreeUID = async (req, res, next) => {
+    let user = req.user;
+
+    try {
+        let tree = await Tree.findById(user.trees.profileDefaultTree)
+        if (!tree) {
+            next(new ErrorHandelar("tree not found", 404))
+        }
+        console.log(`sent treeUID`, tree.UID);
+        res.json({ sucess: true, treeUID: tree.UID })
+    } catch (error) {
+        next(error)
+    }
+}
+
 export const HandelCreateTreeGet = (req, res, next) => {
     res.render("createTree")
 };
@@ -77,15 +92,23 @@ export const getAllTrees = async (req, res, next) => { // for admin (temp)
 }
 
 export const getAdminAllTreeLinks = async (req, res, next) => {
-    const userID = req.user._id;
+    const user = req.user;
     let treeUID = req.params.treeUID;
 
     try {
-        let tree = await Tree.findOne({ UID: treeUID, owner: userID });
+        // let tree = await Tree.findOne({ UID: treeUID, owner: user._id });
+        let tree = await Tree.findOne({ UID: treeUID});
+        if (!tree) { return next(new ErrorHandelar('Invalid treeUID', 400))};
+        
+        if(tree.owner.equals(user._id)){
+            res.json({ success: true, links: tree.treeContent.links })
+        } else{
+            next(new ErrorHandelar("Unautherised access to edit tree", 401))
+        }
 
-        if (!tree) { return next(new ErrorHandelar('Tree not found')) };
 
-        res.json({ success: true, links: tree.treeContent.links })
+        // res.json({ success: true, links: tree.treeContent.links }) //temp
+
     } catch (error) {
         console.log(error);
         next(error)
@@ -167,7 +190,7 @@ export const updateLinksOrder = async (req, res, next) => {
             // Return the link object if found, or null otherwise
             if (!link) { console.log("didn't found a link with the uid ", linkUID) }
             return link || null;
-        }).filter(link => link !== null); 
+        }).filter(link => link !== null);
 
         await tree.save();
 
@@ -181,9 +204,9 @@ export const updateLinksOrder = async (req, res, next) => {
 export const editTreeLinkTitleAndURL = async (req, res, next) => {
     const userID = req.user._id;
 
-    let {URL, title, linkUID} = req.body;
-    if(!(URL) || !(title)){ return next(new ErrorHandelar("URL or title not provided, nothing to change"));}
-    if(!linkUID){return next(new ErrorHandelar("linkUID not provided"));}
+    let { URL, title, linkUID } = req.body;
+    if (!(URL) || !(title)) { return next(new ErrorHandelar("URL or title not provided, nothing to change")); }
+    if (!linkUID) { return next(new ErrorHandelar("linkUID not provided")); }
 
     let treeUID;
     if (!(req.params.treeUID) && !(req.body.treeUID)) {
@@ -202,7 +225,7 @@ export const editTreeLinkTitleAndURL = async (req, res, next) => {
 
         // Find the link within the tree
         let link = tree.treeContent.links.find(link => link.UID === linkUID);
-        if (!link) {return next(new ErrorHandelar("Link Not Found", 404));}
+        if (!link) { return next(new ErrorHandelar("Link Not Found", 404)); }
 
         // Update the link's properties if provided
         if (URL) {

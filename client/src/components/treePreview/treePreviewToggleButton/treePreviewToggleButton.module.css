@@ -26,7 +26,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 10px solid yellowgreen;
     z-index: 31;
 }
 
