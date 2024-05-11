@@ -4,14 +4,14 @@ import AddHeaderPopUp from "./addHeaderPopUp";
 import { useState } from "react";
 
 export default function AddHeaderButton() {
-    const [isPopUpActive, useIsPopUpActive] = useState(false);
+    const [isPopUpActive, setIsPopUpActive] = useState(false);
   function handleaddHeaderButtonCLick(e) {
     toast("POP POP");
-    useIsPopUpActive(true)
+    setIsPopUpActive(true)
   }
   function closeaddHeaderPopUp(e) {
     toast("PopUP close");
-    useIsPopUpActive(false)
+    setIsPopUpActive(false)
   }
   return (
     <>
