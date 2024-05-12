@@ -3,12 +3,12 @@ import AddLinkPopUp from "./addLinkPopUp";
 import { useState } from "react";
 
 export default function AddLinkButton({links, setLinks, treeUID}) {
-    const [isPopUpActive, useIsPopUpActive] = useState(false);
+    const [isPopUpActive, setIsPopUpActive] = useState(false);
   function handleAddLinkButtonCLick(e) {
-    useIsPopUpActive(true)
+    setIsPopUpActive(true)
   }
   function closeAddLinkPopUp(e) {
-    useIsPopUpActive(false)
+    setIsPopUpActive(false)
   }
   return (
       <>
