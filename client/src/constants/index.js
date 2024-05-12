@@ -7,8 +7,8 @@ export const navLinks = [
         path:'/admin/tree/links'
     },
     {
-        title:'Appearamce',
-        path:'/admin/tree/Appearance'
+        title:'Appearance',
+        path:'/admin/tree/appearance'
     },
     {
         title:'Analytics',

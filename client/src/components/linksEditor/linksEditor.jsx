@@ -108,7 +108,7 @@ export default function LinksEditor() {
     } else {
       if (error) {
         // if catched error in fetch
-        setLinks([])
+        setLinks([]);
         toast.error("Error occured while fetching data");
         console.log("Error occured while fetching data", error);
       } else {

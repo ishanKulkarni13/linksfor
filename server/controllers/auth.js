@@ -92,18 +92,18 @@ export const handelPassportlocalRegester = async (req, res, next) => {
             if (uploadToCloudinaryResult && uploadToCloudinaryResult.public_id && uploadToCloudinaryResult.url) {
                 profilePic = {
                     public_id: uploadToCloudinaryResult.public_id,
-                    url: uploadToCloudinaryResult.url
+                    URL: uploadToCloudinaryResult.url
                 };
             } else {
                 profilePic = {
                     public_id: 'uiccf1wbzyioazqgve5q',
-                    url: 'http://res.cloudinary.com/kakashib2k/image/upload/v1713685024/uiccf1wbzyioazqgve5q.png'
+                    URL: 'http://res.cloudinary.com/kakashib2k/image/upload/v1713685024/uiccf1wbzyioazqgve5q.png'
                 };
             }
         } else {
             profilePic = {
                 public_id: 'uiccf1wbzyioazqgve5q',
-                url: 'http://res.cloudinary.com/kakashib2k/image/upload/v1713685024/uiccf1wbzyioazqgve5q.png'
+                URL: 'http://res.cloudinary.com/kakashib2k/image/upload/v1713685024/uiccf1wbzyioazqgve5q.png'
             };
         }
 

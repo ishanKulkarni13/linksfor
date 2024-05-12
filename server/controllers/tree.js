@@ -1,4 +1,5 @@
 import ErrorHandelar from "../utils/error.js";
+import { uploadToCloudinary } from "../utils/cloudinary.js";
 import User from "../models/user.js";
 import Tree from "../models/tree.js";
 
@@ -97,12 +98,12 @@ export const getAdminAllTreeLinks = async (req, res, next) => {
 
     try {
         // let tree = await Tree.findOne({ UID: treeUID, owner: user._id });
-        let tree = await Tree.findOne({ UID: treeUID});
-        if (!tree) { return next(new ErrorHandelar('Invalid treeUID', 400))};
-        
-        if(tree.owner.equals(user._id)){
+        let tree = await Tree.findOne({ UID: treeUID });
+        if (!tree) { return next(new ErrorHandelar('Invalid treeUID', 400)) };
+
+        if (tree.owner.equals(user._id)) {
             res.json({ success: true, links: tree.treeContent.links })
-        } else{
+        } else {
             next(new ErrorHandelar("Unautherised access to edit tree", 401))
         }
 
@@ -244,4 +245,54 @@ export const editTreeLinkTitleAndURL = async (req, res, next) => {
         console.log(error);
         next(error);
     }
+}
+
+export const changeTreePicture = async (req, res, next) => {
+    console.log("kkkk");
+    let user = req.user
+    let treeUID;
+
+    if (req.params.treeUID) {
+        treeUID = req.params.treeUID
+        console.log(req.params);
+    } else {
+        return next(new ErrorHandelar("treeUID not provided"))
+    }
+
+    
+    try {
+        let path;
+        let treePicture;
+        if (req.file) {
+            path = req.file.path;
+            const uploadToCloudinaryResult = await uploadToCloudinary(path);
+            if (uploadToCloudinaryResult && uploadToCloudinaryResult.public_id && uploadToCloudinaryResult.url) {
+                treePicture = {
+                    public_id: uploadToCloudinaryResult.public_id,
+                    URL: uploadToCloudinaryResult.url
+                };
+            } else{
+                next(new ErrorHandelar('A error occured, retry'))
+            }
+        } else {
+            return next(new ErrorHandelar('No image provided'))
+        }
+
+        let tree = await Tree.findOne({ UID: treeUID });
+        if (!tree) { return next(new ErrorHandelar('Invalid treeUID', 400)) };
+
+        if (tree.owner.equals(user._id)) {
+            tree.treePicture = treePicture;
+            tree.save()
+            res.json({success:true, message:`updated tree`, treePicture})
+            console.log(treePicture);
+        } else {
+            next(new ErrorHandelar("Unautherised access to edit tree", 401))
+        }
+    } catch (error) {
+        next(error)
+    }
+
+
+    // res.json({sucess:true, treePicture: "http://cloud.io"})
 }

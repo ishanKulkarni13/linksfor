@@ -59,7 +59,7 @@ const googleStrategyVerifyFunction = async (accessToken, refreshToken, user, cb)
             let { public_id, url } = await uploadToCloudinary(googleProfilePhoto);
             let profilePic;
             if (public_id && url) {
-                profilePic = { public_id, url }
+                profilePic = { public_id, URL: url }
             }
             user = await User.create({ name, email, profilePic, googleOAuthID: id, authMethod: 'google' });
             let tree = await Tree.create({ owner: user._id, treeName: `@${user.name}` , treePicture:{URL:user.profilePic.URL}});

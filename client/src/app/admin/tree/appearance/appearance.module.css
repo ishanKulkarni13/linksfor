@@ -1,0 +1,17 @@
+.container {
+    /* margin-top: 100px; */
+    padding: calc(var(--topBarHeight) + 30px) 20px;
+
+    border: 2px solid green;
+    color: white;
+}
+
+.profileEditorContainer {
+    border: 1px solid red;
+}
+
+.profileEditorContainer>p {
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
