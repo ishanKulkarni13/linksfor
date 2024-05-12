@@ -5,9 +5,9 @@ import { useState } from "react";
 import TreePreview from "../treePreview";
 
 export default function TreePreviewToggleButton() {
-  const [isPreviewActive, useIsPreviewActive] = useState(false);
+  const [isPreviewActive, setIsPreviewActive] = useState(false);
   function handleToggleButtonCLick(e) {
-    useIsPreviewActive((pre) => !pre);
+    setIsPreviewActive((pre) => !pre);
   }
   return (
     <>
