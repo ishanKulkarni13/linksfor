@@ -47,7 +47,7 @@ export const searchTreeByUsername = async (req, res, next) => {
             treeName: tree.treeName,
             treeVisibility: tree.treeVisibility,
             treePicture: tree.treePicture,
-            treeDescription: tree.treeDescription,
+            treeBio: tree.treeBio,
             treeContent: {
                 links: tree.treeContent.links.map(link => {
                     const { linkLockConfig, ...rest } = link;

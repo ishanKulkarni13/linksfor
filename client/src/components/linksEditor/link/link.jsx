@@ -4,6 +4,7 @@ import EditLinkPanel from "../editLinkPanels/editLinkPanel";
 import styles from "./link.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faCheck,
   faGripVertical,
   faPen,
   faTrash,
@@ -92,7 +93,7 @@ export default function Link({ link, deleteLink , treeUID}) {
                   value={linkData.title}
                   onChange={handleInputChange}
                 />
-                <button><FontAwesomeIcon type="submit" icon={faPen} /></button>
+                <button className={styles.submitButton} type="submit" ><FontAwesomeIcon icon={faCheck} /></button>
               </div>
               <div className={styles.URLContainer}>
                 <input
@@ -102,9 +103,7 @@ export default function Link({ link, deleteLink , treeUID}) {
                   value={linkData.URL}
                   onChange={handleInputChange}
                 />
-                <button>
-                  <FontAwesomeIcon icon={faPen} type="submit" />
-                </button>
+                <button className={styles.submitButton} type="submit" ><FontAwesomeIcon icon={faCheck}/></button>
               </div>
               {/* <div className={styles.OtherOptionsContainer}>
                 <span>A</span>

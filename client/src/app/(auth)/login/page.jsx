@@ -30,15 +30,6 @@ const formSchema = z
     email: z.string().email(),
     password: z.string().min(3),
   })
-  // .refine(
-  //   (data) => {
-  //     return true; // temp
-  //   },
-  //   {
-  //     message: "lol bro",
-  //     path: ["password"],
-  //   }
-  // );
 
 export default function Login() {
   const { push } = useRouter();

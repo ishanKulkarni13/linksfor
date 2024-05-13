@@ -32,7 +32,7 @@
 .DNDIcon{
     font-size: 20px;
     width: auto;
-    padding: 10px 5px;
+    padding: 15px 5px;
     cursor: grab;
     touch-action: none;
     /* border: 1px solid green; */
@@ -63,6 +63,21 @@
     /* border: 1px solid var(--primary); */
     border-radius: 25px;
     padding: 1px 10px;
+}
+
+.submitButton{
+    opacity: 0;
+}
+
+.URLInput:focus + .submitButton{
+    display: block;
+    opacity: 1;
+}
+
+
+.titleInput:focus + .submitButton{
+    display: block;
+    opacity: 1;
 }
 
 .URLContainer{

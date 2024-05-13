@@ -14,7 +14,7 @@ export default function PofileAirblack({ treeName, treePicture, treeBio }) {
       </div>
       <div className={styles.profileTextContainer}>
         <div className={styles.nameContainer}> <p>{treeName}</p> </div>
-        <div className={styles.bioContainer}> <p>{treeBio || `Hey there!`}</p> </div>
+        <div className={styles.bioContainer}> <p>{treeBio}</p> </div>
       </div>
     </div>
   );

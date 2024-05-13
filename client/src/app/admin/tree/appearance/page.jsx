@@ -5,7 +5,6 @@ export default function Appearance() {
   return (
     <main className={styles.container}>
       <div className={styles.profileEditorContainer}>
-        <p>Profile</p>
         <TreeProfileEditor />
       </div>
     </main>

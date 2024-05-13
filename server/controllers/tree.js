@@ -248,7 +248,6 @@ export const editTreeLinkTitleAndURL = async (req, res, next) => {
 }
 
 export const changeTreePicture = async (req, res, next) => {
-    console.log("kkkk");
     let user = req.user
     let treeUID;
 
@@ -259,7 +258,7 @@ export const changeTreePicture = async (req, res, next) => {
         return next(new ErrorHandelar("treeUID not provided"))
     }
 
-    
+
     try {
         let path;
         let treePicture;
@@ -271,7 +270,7 @@ export const changeTreePicture = async (req, res, next) => {
                     public_id: uploadToCloudinaryResult.public_id,
                     URL: uploadToCloudinaryResult.url
                 };
-            } else{
+            } else {
                 next(new ErrorHandelar('A error occured, retry'))
             }
         } else {
@@ -284,7 +283,7 @@ export const changeTreePicture = async (req, res, next) => {
         if (tree.owner.equals(user._id)) {
             tree.treePicture = treePicture;
             tree.save()
-            res.json({success:true, message:`updated tree`, treePicture})
+            res.json({ success: true, message: `updated tree`, treePicture })
             console.log(treePicture);
         } else {
             next(new ErrorHandelar("Unautherised access to edit tree", 401))
@@ -292,7 +291,73 @@ export const changeTreePicture = async (req, res, next) => {
     } catch (error) {
         next(error)
     }
+}
 
 
-    // res.json({sucess:true, treePicture: "http://cloud.io"})
+export const treeProfile = async (req, res, next) => {
+    let user = req.user
+    let treeUID;
+
+    if (req.params.treeUID) {
+        treeUID = req.params.treeUID
+        console.log(req.params);
+    } else {
+        return next(new ErrorHandelar("treeUID not provided in params"))
+    }
+
+    try {
+        let tree = await Tree.findOne({ UID: treeUID });
+        if (!tree) { return next(new ErrorHandelar('Invalid treeUID', 400)) };
+
+        if (tree.owner.equals(user._id)) {
+            const {UID, treeVisibility, treeLockConfig, treeName, treePicture, treeBio} = tree
+            res.json({success:true, treeProfile : {UID, treeVisibility, treeLockConfig, treeName, treePicture, treeBio}})
+        } else {
+            next(new ErrorHandelar("Unautherised access to edit tree", 401))
+        }
+    } catch (error) {
+        next(error)
+    }
+
+}
+
+
+
+export const editTreeProfile = async (req, res, next) => {
+    const user = req.user
+    let treeUID;
+    if (!(req.params.treeUID) && !(req.body.treeUID)) {
+        return next(new ErrorHandelar("treeUID not provided"));
+    } else {
+        treeUID = req.params.treeUID || req.body.treeUID;
+    }
+
+    let {treeName, treeBio} = req.body;
+    if(!treeName && !treeBio){return next(new ErrorHandelar("Nothing to change"))}
+
+    try {
+
+        let tree = await Tree.findOne({ UID: treeUID });
+        if (!tree) { return next(new ErrorHandelar('treeUID is not valid', 400)) };
+
+        if (tree.owner.equals(user._id)) {
+
+            if(treeName){
+                tree.treeName = treeName
+            }
+
+            if(treeBio){
+                tree.treeBio = treeBio
+            }          
+            
+            res.json({success:true, treeProfile: {treeBio, treeName}})
+            await tree.save();
+        } else {
+            next(new ErrorHandelar("Unautherised access to edit tree", 401))
+        }
+
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
 }

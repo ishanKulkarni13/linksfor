@@ -51,3 +51,11 @@
         display: none;
     }
 }
+
+@media (width<640px){
+
+    .linksEditorContainer {
+        display: block;
+        padding: calc(var(--topBarHeight) + 30px) 15px;
+    }
+}

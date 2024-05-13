@@ -46,10 +46,6 @@ const formSchema = z
 export default function Home() {
   const {push} = useRouter();
 
-
-
-
-
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {

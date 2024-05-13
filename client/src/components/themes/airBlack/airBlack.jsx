@@ -4,7 +4,6 @@ import LinksAirblack from "./links/linksAirblack";
 import PofileAirblack from "./profile/profileAirblack";
 
 export default function TreeThemeAirBlack({ tree }) {
-  
   return (
     <>
       <BackgroundAirBlack />

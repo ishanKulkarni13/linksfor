@@ -188,7 +188,6 @@ export default function LinksEditor() {
   function handelLinksOrderChange(value) {
     setLinks(value);
     let GeneratedLinksUIDArray = value.map((link) => link.UID);
-    console.log("created GeneratedLinksUIDArray:", GeneratedLinksUIDArray);
     setReorderedLinksUID(GeneratedLinksUIDArray);
   }
 

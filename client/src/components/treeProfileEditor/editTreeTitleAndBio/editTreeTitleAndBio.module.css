@@ -1,0 +1,46 @@
+.container{
+    margin-top: 15px;
+    display: flex;
+    justify-content:flex-end;
+    align-items:stretch;
+    flex-direction: column;
+}
+.form{
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 15px;
+}
+.inputContainer{
+    background-color: #212121;
+    padding: 15px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: left;
+    align-items: stretch;
+    flex-direction: column;
+}
+
+.input{
+    border: 0px;
+    /* border: 1px solid green; */
+    background-color: inherit;
+    border-radius: 5px;
+}
+
+.lable{
+    color: #b1b1b1;
+    /* border: 1px solid green; */
+    margin: 0;
+}
+
+.saveButton{
+    display: none;
+    /* border:1px solid var(--primary);
+    width: 200px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 50px;
+    align-self:center; */
+}
