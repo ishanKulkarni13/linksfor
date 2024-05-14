@@ -8,12 +8,12 @@ import { useLocalstorage } from "@/hooks/localStorage";
 import { useEffect, useState } from "react";
 import { useDebounce } from "@/hooks/debounce";
 
-export default function EditTreeTitleAndBio({ treeUID }) {
+export default function EditTreeTitleAndBio({ treeUID,  treeProfile}) {
   const { push } = useRouter();
   const { removeItem } = useLocalstorage("selectedTree");
   const [titleAndBio, setTitleAndBio] = useState({
-    title: "djNilu",
-    bio: "iLoveMelofy",
+    title: treeProfile.treeName,
+    bio: treeProfile.treeBio,
   });
   const debounceTitleAndBio = useDebounce(titleAndBio, 3000);
 

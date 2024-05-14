@@ -3,20 +3,56 @@
     top:0%;
     width: 100vw;
     height: var(--topBarHeight);
+    border-bottom: 1px solid white;
+    z-index: 10;
+    background-color: var(--background);
+}
+
+.mobieTopBarContainer{
+    display: none;
+    border-bottom: 1px solid white;
+    height: var(--topBarHeight);
+}
+
+.topContainer, .bottomContainer{
+    border-bottom: 1px solid white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
-    background-color: var(--background);
-    z-index: 10;
+    height: calc(var(--topBarHeight )/ 2);
+    padding: 0px 20px;
+}
+
+.share{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid white;
+    border-radius: 225px;
+    padding: 5px 10px;
+}
+
+.icon{
+    width: 25px;
+}
+
+.desktopTopBarContainer{
     border-bottom: 1px solid white;
+    height: var(--topBarHeight);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px;
 }
 
 
-.logoContainer{
-    width: 25px;
-}
+@media (width < 640px){
+    .mobieTopBarContainer{
+        display: block;
+    }
 
-.profileContainer{
-    width: 25px;
+    .desktopTopBarContainer{
+        display: none;
+    }
 }

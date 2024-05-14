@@ -119,3 +119,9 @@ body {
   background-color: var(--background);
   color: white;
 }
+
+@media (width < 640px){
+  :root{
+      --topBarHeight : 120px;
+  }
+}

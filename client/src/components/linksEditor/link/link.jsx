@@ -1,12 +1,10 @@
 import { Reorder, useDragControls } from "framer-motion";
 import {backendBaseURL} from "@/constants/index"
-import EditLinkPanel from "../editLinkPanels/editLinkPanel";
 import styles from "./link.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheck,
   faGripVertical,
-  faPen,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";

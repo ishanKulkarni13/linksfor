@@ -3,11 +3,11 @@ import { useState, useEffect } from 'react';
 import { useLocalstorage } from './localStorage';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
-const { setItem, getItem, removeItem } = useLocalstorage(`selectedTree`);
 
 export const useTreeUID = () => {
     const { push } = useRouter();
     const [treeUID, setTreeUID] = useState();
+    const { setItem, getItem, removeItem } = useLocalstorage(`selectedTree`);
 
     useEffect(() => {
         const getDefaultTreeUID = async () => {

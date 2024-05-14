@@ -12,92 +12,94 @@ import TreePreviewToggleButton from "../treePreview/treePreviewToggleButton/tree
 import { useDebounce } from "@/hooks/debounce";
 import { useLocalstorage } from "@/hooks/localStorage";
 import { useRouter } from "next/navigation";
+import { useTreeUID } from "@/hooks/treeUID";
 
 export default function LinksEditor() {
   // const treeUID = `1148359071`;
 
   const {push} = useRouter();
   const { setItem, getItem , removeItem} = useLocalstorage(`selectedTree`);
-  const [treeUID, setTreeUID] = useState();
+  // const [treeUID, setTreeUID] = useState();
+  let treeUID = useTreeUID();
   const [areLinksFetched, setAreLinksFetched] = useState();
   const [links, setLinks] = useState([
-    {
-      title: "Loading",
-      URL: "loading",
-      UID: "1111111",
-    },
-    {
-      title: "Loading",
-      URL: "loading",
-      UID: "2222222222",
-    },
-    {
-      title: "Loading",
-      URL: "loading",
-      UID: "33333333",
-    },
+    // {
+    //   title: "Loading",
+    //   URL: "loading",
+    //   UID: "1111111",
+    // },
+    // {
+    //   title: "Loading",
+    //   URL: "loading",
+    //   UID: "2222222222",
+    // },
+    // {
+    //   title: "Loading",
+    //   URL: "loading",
+    //   UID: "33333333",
+    // },
   ]);
   const [reorderedLinksUID, setReorderedLinksUID] = useState();
   const debouncelinksUIDOrder = useDebounce(reorderedLinksUID, 3000);
 
 
-  const getDefaultTreeUID = async ()=>{
-    try {
-      let res = await fetch(
-        `${backendBaseURL}/tree/user-default-treeUID`,
-        {
-          method: "GET",
-          cache: "no-store",
-          credentials: "include",
-          headers: {
-            Accept: "applications/json",
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Credentials": true,
-          },
-        }
-      );
-      if (res.ok) {
-        let responseData = await res.json();
-        return { success: true, error: false, response: responseData, statusCode: res.status };
-      } else {
-        let responseData = await res.json();
-        return { success: false, error: false, response: responseData, statusCode: res.status };
-      }
-    } catch (error) {
-      return { success: false, error: error, response: error};
-    }
-  }
+  // const getDefaultTreeUID = async ()=>{
+  //   try {
+  //     let res = await fetch(
+  //       `${backendBaseURL}/tree/user-default-treeUID`,
+  //       {
+  //         method: "GET",
+  //         cache: "no-store",
+  //         credentials: "include",
+  //         headers: {
+  //           Accept: "applications/json",
+  //           "Content-Type": "application/json",
+  //           "Access-Control-Allow-Credentials": true,
+  //         },
+  //       }
+  //     );
+  //     if (res.ok) {
+  //       let responseData = await res.json();
+  //       return { success: true, error: false, response: responseData, statusCode: res.status };
+  //     } else {
+  //       let responseData = await res.json();
+  //       return { success: false, error: false, response: responseData, statusCode: res.status };
+  //     }
+  //   } catch (error) {
+  //     return { success: false, error: error, response: error};
+  //   }
+  // }
 
-  const updateTreeUID = async () => {
-    let UID = getItem();
+  // const updateTreeUID = async () => {
+  //   let UID = getItem();
 
-    if (!UID) {
-      let { success, response, error, statusCode } = await getDefaultTreeUID();
-      if (success) {
-        console.log('got treeUID', response.treeUID);
-        UID = response.treeUID;
-      } else{
-        if (error) {
-          // if catched error in fetch
-          console.log("Some error occured", error);
-          toast.error(`Some error occured: ${error.message}`)
-        } else{
-          //no error in fetch and success is false(from server)
-          toast.error(`${response.message}`)
-          if(statusCode === 404){
-            removeItem()
-           return  push("/admin/selectTree?removeSelectedTree")
-          }
-          console.log("cant get treEUID", response.message );
+  //   if (!UID) {
+  //     let { success, response, error, statusCode } = await getDefaultTreeUID();
+  //     if (success) {
+  //       console.log('got treeUID', response.treeUID);
+  //       UID = response.treeUID;
+  //     } else{
+  //       if (error) {
+  //         // if catched error in fetch
+  //         console.log("Some error occured", error);
+  //         toast.error(`Some error occured: ${error.message}`)
+  //       } else{
+  //         //no error in fetch and success is false(from server)
+  //         toast.error(`${response.message}`)
+  //         if(statusCode === 404){
+  //           removeItem()
+  //          return  push("/admin/selectTree?removeSelectedTree")
+  //         }
+  //         console.log("cant get treEUID", response.message );
 
-        }
-      }
-      console.log("setting selected tree cookie as no tree was selected");
-      setItem(UID);
-    }
+  //       }
+  //     }
+  //     console.log("setting selected tree cookie as no tree was selected");
+  //     setItem(UID);
+  //   }
 
-    setTreeUID(UID)
-  };
+  //   setTreeUID(UID)
+  // };
 
 
   const updateLinks = async () => {
@@ -224,9 +226,7 @@ export default function LinksEditor() {
     }
   }
 
-  useEffect( () => {
-    updateTreeUID()
-  }, []);
+
   
   useEffect(()=>{
     if(treeUID){
@@ -268,10 +268,10 @@ export default function LinksEditor() {
         </div>
 
         <div className={styles.treePreviewContainer}>
-          <TreePreview />
+          <TreePreview treeUID={treeUID}/>
         </div>
       </div>
-      <TreePreviewToggleButton />
+      <TreePreviewToggleButton treeUID={treeUID}/>
       <Toaster position="bottom" expand={true} richColors />
     </>
   );

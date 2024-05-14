@@ -11,8 +11,52 @@ export const searchUserByUsername = (req, res, next) => {
 };
 
 //search tree
-export const searchTreeByTreeUID = (req, res, next) => {
-    res.send("Cheack the log")
+export const searchTreeByTreeUID = async(req, res, next) => {
+    let treeUID;
+    if (!(req.params.treeUID) && !(req.body.treeUID)) {
+        return next(new ErrorHandler("treeUID not provided"));
+    } else{
+        treeUID = req.params.treeUID || req.body.treeUID
+    }
+    treeUID = treeUID.toLowerCase()
+    try {
+        const tree = await Tree.findOne({ UID : treeUID });
+        if (!tree) {
+            return next(new ErrorHandler("Tree not found"));
+        }
+        // Check if the tree visibility is public
+        if (tree.treeVisibility !== "public") {
+            return res.status(403).json({ success:false, message: `The tree is not public, it's locked with ${tree.treeVisibility}` , lockedWith: tree.treeVisibility });
+        }
+
+        // Prepare the response tree
+        let responseTree = {
+            // verified: user.verified,
+            UID: tree.UID,
+            treeName: tree.treeName,
+            treeVisibility: tree.treeVisibility,
+            treePicture: tree.treePicture,
+            treeBio: tree.treeBio,
+            treeContent: {
+                links: tree.treeContent.links.map(link => {
+                    const { linkLockConfig, ...rest } = link;
+                    return rest._doc;
+                }),
+                socials: tree.treeContent.socials,
+            },
+            theme: tree.theme,
+        };
+
+        if (tree.theme.selectedTheme.themeID !== 0) {
+            responseTree.theme.customThemeConfig = undefined;
+        }
+
+        // Send the response
+        res.json({ success: true, tree: responseTree });
+    } catch (error) {
+        next(error);
+        console.log(error);
+    }
 };
 export const searchTreeByUsername = async (req, res, next) => {
     let username;

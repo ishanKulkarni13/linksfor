@@ -1,7 +1,10 @@
 .nav {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: stretch;
     gap: 10px;
+    width: auto;
+    flex-grow: 1;
 }
 
 .navItemContainer {

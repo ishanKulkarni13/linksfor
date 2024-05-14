@@ -1,13 +1,9 @@
-.container {
-    padding: calc(var(--topBarHeight) + 30px) 20px;
-    color: white;
-}
-
-.dynamicContainer{
+.container{
     height: 100dvh;
     width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
+    background-color: aqua;
 }

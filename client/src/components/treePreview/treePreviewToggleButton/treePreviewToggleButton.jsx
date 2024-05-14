@@ -1,10 +1,11 @@
+"use client"
 import { Toaster, toast } from "sonner";
 import styles from "./treePreviewToggleButton.module.css";
 
 import { useState } from "react";
 import TreePreview from "../treePreview";
 
-export default function TreePreviewToggleButton() {
+export default function TreePreviewToggleButton({treeUID}) {
   const [isPreviewActive, setIsPreviewActive] = useState(false);
   function handleToggleButtonCLick(e) {
     setIsPreviewActive((pre) => !pre);
@@ -19,7 +20,7 @@ export default function TreePreviewToggleButton() {
       {isPreviewActive && (
         <div className={styles.popUpCOntainer}>
           <div className={styles.treePreviewComponentContainer}>
-            <TreePreview />
+            <TreePreview treeUID={treeUID}/>
           </div>
         </div>
       )}

@@ -8,7 +8,7 @@ export default function GoogleLogin() {
        async function login(){
        try {
         
-        window.open("http://localhost:4000/auth/google", "_self")
+        window.open(`${backendBaseURL}/auth/google`, "_self")
        } catch (error) {
         console.log(error)
        }

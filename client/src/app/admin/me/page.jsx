@@ -1,6 +1,6 @@
 
 "use client";
-
+import styles from './me.module.css'
 import { useEffect, useState } from "react";
 import {backendBaseURL} from "@/constants/index"
 export default function Me() {
@@ -28,7 +28,7 @@ export default function Me() {
     getUserInfo();
   }, []);
   return (
-    <main>
+    <main className={styles.container}>
       <h3>Your Info</h3>
       <ul>
         <li>
