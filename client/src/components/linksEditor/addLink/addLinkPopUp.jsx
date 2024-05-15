@@ -58,7 +58,7 @@ export default function AddLinkPopUp({ close,setLinks, treeUID }) {
     const handelAddLink = async(URL,title)=>{
       try {
         console.log('posing')
-        let res = await fetch(`${backendBaseURL}/tree/edit/addLink/${treeUID}`, {
+        let res = await fetch(`/api/tree/edit/add/link/${treeUID}`, {
           method: "POST",
           cache: "no-store",
           body: JSON.stringify({
@@ -81,7 +81,7 @@ export default function AddLinkPopUp({ close,setLinks, treeUID }) {
 
       } catch (error) {
         toast.error(error.message)
-        return { success: false, error: true, response: error };
+        return { success: false, error: error, response: error };
       }
     }
     //calling function and gettting data

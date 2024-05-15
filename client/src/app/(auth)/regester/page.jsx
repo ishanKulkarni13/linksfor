@@ -63,7 +63,7 @@ export default function Home() {
     async function postFormData(name ,username, email, password) {
       try {
         username = username.toLowerCase();
-        let res = await fetch(`${backendBaseURL}/auth/local/regester`, {
+        let res = await fetch(`/api/auth/regester`, {
           method: "POST",
           cache: "no-store",
           body: JSON.stringify({

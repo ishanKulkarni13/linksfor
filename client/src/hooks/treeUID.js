@@ -13,7 +13,7 @@ export const useTreeUID = () => {
         const getDefaultTreeUID = async () => {
             try {
                 let res = await fetch(
-                    `${backendBaseURL}/tree/user-default-treeUID`,
+                    `/api/tree/user-default-treeUID`,
                     {
                         method: "GET",
                         cache: "no-store",
