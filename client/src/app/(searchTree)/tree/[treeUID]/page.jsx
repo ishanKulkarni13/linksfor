@@ -6,7 +6,7 @@ import React from 'react'
 const getTree = async (treeUID) => {
   try {
     let res = await fetch(
-      `http://localhost:4000/search/tree/treeUID/${treeUID}`,
+      `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/search/tree/treeUID/${treeUID}`,
       {
         method: "GET",
         cache: "no-store",
@@ -28,7 +28,7 @@ const getTree = async (treeUID) => {
       return { tree: null, success: false };
     }
   } catch (error) {
-    console.log("error catched in getTreeByUsername", error.message);
+    console.log("error catched in getTreeByTreeUID", error.message);
     return { tree: null, success: false, error: true };
   }
 };
@@ -45,5 +45,5 @@ export default async function  TreeUIDSearch({params}) {
   }
 
   // if any erroe occured display error
-  return <p>Error occured</p>;
+  return <p>Error occured lol</p>;
 }

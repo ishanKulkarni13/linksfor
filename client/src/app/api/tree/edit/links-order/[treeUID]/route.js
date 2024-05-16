@@ -14,7 +14,7 @@ export const POST = async (req,{params}) => {
     if (!linksUIDArray) {
         return NextResponse.json({ sucess: false, message:"linksUIDArray not provided"}, {status:500})
     }
-
+ 
     try {
         await connectToDB()
         const tree = await Tree.findOne({ UID: treeUID, owner: userID });

@@ -8,6 +8,7 @@ export const POST = async (req) => {
     console.log(email, name, username, password);
     let user;
     if (!password) {
+        
         throw new Error("Password is not provided")
     } else if (!email) {
         throw new Error("Email is not provided")
