@@ -27,32 +27,32 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 let { email, password } = credincials;
 
                 console.log(email, password);
-                if (!email) {
-                    throw new CredentialsSignin("email is not provided")
-                } else if (!password) {
-                    throw new CredentialsSignin("Password is not provided")
-                }
-                try {
-                    await connectToDB()
-                    const user = await User.findOne({ email }).select('+password');
-                    if (!user) {
-                        throw new CredentialsSignin("email is invalid")
-                    }
+                // if (!email) {
+                //     throw new CredentialsSignin("email is not provided")
+                // } else if (!password) {
+                //     throw new CredentialsSignin("Password is not provided")
+                // }
+                // try {
+                //     await connectToDB()
+                //     const user = await User.findOne({ email }).select('+password');
+                //     if (!user) {
+                //         throw new CredentialsSignin("email is invalid")
+                //     }
 
-                    let isPasswordValid = await user.isValidPassword(password, user);
-                    if (isPasswordValid) {
-                        console.log(user);
-                        console.log("user._id", user._id);
-                        return { id: user._id }
-                    } else {
-                        throw new CredentialsSignin("Password is invalid")
-                    }
+                //     let isPasswordValid = await user.isValidPassword(password, user);
+                //     if (isPasswordValid) {
+                //         console.log(user);
+                //         console.log("user._id", user._id);
+                //         return { id: user._id }
+                //     } else {
+                //         throw new CredentialsSignin("Password is invalid")
+                //     }
 
-                } catch (error) {
-                    console.log('error in authorize', error.message);
-                    throw new CredentialsSignin("Some error occured in authorize")
-                }
-                // return { name: "uuuuuu", _id: "eau142bdrein242edf" }
+                // } catch (error) {
+                //     console.log('error in authorize', error.message);
+                //     throw new CredentialsSignin("Some error occured in authorize")
+                // }
+                return { name: "uuuuuu", _id: "eau142bdrein242edf" }
                 // throw new CredentialsSignin({cause: "soja bro"})
             }
         })
@@ -76,34 +76,34 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         signIn: async (data) => {
             // { user, account, profile, email }
             if (data.account.provider === 'google') {
-                try {
+                // try {
                     
-                    const email = data.user.email
-                    const name = data.profile.given_name
-                    const googleProfilePhoto = data.user.image
-                    const id = data.user.id
-                    await connectToDB();
+                //     const email = data.user.email
+                //     const name = data.profile.given_name
+                //     const googleProfilePhoto = data.user.image
+                //     const id = data.user.id
+                //     await connectToDB();
 
-                    // let { provider, id, name, emails, photos } = user;
+                //     // let { provider, id, name, emails, photos } = user;
 
-                    let user = await User.findOne({ email });
-                    if (!user) {
-                        // let { public_id, url } = await uploadToCloudinary(googleProfilePhoto);
-                        // let profilePic;
-                        // if (public_id && url) {
-                        //     profilePic = { public_id, URL: url }
-                        // }
-                        user = await User.create({ name, email, googleOAuthID: id, authMethod: 'google' });
-                        let tree = await Tree.create({ owner: user._id, treeName: `@${user.name}`, treePicture: { URL: user.profilePic.URL } });
-                        await User.findByIdAndUpdate(user._id, { $set: { 'trees.profileDefaultTree': tree._id } });
-                    }
-                    data.user.id = user._id
-                    return true
+                //     let user = await User.findOne({ email });
+                //     if (!user) {
+                //         // let { public_id, url } = await uploadToCloudinary(googleProfilePhoto);
+                //         // let profilePic;
+                //         // if (public_id && url) {
+                //         //     profilePic = { public_id, URL: url }
+                //         // }
+                //         user = await User.create({ name, email, googleOAuthID: id, authMethod: 'google' });
+                //         let tree = await Tree.create({ owner: user._id, treeName: `@${user.name}`, treePicture: { URL: user.profilePic.URL } });
+                //         await User.findByIdAndUpdate(user._id, { $set: { 'trees.profileDefaultTree': tree._id } });
+                //     }
+                //     data.user.id = user._id
+                //     return true
 
-                } catch (error) {
-                    console.log(error);
-                    throw new AuthError("Error while creating user");
-                }
+                // } catch (error) {
+                //     console.log(error);
+                //     throw new AuthError("Error while creating user");
+                // }
 
             } else if (data.account.provider === 'credentials'){
                 return true
