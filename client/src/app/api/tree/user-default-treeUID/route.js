@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import { connectToDB } from "@/lib/DB/connectDB";
 import { Tree } from "@/lib/DB/models/tree";
 import { User } from "@/lib/DB/models/user";
 import { NextResponse } from "next/server";
@@ -8,6 +9,7 @@ export const GET = async ()=>{
     let userID = session.user.id;
 
     try {
+        await connectToDB()
         let user = await User.findById(userID).select("trees")
         console.log(user);
         let tree = await Tree.findById(user.trees.profileDefaultTree)

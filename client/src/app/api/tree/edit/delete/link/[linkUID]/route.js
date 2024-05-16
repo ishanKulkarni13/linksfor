@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import { connectToDB } from "@/lib/DB/connectDB";
 import { Tree } from "@/lib/DB/models/tree";
 import { NextResponse } from "next/server";
 
@@ -10,6 +11,7 @@ export const POST = async (req, {params}) => {
     if (!treeUID) {  return NextResponse.json({success: false, message: "Didn't got treeUID in body" }, {status: 400}) } 
 
     try {
+        await connectToDB()
         const tree = await Tree.findOne({ UID: treeUID, owner: userID });
 
         if (!tree) { return NextResponse.json({success: false, message: "Tree Not Found" }, {status: 404})  }

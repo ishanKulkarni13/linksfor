@@ -64,7 +64,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     callbacks: {
         jwt({token, user}){
             if(user){
-                console.log("zxcvbnm");
                 token.id = user.id
             }
             return token
@@ -86,7 +85,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     await connectToDB();
 
                     // let { provider, id, name, emails, photos } = user;
-                    log
+                    
                     let user = await User.findOne({ email });
                     if (!user) {
                         // let { public_id, url } = await uploadToCloudinary(googleProfilePhoto);
@@ -95,6 +94,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                         //     profilePic = { public_id, URL: url }
                         // }
                         user = await User.create({ name, email, googleOAuthID: id, authMethod: 'google' });
+            
                         let tree = await Tree.create({ owner: user._id, treeName: `@${user.name}`, treePicture: { URL: user.profilePic.URL } });
                         await User.findByIdAndUpdate(user._id, { $set: { 'trees.profileDefaultTree': tree._id } });
                     }

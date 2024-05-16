@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
 import { Tree } from "@/lib/DB/models/tree";
 import { NextResponse } from "next/server";
-
+import { connectToDB } from "@/lib/DB/connectDB";
 export const POST = async (req,{params}) => {
     const session = await auth()
     const userID = session.user.id;
@@ -16,6 +16,7 @@ export const POST = async (req,{params}) => {
     }
 
     try {
+        await connectToDB()
         const tree = await Tree.findOne({ UID: treeUID, owner: userID });
 
         if (!tree) {

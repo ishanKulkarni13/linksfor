@@ -1,3 +1,4 @@
+import { connectToDB } from "@/lib/DB/connectDB";
 import { Tree } from "@/lib/DB/models/tree";
 import { User } from "@/lib/DB/models/user";
 import { NextResponse } from "next/server";
@@ -15,6 +16,7 @@ export const POST = async (req) => {
     }
 
     try {
+        connectToDB()
         username = username.toLowerCase();
         email = email.toLowerCase();
         let emailUser = await User.findOne({ email });

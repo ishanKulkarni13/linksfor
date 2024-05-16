@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import { connectToDB } from "@/lib/DB/connectDB";
 import { Tree } from "@/lib/DB/models/tree";
 import { NextResponse } from "next/server";
 
@@ -12,6 +13,7 @@ export const POST = async (req, {params}) => {
     try {
         const session = await auth();
         const userID = session.user.id;
+        await connectToDB()
         // let isTreeOfUser = await Tree
         let UpdatedTree = await Tree.findOneAndUpdate({ UID: treeUID, owner: userID }, { $push: { 'treeContent.links': { $each: [updatedLinkObject], $position: 0 } } }, { new: true });
         if (!UpdatedTree) { return next(new ErrorHandelar('Tree not found')) }
