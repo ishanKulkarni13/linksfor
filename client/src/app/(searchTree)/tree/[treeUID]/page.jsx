@@ -1,4 +1,4 @@
-import Tree from '@/components/themes/theme';
+import Tree from '@/components/themes/tree';
 import React from 'react'
 
 

@@ -1,0 +1,70 @@
+.container {
+    background-color: var(--backgroundSecondary);
+    padding: 15px 15px;
+    border-radius: 25px;
+    box-shadow: 0px 0px 2px 1px white;
+}
+
+.selectedTreeContainer {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.selectedTreeProfileContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.selectedTreeImageContainer {
+    position: relative;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.selectedTreeTextContainer {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+}
+
+.selectedTreeName {
+    font-size: 1.25em;
+    font-weight: 600;
+}
+
+.switchTree{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary);
+    color: black;
+    border-radius: 50px;
+    padding: 5px 10px;
+    height: 45px;
+    font-weight: 450;
+}
+
+.createNewTreeButton{
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    text-align: center;
+    border: 1.5px solid var(--primary);
+    color: white;
+    border-radius: 50px;
+    padding: 5px 10px;
+    height: 45px;
+    font-weight: 500;
+}

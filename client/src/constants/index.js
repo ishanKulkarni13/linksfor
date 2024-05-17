@@ -16,6 +16,6 @@ export const navLinks = [
     },
     {
         title:'More',
-        path:'/admin/me'
+        path:'/admin/more'
     },
 ]

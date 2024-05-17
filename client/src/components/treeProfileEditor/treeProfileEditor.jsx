@@ -53,37 +53,6 @@ export default function TreeProfileEditor() {
     }
   };
 
-  // const updateTitleAndBio = async () => {
-  //   if (!treeUID) {
-  //     console.log(treeUID);
-  //     return toast.error("didn't got treeUID");
-  //   }
-  //   try {
-  //     const res = await axios.post(
-  //       `${backendBaseURL}/tree/edit-tree-profile/${treeUID}`,
-  //       { treeName: treeProfile.treeName, treeBio: treeProfile.treeBio },
-  //       { withCredentials: true }
-  //     );
-  //     let data = res.data.treeProfile;
-  //   } catch (error) {
-  //     console.log(error);
-  //     if (error.response) {
-  //       // if server responded
-  //       toast.error(error.response.data.message);
-  //       if (error.response.status === 404 || error.response.status === 400) {
-  //         console.log(error.response);
-  //         //   removeItem();
-  //         //   return push("/admin/selectTree?removeSelectedTree");
-  //       }
-  //     } else if (error.request) {
-  //       //req was made but go no response
-  //       toast.error(`error occured`);
-  //     } else {
-  //       toast.error(`some error occured: ${error.message}`);
-  //     }
-  //   }
-  // };
-
   useEffect(() => {
     if (treeUID) {
       getTreeProfile();

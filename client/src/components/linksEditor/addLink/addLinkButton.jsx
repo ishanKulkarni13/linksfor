@@ -7,7 +7,7 @@ export default function AddLinkButton({links, setLinks, treeUID}) {
   function handleAddLinkButtonCLick(e) {
     setIsPopUpActive(true)
   }
-  function closeAddLinkPopUp(e) {
+  function closePopUp(e) {
     setIsPopUpActive(false)
   }
   return (
@@ -19,7 +19,7 @@ export default function AddLinkButton({links, setLinks, treeUID}) {
         <div>+</div>
         <p>Add Link</p>
       </button>
-      {isPopUpActive && <AddLinkPopUp setLinks={setLinks} close={closeAddLinkPopUp}  treeUID={treeUID}/>}
+      {isPopUpActive && <AddLinkPopUp setLinks={setLinks} close={closePopUp}  treeUID={treeUID}/>}
     </>
   );
 }
