@@ -1,0 +1,52 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid white;
+    border-radius: 225px;
+    padding: 5px 10px;
+}
+
+.icon{
+    width: 25px;
+}
+
+/* .shareContainer{
+    width: inherit;
+    height: 50px;
+    background-color: var(--backgroundSecondary);
+}
+
+.copyToClipboardContainer {
+    height: inherit;
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+    border:1px solid rgba(255, 255, 255, 0.371);
+}
+
+.copyToClipboardContainer > input{
+    background-color: var(--backgroundSecondary);
+    color: white;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.linkContainer{
+    width: auto;
+    flex: 1;
+    font-size: 20px;
+}
+
+.copyIconContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+    border-left: 1px solid white;
+}
+
+.copyIcon{
+    margin: 5px;
+} */

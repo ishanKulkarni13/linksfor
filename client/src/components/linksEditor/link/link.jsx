@@ -31,7 +31,7 @@ export default function Link({ link, deleteLink , treeUID}) {
     let {title, URL, UID} = linkData;
     try {
       const res = await fetch(
-        `${backendBaseURL}/tree/edit/editTitleAndURL/${treeUID}`,
+        `/api/tree/edit/link/titleAndURL/${treeUID}`,
         {
           method: "POST",
           cache: "no-store",

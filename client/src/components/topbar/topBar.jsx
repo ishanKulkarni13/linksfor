@@ -5,6 +5,7 @@ import styles from "./topBar.module.css";
 import { faLink, faShare, faUser } from "@fortawesome/free-solid-svg-icons";
 import useWindowResize from "@/hooks/useWindowSize";
 import Link from "next/link";
+import ShareTreeButton from "../shareTree/shareTreeButton/shareTreeButton";
 export default function TopBar() {
   const { width, heigth } = useWindowResize();
   return (
@@ -17,8 +18,9 @@ export default function TopBar() {
           </div>
 
           <div className={styles.share}>
-            <FontAwesomeIcon className={styles.icon} icon={faShare} />
-            <span>Share</span>
+            <ShareTreeButton/>
+            {/* <FontAwesomeIcon className={styles.icon} icon={faShare} />
+            <span>Share</span> */}
           </div>
 
           <Link className={styles.profile} href={"/admin"}>

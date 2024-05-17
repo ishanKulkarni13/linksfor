@@ -1,0 +1,64 @@
+.container {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+    width: 100vw;
+    z-index: 90;
+}
+
+.popUpContainer {
+    z-index: 91;
+    height: auto;
+    width: 90vw;
+    padding: 15px 15px;
+    flex-direction: column;
+    background-color: var(--backgroundSecondary);
+    border: 2px solid white;
+    border-radius: 25px;
+    color: white;
+
+}
+
+.container::before {
+    content: ''; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 70;
+    height: 100dvh;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.544);
+    backdrop-filter: blur(25px);
+}
+
+.top {
+    width: auto;
+    height: 50px;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.popUpTitle {
+    margin-right: auto;
+    font-size: 45px;
+}
+
+.closeButton {
+    font-size: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+
+.childrenContainer{
+    /* border: 1px solid gold; */
+}
