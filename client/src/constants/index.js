@@ -12,7 +12,7 @@ export const navLinks = [
     },
     {
         title:'login',
-        path:'/login'
+        path:'/api/auth/signin'
     },
     {
         title:'More',

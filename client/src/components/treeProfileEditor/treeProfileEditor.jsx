@@ -30,7 +30,7 @@ export default function TreeProfileEditor() {
     try {
       console.log(`got treeUId in getTreeProfile as:`, treeUID);
       const res = await axios.get(
-        `${backendBaseURL}/tree/tree-profile/${treeUID}`,
+        `/api/tree/profile/${treeUID}`,
         { withCredentials: true }
       );
       let treeProfile = res.data.treeProfile;
@@ -97,7 +97,7 @@ export default function TreeProfileEditor() {
           <p className={styles.title}>Profile</p>
           <div className={styles.container}>
             <div className={styles.editTreePictureContainer}>
-              <EditTreePicture treeProfile={treeProfile} treeUID={treeUID} />
+              {/* <EditTreePicture treeProfile={treeProfile} treeUID={treeUID} /> */}
             </div>
 
             <div className={styles.profileTitleAndBioContainer}>

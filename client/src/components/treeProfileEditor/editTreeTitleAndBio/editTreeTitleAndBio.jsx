@@ -26,7 +26,7 @@ export default function EditTreeTitleAndBio({ treeUID,  treeProfile}) {
     }
     try {
       const res = await axios.post(
-        `${backendBaseURL}/tree/edit-tree-profile/${treeUID}`,
+        `/api/tree/edit/profile/${treeUID}`,
         { treeName:title, treeBio:bio },
         { withCredentials: true }
       );
