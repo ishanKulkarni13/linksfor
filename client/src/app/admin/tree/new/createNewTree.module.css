@@ -1,0 +1,74 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 25px;
+    margin: auto;
+    padding: 0px 25px;
+    height: calc(100dvh - 50px);
+}
+
+.topContainer {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    /* gap: 5px; */
+}
+
+.topContainer>h1 {
+    font-size: 30px;
+    font-weight: 600;
+    color: white;
+}
+
+.topContainer>p {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.738);
+}
+
+.formContainer {
+    flex: ;
+    box-shadow: 0px 0px 2px 1px white;
+    border-radius: 25px;
+    padding: 20px 15px;
+
+}
+
+.createTreeButton {
+    background-color: white;
+    color: black;
+    padding: 10px 15px;
+    border-radius: 50px;
+    margin: auto;
+    width: 100%;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* .nameContainer{
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+    flex-direction: column;
+} */
+
+.input {
+    background-color: var(--backgroundSecondary);
+    width: 100%;
+    padding: 10px 10px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 1px white;
+    margin-top: 15px;
+}
+
+.inputContainer {
+    margin-bottom: 15px;
+}
+
+@media (width > 1204px) {
+    .container {
+        max-width: 750px;
+    }
+}

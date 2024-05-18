@@ -1,13 +1,10 @@
-/* .container {
-    background-color: var(--backgroundSecondary);
-    padding: 15px 15px;
-    border-radius: 25px;
-    box-shadow: 0px 0px 2px 1px white;
-} */
+.treesContainer {max-height: 70dvh;
+    padding: 3px 15px 0px 3px;
+    overflow-y: scroll;
+}
 .treeContainer {
     flex: 1;
     width: 100%;
-    max-height: 80dvh;
     overflow: scroll;
     display: flex;
     justify-content: space-between;

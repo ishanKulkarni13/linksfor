@@ -6,19 +6,12 @@ import axios from "axios";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { useSelectTree } from "@/hooks/selectTree";
 
-export default function SelectTreePopup({ close, selectedTreeUID }) {
+export default function SelectTreePopup({ close,   selectedTreeProfile ,setSelectedTreeProfile  }) {
   const [isLoading, setIsLoading] = useState(true);
-  const [trees, setTrees] = useState([
-    // {
-    //   treePicture: { style: 'classic' },
-    //   treeVisibility: 'public',
-    //   treeName: '@zxcvbnm',
-    //   UID: '2393290459',
-    //   treeBio: 'hi thereee'
-    // }
-  ]);
-  // selectedTreeUID = `2393290459` // temppppppppp
+  const [trees, setTrees] = useState([]);
+  const select = useSelectTree()
   const getTrees = async () => {
     try {
       const res = await axios.get(`/api/tree/admin/trees`, {
@@ -41,8 +34,14 @@ export default function SelectTreePopup({ close, selectedTreeUID }) {
   };
 
   const selectTree = async (treeUID)=>{
-    toast.info(treeUID)
-    close()
+    const selectedTree = trees.find((tree) => tree.UID === treeUID);
+    if (selectedTree) {
+      setSelectedTreeProfile(selectedTree);
+      select(treeUID);
+      close();
+    } else {
+      toast.error(`Tree with UID ${treeUID} not found`);
+    }
   }
   useEffect(() => {
     getTrees();
@@ -63,7 +62,7 @@ export default function SelectTreePopup({ close, selectedTreeUID }) {
                       onClick={(e) => {
                         selectTree(tree.UID);
                       }}
-                      className={`${styles.treeContainer} ${ (tree.UID == selectedTreeUID)? `${styles.selected}`: `notSelected`}`}
+                      className={`${styles.treeContainer} ${ (tree.UID == selectedTreeProfile.UID)? `${styles.selected}`: `notSelected`}`}
                     >
                       <div className={styles.treeProfileContainer}>
                         <div className={styles.treeImageContainer}>
@@ -83,56 +82,8 @@ export default function SelectTreePopup({ close, selectedTreeUID }) {
 
                       <div className={styles.iconContainer} >
                        {
-                        (tree.UID == selectedTreeUID) &&  <FontAwesomeIcon icon={faCheck} />
+                        (tree.UID == selectedTreeProfile.UID) &&  <FontAwesomeIcon icon={faCheck} />
                        }
-                      </div>
-                    </button>
-
-                    {/* ggg */}
-                    <button
-                      onClick={(e) => {
-                        selectTree(tree.UID);
-                      }}
-                      className={styles.treeContainer}
-                    >
-                      <div className={styles.treeProfileContainer}>
-                        <div className={styles.treeImageContainer}>
-                          <Image
-                            fill={true}
-                            className={styles.profileImage}
-                            //   src={`${treeProfile.treePicture.URL}`}
-                            src={`http://res.cloudinary.com/kakashib2k/image/upload/v1713685024/uiccf1wbzyioazqgve5q.png`}
-                            alt="Tree Image"
-                          />
-                        </div>
-                        <div className={styles.treeTextContainer}>
-                          <h1 className={styles.treeName}>{`treeName`}</h1>
-                          <p className={styles.treeUID}>{`treeProfile.UID`}</p>
-                        </div>
-                      </div>
-                    </button>
-
-                    {/* ggg */}
-                    <button
-                      onClick={(e) => {
-                        selectTree(tree.UID);
-                      }}
-                      className={styles.treeContainer}
-                    >
-                      <div className={styles.treeProfileContainer}>
-                        <div className={styles.treeImageContainer}>
-                          <Image
-                            fill={true}
-                            className={styles.profileImage}
-                            //   src={`${treeProfile.treePicture.URL}`}
-                            src={`http://res.cloudinary.com/kakashib2k/image/upload/v1713685024/uiccf1wbzyioazqgve5q.png`}
-                            alt="Tree Image"
-                          />
-                        </div>
-                        <div className={styles.treeTextContainer}>
-                          <h1 className={styles.treeName}>{`treeName`}</h1>
-                          <p className={styles.treeUID}>{`treeProfile.UID`}</p>
-                        </div>
                       </div>
                     </button>
                   </>

@@ -4,11 +4,11 @@ export const frontendBaseURL = `http://192.168.0.193:3000`
 export const navLinks = [
     {
         title:'Links',
-        path:'/admin/tree/links'
+        path:'/admin/tree/edit/links'
     },
     {
         title:'Appearance',
-        path:'/admin/tree/appearance'
+        path:'/admin/tree/edit/appearance'
     },
     {
         title:'login',

@@ -12,7 +12,7 @@ import SelectTreePopup from "./selectTreePopup/selectTreePopup";
 
 export default function SelectTree() {
   let treeUID = useTreeUID();
-  const [treeProfile, setTreeProfile] = useState();
+  const [selectedTreeProfile, setSelectedTreeProfile] = useState();
   const [isPopUpActive, setIsPopUpActive] = useState(false);
   function onSwitchTreeButtonCLick(e) {
     setIsPopUpActive(true);
@@ -32,7 +32,7 @@ export default function SelectTree() {
         withCredentials: true,
       });
       let treeProfile = res.data.treeProfile;
-      setTreeProfile(treeProfile);
+      setSelectedTreeProfile(treeProfile);
     } catch (error) {
       console.log(error);
       if (error.response) {
@@ -61,7 +61,7 @@ export default function SelectTree() {
 
   return (
     <div className={styles.container}>
-      {!true ? (
+      {!selectedTreeProfile ? (
         <div>Loading selected tree Profie </div>
       ) : (
         <>
@@ -74,14 +74,14 @@ export default function SelectTree() {
                 <Image
                   fill={true}
                   className={styles.profileImage}
-                  //   src={`${treeProfile.treePicture.URL}`}
+                  //   src={`${selectedTreeProfile.treePicture.URL}`}
                   src={`http://res.cloudinary.com/kakashib2k/image/upload/v1713685024/uiccf1wbzyioazqgve5q.png`}
                   alt="Tree Image"
                 />
               </div>
               <div className={styles.selectedTreeTextContainer}>
-                <h1 className={styles.selectedTreeName}>{`treeName`}</h1>
-                <p className={styles.selectedTreeUID}>{`treeProfile.UID`}</p>
+                <h1 className={styles.selectedTreeName}>{selectedTreeProfile.treeName}</h1>
+                <p className={styles.selectedTreeUID}>{selectedTreeProfile.UID}</p>
               </div>
             </div>
 
@@ -91,14 +91,15 @@ export default function SelectTree() {
           </button>
           {isPopUpActive && (
             <SelectTreePopup
-              selectedTreeUID={treeUID}
+            selectedTreeProfile = {selectedTreeProfile}
+            setSelectedTreeProfile={setSelectedTreeProfile}
               close={closePopUp}
             />
           )}
         </>
       )}
 
-      <Link href={"/admin/tree/create"} className={styles.createNewTreeButton}>
+      <Link href={"/admin/tree/new"} className={styles.createNewTreeButton}>
         <p>Create new tree</p>
       </Link>
       <Toaster position="bottom" richColors />
