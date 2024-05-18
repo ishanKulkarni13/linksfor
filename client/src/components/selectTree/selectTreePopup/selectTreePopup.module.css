@@ -1,7 +1,11 @@
 .treesContainer {max-height: 70dvh;
-    padding: 3px 15px 0px 3px;
+    padding: 3px 7px 0px 3px;
     overflow-y: scroll;
+    scrollbar-width: auto;
 }
+
+
+
 .treeContainer {
     flex: 1;
     width: 100%;

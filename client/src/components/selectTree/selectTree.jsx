@@ -1,7 +1,11 @@
 "use client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./selectTree.module.css";
-import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowDown,
+  faExchange,
+  faRepeat,
+} from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useTreeUID } from "@/hooks/treeUID";
@@ -9,9 +13,11 @@ import { Toaster, toast } from "sonner";
 import axios from "axios";
 import Link from "next/link";
 import SelectTreePopup from "./selectTreePopup/selectTreePopup";
+import useWindowResize from "@/hooks/useWindowSize";
 
 export default function SelectTree() {
   let treeUID = useTreeUID();
+  const { width } = useWindowResize();
   const [selectedTreeProfile, setSelectedTreeProfile] = useState();
   const [isPopUpActive, setIsPopUpActive] = useState(false);
   function onSwitchTreeButtonCLick(e) {
@@ -80,19 +86,30 @@ export default function SelectTree() {
                 />
               </div>
               <div className={styles.selectedTreeTextContainer}>
-                <h1 className={styles.selectedTreeName}>{selectedTreeProfile.treeName}</h1>
-                <p className={styles.selectedTreeUID}>{selectedTreeProfile.UID}</p>
+                <h1 className={styles.selectedTreeName}>
+                  {selectedTreeProfile.treeName}
+                </h1>
+                <p className={styles.selectedTreeUID}>
+                  {selectedTreeProfile.UID}
+                </p>
               </div>
             </div>
 
             <div className={styles.switchTree}>
-              <p>Switch Tree</p>
+              {width < 540 ? (
+                <FontAwesomeIcon
+                  className={styles.changeIcon}
+                  icon={faRepeat}
+                />
+              ) : (
+                <p className={styles.changeIcon}>Switch Tree</p>
+              )}
             </div>
           </button>
           {isPopUpActive && (
             <SelectTreePopup
-            selectedTreeProfile = {selectedTreeProfile}
-            setSelectedTreeProfile={setSelectedTreeProfile}
+              selectedTreeProfile={selectedTreeProfile}
+              setSelectedTreeProfile={setSelectedTreeProfile}
               close={closePopUp}
             />
           )}
