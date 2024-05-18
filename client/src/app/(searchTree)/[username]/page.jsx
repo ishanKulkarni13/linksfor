@@ -3,7 +3,7 @@ import {backendBaseURL} from "@/constants/index"
 const getTreeByUsername = async (username) => {
   try {
     let res = await fetch(
-      `http://localhost:4000/search/tree/username/${username}`,
+      `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/search/tree/username/${username}`,
       {
         method: "GET",
         cache: "no-store",
@@ -15,6 +15,7 @@ const getTreeByUsername = async (username) => {
         },
       }
     );
+    console.log(res);
     if (res.ok) {
       let responseData = await res.json();
       let tree = responseData.tree;
