@@ -9,7 +9,7 @@ import React, { useRef, useState } from "react";
 import { Toaster, toast } from "sonner";
 import { CldUploadWidget } from "next-cloudinary";
 
-export default function EditTreePicture({ treeProfile, treeUID }) {
+export default function EditTreePicture({ treeProfile,setTreeProfile, treeUID }) {
   const imageInputRef = useRef(null);
   const { push } = useRouter();
   const { removeItem } = useLocalstorage("selectedTree");
@@ -71,8 +71,17 @@ export default function EditTreePicture({ treeProfile, treeUID }) {
         { profilePicturePublicUrl: URL },
         { withCredentials: true }
       );
-      let data = res.data.treeProfile;
-      toast.success('updated picture')
+      const updatedImageURL = res.data.treeProfile.profilePicturePublicUrl;
+      setTreeProfile({
+        ...treeProfile,
+        treePicture: {
+          ...treeProfile.treePicture,
+          URL: updatedImageURL
+        }
+      });
+      // setTreeProfile(...treeProfile, treePicture = {...treeProfile.treePicture, URL:updatedImageURL} )
+      console.log(treeProfile);
+      toast.success("updated picture");
     } catch (error) {
       console.log(error);
       if (error.response) {
@@ -92,94 +101,152 @@ export default function EditTreePicture({ treeProfile, treeUID }) {
     }
   };
 
-  // return (
-  //   <form onSubmit={updateImage} className={styles.profileImageEditForm}>
-  //     <div className={styles.profileImageContainer}>
-  //       <Image
-  //         fill={true}
-  //         className={styles.profileImage}
-  //         src={
-  //           image
-  //             ? URL.createObjectURL(image)
-  //             // : `${treeProfile.treePicture.URL}`
-  //             : `https://res.cloudinary.com/kakashib2k/image/upload/v1715678326/ubvybrdexjldcmgqbryl.jpg`
-  //         }
-  //         alt="Tree ImageTag"
-  //         onClick={() => imageInputRef.current.click()}
-  //       />
-  //       <input
-  //         type="file"
-  //         ref={imageInputRef}
-  //         accept="image/**"
-  //         name="treePicture"
-  //         style={{ display: "none" }}
-  //         onChange={handelImageInputChange}
-  //       />
-  //     </div>
-  //     <div className={styles.profileImageEditOptionsContainer}>
-  //       {/* <button onClick={handleUploadImage}>Upload Image</button> */}
-  //       <button className={styles.saveButton} type="submit">
-  //         Upload
-  //       </button>
-  //     </div>
-  //   </form>
-  // );
-
   return (
-    <>
-      <CldUploadWidget
-        options={{
-          // sources: ["local", "url", "unsplash"],
-          sources: ["local"],
-          // uploadPreset: uploadPreset,
-          cropping: true, //add a cropping step
-          // showAdvancedOptions: true,  //add advanced options (public_id and tag)
-          // sources: [ "local", "url"], // restrict the upload sources to URL and local files
-          multiple: false, //restrict upload to a single file
-          // folder: "user_images", //upload files to the specified folder
-          // tags: ["users", "profile"], //add the given tags to the uploaded files
-          // context: {alt: "user_uploaded"}, //add the given context data to the uploaded files
-          // clientAllowedFormats: ["images"], //restrict uploading to image files only
-          maxImageFileSize: 2000000,  //restrict file size to less than 2MB
-          maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
-          theme: "custom", //change to a purple theme
+    <div  className={styles.profileImageEditContainer}>
+      <div className={styles.profileImageContainer}>
+        <Image
+          fill={true}
+          className={styles.profileImage}
+          src={`${treeProfile.treePicture.URL}` }
+          alt="user tree image"
+          // onClick={() => imageInputRef.current.click()}
+        />
+        {/* <input
+          type="file"
+          ref={imageInputRef}
+          accept="image/**"
+          name="treePicture"
+          style={{ display: "none" }}
+          onChange={handelImageInputChange}
+        /> */}
+      </div>
+      <div className={styles.profileImageEditOptionsContainer}>
+        {/* Upload image button */}
+        <CldUploadWidget
+          options={{
+            // sources: ["local", "url", "unsplash"],
+            sources: ["local", 'unsplash'],
+            // uploadPreset: uploadPreset,
+            cropping: true, //add a cropping step
+            multiple: false, //restrict upload to a single file
+            // folder: "user_images", //upload files to the specified folder
+            tags: ["user", "tree", "treePicture", "linksFor"], //add the given tags to the uploaded files
+            // context: {alt: "user_uploaded"}, //add the given context data to the uploaded files
+            // clientAllowedFormats: ["images"], //restrict uploading to image files only
+            maxImageFileSize: 2000000, //restrict file size to less than 2MB
+            maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
+            theme: "custom", //change to a purple theme
 
-          styles:{
-            palette: { // 2
-              window: "#000000", // TOP AND BOTTOM PANEL
-              sourceBg: "000000",
-              windowBorder: "#FFFFFF", // bordre
-              tabIcon: "#FFFFFF", //logoes
-              inactiveTabIcon: "#FFFFFF",
-              menuIcons: "#FFFFFF", // logo name and X 
-              link:  "#FFFFFF",
-              action:  "#FFFFFF", // icons boxes next and crop
-              error: "#cc0000",
-              inProgress: "#0433ff",
-              complete: "#339933",
-              textDark: "#000000", // Access millions of images from Unsplash.
-              textLight: "#fcfffd", 
+            styles: {
+              palette: {
+                // 2
+                window: "#000000", // TOP AND BOTTOM PANEL
+                sourceBg: "000000",
+                windowBorder: "#FFFFFF", // bordre
+                tabIcon: "#FFFFFF", //logoes
+                inactiveTabIcon: "#FFFFFF",
+                menuIcons: "#FFFFFF", // logo name and X
+                link: "#FFFFFF",
+                action: "#FFFFFF", // icons boxes next and crop
+                error: "#cc0000",
+                inProgress: "#0433ff",
+                complete: "#339933",
+                textDark: "#000000", // Access millions of images from Unsplash.
+                textLight: "#fcfffd",
+              },
             },
-          }
-        }}
-
-        signatureEndpoint="/api/cloudinary-sign"
-        onSuccess={(result, { widget }) => {
-          // setResource(result.info); // { public_id, secure_url, etc }
-          console.log(result.info.secure_url);
-          toast(result.info.secure_url);
-          updateTreeProfilePicture(result.info.secure_url)
-          widget.close();
-        }}
-      >
-        {({ open }) => {
-          function handleOnClick() {
-            setResource(undefined);
-            open();
-          }
-          return <button onClick={handleOnClick}>Upload an Image</button>;
-        }}
-      </CldUploadWidget>
-    </>
+          }}
+          signatureEndpoint="/api/cloudinary-sign"
+          onSuccess={(result, { widget }) => {
+            // setResource(result.info); // { public_id, secure_url, etc }
+            console.log(result.info.secure_url);
+            toast(result.info.secure_url);
+            updateTreeProfilePicture(result.info.secure_url);
+            widget.close();
+          }}
+        >
+          {({ open }) => {
+            function handleOnClick() {
+              setResource(undefined);
+              open();
+            }
+            return (
+              <button
+                className={styles.saveButton}
+                onClick={handleOnClick}
+              >
+                Change Image
+              </button>
+            );
+            // <button onClick={handleOnClick}>Upload an Image</button>;
+          }}
+        </CldUploadWidget>
+      </div>
+    </div>
   );
+
+  // return (
+  //   <>
+  //     <CldUploadWidget
+  //       options={{
+  //         // sources: ["local", "url", "unsplash"],
+  //         sources: ["local"],
+  //         // uploadPreset: uploadPreset,
+  //         cropping: true, //add a cropping step
+  //         multiple: false, //restrict upload to a single file
+  //         // folder: "user_images", //upload files to the specified folder
+  //         tags: ["user", "tree", "treePicture", "linksFor"], //add the given tags to the uploaded files
+  //         // context: {alt: "user_uploaded"}, //add the given context data to the uploaded files
+  //         // clientAllowedFormats: ["images"], //restrict uploading to image files only
+  //         maxImageFileSize: 2000000, //restrict file size to less than 2MB
+  //         maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
+  //         theme: "custom", //change to a purple theme
+
+  //         styles: {
+  //           palette: {
+  //             // 2
+  //             window: "#000000", // TOP AND BOTTOM PANEL
+  //             sourceBg: "000000",
+  //             windowBorder: "#FFFFFF", // bordre
+  //             tabIcon: "#FFFFFF", //logoes
+  //             inactiveTabIcon: "#FFFFFF",
+  //             menuIcons: "#FFFFFF", // logo name and X
+  //             link: "#FFFFFF",
+  //             action: "#FFFFFF", // icons boxes next and crop
+  //             error: "#cc0000",
+  //             inProgress: "#0433ff",
+  //             complete: "#339933",
+  //             textDark: "#000000", // Access millions of images from Unsplash.
+  //             textLight: "#fcfffd",
+  //           },
+  //         },
+  //       }}
+  //       signatureEndpoint="/api/cloudinary-sign"
+  //       onSuccess={(result, { widget }) => {
+  //         // setResource(result.info); // { public_id, secure_url, etc }
+  //         console.log(result.info.secure_url);
+  //         toast(result.info.secure_url);
+  //         updateTreeProfilePicture(result.info.secure_url);
+  //         widget.close();
+  //       }}
+  //     >
+  //       {({ open }) => {
+  //         function handleOnClick() {
+  //           setResource(undefined);
+  //           open();
+  //         }
+  //         return (
+  //           <button
+  //             className={styles.saveButton}
+  //             onClick={handleOnClick}
+  //             type="submit"
+  //           >
+  //             Change Image
+  //           </button>
+  //         );
+  //         // <button onClick={handleOnClick}>Upload an Image</button>;
+  //       }}
+  //     </CldUploadWidget>
+  //   </>
+  // );
 }

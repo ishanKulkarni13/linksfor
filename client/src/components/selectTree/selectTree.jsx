@@ -80,8 +80,7 @@ export default function SelectTree() {
                 <Image
                   fill={true}
                   className={styles.profileImage}
-                  //   src={`${selectedTreeProfile.treePicture.URL}`}
-                  src={`http://res.cloudinary.com/kakashib2k/image/upload/v1713685024/uiccf1wbzyioazqgve5q.png`}
+                    src={`${selectedTreeProfile.treePicture.URL}`}
                   alt="Tree Image"
                 />
               </div>

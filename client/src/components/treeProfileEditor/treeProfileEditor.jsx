@@ -14,12 +14,9 @@ import useWindowResize from "@/hooks/useWindowSize";
 
 export default function TreeProfileEditor() {
   const [treeProfile, setTreeProfile] = useState(null);
-  const [image, setImage] = useState(null);
-  const [isImageChanged, setIsImageChanged] = useState(true);
-  const imageInputRef = useRef(null);
   const { push } = useRouter();
   const { removeItem } = useLocalstorage("selectedTree");
-  const {width , height} = useWindowResize();
+  const {width} = useWindowResize();
   const treeUID = useTreeUID(null);
 
   const getTreeProfile = async () => {
@@ -66,7 +63,7 @@ export default function TreeProfileEditor() {
           <p className={styles.title}>Profile</p>
           <div className={styles.container}>
             <div className={styles.editTreePictureContainer}>
-              <EditTreePicture treeProfile={treeProfile} treeUID={treeUID} />
+              <EditTreePicture treeProfile={treeProfile} setTreeProfile= {setTreeProfile} treeUID={treeUID} />
             </div>
 
             <div className={styles.profileTitleAndBioContainer}>
