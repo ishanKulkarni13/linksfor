@@ -66,7 +66,7 @@ export default function TreeProfileEditor() {
           <p className={styles.title}>Profile</p>
           <div className={styles.container}>
             <div className={styles.editTreePictureContainer}>
-              {/* <EditTreePicture treeProfile={treeProfile} treeUID={treeUID} /> */}
+              <EditTreePicture treeProfile={treeProfile} treeUID={treeUID} />
             </div>
 
             <div className={styles.profileTitleAndBioContainer}>

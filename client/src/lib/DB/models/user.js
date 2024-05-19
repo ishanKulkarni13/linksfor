@@ -7,11 +7,13 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, "Name is required"],
         minLength: [2, "Name must be of at least 2 characters"],
+        maxLength: [11, "name can be of at most 11 characters"],
     },
     username: {
         type: String,
         unique: [true, "username already exist"],
         minLength: [3, "username must be of at least 3 characters"],
+        maxLength: [11, "username can be of at most 11 characters"],
     },
     publicUID: {
         type: Number,
