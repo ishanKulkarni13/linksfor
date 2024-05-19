@@ -77,12 +77,15 @@ export default function SelectTree() {
           >
             <div className={styles.selectedTreeProfileContainer}>
               <div className={styles.selectedTreeImageContainer}>
-                <Image
+                {selectedTreeProfile.treePicture.URL && (
+                  <Image
                   fill={true}
                   className={styles.profileImage}
-                    src={`${selectedTreeProfile.treePicture.URL}`}
+                  src={`${selectedTreeProfile.treePicture.URL}`}
                   alt="Tree Image"
                 />
+                )}
+                
               </div>
               <div className={styles.selectedTreeTextContainer}>
                 <h1 className={styles.selectedTreeName}>

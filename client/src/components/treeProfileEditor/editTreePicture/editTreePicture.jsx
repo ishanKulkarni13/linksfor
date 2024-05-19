@@ -9,7 +9,11 @@ import React, { useRef, useState } from "react";
 import { Toaster, toast } from "sonner";
 import { CldUploadWidget } from "next-cloudinary";
 
-export default function EditTreePicture({ treeProfile,setTreeProfile, treeUID }) {
+export default function EditTreePicture({
+  treeProfile,
+  setTreeProfile,
+  treeUID,
+}) {
   const imageInputRef = useRef(null);
   const { push } = useRouter();
   const { removeItem } = useLocalstorage("selectedTree");
@@ -76,11 +80,10 @@ export default function EditTreePicture({ treeProfile,setTreeProfile, treeUID })
         ...treeProfile,
         treePicture: {
           ...treeProfile.treePicture,
-          URL: updatedImageURL
-        }
+          URL: updatedImageURL,
+        },
       });
       // setTreeProfile(...treeProfile, treePicture = {...treeProfile.treePicture, URL:updatedImageURL} )
-      console.log(treeProfile);
       toast.success("updated picture");
     } catch (error) {
       console.log(error);
@@ -102,15 +105,18 @@ export default function EditTreePicture({ treeProfile,setTreeProfile, treeUID })
   };
 
   return (
-    <div  className={styles.profileImageEditContainer}>
+    <div className={styles.profileImageEditContainer}>
       <div className={styles.profileImageContainer}>
-        <Image
+        {treeProfile.treePicture.URL && (
+          <Image
           fill={true}
           className={styles.profileImage}
-          src={`${treeProfile.treePicture.URL}` }
+          src={`${treeProfile.treePicture.URL}`}
           alt="user tree image"
           // onClick={() => imageInputRef.current.click()}
         />
+        )}
+        
         {/* <input
           type="file"
           ref={imageInputRef}
@@ -125,7 +131,7 @@ export default function EditTreePicture({ treeProfile,setTreeProfile, treeUID })
         <CldUploadWidget
           options={{
             // sources: ["local", "url", "unsplash"],
-            sources: ["local", 'unsplash'],
+            sources: ["local", "unsplash"],
             // uploadPreset: uploadPreset,
             cropping: true, //add a cropping step
             multiple: false, //restrict upload to a single file
@@ -171,10 +177,7 @@ export default function EditTreePicture({ treeProfile,setTreeProfile, treeUID })
               open();
             }
             return (
-              <button
-                className={styles.saveButton}
-                onClick={handleOnClick}
-              >
+              <button className={styles.saveButton} onClick={handleOnClick}>
                 Change Image
               </button>
             );
