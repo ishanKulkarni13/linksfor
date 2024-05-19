@@ -10,8 +10,8 @@ export const POST = async (req, { params }) => {
     
     
     try {
-        let { treeName, treeBio } = await req.json();
-        if (!treeName && !treeBio) {
+        let { treeName, treeBio, profilePicturePublicUrl } = await req.json();
+        if (!treeName && !treeBio && !profilePicturePublicUrl) {
             return NextResponse.json({success: false, message: "Nothing to change" },{status: 500})
         }
         const session = await auth()
@@ -31,9 +31,14 @@ export const POST = async (req, { params }) => {
             if (treeBio) {
                 tree.treeBio = treeBio
             }
+
+            if(profilePicturePublicUrl){
+                tree.treePicture.URL = profilePicturePublicUrl
+            }
+
             await tree.save();
-            
-            return NextResponse.json({success: true, treeProfile: { treeBio, treeName } })
+            console.log(tree.treePicture.URL)
+            return NextResponse.json({success: true, treeProfile: { treeBio, treeName, profilePicturePublicUrl: tree.treePicture.URL } })
         } else {
             return NextResponse.json({success: false, message: "Unautherised access to edit tree"},{status: 401})
         }

@@ -10,11 +10,11 @@ import { Toaster, toast } from "sonner";
 import { CldUploadWidget } from "next-cloudinary";
 
 export default function EditTreePicture({ treeProfile, treeUID }) {
-  // const imageInputRef = useRef(null);
-  // const { push } = useRouter();
-  // const { removeItem } = useLocalstorage("selectedTree");
-  // const [image, setImage] = useState(null);
-  // const [isImageChanged, setIsImageChanged] = useState(true);
+  const imageInputRef = useRef(null);
+  const { push } = useRouter();
+  const { removeItem } = useLocalstorage("selectedTree");
+  const [image, setImage] = useState(null);
+  const [isImageChanged, setIsImageChanged] = useState(true);
   const [resource, setResource] = useState();
 
   // const handelImageInputChange = async (e) => {
@@ -60,6 +60,38 @@ export default function EditTreePicture({ treeProfile, treeUID }) {
   //   // setIsImageChanged(false)
   // };
 
+  const updateTreeProfilePicture = async (URL) => {
+    if (!treeUID) {
+      console.log(treeUID);
+      return toast.error("didn't got treeUID");
+    }
+    try {
+      const res = await axios.post(
+        `/api/tree/edit/profile/${treeUID}`,
+        { profilePicturePublicUrl: URL },
+        { withCredentials: true }
+      );
+      let data = res.data.treeProfile;
+      toast.success('updated picture')
+    } catch (error) {
+      console.log(error);
+      if (error.response) {
+        // if server responded
+        toast.error(error.response.data.message);
+        if (error.response.status === 404 || error.response.status === 400) {
+          console.log(error.response);
+          //   removeItem();
+          //   return push("/admin/selectTree?removeSelectedTree");
+        }
+      } else if (error.request) {
+        //req was made but go no response
+        toast.error(`error occured`);
+      } else {
+        toast.error(`some error occured: ${error.message}`);
+      }
+    }
+  };
+
   // return (
   //   <form onSubmit={updateImage} className={styles.profileImageEditForm}>
   //     <div className={styles.profileImageContainer}>
@@ -97,7 +129,8 @@ export default function EditTreePicture({ treeProfile, treeUID }) {
     <>
       <CldUploadWidget
         options={{
-          sources: ["local", "url", "unsplash"],
+          // sources: ["local", "url", "unsplash"],
+          sources: ["local"],
           // uploadPreset: uploadPreset,
           cropping: true, //add a cropping step
           // showAdvancedOptions: true,  //add advanced options (public_id and tag)
@@ -109,60 +142,24 @@ export default function EditTreePicture({ treeProfile, treeUID }) {
           // clientAllowedFormats: ["images"], //restrict uploading to image files only
           maxImageFileSize: 2000000,  //restrict file size to less than 2MB
           maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
-          theme: "black", //change to a purple theme
+          theme: "custom", //change to a purple theme
 
           styles:{
             palette: { // 2
-              window: "#fff", // TOP AND BOTTOM PANEL
-              windowBorder: "#000", // bordre
-              tabIcon: "#000", //logoes
-              menuIcons: "#000", // logo name and X 
-              // textDark: "#000", // Access millions of images from Unsplash.
-              // textLight: "#fff", 
-              link:  "#fff",
-              // action:  "#212121", // icons boxes next and crop
-              // inactiveTabIcon: "#212121",
-              // error: "#F44235",
-              // inProgress: "#fff",
-              // complete: "#fff",
-              // sourceBg: "fff"
+              window: "#000000", // TOP AND BOTTOM PANEL
+              sourceBg: "000000",
+              windowBorder: "#FFFFFF", // bordre
+              tabIcon: "#FFFFFF", //logoes
+              inactiveTabIcon: "#FFFFFF",
+              menuIcons: "#FFFFFF", // logo name and X 
+              link:  "#FFFFFF",
+              action:  "#FFFFFF", // icons boxes next and crop
+              error: "#cc0000",
+              inProgress: "#0433ff",
+              complete: "#339933",
+              textDark: "#000000", // Access millions of images from Unsplash.
+              textLight: "#fcfffd", 
             },
-            // palette: {  //1
-            //   window: "#000", // TOP AND BOTTOM PANEL
-            //   windowBorder: "#fff", // bordre
-            //   tabIcon: "#fff", //logoes
-            //   menuIcons: "#fff", // logo name and X 
-            //   textDark: "#000", // Access millions of images from Unsplash.
-            //   textLight: "#fff", 
-            //   link:  "#fff",
-            //   action:  "#fff", // icons boxes next and crop
-            //   inactiveTabIcon: "#FFF",
-            //   error: "#F44235",
-            //   inProgress: "#fff",
-            //   complete: "#fff",
-            //   sourceBg: "fff"
-            // },
-            // palette: {
-            //   window: "#fff", // TOP AND BOTTOM PANEL
-            //   windowBorder: "#000", // bordre
-            //   tabIcon: "#000", //logoes
-            //   menuIcons: "#000", // logo name and X 
-            //   textDark: "#000", // Access millions of images from Unsplash.
-            //   textLight: "#fff", 
-            //   link:  "#212121",
-            //   action:  "#212121", // icons boxes next and crop
-            //   inactiveTabIcon: "#212121",
-            //   error: "#F44235",
-            //   inProgress: "#000",
-            //   complete: "#fff",
-            //   sourceBg: "000"
-            // },
-            // frame: {
-            //   background: "#d606c8"
-            // }
-          
-
-            //text-field search-input outline-0
           }
         }}
 
@@ -171,6 +168,7 @@ export default function EditTreePicture({ treeProfile, treeUID }) {
           // setResource(result.info); // { public_id, secure_url, etc }
           console.log(result.info.secure_url);
           toast(result.info.secure_url);
+          updateTreeProfilePicture(result.info.secure_url)
           widget.close();
         }}
       >
