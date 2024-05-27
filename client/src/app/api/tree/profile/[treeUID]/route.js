@@ -28,9 +28,9 @@ export const GET = async (req, { params }) => {
         };
         
         if (tree.owner.equals(userID)) {
-            const { UID, treeVisibility, treeLockConfig, treeName, treePicture, treeBio } = tree;
+            const { UID, treeVisibility, treeLockConfig, treeName, treePicture, treeBio, theme } = tree;
             
-            return NextResponse.json({ success: true,  treeProfile: { UID, treeVisibility, treeLockConfig, treeName, treePicture, treeBio } })
+            return NextResponse.json({ success: true,  treeProfile: { UID, treeVisibility, treeLockConfig, treeName, treePicture, treeBio, theme : {selectedTheme: theme.selectedTheme} } })
         } else {
             return NextResponse.json({ success: false, message: "Unautherised access to edit tree"}, { status: 401 })
         }

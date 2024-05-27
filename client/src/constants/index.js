@@ -23,7 +23,7 @@ export const navLinks = [
 export const avaibleTreeThemes = [
     {
         displayName: 'material UI',
-        id: 1122,
+        id: 10000,
         name: "material-UI",
         displayPicture: "https://res.cloudinary.com/kakashib2k/image/upload/v1716803475/o9gen6ybptudrfib8teh.jpg"
     },

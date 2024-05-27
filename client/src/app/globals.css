@@ -71,7 +71,6 @@
   --background: #050505;
   --backgroundSecondary: #0f0f0f;
   --foreground: 222.2 84% 4.9%;
-
   /* Background colors */
   --color-background: hsl(222.2, 84%, 4.9%);
   --color-surface-1: hsl(222.2, 70%, 10%);
@@ -86,9 +85,9 @@
 
   /* Borders */
   --color-border: hsl(217.2, 32.6%, 17.5%);
-  --border-surface-1: white;
-  --border-surface-2: white;
-  --border-surface-3: white;
+  --border-surface-1: 1px solid white;
+  --border-surface-2: 1px solid white;
+  --border-surface-3: 1px solid white;
   --color-border-muted: hsl(215, 20%, 50%);
 
   /* Primary colors */
@@ -104,7 +103,7 @@
   --color-secondary-foreground: hsl(210, 40%, 98%);
 
   /* Accent colors */
-  --color-accent: hsl(217.2, 32.6%, 17.5%);
+  --color-accent: hsl(174, 100%, 50%);
   --color-accent-foreground: hsl(210, 40%, 98%);
 
   /* Destructive colors */
@@ -155,7 +154,7 @@
 body {
   min-height: 100dvh;
   background-color: var(--color-background);
-  color: var(--color-text-);
+  color: var(--color-text-primary);
 }
 
 @media (width < 640px) {
