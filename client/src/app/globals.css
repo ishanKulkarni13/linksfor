@@ -72,28 +72,66 @@
   --backgroundSecondary: #0f0f0f;
   --foreground: 222.2 84% 4.9%;
 
-  --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
+  /* Background colors */
+  --color-background: hsl(222.2, 84%, 4.9%);
+  --color-surface-1: hsl(222.2, 70%, 10%);
+  --color-surface-2: hsl(222.2, 60%, 15%);
+  --color-surface-3: hsl(222.2, 50%, 20%);
+  --color-overlay: hsla(0, 0%, 0%, 0.4);
 
-  --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
+  /* Text colors */
+  --color-text-primary: hsl(210, 40%, 98%);
+  --color-text-secondary: hsl(210, 40%, 80%);
+  --color-text-muted: hsl(215, 20.2%, 65.1%);
 
-  --primary: white;
-  --primary-foreground: 210 40% 98%;
+  /* Borders */
+  --color-border: hsl(217.2, 32.6%, 17.5%);
+  --border-surface-1: white;
+  --border-surface-2: white;
+  --border-surface-3: white;
+  --color-border-muted: hsl(215, 20%, 50%);
 
-  --secondary: 210 40% 96.1%;
-  --secondary-foreground: 222.2 47.4% 11.2%;
+  /* Primary colors */
+  --color-primary: hsl(210, 40%, 98%);
+  --color-primary-light: hsl(210, 40%, 90%);
+  --color-primary-dark: hsl(222.2, 47.4%, 11.2%);
+  --color-primary-foreground: hsl(222.2, 47.4%, 11.2%);
 
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%;
+  /* Secondary colors */
+  --color-secondary: hsl(217.2, 32.6%, 17.5%);
+  --color-secondary-light: hsl(217.2, 42.6%, 27.5%);
+  --color-secondary-dark: hsl(210, 40%, 96.1%);
+  --color-secondary-foreground: hsl(210, 40%, 98%);
 
-  --accent1: rgb(18, 0, 212);
-  --accent-foreground: 222.2 47.4% 11.2%;
+  /* Accent colors */
+  --color-accent: hsl(217.2, 32.6%, 17.5%);
+  --color-accent-foreground: hsl(210, 40%, 98%);
 
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
+  /* Destructive colors */
+  --color-destructive: hsl(0, 62.8%, 30.6%);
+  --color-destructive-foreground: hsl(210, 40%, 98%);
 
-  --radius: 0.5rem;
+  /* Shadows */
+  --shadow-1: 0px 1px 3px rgba(0, 0, 0, 0.24);
+  --shadow-2: 0px 3px 6px rgba(0, 0, 0, 0.32);
+  --shadow-3: 0px 10px 20px rgba(0, 0, 0, 0.48);
+
+  /* Radius */
+  --radius-small: 0.25rem;
+  --radius-medium: 0.5rem;
+  --radius-large: 1rem;
+
+  /* Font */
+  --font-family: 'Roboto', sans-serif;
+  --font-size: 16px;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* Spacing */
+  --spacing-unit: 8px;
+
 
   --topBarHeight: 70px
 }
@@ -116,12 +154,12 @@
 
 body {
   min-height: 100dvh;
-  background-color: var(--background);
-  color: white;
+  background-color: var(--color-background);
+  color: var(--color-text-);
 }
 
-@media (width < 640px){
-  :root{
-      --topBarHeight : 120px;
+@media (width < 640px) {
+  :root {
+    --topBarHeight: 120px;
   }
 }

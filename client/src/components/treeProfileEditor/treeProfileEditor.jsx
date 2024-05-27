@@ -11,12 +11,13 @@ import EditTreeTitleAndBio from "./editTreeTitleAndBio/editTreeTitleAndBio";
 import TreePreviewToggleButton from "../treePreview/treePreviewToggleButton/treePreviewToggleButton";
 import EditTreePicture from "./editTreePicture/editTreePicture";
 import useWindowResize from "@/hooks/useWindowSize";
+import EditTreeTheme from "./editTreeTheme/editTreeTheme";
 
 export default function TreeProfileEditor() {
   const [treeProfile, setTreeProfile] = useState(null);
   const { push } = useRouter();
   const { removeItem } = useLocalstorage("selectedTree");
-  const {width} = useWindowResize();
+  const { width } = useWindowResize();
   const treeUID = useTreeUID(null);
 
   const getTreeProfile = async () => {
@@ -26,10 +27,9 @@ export default function TreeProfileEditor() {
     }
     try {
       console.log(`got treeUId in getTreeProfile as:`, treeUID);
-      const res = await axios.get(
-        `/api/tree/profile/${treeUID}`,
-        { withCredentials: true }
-      );
+      const res = await axios.get(`/api/tree/profile/${treeUID}`, {
+        withCredentials: true,
+      });
       let treeProfile = res.data.treeProfile;
       setTreeProfile(treeProfile);
     } catch (error) {
@@ -63,7 +63,11 @@ export default function TreeProfileEditor() {
           <p className={styles.title}>Profile</p>
           <div className={styles.container}>
             <div className={styles.editTreePictureContainer}>
-              <EditTreePicture treeProfile={treeProfile} setTreeProfile= {setTreeProfile} treeUID={treeUID} />
+              <EditTreePicture
+                treeProfile={treeProfile}
+                setTreeProfile={setTreeProfile}
+                treeUID={treeUID}
+              />
             </div>
 
             <div className={styles.profileTitleAndBioContainer}>
@@ -72,8 +76,12 @@ export default function TreeProfileEditor() {
                 treeUID={treeUID}
               />
             </div>
+
+            <div className={styles.editTreeThemeContainer}>
+              <EditTreeTheme treeProfile={treeProfile} treeUID={treeUID} />
+            </div>
           </div>
-          {(width > 640) && (<TreePreviewToggleButton treeUID={treeUID} />)}
+          {width > 640 && <TreePreviewToggleButton treeUID={treeUID} />}
         </>
       ) : (
         <div>Loading...</div>

@@ -1,0 +1,34 @@
+.title{
+    font-weight: 550;
+    font-size: 25px;
+    color: var(--color-text-primary);
+}
+
+.form{
+    width: auto;
+    /* display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr; */
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 35px;
+    flex-wrap: wrap;
+    border: 1px solid yellow;
+}
+
+.themeInput {
+    /* display: none; */
+}
+
+.themeLable > div {
+    border: 1px solid var(--border-surface-3);
+    height: 300px;
+    width: 200px; 
+    background-color: red;
+}
+
+.themeDisplayPicture{
+    position: relative;
+    height: 250px;
+    width: auto;
+}
