@@ -59,7 +59,7 @@ export default function EditTreeTheme({ treeUID, treeProfile }) {
         <div className={`${styles.formContainer}`}>
           <form onSubmit={onSubmit} className={styles.form}>
             {avaibleTreeThemes.map((theme) => (
-              <div className={`${styles.themeContainer}`}>
+              <div key={`${theme.name}`} className={`${styles.themeContainer}`}>
                 <input
                   className={`${styles.themeInput}`}
                   type="radio"

@@ -81,7 +81,7 @@ export default function TreeProfileEditor() {
               <EditTreeTheme treeProfile={treeProfile} treeUID={treeUID} />
             </div>
           </div>
-          {width > 640 && <TreePreviewToggleButton treeUID={treeUID} />}
+          {width < 640 && <TreePreviewToggleButton treeUID={treeUID} />}
         </>
       ) : (
         <div>Loading...</div>
