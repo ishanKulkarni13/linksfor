@@ -17,7 +17,7 @@
     border-radius: inherit;
     box-shadow: 0px 0px 5px 2px white;
     /* background-color: var(--backgroundSecondary); */
-    backdrop-filter: blur(199px);
+    backdrop-filter: blur(30px);
 }
 
 @media (width > 640px){

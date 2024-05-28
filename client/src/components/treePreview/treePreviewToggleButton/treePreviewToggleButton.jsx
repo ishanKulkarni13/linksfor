@@ -1,30 +1,38 @@
-"use client"
+"use client";
 import { Toaster, toast } from "sonner";
 import styles from "./treePreviewToggleButton.module.css";
 
 import { useState } from "react";
 import TreePreview from "../treePreview";
+import useWindowResize from "@/hooks/useWindowSize";
 
-export default function TreePreviewToggleButton({treeUID}) {
+export default function TreePreviewToggleButton({ treeUID, alwaysVisible }) {
   const [isPreviewActive, setIsPreviewActive] = useState(false);
+  const { width } = useWindowResize();
   function handleToggleButtonCLick(e) {
     setIsPreviewActive((pre) => !pre);
   }
   return (
+
     <>
-      <button className={styles.toggleButton} onClick={handleToggleButtonCLick}>
-        <div className={styles.icon}>P</div>
-        <p>Preview</p>
-        {isPreviewActive && <p>A</p>}
-      </button>
+      {(width < 1204 || alwaysVisible) && (
+        <button
+          className={styles.toggleButton}
+          onClick={handleToggleButtonCLick}
+        >
+          <div className={styles.icon}>P</div>
+          <p>Preview</p>
+          {isPreviewActive && <p>A</p>}
+        </button>
+      )}
+
       {isPreviewActive && (
         <div className={styles.popUpCOntainer}>
           <div className={styles.treePreviewComponentContainer}>
-            <TreePreview treeUID={treeUID}/>
+            <TreePreview treeUID={treeUID} />
           </div>
         </div>
       )}
-      {/* <Toaster /> */}
     </>
   );
 }

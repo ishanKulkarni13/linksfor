@@ -7,53 +7,31 @@ import { useLocalstorage } from "@/hooks/localStorage";
 import { useEffect, useRef, useState } from "react";
 import { avaibleTreeThemes } from "@/constants";
 import Image from "next/image";
+import useUpdateTreeProfile from "@/hooks/useUpdateTreeProfile";
 
 export default function EditTreeTheme({ treeUID, treeProfile }) {
   const { push } = useRouter();
   const { removeItem, getItem } = useLocalstorage("selectedTree");
+  const { updateTreeProfile } = useUpdateTreeProfile(treeUID);
   const formRef = useRef(null);
   const [selectedTreeThemeID, setSelectedTreeThemeID] = useState(treeProfile.theme.selectedTheme.themeID);
 
-  const handleInputChange = (e) => {
-    // setSelectedTreeThemeID()
-    // const formData = new FormData(formRef.current);
-    // const selectedTheme = formData.get("themes");
-    // toast(selectedTheme);
+  const handleInputChange = async (e) => {
     console.log(e.target.id);
     setSelectedTreeThemeID(e.target.id)
+
+    const { response, error } = await updateTreeProfile({ selectedThemeID: e.target.id });
+    if (response) {
+      toast.success(`updated theme to ${e.target.id}`)
+    }
+    if (error) {
+      toast.error(error.message)
+      setSelectedTreeThemeID(selectedTreeThemeID)
+    }
+
   };
 
-  const updateTitleAndBio = async (title, bio) => {
-    if (!treeUID) {
-      console.log(treeUID);
-      return toast.error("didn't got treeUID");
-    }
-    try {
-      const res = await axios.post(
-        `/api/tree/edit/profile/${treeUID}`,
-        { treeName: title, treeBio: bio },
-        { withCredentials: true }
-      );
-      let data = res.data.treeProfile;
-    } catch (error) {
-      console.log(error);
-      if (error.response) {
-        // if server responded
-        toast.error(error.response.data.message);
-        if (error.response.status === 404 || error.response.status === 400) {
-          console.log(error.response);
-          //   removeItem();
-          //   return push("/admin/selectTree?removeSelectedTree");
-        }
-      } else if (error.request) {
-        //req was made but go no response
-        toast.error(`error occured`);
-      } else {
-        toast.error(`some error occured: ${error.message}`);
-      }
-    }
-  };
-
+  
   const onSubmit = async (e) => {
     e.preventDefault();
   };

@@ -21,7 +21,7 @@
 
 .selected{
     box-shadow: 0px 0px 2px white;
-    background-color: var(--backgroundecondary);
+    background-color: var(--color-surface-1);
 }
 
 .iconContainer{

@@ -1,19 +1,45 @@
 "use client";
-import styles from "./treeProfileEditor.module.css";
-import { useEffect, useRef, useState } from "react";
-import { Toaster, toast } from "sonner";
-import { backendBaseURL } from "@/constants";
-import axios from "axios";
-import { useLocalstorage } from "@/hooks/localStorage";
 import { useTreeUID } from "@/hooks/treeUID";
-import { useRouter } from "next/navigation";
-import EditTreeTitleAndBio from "./editTreeTitleAndBio/editTreeTitleAndBio";
-import TreePreviewToggleButton from "../treePreview/treePreviewToggleButton/treePreviewToggleButton";
-import EditTreePicture from "./editTreePicture/editTreePicture";
+import styles from "./treeAppearanceEditor.module.css";
+import dynamic from "next/dynamic";
 import useWindowResize from "@/hooks/useWindowSize";
-import EditTreeTheme from "./editTreeTheme/editTreeTheme";
+import { useLocalstorage } from "@/hooks/localStorage";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import axios from "axios";
+import TreePreviewToggleButton from "../treePreview/treePreviewToggleButton/treePreviewToggleButton";
 
-export default function TreeProfileEditor() {
+const DynamicTreeProfileEditor = dynamic(
+  () =>
+    import(
+      "@/components/treeAppearanceEditor/treeProfileEditor/treeProfileEditor"
+    ),
+  {
+    loading: () => (
+      <div className={styles.dynamicContainer}>
+        {" "}
+        <p>Loading Profile Editor</p>{" "}
+      </div>
+    ),
+    ssr: false,
+  }
+);
+
+const DynamicTreeThemeEditor = dynamic(
+  () => import("@/components/treeAppearanceEditor/editTreeTheme/editTreeTheme"),
+  {
+    loading: () => (
+      <div className={styles.dynamicContainer}>
+        {" "}
+        <p>Loading theme Editor</p>{" "}
+      </div>
+    ),
+    ssr: false,
+  }
+);
+
+export default function TreeAppearanceEditor() {
   const [treeProfile, setTreeProfile] = useState(null);
   const { push } = useRouter();
   const { removeItem } = useLocalstorage("selectedTree");
@@ -60,33 +86,23 @@ export default function TreeProfileEditor() {
     <>
       {treeProfile ? (
         <>
-          <p className={styles.title}>Profile</p>
-          <div className={styles.container}>
-            <div className={styles.editTreePictureContainer}>
-              <EditTreePicture
-                treeProfile={treeProfile}
-                setTreeProfile={setTreeProfile}
-                treeUID={treeUID}
-              />
+          {" "}
+          <main className={styles.container}>
+            <div className={styles.profileEditorContainer}>
+              <DynamicTreeProfileEditor />
             </div>
-
-            <div className={styles.profileTitleAndBioContainer}>
-              <EditTreeTitleAndBio
-                treeProfile={treeProfile}
-                treeUID={treeUID}
-              />
+            <div className={styles.profileThemeEditorContainer}>
+              <DynamicTreeThemeEditor treeUID={treeUID} treeProfile={treeProfile} />
             </div>
-
-            <div className={styles.editTreeThemeContainer}>
-              <EditTreeTheme treeProfile={treeProfile} treeUID={treeUID} />
-            </div>
-          </div>
-          {width < 640 && <TreePreviewToggleButton treeUID={treeUID} />}
+          </main>
+          <TreePreviewToggleButton treeUID={treeUID} alwaysVisible = {true} />
         </>
       ) : (
-        <div>Loading...</div>
+        <>
+          {" "}
+          <p>Getting TreeUID</p>{" "}
+        </>
       )}
-      <Toaster richColors={true} expand={true} />
     </>
   );
 }

@@ -16,7 +16,7 @@
     width: 90vw;
     padding: 15px 15px;
     flex-direction: column;
-    background-color: var(--background);
+    background-color: var(--color-overlay);
     border: 2px solid white;
     border-radius: 25px;
     color: white;

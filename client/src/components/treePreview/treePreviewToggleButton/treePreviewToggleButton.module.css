@@ -10,10 +10,12 @@
     align-items: center;
     gap: 10px;
     z-index: 32;
-    background-color: var(--color-accent);
-    color: black;
+    background-color: var(--color-surface-floating);
+    color: var(--color-text-floating);
     font-weight: 600;
+    border: var(--border-surface-floating);
     border-radius: 50px;
+    box-shadow: var(--shadow-floating);
     padding: 15px;
 }
 
