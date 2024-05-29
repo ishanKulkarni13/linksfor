@@ -54,6 +54,11 @@
     .container {
         display: block
     }
+
+    .linksEditorContainer{
+        border-right: none;
+    }
+    
     
     .treePreviewContainer{
         display: none;

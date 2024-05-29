@@ -99,8 +99,8 @@ export default function EditTreePicture({
             styles: {
               palette: {
                 // 2
-                window: "#000000", // TOP AND BOTTOM PANEL
-                sourceBg: "000000",
+                window: "hsl(222.2, 84%, 4.9%)", // TOP AND BOTTOM PANEL
+                sourceBg: "hsl(222.2, 70%, 10%)",
                 windowBorder: "#FFFFFF", // bordre
                 tabIcon: "#FFFFFF", //logoes
                 inactiveTabIcon: "#FFFFFF",
