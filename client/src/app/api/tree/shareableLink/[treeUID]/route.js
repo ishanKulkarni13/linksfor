@@ -26,9 +26,9 @@ export const GET = async (req, { params }) => {
         }
 
         if (isTreeOwnerDefaultTree) {
-            shareableLink = `${process.env.NEXT_PUBLIC_FRONTEND_URL}/${owner.username}`
+            shareableLink = `${process.env.NEXT_PUBLIC_STATIC_FRONTEND_URL }/${owner.username}`
         } else {
-            shareableLink = `${process.env.NEXT_PUBLIC_FRONTEND_URL}/tree/${treeUID}`
+            shareableLink = `${process.env.NEXT_PUBLIC_STATIC_FRONTEND_URL }/tree/${treeUID}`
         }
 
         return NextResponse.json({ success: true, shareableLink, isTreeOwnerDefaultTree })

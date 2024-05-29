@@ -22,11 +22,11 @@ const getTreeByUsername = async (username) => {
       return { tree };
     } else {
       let responseData = await res.json();
-      console.log("error occured in getTreeByUsername", responseData);
+      console.log("error occured in getTreeByUsername 1", responseData);
       return { tree: null, success: false };
     }
   } catch (error) {
-    console.log("error catched in getTreeByUsername", error.message);
+    console.log("error catched in getTreeByUsername 2", error.message);
     return { tree: null, success: false, error: true };
   }
 };
