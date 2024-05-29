@@ -8,7 +8,7 @@ export default async function page() {
   console.log("id is ", user.id);
   return (
     <div>
-      THis is a LinktrEe CloNE
+      THis is a LinktrEe CloNE {`${process.env.NEXT_PUBLIC_FRONTEND_URL}`}
     </div>
   )
 }
