@@ -1,9 +1,9 @@
-.container{
+/* .container{
     width: inherit;
     height: inherit;
     border-radius: inherit;
     background-color: inherit;
-}
+} */
 
 .preview{
     height: inherit;
@@ -20,7 +20,8 @@
     backdrop-filter: blur(30px);
 }
 
-@media (width > 640px){
-    .container{height: 80dvh;
+/* @media (width > 640px){
+    .container{
+        height: 80dvh;
     }
-}
+} */

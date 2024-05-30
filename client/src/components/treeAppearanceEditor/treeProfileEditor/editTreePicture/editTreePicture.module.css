@@ -28,6 +28,8 @@
 
 .profileImage {
     border-radius: inherit;
+    object-fit: cover;
+    object-position: center;
     /* border: 5px solid saddlebrown; */
 }
 

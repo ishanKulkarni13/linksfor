@@ -62,6 +62,7 @@ export default function Home() {
     console.log("got values as", values);
     async function postFormData(name ,username, email, password) {
       try {
+        email = email.toLowerCase();
         username = username.toLowerCase();
         let res = await fetch(`/api/auth/regester`, {
           method: "POST",

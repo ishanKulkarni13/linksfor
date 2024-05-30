@@ -20,7 +20,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 },
                 password: {
                     label: "Password",
-                    type: "pasword"
+                    type: "password"
                 },
             },
             authorize: async (credincials) => {
@@ -34,6 +34,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     throw new CredentialsSignin("Password is not provided")
                 }
                 try {
+                    email = email.toLowerCase()
                     await connectToDB()
                     const user = await User.findOne({ email }).select('+password');
                     if (!user) {

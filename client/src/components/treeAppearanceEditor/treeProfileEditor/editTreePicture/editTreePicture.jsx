@@ -63,6 +63,8 @@ export default function EditTreePicture({
         {treeProfile.treePicture.URL && (
           <Image
           fill={true}
+          // objectFit="cover"
+          // objectPosition="centre"
           className={styles.profileImage}
           src={`${treeProfile.treePicture.URL}`}
           alt="user tree image"
@@ -85,7 +87,7 @@ export default function EditTreePicture({
           options={{
             // sources: ["local", "url", "unsplash"],
             sources: ["local", "unsplash"],
-            // uploadPreset: uploadPreset,
+            uploadPreset: 'links_profile_photo',
             cropping: true, //add a cropping step
             multiple: false, //restrict upload to a single file
             // folder: "user_images", //upload files to the specified folder

@@ -58,6 +58,8 @@ export default function EditTreeTheme({ treeUID, treeProfile }) {
                       <div className={`${styles.themeDisplayPicture}`}>
                         <Image
                           fill={true}
+                          objectFit="cover"
+                          objectPosition="centre"
                           src={`${theme.displayPicture}`}
                           alt={`${theme.name}-display-picture`}
                         />

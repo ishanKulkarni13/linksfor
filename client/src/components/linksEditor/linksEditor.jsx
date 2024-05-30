@@ -246,8 +246,7 @@ export default function LinksEditor() {
             <div className={styles.linksEditorContainer}>
               <div className={styles.addLinkAndHeaderContainer}>
                 <AddLinkButton setLinks={setLinks} treeUID={treeUID} />
-                {/* <AddLinkButton /> */}
-                <AddHeaderButton />
+                {/* <AddHeaderButton /> */}
               </div>
 
               <Reorder.Group
@@ -268,7 +267,8 @@ export default function LinksEditor() {
             </div>
 
             <div className={styles.treePreviewContainer}>
-              <TreePreview treeUID={treeUID} />
+            <div className={styles.treePreview}> <TreePreview treeUID={treeUID} /></div>
+             
             </div>
           </div>
           <TreePreviewToggleButton treeUID={treeUID} />

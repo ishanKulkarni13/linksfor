@@ -4,10 +4,10 @@ import { faArrowsRotate, faShareFromSquare } from "@fortawesome/free-solid-svg-i
 export default function TreePreview({refresh, treeUID}) {
   console.log(`treeUID in treePreview is `,treeUID);
   return (
-    <div className={styles.container} >
+    // <div className={styles.container} >
       <div className={styles.preview} >
         <iframe className={styles.iframe}  src={`/tree/${treeUID}`} title="tree Preview" scrolling="yes" ></iframe>
       </div>
-    </div>
+    // </div>
   )
 }

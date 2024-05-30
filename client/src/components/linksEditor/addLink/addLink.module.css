@@ -37,7 +37,7 @@
 
 
 .addLinkButton {
-    width: 10rem;
+    width: 100%;
     padding: 10px;
     display: flex;
     justify-content: center;
