@@ -27,6 +27,15 @@
     width: 50px;
     border-radius: 50%;
     overflow: hidden;
+    background-color: var(--color-surface-2);
+}
+
+.selectedTreeImageContainer > span{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
 }
 
 .selectedTreeTextContainer {
@@ -50,7 +59,7 @@
     justify-content: center;
     align-items: center;
     background-color: var(--primary);
-    color: black;
+    color: var(--color-text-primary);
     border-radius: 50px;
     padding: 5px 10px;
     height: 45px;

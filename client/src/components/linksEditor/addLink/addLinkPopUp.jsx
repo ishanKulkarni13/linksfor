@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import GoogleButton from "@/components/buttons/google/googleButton";
 import {
   Form,
   FormControl,
@@ -16,16 +15,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import {
-  SelectValue,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-  Select,
-} from "@/components/ui/select";
 import { Toaster, toast } from "sonner";
-import { backendBaseURL } from "@/constants";
+import { useState } from "react";
 
 const formSchema = z
   .object({
@@ -44,7 +35,7 @@ const formSchema = z
 
 export default function AddLinkPopUp({ close,setLinks, treeUID }) {
   const { push } = useRouter();
-
+  const [isLoading, setIsLoading]= useState(false)
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -57,6 +48,7 @@ export default function AddLinkPopUp({ close,setLinks, treeUID }) {
   const handleSubmit = async (values) => {
     const handelAddLink = async(URL,title)=>{
       try {
+        setIsLoading(true)
         console.log('posing')
         let res = await fetch(`/api/tree/edit/add/link/${treeUID}`, {
           method: "POST",
@@ -71,15 +63,19 @@ export default function AddLinkPopUp({ close,setLinks, treeUID }) {
             "Access-Control-Allow-Credentials": true,
           },
         });
+        setIsLoading(false)
         if (res.ok) {
-          let responseData = await res.json();
+        let responseData = await res.json();
           return { success: true, error: false, response: responseData };
         } else {
           let responseData = await res.json();
           return { success: false, error: false, response: responseData };
         }
 
+
       } catch (error) {
+
+        setIsLoading(false)
         toast.error(error.message)
         return { success: false, error: error, response: error };
       }
@@ -169,8 +165,8 @@ export default function AddLinkPopUp({ close,setLinks, treeUID }) {
                   }}
                 />
                 <button type="submit" className={styles.doneButton}>
-                  <FontAwesomeIcon className={styles.doneIcon} icon={faCheck} />{" "}
-                  <span className={styles.doneText}>Done</span>
+                  {!isLoading && <FontAwesomeIcon className={styles.doneIcon} icon={faCheck} />}
+                  <span className={styles.doneText}>{ !isLoading?(<>Done</>):(<>Loading...</>) }</span>
                 </button>
               </form>
             </Form>

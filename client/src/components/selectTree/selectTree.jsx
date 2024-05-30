@@ -77,6 +77,8 @@ export default function SelectTree() {
           >
             <div className={styles.selectedTreeProfileContainer}>
               <div className={styles.selectedTreeImageContainer}>
+
+              <span>NA</span>
                 {selectedTreeProfile.treePicture.URL && (
                   <Image
                   fill={true}

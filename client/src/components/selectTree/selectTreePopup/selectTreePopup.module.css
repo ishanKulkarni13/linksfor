@@ -41,6 +41,16 @@
     width: 50px;
     border-radius: 50%;
     overflow: hidden;
+    background-color: var(--color-surface-2);
+    text-align: center;
+}
+
+.treeImageContainer  > span{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
 }
 
 .treeTextContainer {

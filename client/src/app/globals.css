@@ -83,8 +83,10 @@
 
   /* Text colors */
   --color-text-primary: hsl(210, 40%, 98%);
+  --color-text-contrast-primary: black;
   --color-text-secondary: hsl(210, 40%, 80%);
   --color-text-floating: white
+  
   --color-text-muted: hsl(215, 20.2%, 65.1%);
 
   /* Borders */

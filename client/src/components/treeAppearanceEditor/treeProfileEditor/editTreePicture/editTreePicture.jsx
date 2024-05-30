@@ -60,6 +60,7 @@ export default function EditTreePicture({
   return (
     <div className={styles.profileImageEditContainer}>
       <div className={styles.profileImageContainer}>
+        <span>NA</span>
         {treeProfile.treePicture.URL && (
           <Image
           fill={true}

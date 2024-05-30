@@ -74,6 +74,7 @@ export default function SelectTreePopup({
                     >
                       <div className={styles.treeProfileContainer}>
                         <div className={styles.treeImageContainer}>
+                          <span>NA</span>
                           {tree.treePicture.URL && (
                             <Image
                               fill={true}

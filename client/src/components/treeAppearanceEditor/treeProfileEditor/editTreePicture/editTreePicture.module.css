@@ -24,7 +24,17 @@
     height: 75px;
     width: 75px;
     border-radius: 50px;
+    background-color: var(--color-surface-2);
 }
+
+.profileImageContainer > span{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
 
 .profileImage {
     border-radius: inherit;

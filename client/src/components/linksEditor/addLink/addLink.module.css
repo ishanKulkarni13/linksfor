@@ -16,10 +16,10 @@
     width: 90vw;
     padding: 15px 10px;
     flex-direction: column;
-    background-color: var(--backgroundSecondary);
-    border: 2px solid white;
+    background-color: var(--color-background);
+    border: var(--border-surface-1);
     border-radius: 25px;
-    color: white;
+    color: var(--color-text-primary);
 
 }
 
@@ -112,14 +112,19 @@
     width: 80vw;
     font-size: 20px;
     font-weight: 500;
+    background-color: var( --color-surface-1);
 }
 
 .doneButton {
     font-size: 20px;
     height: 50px;
-    background-color: var(--primary);
-    color: black;
+    background-color: var(--color-primary);
+    color: var(--color-text-contrast-primary);
     font-weight: 600;
     border-radius: 50px;
     width: 125px;
+}
+
+.doneIcon{
+    margin-right: 5px;
 }
