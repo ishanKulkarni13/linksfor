@@ -15,7 +15,6 @@ const getTreeByUsername = async (username) => {
         },
       }
     );
-    console.log(res);
     if (res.ok) {
       let responseData = await res.json();
       let tree = responseData.tree;

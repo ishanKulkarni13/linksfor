@@ -1,10 +1,10 @@
 import Image from "next/image";
-import styles from "./linkAirBlack.module.css";
+import styles from "./link.module.css";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 
-export default function LinkAirblack({ link }) {
+export default function LinkGreenFog({ link }) {
   return (
     <Link className={styles.container} href={link.URL} >
       <div className={styles.thumbnailContainer}>

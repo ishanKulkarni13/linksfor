@@ -55,8 +55,9 @@ export default function EditTreeTheme({ treeUID, treeProfile }) {
                 <label className={`${styles.themeLable}`} htmlFor={theme.id}>
                   <div className={`${styles.theme}`}>
                     <div className={`${styles.themeDisplayPictureContainer}`}>
-                      <div className={`${styles.themeDisplayPicture}`}>
+                      <div className={`${styles.themeDisplayPictureWrapper}`}>
                         <Image
+                          className={`${styles.themeDisplayPicture}`}
                           fill={true}
                           src={`${theme.displayPicture}`}
                           alt={`${theme.name}-display-picture`}

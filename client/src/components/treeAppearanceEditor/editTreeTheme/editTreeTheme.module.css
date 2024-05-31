@@ -41,7 +41,7 @@
 }
 
 .themeDisplayPictureContainer {
-    height: 250px;
+    height: 300px;
     width: 200px;
     /* padding: 10px;
     border: 3px solid gray; */
@@ -54,7 +54,7 @@
 }
 
 
-.themeDisplayPicture {
+.themeDisplayPictureWrapper {
     position: relative;
     height: 100%;
     width: auto;
@@ -62,4 +62,9 @@
     border: var(--border-surface-3);
     background-color: var(--color-surface-3);
     border-radius: 15px;
+}
+
+.themeDisplayPicture{
+    object-fit: cover;
+    object-position: top;
 }

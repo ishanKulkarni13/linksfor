@@ -1,0 +1,39 @@
+.profileContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap:15px;
+    height: inherit;
+    width: inherit;
+    color: var(--color-text-profile);
+}
+
+.profilePictureContainer{
+    position: relative;
+    min-height: 100px;
+    min-width: 100px;
+}
+
+.profilePicture{
+    border-radius: 50%;
+    object-fit:cover;
+    object-position: center;
+}
+
+.profileTextContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.nameContainer{
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.bioContainer{
+    font-size: 15px;
+    font-weight: 600;
+}

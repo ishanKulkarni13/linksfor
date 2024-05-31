@@ -22,29 +22,29 @@ export const navLinks = [
 
 export const avaibleTreeThemes = [
     {
-        displayName: 'material UI',
+        displayName: 'Air-Black',
         id: 10000,
-        name: "material-UI",
-        displayPicture: "https://res.cloudinary.com/kakashib2k/image/upload/v1716803475/o9gen6ybptudrfib8teh.jpg"
+        name: "airBlack",
+        displayPicture: "https://res.cloudinary.com/kakashib2k/image/upload/v1717148505/LinksFor/important/themes/pictures/nvqkazndfccqksyztfkm.jpg"
     },
 
     {
-        displayName: 'black sky',
+        displayName: 'Sky mint',
         id: 911111,
-        name: 'black sky',
-        displayPicture: "https://res.cloudinary.com/kakashib2k/image/upload/v1716130088/lo7konunpeisptjalfkb.jpg"
+        name: 'skyMint',
+        displayPicture: "https://res.cloudinary.com/kakashib2k/image/upload/v1717148505/LinksFor/important/themes/pictures/m14rkvkez48m8mlpzb6o.jpg"
 
     },
     {
-        displayName: 'white sky',
+        displayName: 'GreenFog',
         id: 921111,
-        name: 'white sky',
-        displayPicture: "https://res.cloudinary.com/kakashib2k/image/upload/v1716193952/jj8kquluellpfred1uaz.jpg"
+        name: 'greenFog',
+        displayPicture: "https://res.cloudinary.com/kakashib2k/image/upload/v1717148505/LinksFor/important/themes/pictures/ftaygcoqrryrknotcuck.jpg"
     },
     {
-        displayName: 'milk sky',
+        displayName: 'spray',
         id: 931111,
-        name: 'milk sky',
-        displayPicture: "https://res.cloudinary.com/kakashib2k/image/upload/v1716194512/ahwr1wiuyskd76odknlt.jpg"
+        name: 'spray',
+        displayPicture: "https://res.cloudinary.com/kakashib2k/image/upload/v1717148506/LinksFor/important/themes/pictures/eltih4qrwjvfr3mz66qs.jpg"
     },
 ]
