@@ -14,22 +14,21 @@ export default function Tree({ tree }) {
 
       {tree.theme.selectedTheme.themeID === 911111 && (
         <main>
-          <TreeThemeSpray tree={tree} />
+          <TreeThemeSkymint tree={tree} />
         </main>
       )}
 
       {tree.theme.selectedTheme.themeID === 921111 && (
         <main>
-          <TreeThemeSkymint tree={tree} />
-        </main>
-      )}
-
-{tree.theme.selectedTheme.themeID === 931111 && (
-        <main>
           <TreeThemeGreenFog tree={tree} />
         </main>
       )}
-    </>
 
+      {tree.theme.selectedTheme.themeID === 931111 && (
+        <main>
+          <TreeThemeSpray tree={tree} />
+        </main>
+      )}
+    </>
   );
 }
