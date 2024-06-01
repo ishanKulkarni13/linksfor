@@ -1,3 +1,13 @@
+.headerContainer{
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--color-text-header);
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+
+
 .container {
     display: flex;
     justify-content: space-between;

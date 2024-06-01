@@ -1,5 +1,5 @@
 import { Reorder, useDragControls } from "framer-motion";
-import {backendBaseURL} from "@/constants/index"
+import { backendBaseURL } from "@/constants/index";
 import styles from "./link.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,7 +10,7 @@ import {
 import { useState } from "react";
 import { toast } from "sonner";
 
-export default function Link({ link, deleteLink , treeUID}) {
+export default function Link({ link, deleteLink, treeUID }) {
   const [linkData, setLinkData] = useState(link);
   const controls = useDragControls();
 
@@ -18,28 +18,30 @@ export default function Link({ link, deleteLink , treeUID}) {
     deleteLink(link.UID);
   };
 
-  const handleInputChange = (e) => setLinkData(prev => ({...prev, [e.target.name]: e.target.value}))
+  const handleInputChange = (e) =>
+    setLinkData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
-  const handleSubmit = async(event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(linkData);
-    await sendLinkTitleAndURLToBackend()
-  }
+    await sendLinkTitleAndURLToBackend();
+  };
 
-  const sendLinkTitleAndURLToBackend = async()=>{
+  const sendLinkTitleAndURLToBackend = async () => {
     toast.info(`sendLinkTitleAndURLToBackend function is running`);
-    let {title, URL, UID} = linkData;
+    let { title, URL, UID } = linkData;
     try {
-      const res = await fetch(
-        `/api/tree/edit/link/titleAndURL/${treeUID}`,
-        {
+      let res
+      if(link.type != `header`){
+        // for link
+         res = await fetch(`/api/tree/edit/link/titleAndURL/${treeUID}`, {
           method: "POST",
           cache: "no-store",
           body: JSON.stringify({
             treeUID,
             linkUID: UID,
             title,
-            URL
+            URL,
           }),
           credentials: "include",
           headers: {
@@ -47,22 +49,42 @@ export default function Link({ link, deleteLink , treeUID}) {
             "Content-Type": "application/json",
             "Access-Control-Allow-Credentials": true,
           },
-        }
-      );
+        });
+      } else{
+        // for header 
+        res = await fetch(`/api/tree/edit/header/${treeUID}`, {
+          method: "POST",
+          cache: "no-store",
+          body: JSON.stringify({
+            treeUID,
+            linkUID: UID,
+            title,
+            // URL,
+          }),
+          credentials: "include",
+          headers: {
+            Accept: "applications/json",
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Credentials": true,
+          },
+        });
+      }
 
       if (res.ok) {
         const responseData = await res.json();
-        console.log('responce from sending Title and Input to DB', responseData);
+        console.log(
+          "responce from DB",
+          responseData
+        );
       } else {
         const responseData = await res.json();
         toast.error(responseData.message);
       }
     } catch (error) {
-      console.error("Error in sending Title and Input to DB", error);
-      toast.error("Error in sending Title and Input to DB");
+      console.error("Error in sending header title to DB", error);
+      toast.error("Error in sending header tltle to DB");
     }
-  }
-
+  };
 
   return (
     <>
@@ -91,18 +113,26 @@ export default function Link({ link, deleteLink , treeUID}) {
                   value={linkData.title}
                   onChange={handleInputChange}
                 />
-                <button className={styles.submitButton} type="submit" ><FontAwesomeIcon icon={faCheck} /></button>
+                <button className={styles.submitButton} type="submit">
+                  <FontAwesomeIcon icon={faCheck} />
+                </button>
               </div>
-              <div className={styles.URLContainer}>
-                <input
-                  className={styles.URLInput}
-                  type="text"
-                  name="URL"
-                  value={linkData.URL}
-                  onChange={handleInputChange}
-                />
-                <button className={styles.submitButton} type="submit" ><FontAwesomeIcon icon={faCheck}/></button>
-              </div>
+
+              {link.type != `header` && (
+                <div className={styles.URLContainer}>
+                  <input
+                    className={styles.URLInput}
+                    type="text"
+                    name="URL"
+                    value={linkData.URL}
+                    onChange={handleInputChange}
+                  />
+                  <button className={styles.submitButton} type="submit">
+                    <FontAwesomeIcon icon={faCheck} />
+                  </button>
+                </div>
+              )}
+
               {/* <div className={styles.OtherOptionsContainer}>
                 <span>A</span>
                 <span>B</span>

@@ -5,8 +5,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 
 export default function LinkAirblack({ link }) {
-  return (
-    <Link className={styles.container} href={link.URL} >
+  if (link.type != `header`){
+    return (
+      <Link className={styles.container} href={link.URL } >
       <div className={styles.thumbnailContainer}>
         {/* {link.thumbnail.URL && (
           <Image
@@ -30,5 +31,14 @@ export default function LinkAirblack({ link }) {
       {/* <FontAwesomeIcon icon={faEllipsisVertical} className={styles.optionsIcon}/> */}
       </button>
     </Link>
-  );
+    );
+  
+  } else {
+    return (
+      <div className={styles.headerContainer}>
+        <p>{link.title}</p>
+      </div>
+    )
+  }
 }
+

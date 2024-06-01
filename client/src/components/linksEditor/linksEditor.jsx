@@ -5,8 +5,7 @@ import { Reorder, useDragControls } from "framer-motion";
 import { useEffect, useState } from "react";
 import Link from "@/components/linksEditor/link/link";
 import { Toaster, toast } from "sonner";
-import AddLinkButton from "./addLink/addLinkButton";
-import AddHeaderButton from "./addHeader/addHeaderButton";
+import AddButton from "./addLink/addLinkButton";
 import TreePreview from "../treePreview/treePreview";
 import TreePreviewToggleButton from "../treePreview/treePreviewToggleButton/treePreviewToggleButton";
 import { useDebounce } from "@/hooks/debounce";
@@ -245,8 +244,8 @@ export default function LinksEditor() {
           <div className={styles.container}>
             <div className={styles.linksEditorContainer}>
               <div className={styles.addLinkAndHeaderContainer}>
-                <AddLinkButton setLinks={setLinks} treeUID={treeUID} />
-                {/* <AddHeaderButton /> */}
+                <AddButton type='link'  setLinks={setLinks} treeUID={treeUID} />
+                <AddButton type='header' setLinks={setLinks} treeUID={treeUID} />
               </div>
 
               <Reorder.Group
@@ -271,7 +270,7 @@ export default function LinksEditor() {
              
             </div>
           </div>
-          <TreePreviewToggleButton treeUID={treeUID} />
+          <TreePreviewToggleButton treeUID={treeUID}   alwaysVisible />
           <Toaster position="bottom" expand={true} richColors />
         </>
       )}

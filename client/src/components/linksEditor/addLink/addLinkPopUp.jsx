@@ -18,43 +18,74 @@ import { Input } from "@/components/ui/input";
 import { Toaster, toast } from "sonner";
 import { useState } from "react";
 
-const formSchema = z
+const AddLinkFormSchema = z
   .object({
-    URL: z.string().min(1),
-    title: z.string().min(1),
+    URL: z.string().min(1, { message: `Plesae entre a URL` }), // tempppppp
+    title: z
+      .string()
+      .min(1, { message: `Title should be if at least 1 character long` }),
   })
   .refine(
     (data) => {
       return data.URL != data.title;
     },
     {
-      message: "The URL cant be same as the title, lol",
+      message: "Invalid URL",
       path: ["URL"],
     }
   );
 
-export default function AddLinkPopUp({ close,setLinks, treeUID }) {
+  const AddHeaderFormSchema = z
+  .object({
+    // URL: z.string().min(1, { message: `Plesae entre a URL` }), // tempppppp
+    title: z
+      .string()
+      .min(1, { message: `Header title should be if at least 1 character long` }),
+  })
+  // .refine(
+  //   (data) => {
+  //     return data.title != data.title;
+  //   },
+  //   {
+  //     message: "Invalid URL",
+  //     path: ["URL"],
+  //   }
+  // );
+
+export default function AddPopUp({ close, setLinks, treeUID, type }) {
   const { push } = useRouter();
-  const [isLoading, setIsLoading]= useState(false)
-  const form = useForm({
-    resolver: zodResolver(formSchema),
+  const [isLoading, setIsLoading] = useState(false);
+
+  const AddLinkForm = useForm({
+    resolver: zodResolver(AddLinkFormSchema),
     defaultValues: {
       URL: "",
       title: "",
     },
   });
 
+  const AddHeaderForm = useForm({
+    resolver: zodResolver(AddHeaderFormSchema),
+    defaultValues: {
+      // URL: "",
+      title: "",
+    },
+  });
+
   // handel form submit
   const handleSubmit = async (values) => {
-    const handelAddLink = async(URL,title)=>{
+    toast.info(`submitted ${type}`);
+    const handelAdd = async (title, URL ) => {
       try {
-        setIsLoading(true)
-        console.log('posing')
-        let res = await fetch(`/api/tree/edit/add/link/${treeUID}`, {
+        setIsLoading(true);
+        console.log("posing");
+        let res = await fetch(`/api/tree/edit/add/${type}/${treeUID}`, {
           method: "POST",
           cache: "no-store",
           body: JSON.stringify({
-            URL,title
+            URL,
+            title,
+            type,
           }),
           credentials: "include",
           headers: {
@@ -63,49 +94,46 @@ export default function AddLinkPopUp({ close,setLinks, treeUID }) {
             "Access-Control-Allow-Credentials": true,
           },
         });
-        setIsLoading(false)
+        setIsLoading(false);
         if (res.ok) {
-        let responseData = await res.json();
+          let responseData = await res.json();
           return { success: true, error: false, response: responseData };
         } else {
           let responseData = await res.json();
           return { success: false, error: false, response: responseData };
         }
-
-
       } catch (error) {
-
-        setIsLoading(false)
-        toast.error(error.message)
+        setIsLoading(false);
+        toast.error(error.message);
         return { success: false, error: error, response: error };
       }
-    }
+    };
+
     //calling function and gettting data
-    let { success, response, error } = await handelAddLink(
-      values.URL,
-      values.title
+    let { success, response, error } = await handelAdd(
+      values.title,
+      (type != 'header') && values.URL,
     );
     if (success) {
-      console.log('Added link');
-      setLinks(response.links)
-      close()
-    } else{
+      console.log(`Added ${type}`);
+      setLinks(response.links);
+      close();
+    } else {
       if (error) {
         // if catched error in fetch
         console.log("Some error occured", error);
-      } else{
+      } else {
         //no error in fetch and success is false(from server)
-        toast.error(`Link not added: ${response.message}`)
-        console.log("Link not added", response.message );
+        toast.error(`${type} not added: ${response.message}`);
+        console.log(`${type} not added`, response.message);
       }
     }
-    
   };
 
   return (
     <>
-    <div className={`${styles.blur}` } ></div>
-      <div className={`${styles.container}` }>
+      <div className={`${styles.blur}`}></div>
+      <div className={`${styles.container}`}>
         <div className={styles.popUpContainer}>
           <div className={styles.top}>
             <div className={styles.popUpTitle}>
@@ -117,66 +145,137 @@ export default function AddLinkPopUp({ close,setLinks, treeUID }) {
           </div>
 
           <div className={styles.popUpFormContainer}>
-            {/* <div className={` ${styles.formContainer}`}> */}
-            {/* <div className={`${styles.regesterFormContainer}`}> */}
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(handleSubmit)}
-                className={styles.form}
-              >
-                <FormField
-                  control={form.control}
-                  name="URL"
-                  render={({ field }) => {
-                    return (
-                      <FormItem className={styles.inputContainer}>
-                        <FormLabel className={styles.lable}>URL</FormLabel>
-                        <FormControl>
-                          <Input
-                            className={styles.URLInput}
-                            placeholder="URL"
-                            type="text"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    );
-                  }}
-                />
-                <FormField
-                  control={form.control}
-                  name="title"
-                  render={({ field }) => {
-                    return (
-                      <FormItem className={styles.inputContainer}>
-                        <FormLabel className={styles.lable}>Title</FormLabel>
-                        <FormControl>
-                          <Input
-                            className={styles.titleInput}
-                            placeholder="Title"
-                            type="text"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    );
-                  }}
-                />
-                <button type="submit" className={styles.doneButton}>
-                  {!isLoading && <FontAwesomeIcon className={styles.doneIcon} icon={faCheck} />}
-                  <span className={styles.doneText}>{ !isLoading?(<>Done</>):(<>Loading...</>) }</span>
-                </button>
-              </form>
-            </Form>
-            {/* </div> */}
+            {type == `header` ? (
+              <>
+                <Form {...AddHeaderForm}>
+                  <form
+                    onSubmit={AddHeaderForm.handleSubmit(handleSubmit)}
+                    className={styles.form}
+                  >
+                    {/* <FormField
+                      control={AddHeaderForm.control}
+                      name="URL"
+                      render={({ field }) => {
+                        return (
+                          <FormItem className={styles.inputContainer}>
+                            <FormLabel className={styles.lable}>URL</FormLabel>
+                            <FormControl>
+                              <Input
+                                className={styles.URLInput}
+                                placeholder="URL"
+                                type="text"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        );
+                      }}
+                    /> */}
 
-            {/* </div> */}
+                    <FormField
+                      control={AddHeaderForm.control}
+                      name="title"
+                      render={({ field }) => {
+                        return (
+                          <FormItem className={styles.inputContainer}>
+                            <FormLabel className={styles.lable}>
+                              Title
+                            </FormLabel>
+                            <FormControl>
+                              <Input
+                                className={styles.titleInput}
+                                placeholder="Title"
+                                type="text"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        );
+                      }}
+                    />
+                    <button type="submit" className={styles.doneButton}>
+                      {!isLoading && (
+                        <FontAwesomeIcon
+                          className={styles.doneIcon}
+                          icon={faCheck}
+                        />
+                      )}
+                      <span className={styles.doneText}>
+                        {!isLoading ? <>Done</> : <>Loading...</>}
+                      </span>
+                    </button>
+                  </form>
+                </Form>
+              </>
+            ) : (
+              <>
+                <Form {...AddLinkForm}>
+                  <form
+                    onSubmit={AddLinkForm.handleSubmit(handleSubmit)}
+                    className={styles.form}
+                  >
+                    <FormField
+                      control={AddLinkForm.control}
+                      name="URL"
+                      render={({ field }) => {
+                        return (
+                          <FormItem className={styles.inputContainer}>
+                            <FormLabel className={styles.lable}>URL</FormLabel>
+                            <FormControl>
+                              <Input
+                                className={styles.URLInput}
+                                placeholder="URL"
+                                type="text"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        );
+                      }}
+                    />
+                    <FormField
+                      control={AddLinkForm.control}
+                      name="title"
+                      render={({ field }) => {
+                        return (
+                          <FormItem className={styles.inputContainer}>
+                            <FormLabel className={styles.lable}>
+                              Title
+                            </FormLabel>
+                            <FormControl>
+                              <Input
+                                className={styles.titleInput}
+                                placeholder="Title"
+                                type="text"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        );
+                      }}
+                    />
+                    <button type="submit" className={styles.doneButton}>
+                      {!isLoading && (
+                        <FontAwesomeIcon
+                          className={styles.doneIcon}
+                          icon={faCheck}
+                        />
+                      )}
+                      <span className={styles.doneText}>
+                        {!isLoading ? <>Done</> : <>Loading...</>}
+                      </span>
+                    </button>
+                  </form>
+                </Form>
+              </>
+            )}
           </div>
         </div>
       </div>
-      <Toaster richColors />
     </>
   );
 }

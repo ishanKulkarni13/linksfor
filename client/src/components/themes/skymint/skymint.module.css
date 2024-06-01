@@ -12,6 +12,7 @@
   
     /* Text colors */
     --color-text-link: white;
+    --color-text-header: black;
     --color-text-profile: black; 
     /* Borders */
     --color-border: hsl(217.2, 32.6%, 17.5%);
