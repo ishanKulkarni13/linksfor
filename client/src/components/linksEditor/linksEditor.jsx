@@ -18,23 +18,7 @@ export default function LinksEditor() {
   const { setItem, getItem, removeItem } = useLocalstorage(`selectedTree`);
   let treeUID = useTreeUID();
   const [areLinksFetched, setAreLinksFetched] = useState();
-  const [links, setLinks] = useState([
-    // {
-    //   title: "Loading",
-    //   URL: "loading",
-    //   UID: "1111111",
-    // },
-    // {
-    //   title: "Loading",
-    //   URL: "loading",
-    //   UID: "2222222222",
-    // },
-    // {
-    //   title: "Loading",
-    //   URL: "loading",
-    //   UID: "33333333",
-    // },
-  ]);
+  const [links, setLinks] = useState([]);
   const [reorderedLinksUID, setReorderedLinksUID] = useState();
   const debouncelinksUIDOrder = useDebounce(reorderedLinksUID, 3000);
 
@@ -153,23 +137,20 @@ export default function LinksEditor() {
   const deleteLink = async (UID) => {
     try {
       console.log("posing");
-      let res = await fetch(
-        `/api/tree/edit/delete/link/${UID}`,
-        {
-          method: "POST",
-          cache: "no-store",
-          body: JSON.stringify({
-            linkUID: UID,
-            treeUID,
-          }),
-          credentials: "include",
-          headers: {
-            Accept: "applications/json",
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Credentials": true,
-          },
-        }
-      );
+      let res = await fetch(`/api/tree/edit/delete/link/${UID}`, {
+        method: "POST",
+        cache: "no-store",
+        body: JSON.stringify({
+          linkUID: UID,
+          treeUID,
+        }),
+        credentials: "include",
+        headers: {
+          Accept: "applications/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      });
 
       if (res.ok) {
         let responseData = await res.json();
@@ -193,23 +174,20 @@ export default function LinksEditor() {
   async function sendLinksUIDToBackend(linksUIDArray) {
     toast.info(`sendLinksUIDToBackend function is running`);
     try {
-      const res = await fetch(
-        `/api/tree/edit/links-order/${treeUID}`,
-        {
-          method: "POST",
-          cache: "no-store",
-          body: JSON.stringify({
-            treeUID,
-            linksUIDArray,
-          }),
-          credentials: "include",
-          headers: {
-            Accept: "applications/json",
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Credentials": true,
-          },
-        }
-      );
+      const res = await fetch(`/api/tree/edit/links-order/${treeUID}`, {
+        method: "POST",
+        cache: "no-store",
+        body: JSON.stringify({
+          treeUID,
+          linksUIDArray,
+        }),
+        credentials: "include",
+        headers: {
+          Accept: "applications/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      });
 
       if (res.ok) {
         const responseData = await res.json();
@@ -238,39 +216,63 @@ export default function LinksEditor() {
   return (
     <>
       {!treeUID ? (
-       <div className={styles.loadingContainer} ><p>Loading...</p></div>
+        <div className={styles.loadingContainer}>
+          <p>Loading...</p>
+        </div>
       ) : (
         <>
           <div className={styles.container}>
             <div className={styles.linksEditorContainer}>
               <div className={styles.addLinkAndHeaderContainer}>
-                <AddButton type='link'  setLinks={setLinks} treeUID={treeUID} />
-                <AddButton type='header' setLinks={setLinks} treeUID={treeUID} />
+                <AddButton type="link" setLinks={setLinks} treeUID={treeUID} />
+                <AddButton
+                  type="header"
+                  setLinks={setLinks}
+                  treeUID={treeUID}
+                />
               </div>
 
-              <Reorder.Group
-                values={links}
-                onReorder={handelLinksOrderChange}
-                layoutScroll
-                className={styles.linksContainer}
-              >
-                {links.map((link, index) => (
-                  <Link
-                    key={link.UID}
-                    link={link}
-                    treeUID={treeUID}
-                    deleteLink={deleteLink}
-                  />
-                ))}
-              </Reorder.Group>
+              {!areLinksFetched && <div className={styles.fetchingLinksContainer} >
+                  <h1>
+                 Fetching Links
+                  </h1>
+                </div>}
+              {(links.length == 0 && areLinksFetched) ? (
+                <div className={styles.noLinksContainer} >
+                  <h1>
+
+                  No Links <br></br> Click on Add links to add a Link
+                  </h1>
+                </div>
+              ) : (
+                <>
+                  <Reorder.Group
+                    values={links}
+                    onReorder={handelLinksOrderChange}
+                    layoutScroll
+                    className={styles.linksContainer}
+                  >
+                    {links.map((link, index) => (
+                      <Link
+                        key={link.UID}
+                        link={link}
+                        treeUID={treeUID}
+                        deleteLink={deleteLink}
+                      />
+                    ))}
+                  </Reorder.Group>
+                </>
+              )}
             </div>
 
             <div className={styles.treePreviewContainer}>
-            <div className={styles.treePreview}> <TreePreview treeUID={treeUID} /></div>
-             
+              <div className={styles.treePreview}>
+                {" "}
+                <TreePreview treeUID={treeUID} />
+              </div>
             </div>
           </div>
-          <TreePreviewToggleButton treeUID={treeUID}   alwaysVisible />
+          <TreePreviewToggleButton treeUID={treeUID} alwaysVisible />
           <Toaster position="bottom" expand={true} richColors />
         </>
       )}

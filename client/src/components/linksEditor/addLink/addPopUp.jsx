@@ -1,5 +1,5 @@
 "use client";
-import styles from "./addLink.module.css";
+import styles from "./add.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
@@ -74,7 +74,6 @@ export default function AddPopUp({ close, setLinks, treeUID, type }) {
 
   // handel form submit
   const handleSubmit = async (values) => {
-    toast.info(`submitted ${type}`);
     const handelAdd = async (title, URL ) => {
       try {
         setIsLoading(true);
@@ -137,7 +136,7 @@ export default function AddPopUp({ close, setLinks, treeUID, type }) {
         <div className={styles.popUpContainer}>
           <div className={styles.top}>
             <div className={styles.popUpTitle}>
-              <p>Add Link</p>
+              <p>Add {(type != `header`?('Link'):('Header'))}</p>
             </div>
             <button className={styles.closeButton} onClick={close}>
               <FontAwesomeIcon icon={faXmark} />
@@ -195,7 +194,7 @@ export default function AddPopUp({ close, setLinks, treeUID, type }) {
                         );
                       }}
                     />
-                    <button type="submit" className={styles.doneButton}>
+                    <button disabled={isLoading} type="submit" className={styles.doneButton}>
                       {!isLoading && (
                         <FontAwesomeIcon
                           className={styles.doneIcon}
@@ -258,7 +257,7 @@ export default function AddPopUp({ close, setLinks, treeUID, type }) {
                         );
                       }}
                     />
-                    <button type="submit" className={styles.doneButton}>
+                    <button disabled={isLoading}  type="submit" className={styles.doneButton}>
                       {!isLoading && (
                         <FontAwesomeIcon
                           className={styles.doneIcon}

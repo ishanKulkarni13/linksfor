@@ -15,8 +15,7 @@ export default function EditTreePicture({
   treeUID,
 }) {
   const [resource, setResource] = useState();
-
-  
+  const changeButtonRef = useRef()
 
   const updateTreeProfilePicture = async (URL) => {
     if (!treeUID) {
@@ -60,19 +59,21 @@ export default function EditTreePicture({
   return (
     <div className={styles.profileImageEditContainer}>
       <div className={styles.profileImageContainer}>
-        <span>NA</span>
-        {treeProfile.treePicture.URL && (
-          <Image
-          fill={true}
-          // objectFit="cover"
-          // objectPosition="centre"
-          className={styles.profileImage}
-          src={`${treeProfile.treePicture.URL}`}
-          alt="user tree image"
-          // onClick={() => imageInputRef.current.click()}
-        />
+        {treeProfile.treePicture.URL ? (
+          <>
+            <span>Loading...</span>
+            <Image
+              fill={true}
+              className={styles.profileImage}
+              src={`${treeProfile.treePicture.URL}`}
+              alt="user tree image"
+              onClick={() => changeButtonRef.current.click()}
+            />
+          </>
+        ) : (
+          <span>NA</span>
         )}
-        
+
         {/* <input
           type="file"
           ref={imageInputRef}
@@ -88,7 +89,7 @@ export default function EditTreePicture({
           options={{
             // sources: ["local", "url", "unsplash"],
             sources: ["local", "unsplash"],
-            uploadPreset: 'links_profile_photo',
+            uploadPreset: "links_profile_photo",
             cropping: true, //add a cropping step
             multiple: false, //restrict upload to a single file
             // folder: "user_images", //upload files to the specified folder
@@ -133,7 +134,7 @@ export default function EditTreePicture({
               open();
             }
             return (
-              <button className={styles.saveButton} onClick={handleOnClick}>
+              <button  ref={changeButtonRef} className={styles.saveButton} onClick={handleOnClick}>
                 Change Image
               </button>
             );
@@ -143,5 +144,4 @@ export default function EditTreePicture({
       </div>
     </div>
   );
-
 }

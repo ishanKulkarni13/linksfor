@@ -5,6 +5,8 @@ import styles from "./treePreviewToggleButton.module.css";
 import { useState } from "react";
 import TreePreview from "../treePreview";
 import useWindowResize from "@/hooks/useWindowSize";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 export default function TreePreviewToggleButton({ treeUID, alwaysVisible }) {
   const [isPreviewActive, setIsPreviewActive] = useState(false);
@@ -20,9 +22,13 @@ export default function TreePreviewToggleButton({ treeUID, alwaysVisible }) {
           className={styles.toggleButton}
           onClick={handleToggleButtonCLick}
         >
-          <div className={styles.icon}>P</div>
+          <div className={styles.icon}>
+            {
+              (isPreviewActive)?(<FontAwesomeIcon icon={faEyeSlash} />):(<FontAwesomeIcon icon={faEye} />)
+            }
+            
+          </div>
           <p>Preview</p>
-          {isPreviewActive && <p>A</p>}
         </button>
       )}
 

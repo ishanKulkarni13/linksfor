@@ -1,5 +1,5 @@
-import styles from "./addLink.module.css";
-import AddPopUp from "./addLinkPopUp";
+import styles from "./add.module.css";
+import AddPopUp from "./addPopUp";
 import { useState } from "react";
 
 export default function AddButton({links, setLinks, treeUID, type}) {
@@ -7,7 +7,7 @@ export default function AddButton({links, setLinks, treeUID, type}) {
   function handleAddLinkButtonCLick(e) {
     setIsPopUpActive(true)
   }
-  function closePopUp(e) {
+  function closePopUp() {
     setIsPopUpActive(false)
   }
   return (

@@ -50,8 +50,9 @@
 }
 
 .saveButton {
-    background-color: white;
-    color: black;
+    background-color: var(--color-surface-3);
+    border: var(--border-surface-1);
+    color: var(--color-text-primary);
     font-weight: 450;
     border-radius: 50px;
     padding: 10px;

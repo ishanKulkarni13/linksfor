@@ -99,8 +99,8 @@ export default function TreeAppearanceEditor() {
         </>
       ) : (
         <>
-          {" "}
-          <p>Getting TreeUID</p>{" "}
+        <div className={styles.loadingContainer} ></div>
+          <p>Loading Data...</p>{" "}
         </>
       )}
     </>

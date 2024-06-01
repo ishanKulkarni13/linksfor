@@ -4,6 +4,7 @@ import styles from "./link.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheck,
+  faDotCircle,
   faGripVertical,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
@@ -13,8 +14,11 @@ import { toast } from "sonner";
 export default function Link({ link, deleteLink, treeUID }) {
   const [linkData, setLinkData] = useState(link);
   const controls = useDragControls();
+  const [isLoading, setIsLoading] = useState({link:false, deleting:false})
 
   const handelDeleteButtonClick = () => {
+
+    setIsLoading({...isLoading, deleting:true});
     deleteLink(link.UID);
   };
 
@@ -22,9 +26,11 @@ export default function Link({ link, deleteLink, treeUID }) {
     setLinkData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
   const handleSubmit = async (event) => {
+    setIsLoading({...isLoading, link:true});
     event.preventDefault();
     console.log(linkData);
     await sendLinkTitleAndURLToBackend();
+    setIsLoading( {...isLoading, link:false});
   };
 
   const sendLinkTitleAndURLToBackend = async () => {
@@ -59,7 +65,6 @@ export default function Link({ link, deleteLink, treeUID }) {
             treeUID,
             linkUID: UID,
             title,
-            // URL,
           }),
           credentials: "include",
           headers: {
@@ -99,7 +104,11 @@ export default function Link({ link, deleteLink, treeUID }) {
           <div className={styles.link}>
             <div
               className={`${styles.left}, ${styles.DNDIcon}`}
-              onPointerDown={(e) => controls.start(e)}
+              onPointerDown={(e) => {
+                if(!isLoading.deleting && !isLoading.link){
+                  controls.start(e)
+                }
+              }}
             >
               <FontAwesomeIcon icon={faGripVertical} />{" "}
             </div>
@@ -113,7 +122,7 @@ export default function Link({ link, deleteLink, treeUID }) {
                   value={linkData.title}
                   onChange={handleInputChange}
                 />
-                <button className={styles.submitButton} type="submit">
+                <button disabled={isLoading.link} className={styles.submitButton} type="submit">
                   <FontAwesomeIcon icon={faCheck} />
                 </button>
               </div>
@@ -127,7 +136,7 @@ export default function Link({ link, deleteLink, treeUID }) {
                     value={linkData.URL}
                     onChange={handleInputChange}
                   />
-                  <button className={styles.submitButton} type="submit">
+                  <button disabled={isLoading.link} className={styles.submitButton} type="submit">
                     <FontAwesomeIcon icon={faCheck} />
                   </button>
                 </div>
@@ -142,15 +151,19 @@ export default function Link({ link, deleteLink, treeUID }) {
                 <span>A</span>
                 <span>A</span>
               </div> */}
+              
+              
             </form>
 
             <div className={styles.right}>
               <button
+              disabled={isLoading.deleting}
                 className={styles.deleteButton}
                 onClick={handelDeleteButtonClick}
               >
-                {" "}
-                <FontAwesomeIcon icon={faTrash} />{" "}
+                {(!isLoading.deleting)?(<FontAwesomeIcon icon={faTrash} />):(<FontAwesomeIcon  icon={faDotCircle} />) }
+                
+                
               </button>
             </div>
           </div>

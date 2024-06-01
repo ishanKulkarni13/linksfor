@@ -79,7 +79,6 @@ export default function TreeProfileEditor() {
       ) : (
         <div>Loading...</div>
       )}
-      <Toaster richColors={true} expand={true} />
     </>
   );
 }
