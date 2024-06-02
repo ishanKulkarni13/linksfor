@@ -18,8 +18,7 @@ const DynamicTreeProfileEditor = dynamic(
   {
     loading: () => (
       <div className={styles.dynamicContainer}>
-        {" "}
-        <p>Loading Profile Editor</p>{" "}
+        <p>Loading Dynamic Profile Editor</p>
       </div>
     ),
     ssr: false,
@@ -32,7 +31,7 @@ const DynamicTreeThemeEditor = dynamic(
     loading: () => (
       <div className={styles.dynamicContainer}>
         {" "}
-        <p>Loading theme Editor</p>{" "}
+        <p>Loading Dynamic theme Editor</p>{" "}
       </div>
     ),
     ssr: false,
@@ -86,21 +85,28 @@ export default function TreeAppearanceEditor() {
     <>
       {treeProfile ? (
         <>
-          {" "}
           <main className={styles.container}>
             <div className={styles.profileEditorContainer}>
-              <DynamicTreeProfileEditor />
+              <DynamicTreeProfileEditor
+                treeUID={treeUID}
+                setTreeProfile={setTreeProfile}
+                treeProfile={treeProfile}
+              />
             </div>
             <div className={styles.profileThemeEditorContainer}>
-              <DynamicTreeThemeEditor treeUID={treeUID} treeProfile={treeProfile} />
+              <DynamicTreeThemeEditor
+                treeUID={treeUID}
+                treeProfile={treeProfile}
+              />
             </div>
           </main>
-          <TreePreviewToggleButton treeUID={treeUID} alwaysVisible = {true} />
+          <TreePreviewToggleButton treeUID={treeUID} alwaysVisible={true} />
         </>
       ) : (
         <>
-        <div className={styles.loadingContainer} ></div>
-          <p>Loading Data...</p>{" "}
+          <div className={styles.loadingContainer}>
+            <p>Loading Appreance Editor</p>
+          </div>
         </>
       )}
     </>

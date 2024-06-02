@@ -4,16 +4,21 @@
 }
 
 .loadingContainer{
-    width: inherit;
+    width: 100vw;
+    height: 100dvh;
     font-size: 25px;
     font-weight: 500;
     text-align: center;
-
 }
 
 .dynamicContainer{
-    height: 100dvh;
+    margin-bottom: 20vw;
+    /* height: 100dvh; */
+
     width: 100vw;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -93,8 +93,6 @@ export default function EditTreeTitleAndBio({ treeUID,  treeProfile}) {
             </button>
           </form>
         </div>
-
-        <Toaster richColors={true} />
       </div>
     </>
   );

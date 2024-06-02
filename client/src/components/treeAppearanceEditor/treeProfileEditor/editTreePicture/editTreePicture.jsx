@@ -6,7 +6,7 @@ import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 import { CldUploadWidget } from "next-cloudinary";
 
 export default function EditTreePicture({
@@ -14,8 +14,10 @@ export default function EditTreePicture({
   setTreeProfile,
   treeUID,
 }) {
-  const [resource, setResource] = useState();
+  // const [resource, setResource] = useState();
   const changeButtonRef = useRef()
+  const {removeItem} = useLocalstorage('selectedTree')
+  const {push}= useRouter()
 
   const updateTreeProfilePicture = async (URL) => {
     if (!treeUID) {
@@ -44,8 +46,8 @@ export default function EditTreePicture({
         toast.error(error.response.data.message);
         if (error.response.status === 404 || error.response.status === 400) {
           console.log(error.response);
-          //   removeItem();
-          //   return push("/admin/selectTree?removeSelectedTree");
+            removeItem();
+            return push("/admin/selectTree?removeSelectedTree");
         }
       } else if (error.request) {
         //req was made but go no response
@@ -73,15 +75,6 @@ export default function EditTreePicture({
         ) : (
           <span>NA</span>
         )}
-
-        {/* <input
-          type="file"
-          ref={imageInputRef}
-          accept="image/**"
-          name="treePicture"
-          style={{ display: "none" }}
-          onChange={handelImageInputChange}
-        /> */}
       </div>
       <div className={styles.profileImageEditOptionsContainer}>
         {/* Upload image button */}
@@ -130,7 +123,7 @@ export default function EditTreePicture({
         >
           {({ open }) => {
             function handleOnClick() {
-              setResource(undefined);
+              // setResource(undefined);
               open();
             }
             return (
