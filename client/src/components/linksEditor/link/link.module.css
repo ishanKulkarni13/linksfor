@@ -61,13 +61,17 @@
 .titleInput, .URLInput{
     width:200px;
     background-color: inherit;
-    /* border: 1px solid var(--primary); */
     border-radius: 25px;
-    padding: 1px 10px;
+    /* padding: 1px 10px; */
 }
 
 .submitButton{
     opacity: 0;
+}
+
+.URLInput:focus, .titleInput:focus{
+border: none;
+outline: none;
 }
 
 .URLInput:focus + .submitButton{
@@ -89,13 +93,16 @@
 }
 
 .OtherOptionsContainer{
-    min-width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 
 }
 
-.OtherOptionsContainer span{
+/* .OtherOptionsContainer span{
     margin: 2px;
     padding: 2px;
     width: 4px;
     height: 2px;
-}
+} */

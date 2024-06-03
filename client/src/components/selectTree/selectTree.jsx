@@ -68,7 +68,7 @@ export default function SelectTree() {
   return (
     <div className={styles.container}>
       {!selectedTreeProfile ? (
-        <div>Loading selected tree Profie </div>
+        <div className={styles.loadingContainer} >Loading selected tree Profie </div>
       ) : (
         <>
           <button

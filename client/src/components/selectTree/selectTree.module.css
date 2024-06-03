@@ -1,8 +1,17 @@
+.loadingContainer {
+    min-height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
 .container {
     background-color: var(--color-surface-1);
     padding: 15px 15px;
     border-radius: 25px;
     box-shadow: 0px 0px 2px 1px white;
+    transition: all 5s;
 }
 
 .selectedTreeContainer {
@@ -30,7 +39,7 @@
     background-color: var(--color-surface-2);
 }
 
-.selectedTreeImageContainer > span{
+.selectedTreeImageContainer>span {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -84,9 +93,9 @@
 
 
 
-@media (width < 470px){
+@media (width < 470px) {
     .selectedTreeName {
         max-width: 150px;
     }
-    
+
 }

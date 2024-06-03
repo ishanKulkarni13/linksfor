@@ -6,18 +6,21 @@ import {
   faCheck,
   faDotCircle,
   faGripVertical,
+  faImage,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
+import {FiLayout} from 'react-icons/fi'
 import { useState } from "react";
 import { toast } from "sonner";
 
 export default function Link({ link, deleteLink, treeUID }) {
   const [linkData, setLinkData] = useState(link);
+  const [popup, setPopup] = useState('')
   const controls = useDragControls();
   const [isLoading, setIsLoading] = useState({link:false, deleting:false})
+  
 
   const handelDeleteButtonClick = () => {
-
     setIsLoading({...isLoading, deleting:true});
     deleteLink(link.UID);
   };
@@ -142,15 +145,16 @@ export default function Link({ link, deleteLink, treeUID }) {
                 </div>
               )}
 
-              {/* <div className={styles.OtherOptionsContainer}>
-                <span>A</span>
-                <span>B</span>
-                <span>C</span>
-                <span>D</span>
-                <span>A</span>
-                <span>A</span>
-                <span>A</span>
-              </div> */}
+              <div className={styles.OtherOptionsContainer}>
+                <button className={styles.thumbnailContainer}  >
+                  <FontAwesomeIcon className={styles.icon} icon={faImage} /> 
+                </button>
+                <button className={styles.layoutContainer} >
+                 <FiLayout/>
+                </button>
+              </div>
+
+              
               
               
             </form>
