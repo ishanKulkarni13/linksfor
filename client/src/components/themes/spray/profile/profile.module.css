@@ -4,8 +4,6 @@
     align-items: center;
     flex-direction: column;
     gap:15px;
-    height: inherit;
-    width: inherit;
 }
 
 .profilePictureContainer{

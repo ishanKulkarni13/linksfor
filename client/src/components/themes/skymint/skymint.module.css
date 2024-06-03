@@ -1,4 +1,5 @@
-.spray{
+.skyMint{
+    --margin-x: 15px;
     --color-background: white ;
     --color-surface-1: hsl(57, 70%, 10%);
     --color-surface-2: hsl(57, 60%, 15%);
@@ -49,19 +50,12 @@
     /* Destructive colors */
     --color-destructive: hsl(0, 62.8%, 30.6%);
     --color-destructive-foreground: hsl(210, 40%, 98%);
-  
-  
     
   
 }
 
-.spray{
- margin: 100px 15px; 
-}
-
-.profileContainer{
-    height: 150px;
-    width: auto;
+.skyMint{
+ margin: 100px 0px; 
 }
 
 .linksContainer{

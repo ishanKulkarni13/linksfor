@@ -1,4 +1,6 @@
 .spray{
+
+    --margin-x: 15px;
     --color-background: linear-gradient(180deg, rgb(0, 89, 255) 30%, rgb(0, 149, 255) 100%) ;
     --color-surface-1: hsl(57, 70%, 10%);
     --color-surface-2: hsl(57, 60%, 15%);
@@ -60,13 +62,9 @@
 }
 
 .spray{
- margin: 100px 15px; 
+ margin: 100px 0px; 
 }
 
-.profileContainer{
-    height: 150px;
-    width: auto;
-}
 
 .linksContainer{
     margin-top: 50px;

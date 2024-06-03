@@ -1,14 +1,13 @@
 import BackgroundGreenFog from "./background/background";
-import styles from "./greenFog.module.css"
+import styles from "./greenFog.module.css";
 import LinksGreenFog from "./links/linksSkymint";
 import PofileGreenFog from "./profile/profile";
 
 export default function TreeThemeGreenFog({ tree }) {
   return (
-    <>
-      <main className={`spray ${styles.spray}`}>
-      <BackgroundGreenFog/>
-    
+    <main className={`${styles.spray}`}>
+      <BackgroundGreenFog />
+      <div className={`${styles.content}`}>
         <div className={styles.profileContainer}>
           <PofileGreenFog
             treeName={tree.treeName}
@@ -18,10 +17,9 @@ export default function TreeThemeGreenFog({ tree }) {
         </div>
 
         <div className={styles.linksContainer}>
-          <LinksGreenFog links={ tree.treeContent.links }/>
+          <LinksGreenFog links={tree.treeContent.links} />
         </div>
-
-      </main>
-    </>
+      </div>
+    </main>
   );
 }

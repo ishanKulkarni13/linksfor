@@ -5,9 +5,9 @@ import PofileAirblack from "./profile/profileAirblack";
 
 export default function TreeThemeAirBlack({ tree }) {
   return (
-    <>
+    <main  className={styles.airBlack} >
       <BackgroundAirBlack />
-      <main className={styles.container}>
+      <div className={styles.content}>
 
         <div className={styles.profileContainer}>
           <PofileAirblack
@@ -21,7 +21,7 @@ export default function TreeThemeAirBlack({ tree }) {
           <LinksAirblack links={ tree.treeContent.links }/>
         </div>
 
-      </main>
-    </>
+      </div>
+    </main>
   );
 }

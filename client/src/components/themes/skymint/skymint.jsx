@@ -6,7 +6,7 @@ import styles from "./skymint.module.css"
 export default function TreeThemeSkymint({ tree }) {
   return (
     <>
-      <main className={`spray ${styles.spray}`}>
+      <main className={`${styles.skyMint}`}>
       <BackgroundSkymint/>
     
         <div className={styles.profileContainer}>

@@ -1,4 +1,5 @@
 .spray{
+    --margin-x: 15px;
     --color-background: rgb(236, 255, 235) ;
     --color-surface-1: hsl(57, 70%, 10%);
     --color-surface-2: hsl(57, 60%, 15%);
@@ -53,13 +54,9 @@
   
 }
 
-.spray{
- margin: 100px 15px; 
-}
-
-.profileContainer{
-    height: 150px;
-    width: auto;
+.content{
+    margin-top: 100px;
+    margin-bottom: 100px; 
 }
 
 .linksContainer{
