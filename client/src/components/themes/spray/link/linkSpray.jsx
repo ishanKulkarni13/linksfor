@@ -9,20 +9,14 @@ export default function LinkSpray({ link }) {
     return (
       <Link className={styles.container} href={link.URL}>
         <div className={styles.thumbnailContainer}>
-          {/* {link.thumbnail.URL && (
-        <Image
-          className={styles.thumbnail}
-          fill={true}
-          object-fit="cover"
-          src={link.thumbnail}
-        />
-      )} */}
-          {/* <Image
-          className={styles.thumbnail}
-          fill={true}
-          object-fit="cover"
-          src= {"http://res.cloudinary.com/kakashib2k/image/upload/v1713685024/uiccf1wbzyioazqgve5q.png"}
-        /> */}
+          {link.thumbnail?.URL && (
+            <Image
+              className={styles.thumbnail}
+              fill={true}
+              object-fit="cover"
+              src={link.thumbnail.URL}
+            />
+          )}
         </div>
         <div className={styles.textContainer}>
           <p className={styles.title}>{link.title}</p>

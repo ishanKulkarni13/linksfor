@@ -114,9 +114,6 @@ export default function EditTreePicture({
           }}
           signatureEndpoint="/api/cloudinary-sign"
           onSuccess={(result, { widget }) => {
-            // setResource(result.info); // { public_id, secure_url, etc }
-            console.log(result.info.secure_url);
-            toast(result.info.secure_url);
             updateTreeProfilePicture(result.info.secure_url);
             widget.close();
           }}

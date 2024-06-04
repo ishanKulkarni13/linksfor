@@ -9,19 +9,23 @@ import {
   faImage,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
-import {FiLayout} from 'react-icons/fi'
+import { FiLayout } from "react-icons/fi";
 import { useState } from "react";
 import { toast } from "sonner";
+import LinkEditPopup from "./popup/linkEditPopup";
 
 export default function Link({ link, deleteLink, treeUID }) {
   const [linkData, setLinkData] = useState(link);
-  const [popup, setPopup] = useState('')
+  const [popup, setPopup] = useState();
   const controls = useDragControls();
-  const [isLoading, setIsLoading] = useState({link:false, deleting:false})
-  
+  const [isLoading, setIsLoading] = useState({ link: false, deleting: false });
+
+
+  const closePopup = () => setPopup();
+  const openPopup = (e) => setPopup(e.currentTarget.getAttribute('data-popup'));
 
   const handelDeleteButtonClick = () => {
-    setIsLoading({...isLoading, deleting:true});
+    setIsLoading({ ...isLoading, deleting: true });
     deleteLink(link.UID);
   };
 
@@ -29,21 +33,21 @@ export default function Link({ link, deleteLink, treeUID }) {
     setLinkData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
   const handleSubmit = async (event) => {
-    setIsLoading({...isLoading, link:true});
+    setIsLoading({ ...isLoading, link: true });
     event.preventDefault();
     console.log(linkData);
     await sendLinkTitleAndURLToBackend();
-    setIsLoading( {...isLoading, link:false});
+    setIsLoading({ ...isLoading, link: false });
   };
 
   const sendLinkTitleAndURLToBackend = async () => {
     toast.info(`sendLinkTitleAndURLToBackend function is running`);
     let { title, URL, UID } = linkData;
     try {
-      let res
-      if(link.type != `header`){
+      let res;
+      if (link.type != `header`) {
         // for link
-         res = await fetch(`/api/tree/edit/link/titleAndURL/${treeUID}`, {
+        res = await fetch(`/api/tree/edit/link/titleAndURL/${treeUID}`, {
           method: "POST",
           cache: "no-store",
           body: JSON.stringify({
@@ -59,8 +63,8 @@ export default function Link({ link, deleteLink, treeUID }) {
             "Access-Control-Allow-Credentials": true,
           },
         });
-      } else{
-        // for header 
+      } else {
+        // for header
         res = await fetch(`/api/tree/edit/header/${treeUID}`, {
           method: "POST",
           cache: "no-store",
@@ -80,10 +84,7 @@ export default function Link({ link, deleteLink, treeUID }) {
 
       if (res.ok) {
         const responseData = await res.json();
-        console.log(
-          "responce from DB",
-          responseData
-        );
+        console.log("responce from DB", responseData);
       } else {
         const responseData = await res.json();
         toast.error(responseData.message);
@@ -108,66 +109,78 @@ export default function Link({ link, deleteLink, treeUID }) {
             <div
               className={`${styles.left}, ${styles.DNDIcon}`}
               onPointerDown={(e) => {
-                if(!isLoading.deleting && !isLoading.link){
-                  controls.start(e)
+                if (!isLoading.deleting && !isLoading.link) {
+                  controls.start(e);
                 }
               }}
             >
               <FontAwesomeIcon icon={faGripVertical} />{" "}
             </div>
 
-            <form className={styles.centre} onSubmit={handleSubmit}>
-              <div className={styles.titleContainer}>
-                <input
-                  className={styles.titleInput}
-                  type="text"
-                  name="title"
-                  value={linkData.title}
-                  onChange={handleInputChange}
-                />
-                <button disabled={isLoading.link} className={styles.submitButton} type="submit">
-                  <FontAwesomeIcon icon={faCheck} />
-                </button>
-              </div>
-
-              {link.type != `header` && (
-                <div className={styles.URLContainer}>
+            <div className={styles.centre} onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit}>
+                <div className={styles.titleContainer}>
                   <input
-                    className={styles.URLInput}
+                    className={styles.titleInput}
                     type="text"
-                    name="URL"
-                    value={linkData.URL}
+                    name="title"
+                    value={linkData.title}
                     onChange={handleInputChange}
                   />
-                  <button disabled={isLoading.link} className={styles.submitButton} type="submit">
+                  <button
+                    disabled={isLoading.link}
+                    className={styles.submitButton}
+                    type="submit"
+                  >
                     <FontAwesomeIcon icon={faCheck} />
                   </button>
                 </div>
-              )}
+
+                {link.type != `header` && (
+                  <div className={styles.URLContainer}>
+                    <input
+                      className={styles.URLInput}
+                      type="text"
+                      name="URL"
+                      value={linkData.URL}
+                      onChange={handleInputChange}
+                    />
+                    <button
+                      disabled={isLoading.link}
+                      className={styles.submitButton}
+                      type="submit"
+                    >
+                      <FontAwesomeIcon icon={faCheck} />
+                    </button>
+                  </div>
+                )}
+              </form>
 
               <div className={styles.OtherOptionsContainer}>
-                <button className={styles.thumbnailContainer}  >
-                  <FontAwesomeIcon className={styles.icon} icon={faImage} /> 
-                </button>
-                <button className={styles.layoutContainer} >
-                 <FiLayout/>
-                </button>
-              </div>
+                
+                  <button className={styles.thumbnailContainer}  data-popup={`thumbnail`} onClick={openPopup}  >
+                    <FontAwesomeIcon className={styles.icon} icon={faImage} />
+                  </button>
 
-              
-              
-              
-            </form>
+                <button className={styles.layoutContainer} data-popup={`layout`} onClick={openPopup} >
+                  <FiLayout />
+                </button>
+                
+                <LinkEditPopup treeUID={treeUID} setLinkData={setLinkData} linkData={linkData} openPopup={popup} closePopup={closePopup} />
+              </div>
+            </div>
 
             <div className={styles.right}>
               <button
-              disabled={isLoading.deleting}
+                disabled={isLoading.deleting}
                 className={styles.deleteButton}
                 onClick={handelDeleteButtonClick}
               >
-                {(!isLoading.deleting)?(<FontAwesomeIcon icon={faTrash} />):(<FontAwesomeIcon  icon={faDotCircle} />) }
-                
-                
+                {!isLoading.deleting ? (
+                  <FontAwesomeIcon icon={faTrash} />
+                ) : (
+                  <FontAwesomeIcon icon={faDotCircle} />
+                )}
               </button>
             </div>
           </div>

@@ -29,7 +29,7 @@
 }
 
 .thumbnail {
-    border-radius: 50%;
+    border-radius: var(--border-radius-thumbnail);
 }
 
 .title{
