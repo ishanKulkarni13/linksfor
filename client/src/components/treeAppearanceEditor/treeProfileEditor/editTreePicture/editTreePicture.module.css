@@ -40,7 +40,6 @@
     border-radius: inherit;
     object-fit: cover;
     object-position: center;
-    /* border: 5px solid saddlebrown; */
 }
 
 .profileImageEditOptionsContainer {
@@ -50,9 +49,9 @@
 }
 
 .saveButton {
-    background-color: var(--color-surface-3);
+    background-color: var(--color-primary);
     border: var(--border-surface-1);
-    color: var(--color-text-primary);
+    color: var(--color-text-contrast-main);
     font-weight: 450;
     border-radius: 50px;
     padding: 10px;

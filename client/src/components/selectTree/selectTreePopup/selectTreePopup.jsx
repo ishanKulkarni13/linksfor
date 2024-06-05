@@ -7,6 +7,7 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { useSelectTree } from "@/hooks/selectTree";
+import {useRouter} from "next/navigation"
 
 export default function SelectTreePopup({
   close,
@@ -15,6 +16,7 @@ export default function SelectTreePopup({
 }) {
   const [isLoading, setIsLoading] = useState(true);
   const [trees, setTrees] = useState([]);
+  const {push} = useRouter()
   const select = useSelectTree();
   const getTrees = async () => {
     try {
@@ -42,6 +44,7 @@ export default function SelectTreePopup({
     if (selectedTree) {
       setSelectedTreeProfile(selectedTree);
       select(treeUID);
+      push(`/admin/tree/edit/links`)
       close();
     } else {
       toast.error(`Tree with UID ${treeUID} not found`);

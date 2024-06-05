@@ -268,7 +268,7 @@ export default function LinksEditor() {
             <div className={styles.treePreviewContainer}>
               <div className={styles.treePreview}>
                 {" "}
-                <TreePreview treeUID={treeUID} />
+                <TreePreview showBorder={true} treeUID={treeUID} />
               </div>
             </div>
           </div>

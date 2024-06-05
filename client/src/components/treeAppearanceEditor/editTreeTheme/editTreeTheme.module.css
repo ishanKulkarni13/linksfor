@@ -25,26 +25,21 @@
 }
 
 .themeLable>div {
-    border: 1px solid var(--border-surface-3);
     height: fit-content;
     width: fit-content;
     display: flex;
     justify-content: stretch;
     align-items: stretch;
-    gap: 10px;
+    gap: 5px;
     flex-direction: column;
-    padding: 15px;
-    background-color: var(--color-surface-2);
+    /* padding: 15px; */
     border-radius: 15px;
-    box-shadow: var(--shadow-2);
     text-align: center;
 }
 
 .themeDisplayPictureContainer {
     height: 300px;
     width: 200px;
-    /* padding: 10px;
-    border: 3px solid gray; */
     border-radius: 15px;
 }
 
@@ -60,8 +55,10 @@
     width: auto;
     overflow: hidden;
     border: var(--border-surface-3);
-    background-color: var(--color-surface-3);
+    border: var(--border-surface-1);
+    background-color: var(--color-surface-2);
     border-radius: 15px;
+    overflow: hidden;
 }
 
 .themeDisplayPicture{

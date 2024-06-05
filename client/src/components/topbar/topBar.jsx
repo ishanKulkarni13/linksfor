@@ -19,8 +19,6 @@ export default function TopBar() {
 
           <div className={styles.share}>
             <ShareTreeButton/>
-            {/* <FontAwesomeIcon className={styles.icon} icon={faShare} />
-            <span>Share</span> */}
           </div>
 
           <Link className={styles.profile} href={"/admin"}>

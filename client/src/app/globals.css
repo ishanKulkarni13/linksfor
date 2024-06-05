@@ -76,14 +76,20 @@
   --color-surface-1: hsl(222.2, 70%, 10%);
   --color-surface-2: hsl(222.2, 60%, 15%);
   --color-surface-3: hsl(222.2, 50%, 20%);
+  --color-top-bar: var(--color-surface-1);
   --color-surface-floating: hsl(222.2, 50%, 20%);
 
   /* --color-surface-floating: hsl(118, 100%, 27%); */
   --color-overlay: hsl(222.2, 80%, 5%);
 
   /* Text colors */
-  --color-text-primary: hsl(210, 40%, 98%);
-  --color-text-contrast-primary: black;
+  /* --color-text-primary: hsl(210, 40%, 98%); */
+  
+  --color-text-main: white;
+  --color-text-primary: var(--color-text-main);
+  --color-text-contrast-main: black;
+  --color-text-contrast-primary: var(--color-text-contrast-main);
+
   --color-text-secondary: hsl(210, 40%, 80%);
   --color-text-floating: white
   
@@ -92,7 +98,7 @@
   /* Borders */
   --color-border: hsl(217.2, 32.6%, 17.5%);
   --border-surface-1: 1px solid white;
-  --border-surface-2: 1px solid white;
+  --border-surface-2: 1px solid rgb(201, 144, 144);
   --border-surface-3: 1px solid white;
   --border-surface-floating: 1px solid rgba(255, 255, 255, 0.326);
   --color-border-muted: hsl(215, 20%, 50%);
@@ -140,8 +146,8 @@
   /* Spacing */
   --spacing-unit: 8px;
 
-
-  --topBarHeight: 70px
+  --margin-x: 25px;
+  --topBarHeight: 70px;
 }
 
 .light{
@@ -157,7 +163,7 @@
   --color-surface-2: hsl(0, 0%, 90%);
   --color-surface-3: hsl(0, 0%, 80%);
   --color-top-bar: var(--color-surface-1);
-  --color-surface-floating: hsl(222.2, 50%, 20%);
+  --color-surface-floating: var(--color-background);
 
   /* --color-surface-floating: hsl(118, 100%, 27%); */
   --color-overlay: hsl(222.2, 80%, 5%);
@@ -173,11 +179,11 @@
   --color-text-muted: hsl(215, 20.2%, 65.1%);
 
   /* Borders */
-  --color-border: hsl(217.2, 32.6%, 17.5%);
-  --border-surface-1: 1px solid rgba(0, 0, 0, 0.5);
-  --border-surface-2: 1px solid black;
-  --border-surface-3: 1px solid black;
-  --border-surface-floating: 1px solid rgba(255, 255, 255, 0.326);
+  --color-border: #f3f3f1;
+  --border-surface-1: 0.5px solid var(--color-border);
+  --border-surface-2: 1px solid var(--color-border);
+  --border-surface-3: 1px solid var(--color-border);
+  --border-surface-floating: 1px solid var(--color-border);
   --color-border-muted: hsl(215, 20%, 50%);
   
   /* Shadows */
@@ -222,9 +228,7 @@
 
   /* Spacing */
   --spacing-unit: 8px;
-
-
-  --topBarHeight: 70px
+  --topBarHeight: 70px;
 
 }
 
@@ -251,7 +255,7 @@ body {
 }
 
 @media (width < 640px) {
-  :root {
+  :root, .light, .dark {
     --topBarHeight: 120px;
   }
 }

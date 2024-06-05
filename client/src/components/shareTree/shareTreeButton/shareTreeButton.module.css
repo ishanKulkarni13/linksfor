@@ -1,9 +1,10 @@
 .container{
+    background-color: var(--color-surface-2);
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 5px;
-    border: 1px solid white;
+    border: var(--border-surface-1);
     border-radius: 225px;
     padding: 5px 10px;
 }

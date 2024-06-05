@@ -15,15 +15,17 @@
     height: inherit;
     width: inherit;
     border-radius: inherit;
-    border: var(--border-surface-floating);
-    border-width: 5px;
     box-shadow: var(--shadow-floating);
     /* background-color: var(--backgroundSecondary); */
     backdrop-filter: blur(30px);
+  
 }
 
-/* @media (width > 640px){
-    .container{
-        height: 80dvh;
-    }
-} */
+.showBorder{
+    border: var(--border-surface-floating);
+    border-width: 5px;
+    box-shadow: var(--shadow-floating);
+}
+
+
+    

@@ -13,7 +13,6 @@
     background-color: var(--color-primary);
     color: var(--color-text-contrast-main);
     font-weight: 600;
-    border: var(--border-surface-floating);
     border-radius: 50px;
     box-shadow: var(--shadow-floating);
     padding: 15px;

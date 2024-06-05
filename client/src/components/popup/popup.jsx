@@ -6,12 +6,6 @@ import { Input } from "@/components/ui/input";
 import { Toaster, toast } from "sonner";
 
 export default function Popup({ close , title,  children }) {
-  // handel form submit
-  const handleSubmit = async (values) => {
-
-    // here
-
-  };
 
   return (
     <>

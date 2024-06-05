@@ -29,7 +29,8 @@
     gap: 25px;
 }
 
-.noLinksContainer, .fetchingLinksContainer{
+.noLinksContainer,
+.fetchingLinksContainer {
     height: 100%;
     /* background-color: #212121; */
     color: var(--color-text-main);
@@ -61,10 +62,12 @@
     justify-content: center;
     align-items: center;
     border-radius: 25px;
+
+
+
 }
 
-.treePreview{
-
+.treePreview {
     height: 80dvh;
     width: inherit;
     border-radius: inherit;

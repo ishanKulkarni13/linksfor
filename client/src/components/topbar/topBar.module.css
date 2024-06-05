@@ -1,6 +1,6 @@
-.topBarContainer{
-    position:fixed;
-    top:0%;
+.topBarContainer {
+    position: fixed;
+    top: 0%;
     width: 100vw;
     height: var(--topBarHeight);
     border-bottom: 1px solid white;
@@ -8,26 +8,39 @@
     background-color: var(--color-top-bar);
 }
 
-.mobieTopBarContainer{
+.mobieTopBarContainer {
     display: none;
     border-bottom: 1px solid white;
     height: var(--topBarHeight);
 }
 
-.topContainer, .bottomContainer{
-    border-bottom: 1px solid white;
+.topContainer,
+.bottomContainer {
+    border: var(--border-surface-1);
+    border-width: 0.01px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: calc(var(--topBarHeight )/ 2);
-    padding: 0px 20px;
+    height: calc(var(--topBarHeight)/ 2);
 }
 
-.icon{
+.topContainer {
+    align-items: center;
+    padding: 0px var(--margin-x);
+}
+
+.bottomContainer{
+    align-items: stretch;
+}
+
+.icon {
     width: 25px;
 }
 
-.desktopTopBarContainer{
+.desktopTopBarContainer {
     border-bottom: 1px solid white;
     height: var(--topBarHeight);
     display: flex;
@@ -37,12 +50,12 @@
 }
 
 
-@media (width < 640px){
-    .mobieTopBarContainer{
+@media (width < 640px) {
+    .mobieTopBarContainer {
         display: block;
     }
 
-    .desktopTopBarContainer{
+    .desktopTopBarContainer {
         display: none;
     }
 }

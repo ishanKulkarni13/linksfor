@@ -16,10 +16,10 @@
     width: 90vw;
     padding: 15px 15px;
     flex-direction: column;
-    background-color: var(--color-overlay);
+    background-color: var(--color-surface-floating);
     border: 2px solid white;
     border-radius: 25px;
-    color: white;
+    color: var(--color-text-main);
 
 }
 
