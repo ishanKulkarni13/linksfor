@@ -9,6 +9,7 @@
 .container {
     display: grid;
     grid-template-columns: 2fr 1fr;
+    color: var(--color-text-main);
 }
 
 .linksEditorContainer {
@@ -31,7 +32,7 @@
 .noLinksContainer, .fetchingLinksContainer{
     height: 100%;
     /* background-color: #212121; */
-    color: white;
+    color: var(--color-text-main);
     display: flex;
     justify-content: center;
     align-items: center;

@@ -144,6 +144,90 @@
   --topBarHeight: 70px
 }
 
+.light{
+
+  --background: #050505;
+  --backgroundSecondary: #0f0f0f;
+  --foreground: 222.2 84% 4.9%;
+
+
+  /* Background colors */
+  --color-background: #f3f3f1;
+  --color-surface-1: hsl(0, 0%, 100%);
+  --color-surface-2: hsl(0, 0%, 90%);
+  --color-surface-3: hsl(0, 0%, 80%);
+  --color-top-bar: var(--color-surface-1);
+  --color-surface-floating: hsl(222.2, 50%, 20%);
+
+  /* --color-surface-floating: hsl(118, 100%, 27%); */
+  --color-overlay: hsl(222.2, 80%, 5%);
+
+  /* Text colors */
+  --color-text-primary: var(--color-text-main);
+  --color-text-main: black;
+  --color-text-contrast-main: white;
+  --color-text-contrast-primary: black;
+  --color-text-secondary: black;
+  --color-text-floating: black
+  
+  --color-text-muted: hsl(215, 20.2%, 65.1%);
+
+  /* Borders */
+  --color-border: hsl(217.2, 32.6%, 17.5%);
+  --border-surface-1: 1px solid rgba(0, 0, 0, 0.5);
+  --border-surface-2: 1px solid black;
+  --border-surface-3: 1px solid black;
+  --border-surface-floating: 1px solid rgba(255, 255, 255, 0.326);
+  --color-border-muted: hsl(215, 20%, 50%);
+  
+  /* Shadows */
+  --shadow-1: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-2: 0px 3px 6px rgba(0, 0, 0, 0.32);
+  --shadow-3: 0px 10px 20px rgba(0, 0, 0, 0.48);
+  --shadow-floating: 0px 3px 15px 1.5px rgba(0, 0, 0, 0.544);
+
+  /* Primary colors */
+  --color-primary: rgb(153, 0, 255);
+  --color-primary-light: hsl(210, 40%, 90%);
+  --color-primary-dark: hsl(222.2, 47.4%, 11.2%);
+  --color-primary-foreground: hsl(222.2, 47.4%, 11.2%);
+
+  /* Secondary colors */
+  --color-secondary:  rgb(153, 0, 255);
+  --color-secondary-light:  rgb(153, 0, 255);
+  --color-secondary-dark: hsl(210, 40%, 96.1%);
+  --color-secondary-foreground: hsl(210, 40%, 98%);
+
+  /* Accent colors */
+  --color-accent: hsl(174, 100%, 50%);
+  --color-accent-foreground: hsl(210, 40%, 98%);
+
+  /* Destructive colors */
+  --color-destructive: hsl(0, 62.8%, 30.6%);
+  --color-destructive-foreground: hsl(210, 40%, 98%);
+
+
+  /* Radius */
+  --radius-small: 0.25rem;
+  --radius-medium: 0.5rem;
+  --radius-large: 1rem;
+
+  /* Font */
+  --font-family: 'Roboto', sans-serif;
+  --font-size: 16px;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* Spacing */
+  --spacing-unit: 8px;
+
+
+  --topBarHeight: 70px
+
+}
+
 @layer base {
   /* * {
     @apply border-border;
@@ -163,7 +247,7 @@
 body {
   min-height: 100dvh;
   background-color: var(--color-background);
-  color: var(--color-text-primary);
+  color: var(--color-text-main);
 }
 
 @media (width < 640px) {

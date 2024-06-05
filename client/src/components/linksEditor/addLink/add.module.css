@@ -8,9 +8,12 @@
     height: 100dvh;
     width: 100vw;
     z-index: 90;
+    color: var(--color-text-contrast-main);
 }
 
 .popUpContainer {
+    border: var(--border-surface-floating);
+    box-shadow: var(--shadow-floating);
     z-index: 91;
     height: auto;
     width: 90vw;
@@ -19,7 +22,7 @@
     background-color: var(--color-background);
     border: var(--border-surface-1);
     border-radius: 25px;
-    color: var(--color-text-primary);
+    color: var(--color-text-main);
 
 }
 
@@ -44,12 +47,12 @@
     align-items: center;
     gap: 10px;
     border-radius: 50px;
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .addLinkButton {
     background-color: var(--color-primary);
-    color: black;
+    color: var(--color-text-contrast-main);
 }
 
 
@@ -85,19 +88,16 @@
 }
 
 .form {
-    /* box-shadow: 0px 0px 2px white; */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: 15px;
     width: inherit;
-    /* border: 2px solid white; */
 }
 
 .inputContainer {
     width: inherit;
-    /* border: 1px solid darkcyan; */
 }
 
 .lable {
@@ -107,6 +107,8 @@
 
 .titleInput,
 .URLInput {
+    box-shadow: var(--shadow-1);
+    border: var(--border-surface-1);
     padding: 25px;
     border-radius: 15px;
     width: 80vw;
@@ -119,7 +121,7 @@
     font-size: 20px;
     height: 50px;
     background-color: var(--color-primary);
-    color: var(--color-text-contrast-primary);
+    color: var(--color-text-contrast-main);
     font-weight: 600;
     border-radius: 50px;
     width: 125px;

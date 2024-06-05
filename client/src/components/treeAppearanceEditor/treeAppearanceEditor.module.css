@@ -1,6 +1,6 @@
 .container, .loadingContainer {
     padding: calc(var(--topBarHeight) + 30px) 20px;
-    color: white;
+    color: var(--color-text-main);
 }
 
 .loadingContainer{
@@ -13,8 +13,6 @@
 
 .dynamicContainer{
     margin-bottom: 20vw;
-    /* height: 100dvh; */
-
     width: 100%;
     font-size: 20px;
     font-weight: 500;
@@ -22,7 +20,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
+    color: var(--color-text-main);
 }
 
 .profileEditorContainer{

@@ -5,7 +5,7 @@
     height: var(--topBarHeight);
     border-bottom: 1px solid white;
     z-index: 10;
-    background-color: var(--color-background);
+    background-color: var(--color-top-bar);
 }
 
 .mobieTopBarContainer{
