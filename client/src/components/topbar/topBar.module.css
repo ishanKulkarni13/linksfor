@@ -17,7 +17,7 @@
 .topContainer,
 .bottomContainer {
     border: var(--border-surface-1);
-    border-width: 0.01px;
+    border-width: 0.5px;
     border-top: none;
     border-left: none;
     border-right: none;
