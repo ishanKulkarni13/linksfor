@@ -10,12 +10,9 @@ import { useTreeUID } from "@/hooks/treeUID";
 import axios from "axios";
 
 export default function ShareTreePopup({ close }) {
-  const [shareableLink, setShareableLink] = useState("");
+  const [shareableLink, setShareableLink] = useState(null);
   const [isLinkCopyed, setIsLinkCopyed] = useState(false);
   let treeUID = useTreeUID();
-  const handleSubmit = async (values) => {
-    // here
-  };
 
   async function onCopyButtonClick() {
     try {
@@ -48,10 +45,6 @@ export default function ShareTreePopup({ close }) {
       if (error.response) {
         // if server responded
         toast.error(error.response.data.message);
-        // if (error.response.status === 404 || error.response.status === 401) {
-        //   removeItem();
-        //   return push("/admin/selectTree?removeSelectedTree");
-        // }
       } else if (error.request) {
         //req was made but go no response
         toast.error(`error occured`);
@@ -62,7 +55,7 @@ export default function ShareTreePopup({ close }) {
   };
 
   useEffect(() => {
-    setShareableLink( `${process.env.NEXT_PUBLIC_FRONTEND_URL}/tree/`)
+    // setShareableLink( `${process.env.NEXT_PUBLIC_FRONTEND_URL}/tree/`)
     if (treeUID) {
       handelSetShareableLink();
     }
@@ -78,9 +71,10 @@ export default function ShareTreePopup({ close }) {
               className={styles.linkContainer}
               type="text"
               readOnly
-              value={shareableLink}
+              value={(shareableLink)? shareableLink: `Loading...` }
             />
             <button
+            disabled={!shareableLink}
               onClick={onCopyButtonClick}
               className={styles.copyIconContainer}
             >

@@ -1,18 +1,28 @@
-'use client'
-import React from 'react'
-import TreePreviewToggleButton from '@/components/treePreview/treePreviewToggleButton/treePreviewToggleButton'
-import axios from 'axios'
+"use client";
+import React from "react";
+import { useTheme } from "next-themes";
 export default function page() {
-
-  const onClick = async ()=>{
-    let res = await axios.get("/api/tree/user-default-treeUID")
-    console.log(res);
-  }
-
+  const { theme, setTheme, resolvedTheme } = useTheme();
 
   return (
     <div>
-      <button onClick={onClick}   > click me </button>
+      <p>theme theme is {theme}</p>
+      <p> resolvedTheme theme is {resolvedTheme}</p>
+      <button onClick={(e) => setTheme("dark")}>
+        {" "}
+        <b>darkkkk</b>{" "}
+      </button>{" "}
+      <br />
+      <button onClick={(e) => setTheme("light")}>
+        {" "}
+        <b>Light</b>{" "}
+      </button>{" "}
+      <br />
+      <button onClick={(e) => setTheme("system")}>
+        {" "}
+        <b>System</b>{" "}
+      </button>{" "}
+      <br />
     </div>
-  )
+  );
 }

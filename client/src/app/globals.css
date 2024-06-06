@@ -66,8 +66,11 @@
   }
 }
 
+:root{
+  --margin-x: 25px;}
 
-:root {
+
+.dark {
   --background: #050505;
   --backgroundSecondary: #0f0f0f;
   --foreground: 222.2 84% 4.9%;
@@ -76,8 +79,8 @@
   --color-surface-1: hsl(222.2, 70%, 10%);
   --color-surface-2: hsl(222.2, 60%, 15%);
   --color-surface-3: hsl(222.2, 50%, 20%);
-  --color-top-bar: var(--color-surface-1);
-  --color-surface-floating: hsl(222.2, 50%, 20%);
+  --color-top-bar: var(--color-background);
+  --color-surface-floating: hsl(222.2, 50%, 5%);
 
   /* --color-surface-floating: hsl(118, 100%, 27%); */
   --color-overlay: hsl(222.2, 80%, 5%);
@@ -88,7 +91,7 @@
   --color-text-main: white;
   --color-text-primary: var(--color-text-main);
   --color-text-contrast-main: black;
-  --color-text-contrast-primary: var(--color-text-contrast-main);
+  --color-text-contrast-primary: black;
 
   --color-text-secondary: hsl(210, 40%, 80%);
   --color-text-floating: white
@@ -146,7 +149,6 @@
   /* Spacing */
   --spacing-unit: 8px;
 
-  --margin-x: 25px;
   --topBarHeight: 70px;
 }
 
@@ -172,7 +174,7 @@
   --color-text-primary: var(--color-text-main);
   --color-text-main: black;
   --color-text-contrast-main: white;
-  --color-text-contrast-primary: black;
+  --color-text-contrast-primary: white; 
   --color-text-secondary: black;
   --color-text-floating: black
   
@@ -229,7 +231,6 @@
   /* Spacing */
   --spacing-unit: 8px;
   --topBarHeight: 70px;
-
 }
 
 @layer base {

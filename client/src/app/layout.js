@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from 'next-themes'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -10,8 +11,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} light`}>{children}</body>
+    <html suppressHydrationWarning lang="en">
+      <body className={`${inter.className}s`}>
+        <ThemeProvider attribute="class" >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

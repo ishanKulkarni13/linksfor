@@ -1,4 +1,4 @@
-.main{
+.main {
     height: 100vh;
     height: 100dvh;
     display: flex;
@@ -7,7 +7,7 @@
     padding: 15px;
 }
 
-.homeContainer{
+.homeContainer {
     height: 100vh;
     height: 100dvh;
     display: flex;
@@ -18,21 +18,22 @@
     gap: 25px;
 }
 
-.topContainer >h1{
- font-size: 2rem;
- font-weight: 600;
- line-height: 99%;
- margin-bottom: 15px;
+.topContainer>h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 99%;
+    margin-bottom: 15px;
 }
 
 
-.topContainer >p{
-    color: rgba(255, 255, 255, 0.579);
- font-size: 1rem;
- line-height: 99%;
+.topContainer>p {
+    color: var(--color-text-main);
+    opacity: 0.6;
+    font-size: 1rem;
+    line-height: 99%;
 }
 
-.getStartedContainer{
+.getStartedContainer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,16 +42,18 @@
     gap: 10px;
 }
 
-.getStarted, .adminConsole{
-    background-color: var(--color-surface-1);
-    border:  var(--border-surface-1);
+.getStarted,
+.adminConsole {
+    background-color: var(--color-primary);
+    color: var(--color-text-contrast-primary);
+    border: var(--border-surface-1);
     font-size: 1.5em;
     border-radius: 50px;
     min-width: fit-content;
     padding: 10px 25px;
 }
 
-.login{
+.login {
     color: var(--color-text-muted);
     text-decoration: underline;
 }

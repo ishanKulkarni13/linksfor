@@ -1,0 +1,39 @@
+.popupContent{
+    display: flex;
+    justify-content:flex-start;
+    gap: 20px;
+    align-items: center;
+}
+
+.imageContainer {
+    position: relative;
+    height: 75px;
+    width: 75px;
+    border-radius: 50px;
+    background-color: var(--color-surface-2);
+    overflow: hidden;
+}
+
+.imageContainer > span{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+
+.image {
+    object-fit: cover;
+    object-position: center;
+}
+
+.changeButton{
+    height: fit-content;
+    background-color: var(--color-primary);
+    color: var(--color-text-contrast-primary);
+    font-size: 20px;
+    font-weight: 500;
+    padding: 10px 15px;
+    border-radius: 50px;
+}
