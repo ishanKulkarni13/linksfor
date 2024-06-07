@@ -1,0 +1,20 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column-reverse;
+}
+
+@media (width < 1204px) {
+    .container {}
+
+    .title {
+        font-size: 15px;
+    }
+
+    .iconContaier {
+        font-size: 30px;
+    }
+
+    
+}

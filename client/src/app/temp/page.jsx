@@ -1,10 +1,13 @@
 "use client";
 import React from "react";
 import { useTheme } from "next-themes";
+import TopBar from "@/components/topbar/topBar";
 export default function Page() {
   const { theme, setTheme, resolvedTheme } = useTheme();
 
   return (
+    <>
+    <TopBar/>
     <div>
       <p>theme theme is {theme}</p>
       <p> resolvedTheme theme is {resolvedTheme}</p>
@@ -23,6 +26,8 @@ export default function Page() {
         <b>System</b>{" "}
       </button>{" "}
       <br />
+
     </div>
+    </>
   );
 }
