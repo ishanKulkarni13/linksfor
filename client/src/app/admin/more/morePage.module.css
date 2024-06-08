@@ -1,4 +1,23 @@
 .container{
     margin-top: calc(var(--topBarHeight) + 30px);
-    padding: 0px 20px ;
+    margin-bottom: 30px;
+    padding: 0px var(--margin-x) ;
 }
+
+.selectTreeContainer{
+    margin-bottom: 30px;
+}
+
+.settingsContainer .settingsTitle{
+    opacity: .65;
+    font-size: 25px;
+    font-weight: 550;
+    margin-bottom: 15px;
+}
+
+.settingLinksContainer{ 
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+    gap: 15px;
+    flex-direction: column;}

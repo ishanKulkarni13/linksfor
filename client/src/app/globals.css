@@ -67,7 +67,9 @@
 }
 
 :root{
-  --margin-x: 25px;}
+  --margin-x: 20px;
+  --temp-b: 1px solid green;
+}
 
 
 .dark {
@@ -160,7 +162,7 @@
 
 
   /* Background colors */
-  --color-background: #f3f3f1;
+  --color-background: #f2f2f2;
   --color-surface-1: hsl(0, 0%, 100%);
   --color-surface-2: hsl(0, 0%, 90%);
   --color-surface-3: hsl(0, 0%, 80%);
