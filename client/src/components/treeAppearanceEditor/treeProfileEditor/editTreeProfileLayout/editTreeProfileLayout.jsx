@@ -22,19 +22,19 @@ export default function EditTreeProfileLayout({ treeUID, treeProfile }) {
     {
       displayName: "classic",
       displayPicture:
-        "https://res.cloudinary.com/kakashib2k/image/upload/v1717148505/LinksFor/important/themes/pictures/ftaygcoqrryrknotcuck.jpg",
+        "https://res.cloudinary.com/kakashib2k/image/upload/v1717148505/LinksFor/important/treeProfileLayout/pictures/classic",
       key: "classic",
     },
     {
       displayName: "hero",
       displayPicture:
-        "https://res.cloudinary.com/kakashib2k/image/upload/v1717148505/LinksFor/important/themes/pictures/ftaygcoqrryrknotcuck.jpg",
+        "https://res.cloudinary.com/kakashib2k/image/upload/v1717148505/LinksFor/important/treeProfileLayout/pictures/hero",
       key: "hero",
     },
     {
       displayName: "row",
       displayPicture:
-        "https://res.cloudinary.com/kakashib2k/image/upload/v1717148505/LinksFor/important/themes/pictures/ftaygcoqrryrknotcuck.jpg",
+        "https://res.cloudinary.com/kakashib2k/image/upload/v1717148505/LinksFor/important/treeProfileLayout/pictures/row",
       key: "row",
     },
   ];
@@ -45,9 +45,9 @@ export default function EditTreeProfileLayout({ treeUID, treeProfile }) {
     const { response, error } = await updateTreeProfile({
       treeProfileLayout: e.target.id,
     });
-    if (response) {
-      toast.success(`Updated to ${e.target.id}`);
-    }
+    // if (response) {
+    //   toast.success(`Updated to ${e.target.id}`);
+    // }
     if (error) {
       toast.error(error.message);
       setSelectedTreeProfileLayout(selectedTreeProfileLayout);
@@ -61,7 +61,7 @@ export default function EditTreeProfileLayout({ treeUID, treeProfile }) {
   return (
     <>
       <div className={` ${styles.container}`}>
-        <h1 className={` ${styles.title}`}>Themes</h1>
+        <h1 className={` ${styles.title}`}>Image style</h1>
         <div className={`${styles.formContainer}`}>
           <form onSubmit={onSubmit} ref={formRef} className={styles.form}>
             {avaibleTreeProfileLayouts.map((style) => (
