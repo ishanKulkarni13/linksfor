@@ -20,19 +20,19 @@ export default function EditTreeProfileLayout({ treeUID, treeProfile }) {
 
   const avaibleTreeProfileLayouts = [
     {
-      displayName: "classic",
+      displayName: "Classic",
       displayPicture:
         "https://res.cloudinary.com/kakashib2k/image/upload/v1717148505/LinksFor/important/treeProfileLayout/pictures/classic",
       key: "classic",
     },
     {
-      displayName: "hero",
+      displayName: "Hero",
       displayPicture:
         "https://res.cloudinary.com/kakashib2k/image/upload/v1717148505/LinksFor/important/treeProfileLayout/pictures/hero",
       key: "hero",
     },
     {
-      displayName: "row",
+      displayName: "Row",
       displayPicture:
         "https://res.cloudinary.com/kakashib2k/image/upload/v1717148505/LinksFor/important/treeProfileLayout/pictures/row",
       key: "row",
@@ -45,9 +45,9 @@ export default function EditTreeProfileLayout({ treeUID, treeProfile }) {
     const { response, error } = await updateTreeProfile({
       treeProfileLayout: e.target.id,
     });
-    // if (response) {
-    //   toast.success(`Updated to ${e.target.id}`);
-    // }
+    if (response) {
+      toast.success(`Updated style ${e.target.id}`);
+    }
     if (error) {
       toast.error(error.message);
       setSelectedTreeProfileLayout(selectedTreeProfileLayout);
@@ -71,7 +71,6 @@ export default function EditTreeProfileLayout({ treeUID, treeProfile }) {
                   type="radio"
                   name="treeProfileLayout"
                   id={style.key}
-                  layout={'hero'}
                   checked={selectedTreeProfileLayout == style.key}
                   onChange={handleInputChange}
                 />
@@ -96,7 +95,6 @@ export default function EditTreeProfileLayout({ treeUID, treeProfile }) {
           </form>
         </div>
       </div>
-      <Toaster position="top" />
     </>
   );
 }

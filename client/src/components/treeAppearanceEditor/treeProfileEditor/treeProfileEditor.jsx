@@ -48,6 +48,7 @@ export default function TreeProfileEditor({treeProfile,setTreeProfile, treeUID})
     <>
           <p className={styles.title}>Profile</p>
           <div className={styles.container}>
+            
             <div className={styles.editTreePictureContainer}>
               <EditTreePicture
                 treeProfile={treeProfile}

@@ -17,35 +17,6 @@
     gap: 15px;
 }
 
-/* 
-.profileImageEditForm {
-    width: auto;
-    display: flex;
-    justify-content: stretch;
-    align-items: stretch;
-    gap: 20px;
+.editTreeProfileLayoutContainer{
+    margin-top: 5px;
 }
-
-.profileImageContainer {
-    position: relative;
-    height: 75px;
-    width: 75px;
-    border-radius: 50px;
-}
-
-.profileImage {
-    border-radius: inherit;
-}
-
-.profileImageEditOptionsContainer {
-    display: flex;
-    justify-content: stretch;
-    align-items: center;
-}
-
-.saveButton {
-    background-color: var(--accent1);
-    border-radius: 50px;
-    width: 100px;
-    padding: 10px;
-} */

@@ -33,7 +33,6 @@
 }
 
 .themeLable>div {
-    border: 1px solid var(--border-surface-3);
     height: fit-content;
     width: fit-content;
     display: flex;
@@ -41,10 +40,7 @@
     align-items: stretch;
     gap: 10px;
     flex-direction: column;
-    /* padding: 15px; */
-    /* background-color: var(--color-surface-2); */
     border-radius: 15px;
-    box-shadow: var(--shadow-2);
     text-align: center;
 }
 
