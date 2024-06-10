@@ -10,8 +10,9 @@ export const POST = async (req, { params }) => {
     
     
     try {
-        let { treeName, treeBio, profilePicturePublicUrl, selectedThemeID } = await req.json();
-        if (!treeName && !treeBio && !profilePicturePublicUrl && !selectedThemeID) {
+        let { treeName, treeBio, profilePicturePublicUrl, selectedThemeID, treeProfileLayout } = await req.json();
+
+        if (!treeName && !treeBio && !profilePicturePublicUrl && !selectedThemeID && !treeProfileLayout) {
             return NextResponse.json({success: false, message: "Nothing to change" },{status: 500})
         }
         const session = await auth()
@@ -19,7 +20,7 @@ export const POST = async (req, { params }) => {
         
         let tree = await Tree.findOne({ UID: treeUID });
         if (!tree) {
-            return NextResponse.json({ success: false, message: 'treeUID is not valid'}, { status: 400 })
+            return NextResponse.json({ success: false, message: 'Tree not found'}, { status: 400 })
         };
         
         if (tree.owner.equals(userID)) {
@@ -41,8 +42,12 @@ export const POST = async (req, { params }) => {
                 tree.theme.selectedTheme.themeID = selectedThemeID
             }
 
+            if(treeProfileLayout){
+                tree.treeProfileLayout  = treeProfileLayout;
+            }
+
             await tree.save();
-            return NextResponse.json({success: true, treeProfile: { treeBio, treeName, profilePicturePublicUrl: tree.treePicture.URL } })
+            return NextResponse.json({success: true, treeProfile: { treeBio, treeName, profilePicturePublicUrl: tree.treePicture.URL,  } })
         } else {
             return NextResponse.json({success: false, message: "Unautherised access to edit tree"},{status: 401})
         }

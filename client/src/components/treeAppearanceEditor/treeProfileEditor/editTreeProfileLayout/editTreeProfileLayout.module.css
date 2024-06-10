@@ -1,7 +1,11 @@
+.container{
+    border: 1px solid red;
+}
+
 .title {
     font-weight: 550;
-    font-size: 25px;
-    color: var(--color-text-primary);
+    font-size: 20px;
+    color: var(--color-text-main);
     margin-bottom: 15px;
 }
 
@@ -10,13 +14,13 @@
     /* display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr; */
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: stretch;
     gap: 35px;
     flex-wrap: wrap;
 }
 
-.themeInput {
+.styleInput {
     display: none;
 }
 
@@ -29,28 +33,29 @@
     align-items: stretch;
     gap: 10px;
     flex-direction: column;
-    padding: 15px;
-    background-color: var(--color-surface-2);
+    /* padding: 15px; */
+    /* background-color: var(--color-surface-2); */
     border-radius: 15px;
     box-shadow: var(--shadow-2);
     text-align: center;
 }
 
-.themeDisplayPictureContainer {
-    height: 250px;
-    width: 200px;
+.displayPictureContainer {
+    height: 75px;
+    width: 75px;
     /* padding: 10px;
     border: 3px solid gray; */
     border-radius: 15px;
 }
 
-.themeInput:checked+.themeLable .themeDisplayPictureContainer {
-    padding: 10px;
+.styleInput:checked+.themeLable .displayPictureContainer {
+    padding: 5px;
     border: 3px dotted gray;
 }
 
 
-.themeDisplayPicture {
+
+.displayPicture {
     position: relative;
     height: 100%;
     width: auto;

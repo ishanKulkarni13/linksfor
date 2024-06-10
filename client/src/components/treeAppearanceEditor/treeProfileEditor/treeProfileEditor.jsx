@@ -2,6 +2,7 @@
 import styles from "./treeProfileEditor.module.css";
 import EditTreeTitleAndBio from "./editTreeTitleAndBio/editTreeTitleAndBio";
 import EditTreePicture from "./editTreePicture/editTreePicture";
+import EditTreeProfileLayout from "./editTreeProfileLayout/editTreeProfileLayout";
 
 export default function TreeProfileEditor({treeProfile,setTreeProfile, treeUID}) {
   // const [treeProfile, setTreeProfile] = useState(null);
@@ -57,6 +58,14 @@ export default function TreeProfileEditor({treeProfile,setTreeProfile, treeUID})
 
             <div className={styles.profileTitleAndBioContainer}>
               <EditTreeTitleAndBio
+                treeProfile={treeProfile}
+                treeUID={treeUID}
+              />
+            </div>
+
+            
+            <div className={styles.editTreeProfileLayoutContainer}>
+              <EditTreeProfileLayout
                 treeProfile={treeProfile}
                 treeUID={treeUID}
               />

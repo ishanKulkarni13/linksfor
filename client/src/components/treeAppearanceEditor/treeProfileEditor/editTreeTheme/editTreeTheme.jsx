@@ -9,7 +9,7 @@ import { avaibleTreeThemes } from "@/constants";
 import Image from "next/image";
 import useUpdateTreeProfile from "@/hooks/useUpdateTreeProfile";
 
-export default function FaultuEditTreeTheme({ treeUID, treeProfile }) {
+export default function EditTreeTheme({ treeUID, treeProfile }) {
   const { push } = useRouter();
   const { removeItem, getItem } = useLocalstorage("selectedTree");
   const { updateTreeProfile } = useUpdateTreeProfile(treeUID);

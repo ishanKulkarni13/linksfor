@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import User from './user.js'
+import { Columns } from "lucide-react";
+import { values } from "lodash";
 const treeSchema = mongoose.Schema({
     owner: {
         type: mongoose.Schema.Types.ObjectId,
@@ -34,11 +36,13 @@ const treeSchema = mongoose.Schema({
         },
         URL: {
             type: String,
-        },
-        style:{
-            type: String,
-            default:"classic"
         }
+    },
+    treeProfileLayout:{
+        type: String,
+        required: true,
+        enum: {values:["column", 'classic', 'hero', "row"], message:`treeProfileLayout can be following only: column, classic, hero, row`},
+        default: 'classic' // column
     },
     treeBio: {
         type: String,
