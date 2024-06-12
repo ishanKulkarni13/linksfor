@@ -68,7 +68,9 @@ export default function SelectTree() {
   return (
     <div className={styles.container}>
       {!selectedTreeProfile ? (
-        <div className={styles.loadingContainer} >Loading selected tree Profie </div>
+        <div className={styles.loadingContainer}>
+          Loading selected tree Profie{" "}
+        </div>
       ) : (
         <>
           <button
@@ -77,17 +79,21 @@ export default function SelectTree() {
           >
             <div className={styles.selectedTreeProfileContainer}>
               <div className={styles.selectedTreeImageContainer}>
-
-              <span>NA</span>
-                {selectedTreeProfile.treePicture.URL && (
-                  <Image
-                  fill={true}
-                  className={styles.profileImage}
-                  src={`${selectedTreeProfile.treePicture.URL}`}
-                  alt="Tree Image"
-                />
-                )}
                 
+                {selectedTreeProfile.treePicture &&
+                selectedTreeProfile.treePicture.URL ? (
+                  <>
+                    <span>Loading</span>
+                    <Image
+                      fill={true}
+                      className={styles.profileImage}
+                      src={`${selectedTreeProfile.treePicture.URL}`}
+                      alt="Tree Image"
+                    />
+                  </>
+                ) : (
+                  <span>NA</span>
+                )}
               </div>
               <div className={styles.selectedTreeTextContainer}>
                 <h1 className={styles.selectedTreeName}>

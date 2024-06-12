@@ -7,7 +7,7 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { useSelectTree } from "@/hooks/selectTree";
-import {useRouter} from "next/navigation"
+import { useRouter } from "next/navigation";
 
 export default function SelectTreePopup({
   close,
@@ -16,7 +16,7 @@ export default function SelectTreePopup({
 }) {
   const [isLoading, setIsLoading] = useState(true);
   const [trees, setTrees] = useState([]);
-  const {push} = useRouter()
+  const { push } = useRouter();
   const select = useSelectTree();
   const getTrees = async () => {
     try {
@@ -44,7 +44,7 @@ export default function SelectTreePopup({
     if (selectedTree) {
       setSelectedTreeProfile(selectedTree);
       select(treeUID);
-      push(`/admin/tree/edit/links`)
+      push(`/admin/tree/edit/links`);
       close();
     } else {
       toast.error(`Tree with UID ${treeUID} not found`);
@@ -77,14 +77,18 @@ export default function SelectTreePopup({
                     >
                       <div className={styles.treeProfileContainer}>
                         <div className={styles.treeImageContainer}>
-                          <span>NA</span>
-                          {tree.treePicture.URL && (
-                            <Image
-                              fill={true}
-                              className={styles.profileImage}
-                              src={`${tree.treePicture.URL}`}
-                              alt="Tree Image"
-                            />
+                          {tree.treePicture && tree.treePicture.URL ? (
+                            <>
+                              <span>Loading</span>
+                              <Image
+                                fill={true}
+                                className={styles.profileImage}
+                                src={`${tree.treePicture.URL}`}
+                                alt="Tree Image"
+                              />
+                            </>
+                          ) : (
+                            <span>NA</span>
                           )}
                         </div>
                         <div className={styles.treeTextContainer}>
