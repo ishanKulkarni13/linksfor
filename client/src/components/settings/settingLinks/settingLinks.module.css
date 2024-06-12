@@ -11,6 +11,10 @@
     padding: 10px;
 }
 
+.delete{
+    color: red;
+}
+
 .accountSetting:last-child  .separator{
     display: none;
 }

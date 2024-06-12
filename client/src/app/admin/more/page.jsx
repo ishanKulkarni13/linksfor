@@ -57,6 +57,12 @@ export default function AdminMorePage() {
       path: "/admin/tree/Archives",
       key: "Archives",
     },
+    {
+      title: "Delete Tree",
+      icon: FiLayout,
+      path: "/admin/tree/delete",
+      key: "deleteTree",
+    },
   ];
 
 

@@ -3,7 +3,7 @@ import styles from "./settingLinks.module.css";
 import { FiLayout } from "react-icons/fi";
 import { Separator } from "@/components/ui/separator";
 
-export default function SettingLinks({ title, settingLinks }) {
+export default function SettingLinks({ title,key ,settingLinks }) {
   return (
     <div className={styles.container}>
       {title && <p className={styles.title}>{title}</p>}
@@ -11,9 +11,8 @@ export default function SettingLinks({ title, settingLinks }) {
         {settingLinks.map((setting) => {
           return (
             <div key={setting.key} className={styles.accountSetting}>
-              <Link href={setting.path} className={styles.link}>
+              <Link href={setting.path} className={`${styles.link} ${setting.title.toLowerCase().includes('delete') && styles.delete }`}>
                 <span className={styles.icon}>
-                  {" "}
                   <setting.icon />
                 </span>
                 <p className={styles.settingTitle}>{setting.title}</p>
