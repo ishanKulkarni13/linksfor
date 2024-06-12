@@ -12,6 +12,7 @@ import { useDebounce } from "@/hooks/debounce";
 import { useLocalstorage } from "@/hooks/localStorage";
 import { useRouter } from "next/navigation";
 import { useTreeUID } from "@/hooks/treeUID";
+import useHandelReselectTree from "@/hooks/handelReselectTree";
 
 export default function LinksEditor() {
   const { push } = useRouter();
@@ -21,6 +22,7 @@ export default function LinksEditor() {
   const [links, setLinks] = useState([]);
   const [reorderedLinksUID, setReorderedLinksUID] = useState();
   const debouncelinksUIDOrder = useDebounce(reorderedLinksUID, 3000);
+  const {redirectToSelectTree} = useHandelReselectTree();
 
   // const getDefaultTreeUID = async ()=>{
   //   try {
@@ -98,8 +100,7 @@ export default function LinksEditor() {
         toast.error(`Link not added: ${response.message}`);
         console.log(`code in updateLinks`, statusCode);
         if (statusCode === 400 || statusCode === 401) {
-          removeItem();
-          push("/admin/selectTree?removeSelectedTree");
+          return redirectToSelectTree();
         }
       }
     }

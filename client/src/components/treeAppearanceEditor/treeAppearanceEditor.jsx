@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { Toaster, toast } from "sonner";
 import axios from "axios";
 import TreePreviewToggleButton from "../treePreview/treePreviewToggleButton/treePreviewToggleButton";
+import useHandelReselectTree from "@/hooks/handelReselectTree";
 
 const DynamicTreeProfileEditor = dynamic(
   () =>
@@ -44,6 +45,7 @@ export default function TreeAppearanceEditor() {
   const { removeItem } = useLocalstorage("selectedTree");
   const { width } = useWindowResize();
   const treeUID = useTreeUID(null);
+  const {redirectToSelectTree} = useHandelReselectTree();
 
   const getTreeProfile = async () => {
     if (!treeUID) {
@@ -63,8 +65,7 @@ export default function TreeAppearanceEditor() {
         // if server responded
         toast.error(error.response.data.message);
         if (error.response.status === 404 || error.response.status === 401) {
-          removeItem();
-          return push("/admin/selectTree?removeSelectedTree");
+          return redirectToSelectTree();
         }
       } else if (error.request) {
         //req was made but go no response

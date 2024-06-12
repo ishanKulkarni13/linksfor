@@ -1,3 +1,5 @@
+'use client'
+
 import Popup from "@/components/popup/popup";
 import styles from "./selectTreePopup.module.css";
 import { useEffect, useState } from "react";
@@ -17,7 +19,9 @@ export default function SelectTreePopup({
   const [isLoading, setIsLoading] = useState(true);
   const [trees, setTrees] = useState([]);
   const { push } = useRouter();
+
   const select = useSelectTree();
+
   const getTrees = async () => {
     try {
       const res = await axios.get(`/api/tree/admin/trees`, {
@@ -42,10 +46,11 @@ export default function SelectTreePopup({
   const selectTree = async (treeUID) => {
     const selectedTree = trees.find((tree) => tree.UID === treeUID);
     if (selectedTree) {
-      setSelectedTreeProfile(selectedTree);
+      setSelectedTreeProfile && setSelectedTreeProfile(selectedTree);
       select(treeUID);
+      toast.info('Tree selected, redirecting...')
       push(`/admin/tree/edit/links`);
-      close();
+      close && close();
     } else {
       toast.error(`Tree with UID ${treeUID} not found`);
     }
@@ -56,7 +61,7 @@ export default function SelectTreePopup({
 
   return (
     <>
-      <Popup title={`Select Tree`} close={close}>
+      <Popup title={`Select Tree`}  close={close || false} >
         {isLoading ? (
           <>Loading your Trees</>
         ) : (
@@ -70,7 +75,8 @@ export default function SelectTreePopup({
                         selectTree(tree.UID);
                       }}
                       className={`${styles.treeContainer} ${
-                        tree.UID == selectedTreeProfile.UID
+                        selectedTreeProfile &&
+                        tree.UID == selectedTreeProfile?.UID
                           ? `${styles.selected}`
                           : `notSelected`
                       }`}
@@ -98,9 +104,10 @@ export default function SelectTreePopup({
                       </div>
 
                       <div className={styles.iconContainer}>
-                        {tree.UID == selectedTreeProfile.UID && (
-                          <FontAwesomeIcon icon={faCheck} />
-                        )}
+                        {selectedTreeProfile &&
+                          tree.UID == selectedTreeProfile.UID && (
+                            <FontAwesomeIcon icon={faCheck} />
+                          )}
                       </div>
                     </button>
                   </>
