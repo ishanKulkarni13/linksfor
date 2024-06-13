@@ -70,7 +70,7 @@ export default function AdminMorePage() {
     {
       title: "Signout",
       icon: FiLayout,
-      path: "/admin/signout",
+      path: "/signout",
       key: "signout",
     },
   ];
