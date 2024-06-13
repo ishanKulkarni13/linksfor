@@ -1,0 +1,41 @@
+
+.iconContainer{
+    font-size: 25px;
+}
+
+.treeProfileContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.treeImageContainer {
+    position: relative;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: var(--color-surface-2);
+    text-align: center;
+}
+
+.treeImageContainer  > span{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.treeTextContainer {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+}
+
+.selectedTreeName {
+    font-size: 1.25em;
+    font-weight: 600;
+}
