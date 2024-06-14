@@ -20,13 +20,13 @@ export default async function page() {
             <div className={`${styles.getStartedContainer}`}>
               <Link
                 className={`${styles.getStarted}`}
-                href={`/api/auth/signin`}
+                href={`/login`}
               >
                 Get started{" "}
               </Link>
               <Link
                 className={`${styles.login}`}
-                href={`/api/auth/signin`}
+                href={`/login`}
               >
                 Login{" "}
               </Link>

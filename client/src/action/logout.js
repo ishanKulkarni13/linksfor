@@ -8,7 +8,7 @@ export const logout = async ()=>{
     const session = await auth()
     const user = session?.user;
     if(user){
-        await signOut();
+        await signOut({redirectTo:'/', redirect: true});
     }
     redirect('/');
 }

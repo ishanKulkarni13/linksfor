@@ -6,6 +6,7 @@ import { faLink, faShare, faUser } from "@fortawesome/free-solid-svg-icons";
 import useWindowResize from "@/hooks/useWindowSize";
 import Link from "next/link";
 import ShareTreeButton from "../shareTree/shareTreeButton/shareTreeButton";
+import { ThemeModeToggle } from "../buttons/theme/changeThemeButton";
 export default function TopBar() {
   const { width, heigth } = useWindowResize();
   return (
@@ -21,11 +22,12 @@ export default function TopBar() {
             <ShareTreeButton/>
           </div>
 
-          <Link className={styles.profile} href={"/admin"}>
+          <div className={styles.profile} href={"/admin"}>
             <div className={styles.profileImgContainer}>
-              <FontAwesomeIcon  className={styles.icon} icon={faUser} />
+              {/* <FontAwesomeIcon  className={styles.icon} icon={faUser} /> */}
+              <ThemeModeToggle/>
             </div>
-          </Link>
+          </div>
         </div>
 
         <div className={styles.bottomContainer}>
@@ -44,11 +46,12 @@ export default function TopBar() {
           <Nav />
         </div>
 
-        <Link className={styles.profile} href={"/admin"}>
+        <div className={styles.profile} href={"/admin"}>
           <div className={styles.profileImgContainer}>
-            <FontAwesomeIcon className={styles.icon} icon={faUser} />
+            {/* <FontAwesomeIcon className={styles.icon} icon={faUser} /> */}
+            <ThemeModeToggle/>
           </div>
-        </Link>
+        </div>
       </div>
     </div>
   );

@@ -1,14 +1,12 @@
-import { googleLogin } from "@/action/login"
-import { signIn } from "@/auth"
+import styles from "./style.module.css"
+import GoogleButton from "@/components/buttons/google/googleButton"
 
 export default async function Page() {
 
 
   return (
-    <div>
-     <form action={googleLogin}>
-      <button type="submit">Login</button>
-     </form>
+    <div className={styles.container}>
+    <GoogleButton/>
     </div>
   )
 }

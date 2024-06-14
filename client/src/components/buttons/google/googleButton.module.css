@@ -1,18 +1,32 @@
-.container{
-    width: auto;
+/* .container {
+
+
+} */
+
+.container button {
+
+    width: 50vw;
+    max-width: 500px;
+    min-width: 300px;
     height: 45px;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: row-reverse;
+    gap: 10px;
+    font-size: 1.3em;
     border-radius: 50px;
-    border: 1px solid rgb(254, 254, 254);
+    background-color: var(--color-surface-1);
+    border: var(--border-surface-1);
+    color: var(--color-text-main);
     text-align: center;
-    
-
 }
 
-.container > p{
-    size: 20px;
-    font-weight:600;
+.container p {
+    font-weight: 600;
+}
 
+
+.icon {
+    width: auto;
 }
