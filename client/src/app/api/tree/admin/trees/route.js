@@ -7,8 +7,12 @@ export const GET = async () => {
 
     try {
         await connectToDB()
-        const session = await auth()
+        const session = await auth();
+        if (!session?.user) {
+            return NextResponse.json({ success: false, message: 'user not logedin' }, { status: 500 })
+        };
         let userID = session.user.id
+
 
         let trees = await Tree.find({ owner: userID });
         if (trees.length === 0) {

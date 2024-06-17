@@ -1,0 +1,82 @@
+.container {
+    margin: 0px var(--margin-x);
+}
+
+.top {
+    margin: auto;
+    margin-bottom: 50px;
+    margin-top: 15px;
+    text-align: center;
+    font-size: 35px;
+    font-weight: 550;
+}
+
+.trees {
+    display: grid;
+    grid-template-columns: 1fr ;
+    gap: 25px;
+}
+
+.treeContainer {
+    --margin: 15px;
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: var(--color-surface-1);
+    /* display: flex;
+    justify-content: center;
+    align-items: stretch;flex-direction: column; */
+}
+
+.treeProfileContainer {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    grid-template-rows: 150px;
+    gap: var(--margin);
+}
+
+
+
+.treeImageContainer {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--color-surface-2);
+    text-align: center;
+}
+
+.treeImageContainer>span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5em;
+}
+
+.treeInfoContainer {
+    margin-top: var(--margin);
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+}
+
+.treeInfoContainer>.treeName {
+    font-size: 1.3em;
+    font-weight: 500;
+    line-height: 100%;
+}
+
+.treeActionsContainer {
+    padding: var(--margin);
+}
+
+.iconContainer {
+    font-size: 25px;
+}
+
+.separator {
+    width: 90%;
+    
+     margin: 10px auto;
+}
