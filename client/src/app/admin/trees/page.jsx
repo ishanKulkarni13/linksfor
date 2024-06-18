@@ -34,6 +34,7 @@ export default async function Page() {
   }
 
   return (
+    <>
     <div className={styles.container}>
       <div className={styles.top}>
         <h1>Your all the Trees </h1>
@@ -64,9 +65,8 @@ export default async function Page() {
                     <h1 className={styles.treeName}>{tree.treeName}</h1>
                     <p className={styles.treeUID}>{tree.UID}</p>
                   </div>
+                  
                 </div>
-
-                <Separator className={styles.separator} />
                 <div className={styles.treeActionsContainer}>
                   <TreeActionButtons treeUID={tree.UID} />
                 </div>
@@ -75,5 +75,6 @@ export default async function Page() {
           })}
       </div>
     </div>
+    </>
   );
 }

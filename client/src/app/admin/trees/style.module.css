@@ -4,8 +4,8 @@
 
 .top {
     margin: auto;
-    margin-bottom: 50px;
-    margin-top: 15px;
+    margin-top: var(--margin-x);
+    margin-bottom: 20px;
     text-align: center;
     font-size: 35px;
     font-weight: 550;
@@ -22,24 +22,20 @@
     border-radius: 15px;
     overflow: hidden;
     background-color: var(--color-surface-1);
-    /* display: flex;
-    justify-content: center;
-    align-items: stretch;flex-direction: column; */
 }
 
 .treeProfileContainer {
     display: grid;
-    grid-template-columns: 150px 1fr;
-    grid-template-rows: 150px;
+    grid-template-columns: 100px 1fr;
+    grid-template-rows: 100px;
     gap: var(--margin);
 }
-
-
 
 .treeImageContainer {
     position: relative;
     height: 100%;
     width: 100%;
+    border-bottom-right-radius: 15px;
     overflow: hidden;
     background-color: var(--color-surface-2);
     text-align: center;
@@ -59,6 +55,7 @@
     justify-content: start;
     align-items: start;
     flex-direction: column;
+    gap: 5px;
 }
 
 .treeInfoContainer>.treeName {

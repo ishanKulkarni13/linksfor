@@ -2,6 +2,8 @@
 import Popup from "@/components/popup/popup";
 import styles from "./treeActionPopups.module.css";
 import { deleteTree } from "@/action/treeActions";
+import { toast } from "sonner";
+import { useState } from "react";
 
 export default function TreeActionPopups({ popup, treeUID, close }) {
   if (popup == "deleteTree") {
@@ -13,14 +15,18 @@ export default function TreeActionPopups({ popup, treeUID, close }) {
 
 export function DeleteTree({ treeUID, close }) {
 
-  const callDeleteTree = async ()=>{
+  const [error , setError] = useState(false)
 
+  const callDeleteTree = async ()=>{
+    setError(false)
     try {
       const res = await deleteTree({treeUID});
       if(!res.success){
+        setError(res.message)
         toast.error(res.message)
-      } else{
-        toast.success(`deleted tree`);
+        } else{
+          setError(false)
+          toast.success(`Deleted tree`);
         return close()
       }
 
@@ -34,13 +40,19 @@ export function DeleteTree({ treeUID, close }) {
   return (
     <Popup title={`Delete Tree`} close={close || false}>
       <div className={styles.deleteTree}>
+
         <div className={styles.top} >
           <h5>Are you sure you want to delete tree?</h5>
         </div>
+
         <div  className={styles.buttons} >
-          <button onClick={callDeleteTree}  > Yes, delete it</button>
-          <button onClick={close} >Cancel</button>
+          <button className={styles.delete} onClick={callDeleteTree}  > Yes, delete it</button>
+          <button  className={styles.close} onClick={close} >Cancel</button>
         </div>
+
+        {
+          error && <p className={styles.errorText} >{error}</p>
+        }
       </div>
     </Popup>
   );

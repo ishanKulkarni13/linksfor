@@ -1,23 +1,39 @@
 .treeActionsButtons{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: var(--margin);
+    grid-template-rows: auto;
+    grid-template-areas: 
+    'deleteTree treeUniqueName'
+    'selectAsDefaultTree selectAsDefaultTree';
+    gap: 10px;
 
 }
 
 .treeActionsButton{
     background-color: var(--color-surface-2);
-    padding: 15px;
+    padding: 10px 15px;
     border-radius: 50px;
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-weight: 500;
     transition: transform 0.1s ease-in-out;
 }
 
-.treeActionsButton:hover{
-    transform: scale(1.05);
+.treeActionsButton:nth-child(1){
+    grid-area: deleteTree;
 }
+.treeActionsButton:nth-child(2){
+    grid-area:  treeUniqueName;
+}
+.treeActionsButton:nth-child(3){
+    grid-area: selectAsDefaultTree ;
+}
+
+@media (width > 1204){
+    .treeActionsButton:hover{
+    transform: scale(1.05);
+    }
+}
+
 
 
 

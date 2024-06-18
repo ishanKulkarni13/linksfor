@@ -19,15 +19,10 @@ export default function TreeActionButtons({ treeUID }) {
       popupComponentKey: 'deleteTree'
     },
     {
-      type: "admins",
-      name: "Admins",
-      popupComponentKey: 'deleteTree'
-    },
-    {
-      type: "ghkhkkj",
-      name: "FGkghv Gjmh",
-      popupComponentKey: 'deleteTree'
-    },
+      type: "selectAsDefaultTree",
+      name: "Select as Default",
+      popupComponentKey: 'selectAsDefaultTree'
+    }
   ];
 
   const closePopup = ()=>setPopup(false);
@@ -39,7 +34,7 @@ export default function TreeActionButtons({ treeUID }) {
           return (
             <button
               key={`${button.type}-${treeUID}`}
-              className={styles.treeActionsButton}
+              className={`${styles.treeActionsButton}`}
               onClick={()=> setPopup(button.popupComponentKey)}
             >{button.name}</button>
           );

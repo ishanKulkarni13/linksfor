@@ -1,0 +1,33 @@
+.deleteTree{
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+    gap: 10px;flex-direction: column;
+}
+
+ .deleteTree > .top > h5{
+    font-size: 1.05rem;
+}
+
+.deleteTree .buttons{
+    display: grid; 
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.deleteTree .buttons > button{
+    padding: 10px 10px;
+    font-weight: 500;
+    border: var(--border-surface-1);
+    border-color: var(----color-contrast-border);
+    border-radius: 25px;
+}
+
+.deleteTree .delete{
+    color: var(--color-destructive);
+    border-color: var(--color-destructive) !important;
+}
+
+.errorText{
+    color: var(--color-error);
+}
