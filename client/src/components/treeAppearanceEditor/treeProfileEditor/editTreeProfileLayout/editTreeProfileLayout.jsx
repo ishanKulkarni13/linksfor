@@ -1,7 +1,7 @@
 "use client";
 import styles from "./editTreeProfileLayout.module.css";
 import { useRouter } from "next/navigation";
-import { Toaster, toast } from "sonner";
+import {  toast } from "sonner";
 import axios from "axios";
 import { useLocalstorage } from "@/hooks/localStorage";
 import { useEffect, useRef, useState } from "react";

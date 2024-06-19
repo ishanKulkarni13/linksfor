@@ -1,5 +1,5 @@
 "use client";
-import { Toaster, toast } from "sonner";
+import {  toast } from "sonner";
 import styles from "./treePreviewToggleButton.module.css";
 
 import { useState } from "react";

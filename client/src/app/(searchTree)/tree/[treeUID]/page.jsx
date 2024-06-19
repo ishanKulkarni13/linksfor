@@ -6,7 +6,7 @@ import React from 'react'
 const getTree = async (treeUID) => {
   try {
     let res = await fetch(
-      `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/search/tree/treeUID/${treeUID}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/search/tree/treeUID/${treeUID}`,
       {
         method: "GET",
         cache: "no-store",

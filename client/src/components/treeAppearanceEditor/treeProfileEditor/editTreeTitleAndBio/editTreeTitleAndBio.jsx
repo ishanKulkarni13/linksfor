@@ -2,7 +2,7 @@
 import styles from "./editTreeTitleAndBio.module.css";
 import { backendBaseURL } from "@/constants/index";
 import { useRouter } from "next/navigation";
-import { Toaster, toast } from "sonner";
+import {  toast } from "sonner";
 import axios from "axios";
 import { useLocalstorage } from "@/hooks/localStorage";
 import { useEffect, useState } from "react";

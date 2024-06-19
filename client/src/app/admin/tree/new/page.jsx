@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import styles from "./createNewTree.module.css";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useLocalstorage } from "@/hooks/localStorage";
@@ -76,7 +76,6 @@ export default function CreateNewTreePage() {
           </form>
         </div>
       </main>
-      <Toaster richColors={true} />
     </>
   );
 }

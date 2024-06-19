@@ -1,10 +1,9 @@
 .container {
-    margin: 0px var(--margin-x);
+    margin: var(--margin-x);
 }
 
 .top {
     margin: auto;
-    margin-top: var(--margin-x);
     margin-bottom: 20px;
     text-align: center;
     font-size: 35px;
@@ -13,7 +12,7 @@
 
 .trees {
     display: grid;
-    grid-template-columns: 1fr ;
+    grid-template-columns: 1fr;
     gap: 25px;
 }
 
@@ -74,6 +73,6 @@
 
 .separator {
     width: 90%;
-    
-     margin: 10px auto;
+
+    margin: 10px auto;
 }

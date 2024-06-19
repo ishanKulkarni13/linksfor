@@ -3,7 +3,7 @@ import styles from "./popup.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faMinus, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Input } from "@/components/ui/input";
-import { Toaster, toast } from "sonner";
+import {  toast } from "sonner";
 
 export default function Popup({ close, title, children }) {
   return (
@@ -27,7 +27,6 @@ export default function Popup({ close, title, children }) {
           <div className={styles.childrenContainer}>{children}</div>
         </div>
       </div>
-      <Toaster richColors />
     </>
   );
 }

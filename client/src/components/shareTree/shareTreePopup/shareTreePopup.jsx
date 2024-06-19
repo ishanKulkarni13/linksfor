@@ -3,7 +3,7 @@ import styles from "./shareTreePopup.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faCopy, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Input } from "@/components/ui/input";
-import { Toaster, toast } from "sonner";
+import {  toast } from "sonner";
 import Popup from "@/components/popup/popup";
 import { useEffect, useState } from "react";
 import { useTreeUID } from "@/hooks/treeUID";
@@ -55,7 +55,6 @@ export default function ShareTreePopup({ close }) {
   };
 
   useEffect(() => {
-    // setShareableLink( `${process.env.NEXT_PUBLIC_FRONTEND_URL}/tree/`)
     if (treeUID) {
       handelSetShareableLink();
     }
@@ -88,7 +87,6 @@ export default function ShareTreePopup({ close }) {
           </div>
         </div>
       </Popup>
-      <Toaster richColors={true} position="bottom-left" />
     </>
   );
 }

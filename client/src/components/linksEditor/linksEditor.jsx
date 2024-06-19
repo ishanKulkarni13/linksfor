@@ -4,7 +4,7 @@ import { backendBaseURL } from "@/constants/index";
 import { Reorder, useDragControls } from "framer-motion";
 import { useEffect, useState } from "react";
 import Link from "@/components/linksEditor/link/link";
-import { Toaster, toast } from "sonner";
+import {  toast } from "sonner";
 import AddButton from "./addLink/addLinkButton";
 import TreePreview from "../treePreview/treePreview";
 import TreePreviewToggleButton from "../treePreview/treePreviewToggleButton/treePreviewToggleButton";
@@ -274,7 +274,6 @@ export default function LinksEditor() {
             </div>
           </div>
           <TreePreviewToggleButton treeUID={treeUID} alwaysVisible />
-          <Toaster position="bottom" expand={true} richColors />
         </>
       )}
     </>

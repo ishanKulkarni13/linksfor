@@ -9,7 +9,7 @@ import {
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useTreeUID } from "@/hooks/treeUID";
-import { Toaster, toast } from "sonner";
+import {  toast } from "sonner";
 import axios from "axios";
 import Link from "next/link";
 import SelectTreePopup from "./selectTreePopup/selectTreePopup";
@@ -129,7 +129,6 @@ export default function SelectTree() {
       <Link href={"/admin/tree/new"} className={styles.createNewTreeButton}>
         <p>Create new tree</p>
       </Link>
-      <Toaster position="bottom" richColors />
     </div>
   );
 }

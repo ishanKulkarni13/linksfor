@@ -23,7 +23,7 @@ import {
   SelectItem,
   Select,
 } from "@/components/ui/select";
-import { Toaster, toast } from "sonner";
+import {  toast } from "sonner";
 
 const formSchema = z
   .object({
@@ -150,7 +150,6 @@ export default function Login() {
           </div>
         </div>
       </div>
-      <Toaster richColors={true}/>
     </main>
   );
 }

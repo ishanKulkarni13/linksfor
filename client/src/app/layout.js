@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from 'next-themes'
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,9 +13,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html suppressHydrationWarning lang="en">
-      <body className={`${inter.className}s`}>
+      <body className={`${inter.className}`}>
         <ThemeProvider attribute="class">
-          {children}
+          <main>
+            <>
+             {children}
+             </>
+             <Toaster position="bottom-left" richColors />
+
+          </main>
+         
         </ThemeProvider>
       </body>
     </html>

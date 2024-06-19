@@ -3,7 +3,7 @@ import {backendBaseURL} from "@/constants/index"
 const getTreeByUsername = async (username) => {
   try {
     let res = await fetch(
-      `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/search/tree/username/${username}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/search/tree/username/${username}`,
       {
         method: "GET",
         cache: "no-store",

@@ -3,7 +3,7 @@
 import Popup from "@/components/popup/popup";
 import styles from "./selectTreePopup.module.css";
 import { useEffect, useState } from "react";
-import { Toaster, toast } from "sonner";
+import {  toast } from "sonner";
 import axios from "axios";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -117,7 +117,6 @@ export default function SelectTreePopup({
           </>
         )}
       </Popup>
-      <Toaster richColors position="bottom" />
     </>
   );
 }

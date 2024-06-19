@@ -14,7 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Toaster, toast } from "sonner";
+import {  toast } from "sonner";
 import axios from "axios";
 import { useLocalstorage } from "@/hooks/localStorage";
 
@@ -116,8 +116,6 @@ export default function EditTreeTitleAndBio({ treeUID }) {
             </form>
           </Form>
         </div>
-
-        <Toaster richColors={true} />
       </div>
     </>
   );

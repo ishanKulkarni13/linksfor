@@ -23,7 +23,7 @@ import {
   SelectItem,
   Select,
 } from "@/components/ui/select";
-import { Toaster , toast} from "sonner";
+import { toast} from "sonner";
 
 const formSchema = z
   .object({
@@ -113,7 +113,6 @@ export default function Home() {
 
   return (
     <main className={` ${styles.regesterContainer}`}>
-    <Toaster expand={true} />
       <div className={`${styles.titleContainer}`}>
         <h1>Regester</h1>
       </div>
