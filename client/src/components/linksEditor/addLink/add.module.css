@@ -50,9 +50,14 @@
     font-weight: 550;
 }
 
+
 .addLinkButton {
     background-color: var(--color-primary);
     color: var(--color-text-contrast-main);
+}
+
+.addIconContainer{
+    width: 25px;
 }
 
 .top {

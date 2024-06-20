@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.container > p{
+  background-color: #212121;
+  color: white;
+}

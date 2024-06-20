@@ -1,5 +1,4 @@
 import Tree from "@/components/themes/tree";
-import {backendBaseURL} from "@/constants/index"
 const getTreeByUsername = async (username) => {
   try {
     let res = await fetch(
@@ -26,6 +25,7 @@ const getTreeByUsername = async (username) => {
     }
   } catch (error) {
     console.log("error catched in getTreeByUsername 2", error.message);
+    console.log(`The value of process.env.NEXT_PUBLIC_BACKEND_URL is :`, process.env.NEXT_PUBLIC_BACKEND_URL);
     return { tree: null, success: false, error: true };
   }
 };

@@ -23,7 +23,7 @@
     border-radius: 25px;
 }
 
-.deleteTree .delete{
+.deleteTree .yes{
     color: var(--color-destructive);
     border-color: var(--color-destructive) !important;
 }
@@ -31,3 +31,52 @@
 .errorText{
     color: var(--color-error);
 }
+
+
+
+
+
+
+
+
+/* 
+
+For select tree
+
+ */
+
+ .selectTree{
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+    gap: 10px;flex-direction: column;
+}
+
+ .selectTree > .top > h5{
+    font-size: 1.05rem;
+}
+
+.selectTree .buttons{
+    display: grid; 
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.selectTree .buttons > button{
+    padding: 10px 10px;
+    font-weight: 500;
+    border: var(--border-surface-1);
+    border-color: var(----color-contrast-border);
+    border-radius: 25px;
+}
+
+.selectTree .yes{
+    color: rgb(132, 0, 255);
+    border-color: rgb(132, 0, 255) !important;
+}
+
+.errorText{
+    color: var(--color-error);
+}
+
+

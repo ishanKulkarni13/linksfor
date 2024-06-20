@@ -37,7 +37,7 @@
 
 .top {
     width: auto;
-    height: 50px;
+    min-height: fit-content;
     padding: 5px;
     display: flex;
     justify-content: space-between;
@@ -48,6 +48,7 @@
 .popUpTitle {
     margin-right: auto;
     font-size: 40px;
+    line-height: 100%;
 }
 
 .closeButton {

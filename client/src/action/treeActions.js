@@ -5,9 +5,8 @@ import { Tree } from "@/lib/DB/models/tree";
 import { User } from "@/lib/DB/models/user";
 import { revalidatePath } from "next/cache";
 
-export const deleteTree = async (reqData) => {
+export const deleteTree = async (treeUID) => {
 
-    const { treeUID } = reqData;
     if (!treeUID) {
         return { success: false, message: "treeUID not provided" }
     }
@@ -33,6 +32,39 @@ export const deleteTree = async (reqData) => {
                 revalidatePath('/admin/trees')
                 return { success: true };
             }
+        }
+
+    } catch (error) {
+        console.log(error);
+        return { success: false, message: error.message }
+    }
+}
+
+export const selectTreeAsProfileDefaultTree = async (treeUID) => {
+
+    if (!treeUID) {
+        return { success: false, message: "treeUID not provided, provide it directly in function" }
+    }
+
+    try {
+        const session = await auth()
+        if (!session?.user) { return { success: false, message: "Auth error" } }
+        const userID = session.user.id
+
+        let tree = await Tree.findOne({ UID: treeUID });
+        if (!tree) {
+            return { success: false, message: 'Tree not found' }
+        };
+
+        if (!(tree.owner.equals(userID))) {
+            return { success: false, message: "Unautherised access to delete tree" }
+        } else {
+            let user = await User.findById(userID);
+            user.trees.profileDefaultTree = tree._id;
+            user.save()
+
+            return { success: true };
+
         }
 
     } catch (error) {

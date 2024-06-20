@@ -19,9 +19,9 @@ export default function TreeActionButtons({ treeUID }) {
       popupComponentKey: 'deleteTree'
     },
     {
-      type: "selectAsDefaultTree",
+      type: "selectAsDefault",
       name: "Select as Default",
-      popupComponentKey: 'selectAsDefaultTree'
+      popupComponentKey: 'selectAsDefault'
     }
   ];
 

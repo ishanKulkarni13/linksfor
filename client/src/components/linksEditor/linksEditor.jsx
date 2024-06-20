@@ -4,7 +4,7 @@ import { backendBaseURL } from "@/constants/index";
 import { Reorder, useDragControls } from "framer-motion";
 import { useEffect, useState } from "react";
 import Link from "@/components/linksEditor/link/link";
-import {  toast } from "sonner";
+import { toast } from "sonner";
 import AddButton from "./addLink/addLinkButton";
 import TreePreview from "../treePreview/treePreview";
 import TreePreviewToggleButton from "../treePreview/treePreviewToggleButton/treePreviewToggleButton";
@@ -15,72 +15,12 @@ import { useTreeUID } from "@/hooks/treeUID";
 import useHandelReselectTree from "@/hooks/handelReselectTree";
 
 export default function LinksEditor() {
-  const { push } = useRouter();
-  const { setItem, getItem, removeItem } = useLocalstorage(`selectedTree`);
   let treeUID = useTreeUID();
   const [areLinksFetched, setAreLinksFetched] = useState();
   const [links, setLinks] = useState([]);
   const [reorderedLinksUID, setReorderedLinksUID] = useState();
   const debouncelinksUIDOrder = useDebounce(reorderedLinksUID, 3000);
-  const {redirectToSelectTree} = useHandelReselectTree();
-
-  // const getDefaultTreeUID = async ()=>{
-  //   try {
-  //     let res = await fetch(
-  //       `${backendBaseURL}/tree/user-default-treeUID`,
-  //       {
-  //         method: "GET",
-  //         cache: "no-store",
-  //         credentials: "include",
-  //         headers: {
-  //           Accept: "applications/json",
-  //           "Content-Type": "application/json",
-  //           "Access-Control-Allow-Credentials": true,
-  //         },
-  //       }
-  //     );
-  //     if (res.ok) {
-  //       let responseData = await res.json();
-  //       return { success: true, error: false, response: responseData, statusCode: res.status };
-  //     } else {
-  //       let responseData = await res.json();
-  //       return { success: false, error: false, response: responseData, statusCode: res.status };
-  //     }
-  //   } catch (error) {
-  //     return { success: false, error: error, response: error};
-  //   }
-  // }
-
-  // const updateTreeUID = async () => {
-  //   let UID = getItem();
-
-  //   if (!UID) {
-  //     let { success, response, error, statusCode } = await getDefaultTreeUID();
-  //     if (success) {
-  //       console.log('got treeUID', response.treeUID);
-  //       UID = response.treeUID;
-  //     } else{
-  //       if (error) {
-  //         // if catched error in fetch
-  //         console.log("Some error occured", error);
-  //         toast.error(`Some error occured: ${error.message}`)
-  //       } else{
-  //         //no error in fetch and success is false(from server)
-  //         toast.error(`${response.message}`)
-  //         if(statusCode === 404){
-  //           removeItem()
-  //          return  push("/admin/selectTree?removeSelectedTree")
-  //         }
-  //         console.log("cant get treEUID", response.message );
-
-  //       }
-  //     }
-  //     console.log("setting selected tree cookie as no tree was selected");
-  //     setItem(UID);
-  //   }
-
-  //   setTreeUID(UID)
-  // };
+  const { redirectToSelectTree } = useHandelReselectTree();
 
   const updateLinks = async () => {
     let { success, response, error, statusCode } = await getAllLinks(treeUID);
@@ -225,24 +165,29 @@ export default function LinksEditor() {
           <div className={styles.container}>
             <div className={styles.linksEditorContainer}>
               <div className={styles.addLinkAndHeaderContainer}>
-                <AddButton type="link" setLinks={setLinks} treeUID={treeUID} />
                 <AddButton
+                  disabled={!areLinksFetched}
+                  type="link"
+                  setLinks={setLinks}
+                  treeUID={treeUID}
+                />
+                <AddButton
+                  disabled={!areLinksFetched}
                   type="header"
                   setLinks={setLinks}
                   treeUID={treeUID}
                 />
               </div>
 
-              {!areLinksFetched && <div className={styles.fetchingLinksContainer} >
+              {!areLinksFetched && (
+                <div className={styles.fetchingLinksContainer}>
+                  <h1>Fetching Links</h1>
+                </div>
+              )}
+              {links.length == 0 && areLinksFetched ? (
+                <div className={styles.noLinksContainer}>
                   <h1>
-                 Fetching Links
-                  </h1>
-                </div>}
-              {(links.length == 0 && areLinksFetched) ? (
-                <div className={styles.noLinksContainer} >
-                  <h1>
-
-                  No Links <br></br> Click on Add links to add a Link
+                    No Links <br></br> Click on Add links to add a Link
                   </h1>
                 </div>
               ) : (

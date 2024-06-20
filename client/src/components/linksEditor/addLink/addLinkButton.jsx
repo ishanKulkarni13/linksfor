@@ -1,8 +1,9 @@
+import { FaPlus } from "react-icons/fa6";
 import styles from "./add.module.css";
 import AddPopUp from "./addPopUp";
 import { useState } from "react";
 
-export default function AddButton({links, setLinks, treeUID, type}) {
+export default function AddButton({links, setLinks, treeUID, type ,disabled}) {
     const [isPopUpActive, setIsPopUpActive] = useState(false);
   function handleAddLinkButtonCLick(e) {
     setIsPopUpActive(true)
@@ -13,12 +14,13 @@ export default function AddButton({links, setLinks, treeUID, type}) {
   return (
       <>
       <button
+        disabled={disabled}
         className={styles.addLinkButton}
         onClick={handleAddLinkButtonCLick}
       >
-        <div>+</div>
+        <div className={styles.addIconContainer}><FaPlus/> </div>
         {
-          (type == `header`)?( <p>Add Header</p>):(<p>Add Link</p>)
+          (type == `header`)?( <p>Header</p>):(<p>Link</p>)
         }
         </button>
       {isPopUpActive && <AddPopUp type={type} setLinks={setLinks} close={closePopUp}  treeUID={treeUID}/>}

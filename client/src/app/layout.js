@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
             <>
              {children}
              </>
-             <Toaster position="bottom-left" richColors />
+             <Toaster position="bottom-left" richColors closeButton={true} pauseWhenPageIsHidden={true} />
 
           </main>
          

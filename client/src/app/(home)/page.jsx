@@ -2,7 +2,6 @@ import { auth } from "@/auth";
 import React from "react";
 import styles from "./home.module.css";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 
 export default async function page() {
   const session = await auth();

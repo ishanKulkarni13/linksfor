@@ -12,7 +12,7 @@ export default function Popup({ close, title, children }) {
         <div className={styles.popUpContainer}>
           <div className={styles.top}>
             <div className={styles.popUpTitle}>
-              <p>{title}</p>
+              <h1>{title}</h1>
             </div>
             {close ? (
               <button className={styles.closeButton} onClick={close}>
