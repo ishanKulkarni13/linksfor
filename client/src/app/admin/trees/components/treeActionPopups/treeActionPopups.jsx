@@ -28,21 +28,30 @@ export function DeleteTreePopup({ treeUID, close }) {
   const callDeleteTree = async () => {
     setError(false);
     try {
-      toast.info(`Deletin Tree...`);
+      toast.info(`Deleting Tree...`,{
+        id:'deleting'
+      });
+
       const res = await deleteTree(treeUID);
       if (!res.success) {
         setError(res.message);
-        toast.error(res.message);
+        toast.error(res.message, {
+          id: 'deleting'
+        });
       } else {
         setError(false);
         if (selectedTreeUID == treeUID) {
           selectTree();
         }
-        toast.success(`Deleted tree`);
+        toast.success(`Deleted tree`,{
+          id: 'deleting'
+        });
         return close();
       }
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.message,{
+        id: deleting
+      });
     }
   };
 
@@ -75,18 +84,21 @@ export function SelectTreeAsDefaultPopup({ treeUID, close }) {
 
   const callSelectTreeAsProfileDefaultTree = async () => {
     setError(false);
+    let toastID;
     try {
-      toast.info(`Selecting Tree...`);
+       toastID = toast.info(`Selecting Tree...`);
       const res = await selectTreeAsProfileDefaultTree(treeUID);
       if (!res.success) {
         setError(res.message);
+        toast.dismiss(toastID)
         toast.error(res.message);
       } else {
         setError(false);
 
         selectTreeOnClientSide(treeUID);
 
-        toast.success(`Selected tree as profile Default Tree`);
+        toast.dismiss(toastID)
+        toast.success(`Selected tree as profile Default Tree`, );
         return close();
       }
     } catch (error) {

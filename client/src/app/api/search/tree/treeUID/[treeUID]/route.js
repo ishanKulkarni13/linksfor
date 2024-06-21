@@ -39,7 +39,7 @@ export const GET = async(req, {params}) => {
             theme: tree.theme,
         };
 
-        if (tree.theme.selectedTheme.themeID !== 0) {
+        if (tree.theme.selectedTheme.themeID == 0) {
             responseTree.theme.customThemeConfig = undefined;
         }
 

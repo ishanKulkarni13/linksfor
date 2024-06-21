@@ -75,9 +75,9 @@ export default function AddPopUp({ close, setLinks, treeUID, type }) {
   // handel form submit
   const handleSubmit = async (values) => {
     const handelAdd = async (title, URL ) => {
+      
       try {
         setIsLoading(true);
-        console.log("posing");
         let res = await fetch(`/api/tree/edit/add/${type}/${treeUID}`, {
           method: "POST",
           cache: "no-store",

@@ -1,31 +1,33 @@
 "use client";
 import { useState } from "react";
-import TreeActionPopups, { DeleteTree } from "../treeActionPopups/treeActionPopups";
+import TreeActionPopups, {
+  DeleteTree,
+} from "../treeActionPopups/treeActionPopups";
 import styles from "./treeActionButtons.module.css";
 
 export default function TreeActionButtons({ treeUID }) {
-
-  const [popup, setPopup] = useState(false)
+  const [popup, setPopup] = useState(false);
 
   const buttons = [
     {
       type: "deleteTree",
       name: "Detete Tree",
-      popupComponentKey: 'deleteTree'
-    },
-    {
-      type: "treeUniqueName",
-      name: "Change TUIN",
-      popupComponentKey: 'deleteTree'
+      popupComponentKey: "deleteTree",
     },
     {
       type: "selectAsDefault",
       name: "Select as Default",
-      popupComponentKey: 'selectAsDefault'
-    }
+      popupComponentKey: "selectAsDefault",
+    },
+
+    // {
+    //   type: "treeUniqueName",
+    //   name: "Change TUIN",
+    //   popupComponentKey: 'deleteTree'
+    // },
   ];
 
-  const closePopup = ()=>setPopup(false);
+  const closePopup = () => setPopup(false);
 
   return (
     <>
@@ -35,14 +37,16 @@ export default function TreeActionButtons({ treeUID }) {
             <button
               key={`${button.type}-${treeUID}`}
               className={`${styles.treeActionsButton}`}
-              onClick={()=> setPopup(button.popupComponentKey)}
-            >{button.name}</button>
+              onClick={() => setPopup(button.popupComponentKey)}
+            >
+              {button.name}
+            </button>
           );
         })}
       </div>
-        {
-          popup && <TreeActionPopups treeUID={treeUID} close={closePopup}  popup={popup}/>
-        }
+      {popup && (
+        <TreeActionPopups treeUID={treeUID} close={closePopup} popup={popup} />
+      )}
     </>
   );
 }

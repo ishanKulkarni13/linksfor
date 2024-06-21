@@ -76,8 +76,8 @@ export default function LinksEditor() {
   };
 
   const deleteLink = async (UID) => {
+    const deletingToast = toast.info("deleting");
     try {
-      console.log("posing");
       let res = await fetch(`/api/tree/edit/delete/link/${UID}`, {
         method: "POST",
         cache: "no-store",
@@ -94,14 +94,24 @@ export default function LinksEditor() {
       });
 
       if (res.ok) {
+        toast.success("Deleted", {
+          id: deletingToast,
+          duration: 1000,
+        });
         let responseData = await res.json();
         setLinks(responseData.links);
       } else {
         let responseData = await res.json();
-        toast.error(responseData.message);
+        toast.error(responseData.message, {
+          id: deletingToast,
+          duration: 3000,
+        });
       }
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.message, {
+        id: deletingToast,
+        duration: 3000,
+      });
       console.log("catched error", error);
     }
   };
@@ -113,7 +123,9 @@ export default function LinksEditor() {
   }
 
   async function sendLinksUIDToBackend(linksUIDArray) {
-    toast.info(`sendLinksUIDToBackend function is running`);
+    const sendLinksUIDToBackendToast = toast.info(`Sinking links...`, {
+      position: "top-left",
+    });
     try {
       const res = await fetch(`/api/tree/edit/links-order/${treeUID}`, {
         method: "POST",
@@ -132,11 +144,17 @@ export default function LinksEditor() {
 
       if (res.ok) {
         const responseData = await res.json();
+        toast.success("Sinked", {
+          id: sendLinksUIDToBackendToast,
+          position: "top-left",
+        });
       } else {
         const responseData = await res.json();
+        toast.dismiss(sendLinksUIDToBackendToast);
         toast.error(responseData.message);
       }
     } catch (error) {
+      toast.dismiss(sendLinksUIDToBackendToast);
       console.error("Error updating links order:", error);
       toast.error("Error updating links order");
     }

@@ -66,12 +66,12 @@
   }
 }
 
-:root{
+:root {
   --margin-x: 20px;
   --temp-b: 1px solid green;
 }
 
- .dark {
+.dark {
   --background: #050505;
   --backgroundSecondary: #0f0f0f;
   --foreground: 222.2 84% 4.9%;
@@ -88,15 +88,15 @@
 
   /* Text colors */
   /* --color-text-primary: hsl(210, 40%, 98%); */
-  
+
   --color-text-main: white;
   --color-text-primary: var(--color-text-main);
   --color-text-contrast-main: black;
   --color-text-contrast-primary: black;
 
   --color-text-secondary: hsl(210, 40%, 80%);
-  --color-text-floating: white
-  
+  --color-text-floating: white;
+
   --color-text-muted: hsl(215, 20.2%, 65.1%);
 
   /* Borders */
@@ -107,7 +107,7 @@
   --border-surface-3: 1px solid var(--color-border);
   --border-surface-floating: 1px solid rgba(255, 255, 255, 0.326);
   --color-border-muted: hsl(215, 20%, 50%);
-  
+
   /* Shadows */
   --shadow-1: 0px 1px 3px rgba(0, 0, 0, 0.24);
   --shadow-2: 0px 3px 6px rgba(0, 0, 0, 0.32);
@@ -132,9 +132,8 @@
 
   /* Destructive colors */
   --color-destructive: hsl(0, 68%, 35%);
-  --color-error:hsl(0, 62.8%, 30.6%);
+  --color-error: hsl(0, 62.8%, 30.6%);
   --color-destructive-foreground: hsl(210, 40%, 98%);
-
 
   /* Radius */
   --radius-small: 0.25rem;
@@ -142,7 +141,7 @@
   --radius-large: 1rem;
 
   /* Font */
-  --font-family: 'Roboto', sans-serif;
+  --font-family: "Roboto", sans-serif;
   --font-size: 16px;
   --font-weight-light: 300;
   --font-weight-regular: 400;
@@ -155,12 +154,10 @@
   --topBarHeight: 70px;
 }
 
-.light{
-
+.light {
   --background: #050505;
   --backgroundSecondary: #0f0f0f;
   --foreground: 222.2 84% 4.9%;
-
 
   /* Background colors */
   --color-background: #f2f2f2;
@@ -177,10 +174,10 @@
   --color-text-primary: var(--color-text-main);
   --color-text-main: black;
   --color-text-contrast-main: white;
-  --color-text-contrast-primary: white; 
+  --color-text-contrast-primary: white;
   --color-text-secondary: black;
-  --color-text-floating: black
-  
+  --color-text-floating: black;
+
   --color-text-muted: hsl(215, 20.2%, 65.1%);
 
   /* Borders */
@@ -191,7 +188,7 @@
   --border-surface-3: 1px solid var(--color-border);
   --border-surface-floating: 1px solid var(--color-border);
   --color-border-muted: hsl(215, 20%, 50%);
-  
+
   /* Shadows */
   --shadow-1: 0px 1px 3px rgba(0, 0, 0, 0.1);
   --shadow-2: 0px 3px 6px rgba(0, 0, 0, 0.32);
@@ -205,8 +202,8 @@
   --color-primary-foreground: hsl(222.2, 47.4%, 11.2%);
 
   /* Secondary colors */
-  --color-secondary:  rgb(153, 0, 255);
-  --color-secondary-light:  rgb(153, 0, 255);
+  --color-secondary: rgb(153, 0, 255);
+  --color-secondary-light: rgb(153, 0, 255);
   --color-secondary-dark: hsl(210, 40%, 96.1%);
   --color-secondary-foreground: hsl(210, 40%, 98%);
 
@@ -216,6 +213,8 @@
 
   /* Destructive colors */
   --color-destructive: hsl(0, 62.8%, 30.6%);
+
+  --color-error: hsl(0, 62.8%, 30.6%);
   --color-destructive-foreground: hsl(210, 40%, 98%);
 
   /* Radius */
@@ -224,7 +223,7 @@
   --radius-large: 1rem;
 
   /* Font */
-  --font-family: 'Roboto', sans-serif;
+  --font-family: "Roboto", sans-serif;
   --font-size: 16px;
   --font-weight-light: 300;
   --font-weight-regular: 400;
@@ -249,14 +248,15 @@ body {
 }
 
 @media (width < 640px) {
-  :root, .light, .dark {
+  :root,
+  .light,
+  .dark {
     --topBarHeight: 120px;
   }
 }
 
-.latoutChildren{
-    padding-top: calc(var(--topBarHeight));
-    height: 100vh;
-    height: 100dvh;
-    
+.latoutChildren {
+  padding-top: calc(var(--topBarHeight));
+  height: 100vh;
+  height: 100dvh;
 }

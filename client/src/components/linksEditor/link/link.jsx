@@ -20,9 +20,8 @@ export default function Link({ link, deleteLink, treeUID }) {
   const controls = useDragControls();
   const [isLoading, setIsLoading] = useState({ link: false, deleting: false });
 
-
   const closePopup = () => setPopup();
-  const openPopup = (e) => setPopup(e.currentTarget.getAttribute('data-popup'));
+  const openPopup = (e) => setPopup(e.currentTarget.getAttribute("data-popup"));
 
   const handelDeleteButtonClick = () => {
     setIsLoading({ ...isLoading, deleting: true });
@@ -41,7 +40,7 @@ export default function Link({ link, deleteLink, treeUID }) {
   };
 
   const sendLinkTitleAndURLToBackend = async () => {
-    toast.info(`sendLinkTitleAndURLToBackend function is running`);
+    const updatingToast = toast.info(`Updating link data...`);
     let { title, URL, UID } = linkData;
     try {
       let res;
@@ -83,15 +82,24 @@ export default function Link({ link, deleteLink, treeUID }) {
       }
 
       if (res.ok) {
+        toast.success("Updated", {
+          id: updatingToast,
+          duration: 1250,
+        });
         const responseData = await res.json();
-        console.log("responce from DB", responseData);
       } else {
         const responseData = await res.json();
-        toast.error(responseData.message);
+        toast.error(responseData.message, {
+          id: updatingToast,
+          duration: 3500,
+        });
       }
     } catch (error) {
       console.error("Error in sending header title to DB", error);
-      toast.error("Error in sending header tltle to DB");
+      toast.error("Error in sending header tltle to DB", {
+        id: updatingToast,
+        duration: 3500,
+      });
     }
   };
 
@@ -157,16 +165,29 @@ export default function Link({ link, deleteLink, treeUID }) {
               </form>
 
               <div className={styles.OtherOptionsContainer}>
-                
-                  <button className={styles.thumbnailContainer}  data-popup={`thumbnail`} onClick={openPopup}  >
-                    <FontAwesomeIcon className={styles.icon} icon={faImage} />
-                  </button>
+                <button
+                  className={styles.thumbnailContainer}
+                  data-popup={`thumbnail`}
+                  onClick={openPopup}
+                >
+                  <FontAwesomeIcon className={styles.icon} icon={faImage} />
+                </button>
 
-                <button className={styles.layoutContainer} data-popup={`layout`} onClick={openPopup} >
+                <button
+                  className={styles.layoutContainer}
+                  data-popup={`layout`}
+                  onClick={openPopup}
+                >
                   <FiLayout />
                 </button>
-                
-                <LinkEditPopup treeUID={treeUID} setLinkData={setLinkData} linkData={linkData} openPopup={popup} closePopup={closePopup} />
+
+                <LinkEditPopup
+                  treeUID={treeUID}
+                  setLinkData={setLinkData}
+                  linkData={linkData}
+                  openPopup={popup}
+                  closePopup={closePopup}
+                />
               </div>
             </div>
 

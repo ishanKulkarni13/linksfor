@@ -1,45 +1,70 @@
 import Tree from "@/components/themes/tree";
-const getTreeByUsername = async (username) => {
+import { Tree as TreeModel } from "@/lib/DB/models/tree";
+import { connectToDB } from "@/lib/DB/connectDB";
+import { User } from "@/lib/DB/models/user";
+
+const getTree = async (username) => {
   try {
-    let res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/search/tree/username/${username}`,
-      {
-        method: "GET",
-        cache: "no-store",
-        credentials: "include",
-        headers: {
-          Accept: "applications/json",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Credentials": true,
-        },
-      }
-    );
-    if (res.ok) {
-      let responseData = await res.json();
-      let tree = responseData.tree;
-      return { tree };
-    } else {
-      let responseData = await res.json();
-      console.log("error occured in getTreeByUsername 1", responseData);
-      return { tree: null, success: false };
+    await connectToDB();
+
+    const user = await User.findOne({
+      username: username.toLowerCase(),
+    }).select("verified trees _id");
+    if (!user) {
+      return { error: "User not found" };
     }
+    const tree = await TreeModel.findById(user.trees.profileDefaultTree); //change
+    if (!tree) {
+      return { error: "Tree not found" };
+    }
+    // Check if the tree visibility is public
+    if (tree.treeVisibility !== "public") {
+      return {
+        error: `The tree is not public, it's locked with ${tree.treeVisibility}`,
+      };
+    }
+    // Prepare the response tree
+    let responseTree = {
+      verified: user.verified,
+      UID: tree.UID,
+      treeName: tree.treeName,
+      treeVisibility: tree.treeVisibility,
+      treePicture: tree.treePicture,
+      treeBio: tree.treeBio,
+      treeContent: {
+        links: tree.treeContent.links.map((link) => {
+          const { linkLockConfig, ...rest } = link;
+          return rest._doc;
+        }),
+        socials: tree.treeContent.socials,
+      },
+      theme: tree.theme,
+    };
+
+    if (tree.theme.selectedTheme.themeID == 0) {
+      responseTree.theme.customThemeConfig = undefined;
+    }
+
+    // Send the response
+
+    return { tree: responseTree };
   } catch (error) {
-    console.log("error catched in getTreeByUsername 2", error.message);
-    console.log(`The value of process.env.NEXT_PUBLIC_BACKEND_URL is :`, process.env.NEXT_PUBLIC_BACKEND_URL);
-    return { tree: null, success: false, error: true };
+    console.log(error);
+    return {
+      error:
+        "Some Unknown error occured , contact the support for assistance. Error_Code: getTree-username-catch ",
+    };
   }
 };
 
 export default async function page({ params }) {
-  let { tree } = await getTreeByUsername(params.username);
+  let { tree, error } = await getTree(params.username);
 
   // cheak if the tree exist. if true, display tree
   if (tree) {
-    return (
-        <Tree tree={tree} />
-    );
+    return <Tree tree={tree} />;
   }
 
   // if any erroe occured display error
-  return <p>Error occured</p>;
+  return <p>Error occured : {error}</p>;
 }

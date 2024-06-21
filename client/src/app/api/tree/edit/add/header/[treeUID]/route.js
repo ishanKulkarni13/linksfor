@@ -17,7 +17,6 @@ export const POST = async (req, {params}) => {
         // let isTreeOfUser = await Tree
         let UpdatedTree = await Tree.findOneAndUpdate({ UID: treeUID, owner: userID }, { $push: { 'treeContent.links': { $each: [updatedLinkObject], $position: 0 } } }, { new: true });
         if (!UpdatedTree) { return next(new ErrorHandelar('Tree not found')) }
-        console.log(UpdatedTree.treeContent.links);
         return NextResponse.json({ success: true, links: UpdatedTree.treeContent.links })
 
     } catch (error) {

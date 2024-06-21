@@ -18,7 +18,7 @@ export default function CreateNewTreePage() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    toast.info(`Creating Tree`);
+    const creatingToast = toast.info(`Creating Tree`);
 
     try {
       const res = await axios.post(
@@ -26,7 +26,11 @@ export default function CreateNewTreePage() {
         { treeName: newTreeData.treeName },
         { withCredentials: true }
       );
-      toast.success(`Created Tree`);
+
+      toast.dismiss(creatingToast)
+      toast.success(`Created Tree`, {
+        duration: 2000
+      });
       // selectTree(res.data.tree.UID)
       selectTree(res.data.tree.UID)
       push("/admin/tree/edit/appearance");
@@ -34,12 +38,19 @@ export default function CreateNewTreePage() {
       console.log(error);
       if (error.response) {
         // if server responded
-        toast.error(error.response.data.message);
+        
+        toast.error(error.response.data.message, {
+          id:creatingToast
+        });
       } else if (error.request) {
         //req was made but go no response
-        toast.error(`error occured`);
+        toast.error(`error occured`,{
+          id:creatingToast
+        });
       } else {
-        toast.error(`some error occured: ${error.message}`);
+        toast.error(`some error occured: ${error.message}`,{
+          id:creatingToast
+        });
       }
     }
   };
