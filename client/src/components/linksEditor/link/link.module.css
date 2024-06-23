@@ -3,6 +3,11 @@
     margin-bottom: 15px;
 }
 
+.icon{
+    width: 1em;
+    height: 1em;
+}
+
 .linkContainer{
     /* min-width: fit-content; */
     width: inherit;

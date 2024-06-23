@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from 'next-themes'
 import { Toaster } from "sonner";
+import NextTopLoader from "nextjs-toploader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,6 +20,11 @@ export default function RootLayout({ children }) {
             <>
              {children}
              </>
+             <NextTopLoader
+              color="var(--color-primary)"
+              showSpinner={false}
+             
+             />
              <Toaster position="bottom-left" richColors closeButton={true} pauseWhenPageIsHidden={true} />
 
           </main>

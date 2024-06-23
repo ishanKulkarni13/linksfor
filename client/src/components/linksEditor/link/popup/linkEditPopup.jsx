@@ -18,7 +18,9 @@ export default function LinkEditPopup({openPopup, closePopup, setLinkData, linkD
       console.log(error);
       if (error.response) {
         // if server responded
-        toast.error(error.response.data.message);
+        toast.error(error.response.data.message,{
+          id:"linkUpdate"
+        });
         if (error.response.status === 404 || error.response.status === 400) {
           console.log(error.response);
           //   removeItem();
@@ -26,9 +28,14 @@ export default function LinkEditPopup({openPopup, closePopup, setLinkData, linkD
         }
       } else if (error.request) {
         //req was made but go no response
-        toast.error(`error occured`);
+        toast.error(`error occured while updating link`,{
+          id:"linkUpdate"
+        });
       } else {
-        toast.error(`some error occured: ${error.message}`);
+        toast.error(`some error occured while updating link`,{
+          description: error.message,
+          id:"linkUpdate"
+        });
       }
     }
   };

@@ -1,5 +1,5 @@
 .container {
-    margin: var(--margin-x);
+    margin:calc(var(--topBarHeight))  var(--margin-x);
 }
 
 .top {

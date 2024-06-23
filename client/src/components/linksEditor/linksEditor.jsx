@@ -21,6 +21,7 @@ export default function LinksEditor() {
   const [reorderedLinksUID, setReorderedLinksUID] = useState();
   const debouncelinksUIDOrder = useDebounce(reorderedLinksUID, 3000);
   const { redirectToSelectTree } = useHandelReselectTree();
+  const [isLoading, setIsLoading] = useState({ link: false, deleting: false });
 
   const updateLinks = async () => {
     let { success, response, error, statusCode } = await getAllLinks(treeUID);
@@ -76,7 +77,9 @@ export default function LinksEditor() {
   };
 
   const deleteLink = async (UID) => {
-    const deletingToast = toast.info("deleting");
+    toast.loading("deleting", {
+      id: 'deleting'
+    });
     try {
       let res = await fetch(`/api/tree/edit/delete/link/${UID}`, {
         method: "POST",
@@ -95,7 +98,7 @@ export default function LinksEditor() {
 
       if (res.ok) {
         toast.success("Deleted", {
-          id: deletingToast,
+          id: 'deleting',
           duration: 1000,
         });
         let responseData = await res.json();
@@ -103,13 +106,18 @@ export default function LinksEditor() {
       } else {
         let responseData = await res.json();
         toast.error(responseData.message, {
-          id: deletingToast,
+          id: 'deleting',
           duration: 3000,
         });
       }
+      
+    setIsLoading(()=>{ 
+      return ({ ...isLoading, deleting: false })
+    });
+
     } catch (error) {
       toast.error(error.message, {
-        id: deletingToast,
+        id: 'deleting',
         duration: 3000,
       });
       console.log("catched error", error);
@@ -123,7 +131,8 @@ export default function LinksEditor() {
   }
 
   async function sendLinksUIDToBackend(linksUIDArray) {
-    const sendLinksUIDToBackendToast = toast.info(`Sinking links...`, {
+    toast.loading(`Sinking links...`, {
+      id: 'sinking',
       position: "top-left",
     });
     try {
@@ -145,22 +154,28 @@ export default function LinksEditor() {
       if (res.ok) {
         const responseData = await res.json();
         toast.success("Sinked", {
-          id: sendLinksUIDToBackendToast,
+          id:  'sinking',
           position: "top-left",
+          duration: 1000
         });
       } else {
         const responseData = await res.json();
-        toast.dismiss(sendLinksUIDToBackendToast);
-        toast.error(responseData.message);
+        toast.error(responseData.message,{
+          id:  'sinking',
+          duration: 3000
+        });
       }
     } catch (error) {
-      toast.dismiss(sendLinksUIDToBackendToast);
       console.error("Error updating links order:", error);
-      toast.error("Error updating links order");
+      toast.error("Error updating links order",{
+        id:  'sinking',
+        duration: 3000
+      });
     }
   }
 
   useEffect(() => {
+    toast.dismiss('selectTree');
     if (treeUID) {
       updateLinks();
     }
@@ -171,6 +186,8 @@ export default function LinksEditor() {
       sendLinksUIDToBackend(debouncelinksUIDOrder);
     }
   }, [debouncelinksUIDOrder]);
+
+
 
   return (
     <>
@@ -222,6 +239,7 @@ export default function LinksEditor() {
                         link={link}
                         treeUID={treeUID}
                         deleteLink={deleteLink}
+                        setIsLoading={setIsLoading}  isLoading={isLoading}
                       />
                     ))}
                   </Reorder.Group>

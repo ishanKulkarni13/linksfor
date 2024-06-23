@@ -48,11 +48,16 @@ export default function SelectTreePopup({
     if (selectedTree) {
       setSelectedTreeProfile && setSelectedTreeProfile(selectedTree);
       select(treeUID);
-      toast.info('Tree selected, redirecting...')
+      toast.success('Tree selected, ', {
+        id: 'selectTree',
+        description:'redirecting...'
+      })
       push(`/admin/tree/edit/links`);
       close && close();
     } else {
-      toast.error(`Tree with UID ${treeUID} not found`);
+      toast.error(`Tree with UID ${treeUID} not found`,{
+        id: 'selectTree',
+      });
     }
   };
   useEffect(() => {

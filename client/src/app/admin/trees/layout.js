@@ -5,7 +5,7 @@ export default function RootLayout({ children }) {
   return (
     <>
         <div><TopBar/></div>
-        <div className='latoutChildren'  >{children}</div>
+        <div  >{children}</div>
     </>
   );
 }

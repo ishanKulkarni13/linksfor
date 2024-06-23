@@ -13,19 +13,23 @@ import { FiLayout } from "react-icons/fi";
 import { useState } from "react";
 import { toast } from "sonner";
 import LinkEditPopup from "./popup/linkEditPopup";
+import { FaRegImage } from "react-icons/fa6";
+import{CgSpinner} from "react-icons/cg"
 
-export default function Link({ link, deleteLink, treeUID }) {
+export default function Link({ link, deleteLink, treeUID, setIsLoading , isLoading}) {
   const [linkData, setLinkData] = useState(link);
   const [popup, setPopup] = useState();
   const controls = useDragControls();
-  const [isLoading, setIsLoading] = useState({ link: false, deleting: false });
+  const [isLinkLoading, setIsLinkLoading] = useState({ link: false, deleting: false });
 
   const closePopup = () => setPopup();
   const openPopup = (e) => setPopup(e.currentTarget.getAttribute("data-popup"));
 
-  const handelDeleteButtonClick = () => {
+  const handelDeleteButtonClick = async () => {
     setIsLoading({ ...isLoading, deleting: true });
-    deleteLink(link.UID);
+    setIsLinkLoading({ ...isLoading, deleting: true });
+    await deleteLink(link.UID);
+
   };
 
   const handleInputChange = (e) =>
@@ -33,14 +37,18 @@ export default function Link({ link, deleteLink, treeUID }) {
 
   const handleSubmit = async (event) => {
     setIsLoading({ ...isLoading, link: true });
+    setIsLinkLoading({ ...isLoading, link: true });
     event.preventDefault();
     console.log(linkData);
     await sendLinkTitleAndURLToBackend();
     setIsLoading({ ...isLoading, link: false });
+    setIsLinkLoading({ ...isLoading, link: false });
   };
 
   const sendLinkTitleAndURLToBackend = async () => {
-    const updatingToast = toast.info(`Updating link data...`);
+    toast.loading(`Updating link data...`, {
+      id: 'updating'
+    });
     let { title, URL, UID } = linkData;
     try {
       let res;
@@ -83,21 +91,21 @@ export default function Link({ link, deleteLink, treeUID }) {
 
       if (res.ok) {
         toast.success("Updated", {
-          id: updatingToast,
+          id:  'updating',
           duration: 1250,
         });
         const responseData = await res.json();
       } else {
         const responseData = await res.json();
         toast.error(responseData.message, {
-          id: updatingToast,
+          id:  'updating',
           duration: 3500,
         });
       }
     } catch (error) {
       console.error("Error in sending header title to DB", error);
       toast.error("Error in sending header tltle to DB", {
-        id: updatingToast,
+        id:  'updating',
         duration: 3500,
       });
     }
@@ -170,16 +178,17 @@ export default function Link({ link, deleteLink, treeUID }) {
                   data-popup={`thumbnail`}
                   onClick={openPopup}
                 >
-                  <FontAwesomeIcon className={styles.icon} icon={faImage} />
+                  {/* <FontAwesomeIcon className={styles.icon} icon={faImage} /> */}
+                  <FaRegImage className={styles.icon} />
                 </button>
 
-                <button
+                {/* <button
                   className={styles.layoutContainer}
                   data-popup={`layout`}
                   onClick={openPopup}
                 >
                   <FiLayout />
-                </button>
+                </button> */}
 
                 <LinkEditPopup
                   treeUID={treeUID}
@@ -197,10 +206,10 @@ export default function Link({ link, deleteLink, treeUID }) {
                 className={styles.deleteButton}
                 onClick={handelDeleteButtonClick}
               >
-                {!isLoading.deleting ? (
-                  <FontAwesomeIcon icon={faTrash} />
+                {!isLinkLoading.deleting  ? (
+                  <FontAwesomeIcon icon={faTrash}  className={styles.icon}/>
                 ) : (
-                  <FontAwesomeIcon icon={faDotCircle} />
+                  <CgSpinner  className={`${styles.icon} spiner`}/>
                 )}
               </button>
             </div>

@@ -257,7 +257,7 @@ export default function AddPopUp({ close, setLinks, treeUID, type }) {
                         );
                       }}
                     />
-                    <button disabled={isLoading}  type="submit" className={styles.doneButton}>
+                    <button disabled={isLoading && false}  type="submit" className={styles.doneButton}>
                       {!isLoading && (
                         <FontAwesomeIcon
                           className={styles.doneIcon}

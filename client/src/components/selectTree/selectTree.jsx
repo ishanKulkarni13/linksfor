@@ -9,21 +9,24 @@ import {
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useTreeUID } from "@/hooks/treeUID";
-import {  toast } from "sonner";
+import { toast } from "sonner";
 import axios from "axios";
 import Link from "next/link";
 import SelectTreePopup from "./selectTreePopup/selectTreePopup";
 import useWindowResize from "@/hooks/useWindowSize";
+import useHandelReselectTree from "@/hooks/handelReselectTree";
 
 export default function SelectTree() {
   let treeUID = useTreeUID();
   const { width } = useWindowResize();
   const [selectedTreeProfile, setSelectedTreeProfile] = useState();
   const [isPopUpActive, setIsPopUpActive] = useState(false);
-  function onSwitchTreeButtonCLick(e) {
+  const { redirectToSelectTree } = useHandelReselectTree();
+
+  function onSwitchTreeButtonCLick() {
     setIsPopUpActive(true);
   }
-  function closePopUp(e) {
+  function closePopUp() {
     setIsPopUpActive(false);
   }
 
@@ -33,7 +36,6 @@ export default function SelectTree() {
       return toast.error("didn't got treeUID while getting treeprofile");
     }
     try {
-      console.log(`got treeUId in getTreeProfile as:`, treeUID);
       const res = await axios.get(`/api/tree/profile/${treeUID}`, {
         withCredentials: true,
       });
@@ -45,14 +47,15 @@ export default function SelectTree() {
         // if server responded
         toast.error(error.response.data.message);
         if (error.response.status === 404 || error.response.status === 401) {
-          removeItem();
-          return push("/admin/selectTree?removeSelectedTree");
+          redirectToSelectTree();
         }
       } else if (error.request) {
         //req was made but go no response
-        toast.error(`error occured`);
+        toast.error(`Error occured`);
       } else {
-        toast.error(`some error occured: ${error.message}`);
+        toast.error(`some error occured, `, {
+          description: error.message,
+        });
       }
     }
   };
@@ -79,7 +82,6 @@ export default function SelectTree() {
           >
             <div className={styles.selectedTreeProfileContainer}>
               <div className={styles.selectedTreeImageContainer}>
-                
                 {selectedTreeProfile.treePicture &&
                 selectedTreeProfile.treePicture.URL ? (
                   <>

@@ -6,7 +6,7 @@ import useWindowResize from "@/hooks/useWindowSize";
 import { useLocalstorage } from "@/hooks/localStorage";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import {  toast } from "sonner";
+import { toast } from "sonner";
 import axios from "axios";
 import TreePreviewToggleButton from "../treePreview/treePreviewToggleButton/treePreviewToggleButton";
 import useHandelReselectTree from "@/hooks/handelReselectTree";
@@ -45,7 +45,7 @@ export default function TreeAppearanceEditor() {
   const { removeItem } = useLocalstorage("selectedTree");
   const { width } = useWindowResize();
   const treeUID = useTreeUID(null);
-  const {redirectToSelectTree} = useHandelReselectTree();
+  const { redirectToSelectTree } = useHandelReselectTree();
 
   const getTreeProfile = async () => {
     if (!treeUID) {
@@ -77,6 +77,7 @@ export default function TreeAppearanceEditor() {
   };
 
   useEffect(() => {
+    toast.dismiss("newTree");
     if (treeUID) {
       getTreeProfile();
     }

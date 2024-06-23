@@ -242,7 +242,6 @@
 }
 
 body {
-  min-height: 100dvh;
   background-color: var(--color-background);
   color: var(--color-text-main);
 }
@@ -257,6 +256,20 @@ body {
 
 .latoutChildren {
   padding-top: calc(var(--topBarHeight));
-  height: 100vh;
-  height: 100dvh;
+}
+
+.spiner {
+  animation: spin 1100ms ease-in-out 0ms infinite;
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+/* 
+  100%{
+    transform: rotate(360);
+  } */
 }
