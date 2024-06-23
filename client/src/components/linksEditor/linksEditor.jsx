@@ -21,7 +21,6 @@ export default function LinksEditor() {
   const [reorderedLinksUID, setReorderedLinksUID] = useState();
   const debouncelinksUIDOrder = useDebounce(reorderedLinksUID, 3000);
   const { redirectToSelectTree } = useHandelReselectTree();
-  const [isLoading, setIsLoading] = useState({ link: false, deleting: false });
 
   const updateLinks = async () => {
     let { success, response, error, statusCode } = await getAllLinks(treeUID);
@@ -110,11 +109,6 @@ export default function LinksEditor() {
           duration: 3000,
         });
       }
-      
-    setIsLoading(()=>{ 
-      return ({ ...isLoading, deleting: false })
-    });
-
     } catch (error) {
       toast.error(error.message, {
         id: 'deleting',
@@ -156,7 +150,6 @@ export default function LinksEditor() {
         toast.success("Sinked", {
           id:  'sinking',
           position: "top-left",
-          duration: 1000
         });
       } else {
         const responseData = await res.json();
@@ -186,8 +179,6 @@ export default function LinksEditor() {
       sendLinksUIDToBackend(debouncelinksUIDOrder);
     }
   }, [debouncelinksUIDOrder]);
-
-
 
   return (
     <>
@@ -239,7 +230,6 @@ export default function LinksEditor() {
                         link={link}
                         treeUID={treeUID}
                         deleteLink={deleteLink}
-                        setIsLoading={setIsLoading}  isLoading={isLoading}
                       />
                     ))}
                   </Reorder.Group>

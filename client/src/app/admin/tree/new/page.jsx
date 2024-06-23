@@ -19,7 +19,9 @@ export default function CreateNewTreePage() {
   const onSubmit = async (e) => {
     e.preventDefault();
     toast.loading(`Creating Tree`, {
-      id:'newTree'
+      id:'newTree',
+
+      description: null,
     });
 
     try {
@@ -32,7 +34,6 @@ export default function CreateNewTreePage() {
       toast.success(`Created Tree,`, {
         description: 'redirecting...',
         id: 'newTree',
-        duration: 2000
       });
       // selectTree(res.data.tree.UID)
       selectTree(res.data.tree.UID)

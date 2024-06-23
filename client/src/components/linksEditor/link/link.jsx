@@ -16,20 +16,18 @@ import LinkEditPopup from "./popup/linkEditPopup";
 import { FaRegImage } from "react-icons/fa6";
 import{CgSpinner} from "react-icons/cg"
 
-export default function Link({ link, deleteLink, treeUID, setIsLoading , isLoading}) {
+export default function Link({ link, deleteLink, treeUID }) {
   const [linkData, setLinkData] = useState(link);
   const [popup, setPopup] = useState();
   const controls = useDragControls();
-  const [isLinkLoading, setIsLinkLoading] = useState({ link: false, deleting: false });
+  const [isLoading, setIsLoading] = useState({ link: false, deleting: false });
 
   const closePopup = () => setPopup();
   const openPopup = (e) => setPopup(e.currentTarget.getAttribute("data-popup"));
 
-  const handelDeleteButtonClick = async () => {
+  const handelDeleteButtonClick = () => {
     setIsLoading({ ...isLoading, deleting: true });
-    setIsLinkLoading({ ...isLoading, deleting: true });
-    await deleteLink(link.UID);
-
+    deleteLink(link.UID);
   };
 
   const handleInputChange = (e) =>
@@ -37,12 +35,10 @@ export default function Link({ link, deleteLink, treeUID, setIsLoading , isLoadi
 
   const handleSubmit = async (event) => {
     setIsLoading({ ...isLoading, link: true });
-    setIsLinkLoading({ ...isLoading, link: true });
     event.preventDefault();
     console.log(linkData);
     await sendLinkTitleAndURLToBackend();
     setIsLoading({ ...isLoading, link: false });
-    setIsLinkLoading({ ...isLoading, link: false });
   };
 
   const sendLinkTitleAndURLToBackend = async () => {
@@ -206,7 +202,7 @@ export default function Link({ link, deleteLink, treeUID, setIsLoading , isLoadi
                 className={styles.deleteButton}
                 onClick={handelDeleteButtonClick}
               >
-                {!isLinkLoading.deleting  ? (
+                {!isLoading.deleting ? (
                   <FontAwesomeIcon icon={faTrash}  className={styles.icon}/>
                 ) : (
                   <CgSpinner  className={`${styles.icon} spiner`}/>
