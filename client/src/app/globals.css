@@ -68,6 +68,10 @@
 
 :root {
   --margin-x: 20px;
+  --space-top: 25px;  /* gap between topbar and the component */
+   --space-bottom: 100px;  /* space at bottom */
+
+  --topBarHeight: 70px;
   --temp-b: 1px solid green;
 }
 
@@ -151,7 +155,6 @@
   /* Spacing */
   --spacing-unit: 8px;
 
-  --topBarHeight: 70px;
 }
 
 .light {
@@ -232,7 +235,6 @@
 
   /* Spacing */
   --spacing-unit: 8px;
-  --topBarHeight: 70px;
 }
 
 * {
@@ -254,9 +256,6 @@ body {
   }
 }
 
-.latoutChildren {
-  padding-top: calc(var(--topBarHeight));
-}
 
 .spiner {
   animation: spin 1100ms ease-in-out 0ms infinite;

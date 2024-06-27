@@ -2,65 +2,73 @@ import SelectTree from "@/components/selectTree/selectTree";
 import styles from "./morePage.module.css";
 import TopBar from "@/components/topbar/topBar";
 import SettingLinks from "@/components/settings/settingLinks/settingLinks";
-import { FiLayout } from "react-icons/fi";
+import { FiLayout, FiInstagram } from "react-icons/fi";
+
+import { RiArchiveStackLine} from "react-icons/ri";
+import { IoIosSearch} from "react-icons/io";
+import { IoMailUnreadOutline } from "react-icons/io5";
+import { PiSignOut } from "react-icons/pi";
+import { LuTreePine } from "react-icons/lu";
+import { AiOutlineDelete } from "react-icons/ai";
+import { MdOutlineAccountBox } from "react-icons/md";
 
 export default function AdminMorePage() {
   const accountSettingLinks = [
     {
       title: "My Information",
-      icon: FiLayout,
+      icon: MdOutlineAccountBox,
       path: "/admin/settings/admin-information",
       key: "information",
     },
-    {
-      title: "Privacy",
-      icon: FiLayout,
-      path: "/admin/settings/privacy",
-      key: "privacy",
-    },
+    // {
+    //   title: "Privacy",
+    //   icon: FiLayout,
+    //   path: "/admin/settings/privacy",
+    //   key: "privacy",
+    // },
     {
       title: "My trees",
-      icon: FiLayout,
+      icon: LuTreePine,
       path: "/admin/trees",
       key: "trees",
     },
-    {
-      title: "Delete Account",
-      icon: FiLayout,
-      path: "/admin/settings/delete-account",
-      key: "deleteAccount",
-    },
+    // {
+    //   title: "Delete Account",
+    //   icon: AiOutlineDelete,
+    //   path: "/admin/settings/delete-account",
+    //   key: "deleteAccount",
+    // },
   ];
 
   const treeSettingLinks = [
     {
       title: "Social Icons",
-      icon: FiLayout,
+      icon: FiInstagram,
       path: "/admin/tree/edit/social-icons",
       key: "socialIcons",
     },
     {
       title: "SEO",
-      icon: FiLayout,
+      icon: IoIosSearch,
       path: "/admin/tree/edit/SEO",
       key: "SEO",
     },
     {
       title: "Subscribers",
-      icon: FiLayout,
+      icon: IoMailUnreadOutline,
       path: "/admin/tree/Subscribers",
       key: "subscribers",
     },
     {
       title: "Archives",
-      icon: FiLayout,
+      icon: RiArchiveStackLine,
       path: "/admin/tree/Archives",
       key: "Archives",
     },
     {
       title: "Delete Tree",
-      icon: FiLayout,
-      path: "/admin/tree/delete",
+      icon: AiOutlineDelete,
+      path: "/admin/trees",
       key: "deleteTree",
     },
   ];
@@ -69,14 +77,14 @@ export default function AdminMorePage() {
   const signoutLink = [
     {
       title: "Signout",
-      icon: FiLayout,
+      icon: PiSignOut,
       path: "/signout",
       key: "signout",
     },
   ];
   return (
     <>
-      <TopBar />
+
       <div className={styles.container}>
         <div className={styles.selectTreeContainer}>
           <SelectTree />

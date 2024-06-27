@@ -222,6 +222,7 @@ export default function LinksEditor() {
                     values={links}
                     onReorder={handelLinksOrderChange}
                     layoutScroll
+                    
                     className={styles.linksContainer}
                   >
                     {links.map((link, index) => (

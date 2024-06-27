@@ -1,0 +1,5 @@
+.children{
+    margin:  0px var(--margin-x)  ;
+    margin-top: calc(var(--topBarHeight) + var(--space-top));
+    margin-bottom: var(--space-bottom);
+}

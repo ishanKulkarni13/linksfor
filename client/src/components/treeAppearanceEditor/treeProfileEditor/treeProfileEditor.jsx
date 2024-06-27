@@ -65,12 +65,12 @@ export default function TreeProfileEditor({treeProfile,setTreeProfile, treeUID})
             </div>
 
             
-            <div className={styles.editTreeProfileLayoutContainer}>
+            {/* <div className={styles.editTreeProfileLayoutContainer}>
               <EditTreeProfileLayout
                 treeProfile={treeProfile}
                 treeUID={treeUID}
               />
-            </div>
+            </div> */}
           </div>
     </>
   );

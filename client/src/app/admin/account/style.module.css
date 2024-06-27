@@ -1,0 +1,82 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: stretch;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  color: var(--color-text-main);
+}
+
+.container > h1 {
+  font-size: 25px;
+  font-weight: 450;
+  text-align: center;
+  line-height: 100%;
+}
+
+.accountInfoContainer,
+.accountInfoContainer > form {
+  width: 100%;
+}
+
+.accountInfoContainer > form {
+  background-color: var(--color-surface-1);
+  padding: var(--margin-x);
+  border-radius: 15px;
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.accountInfoContainer > form > div {
+  flex: 1;
+  /* background-color: var(--color-surface-2); */
+  border-radius: 15px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-direction: column;
+  gap: 5px;
+  color: var(--color-text-main);
+}
+
+.accountInfoContainer > form label {
+  font-size: 0.8rem;
+  filter: opacity(0.8);
+  line-height: 102%;
+}
+
+.accountInfoContainer > form input {
+  font-size: 1rem;
+  border: none;
+  background-color: none;
+  background: none;
+}
+
+.accountInfoContainer > form .info{
+  font-size: 0.7rem;
+  line-height: 107%;
+  opacity: 0.6;
+}
+
+.separator {
+  border: 0.8px solid var(--color-border);
+}
+
+
+.accountInfoContainer .submit{
+  margin-top: 10px;
+  align-self: center;
+  padding: 15px;
+  width: fit-content;
+  text-align: center;
+  color: var(--color-text-contrast-primary);
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 100%;
+  border-radius: 50px;
+  background-color: var(--color-primary);
+}

@@ -5,8 +5,7 @@
 }
 
 .linksEditorContainer {
-  padding: calc(var(--topBarHeight) + 30px) 50px;
-  height: 100dvh;
+  height: 100%;
   overflow-y: scroll;
   position: relative;
   border-right: 1px solid white;
@@ -21,9 +20,11 @@
   gap: 25px;
 }
 
-.loadingContainer, .noLinksContainer,
+.loadingContainer,
+.noLinksContainer,
 .fetchingLinksContainer {
   height: 100%;
+  width: auto;
   color: var(--color-text-main);
   display: flex;
   justify-content: center;
@@ -77,6 +78,5 @@
 @media (width<640px) {
   .linksEditorContainer {
     display: block;
-    padding: calc(var(--topBarHeight) + 30px) 15px;
   }
 }

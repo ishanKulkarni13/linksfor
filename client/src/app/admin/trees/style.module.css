@@ -1,6 +1,4 @@
-.container {
-    margin:calc(var(--topBarHeight))  var(--margin-x);
-}
+
 
 .top {
     margin: auto;
@@ -75,4 +73,11 @@
     width: 90%;
 
     margin: 10px auto;
+}
+
+@media (width > 1024px){
+    .trees {
+        grid-template-columns: 3fr;
+    }
+    
 }
