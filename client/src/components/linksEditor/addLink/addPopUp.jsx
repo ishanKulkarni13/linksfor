@@ -20,10 +20,10 @@ import { useState } from "react";
 
 const AddLinkFormSchema = z
   .object({
-    URL: z.string().min(1, { message: `Plesae entre a URL` }), // tempppppp
+    URL: z.string().min(1, { message: `Plesae entre a URL` }).url(), // tempppppp
     title: z
       .string()
-      .min(1, { message: `Title should be if at least 1 character long` }),
+      .min(1, { message: `Title should be if at least 1 character long` }).max(20, { message: `Title must be of at most 20 character long` }),
   })
   .refine(
     (data) => {
@@ -37,20 +37,10 @@ const AddLinkFormSchema = z
 
   const AddHeaderFormSchema = z
   .object({
-    // URL: z.string().min(1, { message: `Plesae entre a URL` }), // tempppppp
     title: z
       .string()
       .min(1, { message: `Header title should be if at least 1 character long` }),
   })
-  // .refine(
-  //   (data) => {
-  //     return data.title != data.title;
-  //   },
-  //   {
-  //     message: "Invalid URL",
-  //     path: ["URL"],
-  //   }
-  // );
 
 export default function AddPopUp({ close, setLinks, treeUID, type }) {
   const { push } = useRouter();

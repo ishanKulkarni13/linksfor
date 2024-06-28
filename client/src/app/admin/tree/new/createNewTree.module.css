@@ -7,7 +7,7 @@
     gap: 25px;
     margin: auto;
     padding: 0px 25px;
-    height: calc(100dvh - 50px);
+    height: calc(100dvh - 50px - var(--topBarHeight));
     color: var(--color-text-main);
 }
 

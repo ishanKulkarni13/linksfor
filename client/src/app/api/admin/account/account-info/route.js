@@ -20,6 +20,7 @@ export const GET = async () => {
 
         let responseUser = {
             name: user.name,
+            _id: user._id,
             username: user.username,
             publicUID: user.publicUID,
             profilePic: user.profilePic,

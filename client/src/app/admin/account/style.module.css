@@ -16,11 +16,11 @@
 }
 
 .accountInfoContainer,
-.accountInfoContainer > form {
+.accountInfoContainer > .accountInfo {
   width: 100%;
 }
 
-.accountInfoContainer > form {
+.accountInfoContainer > .accountInfo {
   background-color: var(--color-surface-1);
   padding: var(--margin-x);
   border-radius: 15px;
@@ -31,7 +31,7 @@
   gap: 15px;
 }
 
-.accountInfoContainer > form > div {
+.accountInfoContainer > .accountInfo > div {
   flex: 1;
   /* background-color: var(--color-surface-2); */
   border-radius: 15px;
@@ -43,20 +43,20 @@
   color: var(--color-text-main);
 }
 
-.accountInfoContainer > form label {
+.label {
   font-size: 0.8rem;
   filter: opacity(0.8);
   line-height: 102%;
 }
 
-.accountInfoContainer > form input {
+.accountInfoContainer > .accountInfo .input {
   font-size: 1rem;
   border: none;
   background-color: none;
   background: none;
 }
 
-.accountInfoContainer > form .info{
+.accountInfoContainer > .accountInfo .info{
   font-size: 0.7rem;
   line-height: 107%;
   opacity: 0.6;
@@ -68,6 +68,7 @@
 
 
 .accountInfoContainer .submit{
+  min-width: 50px;
   margin-top: 10px;
   align-self: center;
   padding: 15px;
