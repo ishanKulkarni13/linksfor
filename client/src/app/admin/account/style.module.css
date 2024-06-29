@@ -21,6 +21,8 @@
 }
 
 .accountInfoContainer > .accountInfo {
+
+  height: 290px;
   background-color: var(--color-surface-1);
   padding: var(--margin-x);
   border-radius: 15px;
@@ -51,28 +53,58 @@
 
 .accountInfoContainer > .accountInfo .input {
   font-size: 1rem;
-  border: none;
   background-color: none;
   background: none;
+  margin: 0px;
+  outline: none;
+}
+.input:focus{
+  outline: none;
+  padding: 2px ;
+  border: 1px solid var(--color-border);
+  border-radius: 10px ;
+}
+
+.accountInfo:has(.input:focus) .submit{
+  /* outline: none; */
+  /* transform: scale(1.1); */
+  animation: highlight 2s ease-in-out 4;
+}
+
+@keyframes highlight {
+  0%{
+    transform: scale(1);
+  } 50%{
+    transform: scale(1.1);
+  } 100%{
+    transform: scale(1);
+  }
+}
+
+.accountInfoContainer > .accountInfo .info, .accountInfoContainer  .lable{
+  font-size: 0.7rem;
+  opacity: 0.6;
+}
+
+.accountInfoContainer  .lable{
+  line-height: 100%;
 }
 
 .accountInfoContainer > .accountInfo .info{
-  font-size: 0.7rem;
-  line-height: 107%;
-  opacity: 0.6;
+  line-height: 104%;
 }
+
 
 .separator {
   border: 0.8px solid var(--color-border);
 }
 
 
-.accountInfoContainer .submit{
-  min-width: 50px;
+ .submit{
+  width: 150px;
   margin-top: 10px;
   align-self: center;
   padding: 15px;
-  width: fit-content;
   text-align: center;
   color: var(--color-text-contrast-primary);
   font-size: 1.1rem;
@@ -80,4 +112,5 @@
   line-height: 100%;
   border-radius: 50px;
   background-color: var(--color-primary);
+  transition: transform 0.5s ease-in-out;
 }

@@ -17,7 +17,7 @@ export default function AdminMorePage() {
     {
       title: "My Information",
       icon: MdOutlineAccountBox,
-      path: "/admin/settings/admin-information",
+      path: "/admin/account",
       key: "information",
     },
     // {

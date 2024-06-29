@@ -1,15 +1,17 @@
 .form {
   width: 100%;
-  display: flex;justify-content: stretch;align-items: stretch;flex-direction: column;gap: 5px;
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.lable {
-  font-size: 0.9rem;
-  filter: opacity(0.8);
-  line-height: 102%;
-}
+/* .inputContainer{
+} */
 
-.inputContainer .input {
+
+.input {
   background-color: var(--color-surface-1);
   border-radius: 15px;
   border: var(--border-surface-1);
@@ -19,13 +21,19 @@
   color: var(--colot-text-main);
 }
 
+.lable {
+  font-size: 1rem;
+  filter: opacity(0.8);
+  line-height: 100%;
+}
+
 .doneButton {
   align-self: center;
   min-width: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
   margin-top: 10px;
   align-self: center;
   padding: 15px;

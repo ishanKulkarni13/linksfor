@@ -1,13 +1,18 @@
 .container {
     background-color: var(--color-background);
+    padding: 0px var(--margin-x);
+    padding-top: calc(var(--topBarHeight) - 50px);
+    height: calc(100dvh );
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: stretch;
     flex-direction: column;
     gap: 25px;
     margin: auto;
-    padding: 0px 25px;
-    height: calc(100dvh - 50px - var(--topBarHeight));
+    position: fixed;
+    top: 0%;
+    left: 0%;
     color: var(--color-text-main);
 }
 
@@ -49,12 +54,12 @@
     font-weight: 500;
 }
 
-/* .nameContainer{
+.nameContainer{
     display: flex;
     justify-content: stretch;
     align-items: stretch;
     flex-direction: column;
-} */
+}
 
 .input {
     background-color: var(--color-surface-1);

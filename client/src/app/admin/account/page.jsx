@@ -116,9 +116,8 @@ export default async function Page() {
                 readOnly
               />
               <label
-                className={`${styles.info} ${styles.lable}`}
-                htmlFor="email"
-                style={{ lineHeight: "103%" }}
+                className={` ${styles.lable} ${styles.info}`}
+                htmlFor="username"
               >
                 This username will be used as a username for you Profile Default
                 Tree
@@ -137,7 +136,7 @@ export default async function Page() {
               />
               <Separator className={styles.separator} />
               <label
-                 className={`${styles.info} ${styles.lable}`}
+                 className={` ${styles.lable} ${styles.info}`}
                 htmlFor="email"
                 style={{ lineHeight: "103%" }}
               >
@@ -146,11 +145,13 @@ export default async function Page() {
             </div>
 
             <AccountInfoChangePopupTrigger
-              className={styles.submit}
+              className={`${styles.submit}`}
               changeAccountInfo={changeAccountInfo}
-              user={{ username: user.username }}
+              user={{ username: user.username , }}
               type={"username"}
-            />
+            >
+              Edit
+            </AccountInfoChangePopupTrigger>
           </div>
         </div>
       </div>

@@ -12,16 +12,17 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { changeAdminAccountInfo } from "@/action/admin";
 
 export default function AccountInfoChangePopupTrigger({
   user,
   type,
+  children,
   changeAccountInfo,
   className,
 }) {
@@ -34,10 +35,10 @@ export default function AccountInfoChangePopupTrigger({
   return (
     <>
       <button
-        className={`${styles.triggerButton} ${className}`}
+        className={`${className}`}
         onClick={() => setActivePopup(type)}
       >
-        Edit
+        {children}
       </button>
 
       {activePopup == "username" && (
@@ -81,39 +82,30 @@ function ChangeUsernamePopup({ user, close }) {
     setIsLoading(true);
 
     try {
-      toast.loading(`Changing usernamw...`, {
+      toast.loading(`Changing username...`, {
         id: "username",
       });
-      const res = await axios.post(
-        `/api/admin/account/account-info/edit`,
-        { username: values.username },
-        { withCredentials: true }
-      );
+      const { success, message, user } = await changeAdminAccountInfo({username: values.username});
 
-      toast.success(`Changed username to ${res.data.user.username}`, {
-        id: "username",
-      });
-      close();
-    } catch (error) {
-      if (error.response) {
-        // if server responded
-
-        toast.error(error.response.data.message, {
-          id: "username",
-        });
-      } else if (error.request) {
-        //req was made but go no response
-        toast.error(` error occured`, {
+      if (!success) {
+        toast.error(`Username not changed, error occured: ${message}`, {
           id: "username",
         });
       } else {
-        toast.error(`some error occured: ${error.message}`, {
+        toast.success(`Changed username to ${user.username}`, {
           id: "username",
         });
+        return close();
       }
+    } catch (error) {
+      toast.error(`username not changed, some error occured`, {
+        description: error.message,
+        id: "username",
+      });
     } finally {
       setIsLoading(false);
     }
+  
   };
 
   return (
@@ -132,13 +124,12 @@ function ChangeUsernamePopup({ user, close }) {
                 render={({ field }) => {
                   return (
                     <FormItem className={styles.inputContainer}>
-                      <FormLabel className={styles.lable}>username</FormLabel>
+                      <FormLabel className={styles.lable}>Username</FormLabel>
                       <FormControl>
                         <input
                           placeholder="username"
                           type="text"
                           {...field}
-
                           className={styles.input}
                         />
                       </FormControl>
