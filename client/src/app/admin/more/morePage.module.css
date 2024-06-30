@@ -1,4 +1,9 @@
-.selectTreeContainer {
+.PageWrapper{
+  margin: 0px auto;
+  max-width: var(--desktopMainUIContainerMaxWidth);
+}
+
+selectTreeContainer {
   margin-bottom: 30px;
 }
 

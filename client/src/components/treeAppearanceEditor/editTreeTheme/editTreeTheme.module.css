@@ -1,67 +1,77 @@
 .title {
-    font-weight: 550;
-    font-size: 25px;
-    color: var(--color-text-primary);
-    margin-bottom: 15px;
+  font-weight: 550;
+  font-size: 25px;
+  color: var(--color-text-primary);
+  margin-bottom: 15px;
 }
 
 .form {
-    width: auto;
-    padding: 25px;
-    /* display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr; */
-    display: flex;
+  width: auto;
+  padding: 25px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 200px));
+  justify-content: space-around;
+  align-items: stretch;
+  gap: 1rem;
+  /* display: flex;
     justify-content: center;
-    align-items: stretch;
-    gap: 35px;
-    flex-wrap: wrap;
-    background-color: var(--color-surface-1);
-    border: var(--border-surface-1);
-    border-radius: 15px;
+    align-items: stretch; */
+  /* gap: 35px; */
+  flex-wrap: wrap;
+  background-color: var(--color-surface-1);
+  border: var(--border-surface-1);
+  border-radius: 15px;
 }
 
 .themeInput {
-    display: none;
+  display: none;
 }
 
-.themeLable>div {
-    height: fit-content;
-    width: fit-content;
-    display: flex;
-    justify-content: stretch;
-    align-items: stretch;
-    gap: 5px;
-    flex-direction: column;
-    /* padding: 15px; */
-    border-radius: 15px;
-    text-align: center;
+.themeLable > div {
+  height: fit-content;
+  /* width: fit-content; */
+  margin: auto;
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+  gap: 5px;
+  flex-direction: column;
+  /* padding: 15px; */
+  border-radius: 15px;
+  text-align: center;
 }
 
 .themeDisplayPictureContainer {
-    height: 300px;
-    width: 200px;
-    border-radius: 15px;
+  /* height: 300px; */
+  width: 100%;
+  aspect-ratio: 9 / 14.5;
+  border-radius: 15px;
 }
 
-.themeInput:checked+.themeLable .themeDisplayPictureContainer {
-    padding: 10px;
-    border: 3px dotted gray;
+.themeInput:checked + .themeLable .themeDisplayPictureContainer {
+  padding: 10px;
+  border: 3px dotted gray;
 }
-
 
 .themeDisplayPictureWrapper {
-    position: relative;
-    height: 100%;
-    width: auto;
-    overflow: hidden;
-    border: var(--border-surface-3);
-    border: var(--border-surface-1);
-    background-color: var(--color-surface-2);
-    border-radius: 15px;
-    overflow: hidden;
+  position: relative;
+  height: 100%;
+  width: auto;
+  overflow: hidden;
+  border: var(--border-surface-3);
+  border: var(--border-surface-1);
+  background-color: var(--color-surface-2);
+  border-radius: 15px;
+  overflow: hidden;
 }
 
-.themeDisplayPicture{
-    object-fit: cover;
-    object-position: top;
+.themeDisplayPicture {
+  object-fit: cover;
+  object-position: top;
+}
+
+@media (max-width: 640px) {
+  .form {
+    grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+  }
 }

@@ -140,7 +140,7 @@ export default async function Page() {
                 htmlFor="email"
                 style={{ lineHeight: "103%" }}
               >
-                You cannot edit the email beacause you ave signed by Oauth
+                You cannot edit the email beacause you have signed by Oauth
               </label>
             </div>
 

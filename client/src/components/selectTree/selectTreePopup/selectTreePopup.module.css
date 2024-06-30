@@ -11,7 +11,7 @@
     width: 100%;
     overflow: scroll;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     margin-bottom: 15px;
     padding: 15px 10px;

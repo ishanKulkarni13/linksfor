@@ -71,6 +71,7 @@
   --space-top: 25px; /* gap between topbar and the component */
   --space-bottom: 100px; /* space at bottom */
   --topBarHeight: 70px;
+  --desktopMainUIContainerMaxWidth: 800px;
   --temp-b: 1px solid green;
 }
 

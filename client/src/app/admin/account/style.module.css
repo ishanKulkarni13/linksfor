@@ -1,5 +1,7 @@
 .container {
   width: 100%;
+  max-width: var(--desktopMainUIContainerMaxWidth);
+  margin: 0px auto;
   display: flex;
   justify-content: stretch;
   align-items: center;

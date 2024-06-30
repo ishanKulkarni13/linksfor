@@ -1,0 +1,4 @@
+.PageWrapper{
+    margin: 0px auto;
+    max-width: var(--desktopMainUIContainerMaxWidth);
+  }

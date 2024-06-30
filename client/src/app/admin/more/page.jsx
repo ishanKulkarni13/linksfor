@@ -83,7 +83,8 @@ export default function AdminMorePage() {
     },
   ];
   return (
-    <>
+    
+    <div className={styles.PageWrapper}>
 
       <div className={styles.container}>
         <div className={styles.selectTreeContainer}>
@@ -114,6 +115,6 @@ export default function AdminMorePage() {
           </div>
         </div>
       </div>
-    </>
+      </div>
   );
 }

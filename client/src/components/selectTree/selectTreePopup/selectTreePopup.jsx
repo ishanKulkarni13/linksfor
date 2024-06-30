@@ -108,12 +108,12 @@ export default function SelectTreePopup({
                         </div>
                       </div>
 
-                      <div className={styles.iconContainer}>
+                      {/* <div className={styles.iconContainer}>
                         {selectedTreeProfile &&
                           tree.UID == selectedTreeProfile.UID && (
                             <FontAwesomeIcon icon={faCheck} />
                           )}
-                      </div>
+                      </div> */}
                     </button>
                   </>
                 );
