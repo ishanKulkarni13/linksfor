@@ -2,6 +2,9 @@ import mongoose from "mongoose";
 import bcrypt from "bcryptjs"
 import Tree from "./tree.js"
 
+// { $regex: new RegExp(username, "i") }
+
+
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -14,6 +17,14 @@ const userSchema = new mongoose.Schema({
         unique: [true, "username already exist"],
         minLength: [3, "username must be of at least 3 characters"],
         maxLength: [25, "username can be of at most 25 characters"],
+        validate: {
+            validator: function(v) {
+                // Check for whitespace
+                return !/\s/.test(v);
+            },
+            message: props => `${props.value} should not contain spaces`
+        },
+        // required: [true, "Username is required"] // if username is not provide it is sutomatically generated
     },
     publicUID: {
         type: Number,
@@ -159,13 +170,13 @@ userSchema.pre("save", async function (next) {
 
 
         // Validate email format
-        if (this.isModified("email") || this.isNew) {
-            const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email);
-            if (!isValidEmail) {
-                return console.log(" error from DB Invalid email format");
-            }
-            this.email = this.email.toLowerCase();
-        }
+        // if (this.isModified("email") || this.isNew) {
+        //     const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email);
+        //     if (!isValidEmail) {
+        //         return console.log(" error from DB Invalid email format");
+        //     }
+        //     this.email = this.email.toLowerCase();
+        // }
 
         // Validate username format
         // if (this.isModified("username") || this.isNew) {

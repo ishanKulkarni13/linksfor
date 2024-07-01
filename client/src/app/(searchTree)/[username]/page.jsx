@@ -8,8 +8,9 @@ const getTree = async (username) => {
     await connectToDB();
 
     const user = await User.findOne({
-      username: username.toLowerCase(),
+      username:  { $regex: new RegExp(username, "i") },
     }).select("verified trees _id");
+
     if (!user) {
       return { error: "User not found" };
     }
