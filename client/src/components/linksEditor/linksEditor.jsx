@@ -188,7 +188,7 @@ export default function LinksEditor() {
         </div>
       ) : (
         <>
-          <div className={styles.container}>
+          {/* <div className={styles.container}> */}
             <div className={styles.linksEditorContainer}>
               <div className={styles.addLinkAndHeaderContainer}>
                 <AddButton
@@ -238,14 +238,14 @@ export default function LinksEditor() {
               )}
             </div>
 
-            <div className={styles.treePreviewContainer}>
+            {/* <div className={styles.treePreviewContainer}>
               <div className={styles.treePreview}>
                 {" "}
                 <TreePreview showBorder={true} treeUID={treeUID} />
               </div>
-            </div>
-          </div>
-          <TreePreviewToggleButton treeUID={treeUID} alwaysVisible />
+            </div> */}
+          {/* </div> */}
+         
         </>
       )}
     </>

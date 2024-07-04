@@ -1,13 +1,15 @@
-import TopBar from "@/components/topbar/topBar";
-export const metadata = {
-  title: "Admin",
-  description: "admin page",
-};
-
-export default function RootLayout({ children }) {
+import TreePreview from "@/components/treePreview/treePreview";
+import styles from "./style.module.css";
+export default function AdminTreeEditRootLayout({ children }) {
   return (
-    <>
-        <div>{children}</div>
-    </>
+    <div className={styles.rootContainer}>
+      <div className={styles.childrenContainer}>{children}</div>
+      <div className={styles.treePreviewContainer}>
+        <div className={styles.treePreview}>
+          
+          <TreePreview showBorder={true} />
+        </div>
+      </div>
+    </div>
   );
 }

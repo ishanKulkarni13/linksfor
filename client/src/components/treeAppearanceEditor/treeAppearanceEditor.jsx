@@ -102,7 +102,6 @@ export default function TreeAppearanceEditor() {
               />
             </div>
           </main>
-          <TreePreviewToggleButton treeUID={treeUID} alwaysVisible={true} />
         </>
       ) : (
         <>

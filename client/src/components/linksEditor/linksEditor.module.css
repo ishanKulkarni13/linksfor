@@ -1,14 +1,18 @@
-.container {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
+/* .container {
   color: var(--color-text-main);
-}
+} */
 
 .linksEditorContainer {
   height: 100%;
   overflow-y: scroll;
   position: relative;
-  border-right: 1px solid white;
+  color: var(--color-text-main);
+  /* scrollbar-gutter: stable; */
+}
+
+.linksEditorContainer::-webkit-scrollbar {
+  width: 10px;
+  display: none;
 }
 
 .addLinkAndHeaderContainer {
