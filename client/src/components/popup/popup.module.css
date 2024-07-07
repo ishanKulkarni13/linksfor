@@ -7,12 +7,25 @@
     align-items: center;
     height: 100dvh;
     width: 100vw;
+    
+    z-index: calc(var(--NavContainerZIndex) + 1);
 
-    z-index: 90;
+    /* z-index: 90; */
 }
 
+.container::before {
+    content: ''; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: calc(var(--NavContainerZIndex) + 2);
+    height: 100dvh;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.544);
+    backdrop-filter: blur(25px);
+}
 .popUpContainer {
-    z-index: 91;
+    z-index: calc(var(--NavContainerZIndex) + 3);
     height: auto;
     width: 90vw;
     max-width: var(--desktopMainUIContainerMaxWidth);
@@ -24,17 +37,6 @@
     color: var(--color-text-main);
 }
 
-.container::before {
-    content: ''; 
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 70;
-    height: 100dvh;
-    width: 100vw;
-    background: rgba(0, 0, 0, 0.544);
-    backdrop-filter: blur(25px);
-}
 
 .top {
     width: auto;
