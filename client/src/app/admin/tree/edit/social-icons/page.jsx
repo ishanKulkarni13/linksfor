@@ -2,39 +2,38 @@
 import styles from "./style.module.css";
 import { Reorder, useDragControls } from "framer-motion";
 import { useEffect, useState } from "react";
-import Link from './link/link.jsx';
 import { toast } from "sonner";
 import { useDebounce } from "@/hooks/debounce";
 import { useLocalstorage } from "@/hooks/localStorage";
 import { useRouter } from "next/navigation";
 import { useTreeUID } from "@/hooks/treeUID";
 import useHandelReselectTree from "@/hooks/handelReselectTree";
-import AddButton from './add/addButton.jsx';
 import TreePreviewToggleButton from "@/components/treePreview/treePreviewToggleButton/treePreviewToggleButton";
+import AddButton from "./components/add/addButton";
+import Social from "./components/social/social.jsx";
 
 export default function SocialIconsEditor() {
   let treeUID = useTreeUID();
   const [areLinksFetched, setAreLinksFetched] = useState();
-  const [links, setLinks] = useState([]);
+  const [socials, setSocials] = useState([]);
   const [reorderedLinksUID, setReorderedLinksUID] = useState();
   const debouncelinksUIDOrder = useDebounce(reorderedLinksUID, 3000);
   const { redirectToSelectTree } = useHandelReselectTree();
 
-  const updateLinks = async () => {
-    let { success, response, error, statusCode } = await getAllLinks(treeUID);
+  const updateSocials = async () => {
+    let { success, response, error, statusCode } = await getSocials(treeUID);
     if (success) {
-      console.log("success on updateLinks", response);
-      setLinks(response.links);
+      setSocials(response.socials);
       setAreLinksFetched(true);
     } else {
       if (error) {
         // if catched error in fetch
-        setLinks([]);
+        setSocials([]);
         toast.error("Error occured while fetching data");
         console.log("Error occured while fetching data", error);
       } else {
         //no error in fetch and success is false(from server)
-        setLinks([]);
+        setSocials([]);
         toast.error(`Link not added: ${response.message}`);
         console.log(`code in updateLinks`, statusCode);
         if (statusCode === 400 || statusCode === 401) {
@@ -44,9 +43,9 @@ export default function SocialIconsEditor() {
     }
   };
 
-  const getAllLinks = async (treeUID) => {
+  const getSocials = async (treeUID) => {
     try {
-      let res = await fetch(`/api/tree/adminAllTreeLinks/${treeUID}`, {
+      let res = await fetch(`/api/admin/tree/socials/${treeUID}`, {
         method: "GET",
         cache: "no-store",
         credentials: "include",
@@ -73,16 +72,16 @@ export default function SocialIconsEditor() {
     }
   };
 
-  const deleteLink = async (UID) => {
+  const deleteSocial = async (UID) => {
     toast.loading("deleting", {
       id: 'deleting'
     });
     try {
-      let res = await fetch(`/api/tree/edit/delete/link/${UID}`, {
+      let res = await fetch(`/api/admin/tree/edit/socials/delete`, {
         method: "POST",
         cache: "no-store",
         body: JSON.stringify({
-          linkUID: UID,
+          socialUID: UID,
           treeUID,
         }),
         credentials: "include",
@@ -99,7 +98,7 @@ export default function SocialIconsEditor() {
           duration: 1000,
         });
         let responseData = await res.json();
-        setLinks(responseData.links);
+        setSocials(responseData.socials);
       } else {
         let responseData = await res.json();
         toast.error(responseData.message, {
@@ -116,24 +115,24 @@ export default function SocialIconsEditor() {
     }
   };
 
-  function handelLinksOrderChange(value) {
-    setLinks(value);
-    let GeneratedLinksUIDArray = value.map((link) => link.UID);
+  function handelOrderChange(value) {
+    setSocials(value);
+    let GeneratedLinksUIDArray = value.map((social) => social.UID);
     setReorderedLinksUID(GeneratedLinksUIDArray);
   }
 
-  async function sendLinksUIDToBackend(linksUIDArray) {
-    toast.loading(`Sinking links...`, {
+  async function sendLinksUIDToBackend(socialsUIDArray) {
+    toast.loading(`Sinking to DB...`, {
       id: 'sinking',
       position: "top-left",
     });
     try {
-      const res = await fetch(`/api/tree/edit/links-order/${treeUID}`, {
+      const res = await fetch(`/api/admin/tree/edit/socials/order/${treeUID}`, {
         method: "POST",
         cache: "no-store",
         body: JSON.stringify({
           treeUID,
-          linksUIDArray,
+          socialsUIDArray,
         }),
         credentials: "include",
         headers: {
@@ -157,8 +156,8 @@ export default function SocialIconsEditor() {
         });
       }
     } catch (error) {
-      console.error("Error updating links order:", error);
-      toast.error("Error updating links order",{
+      console.error("Error updating socials order:", error);
+      toast.error("Error updating socials order",{
         id:  'sinking',
         duration: 3000
       });
@@ -166,9 +165,8 @@ export default function SocialIconsEditor() {
   }
 
   useEffect(() => {
-    toast.dismiss('selectTree');
     if (treeUID) {
-      updateLinks();
+      updateSocials();
     }
   }, [treeUID]);
 
@@ -191,8 +189,7 @@ export default function SocialIconsEditor() {
               <div className={styles.addLinkAndHeaderContainer}>
                 <AddButton
                   disabled={!areLinksFetched}
-                  type="link"
-                  setLinks={setLinks}
+                  setSocials={setSocials}
                   treeUID={treeUID}
                 />
               </div>
@@ -202,7 +199,7 @@ export default function SocialIconsEditor() {
                   <h1>Fetching Links</h1>
                 </div>
               )}
-              {links.length == 0 && areLinksFetched ? (
+              {socials.length == 0 && areLinksFetched ? (
                 <div className={styles.noLinksContainer}>
                   <h1>
                     No Links <br></br> Click on Add links to add a Link
@@ -211,18 +208,18 @@ export default function SocialIconsEditor() {
               ) : (
                 <>
                   <Reorder.Group
-                    values={links}
-                    onReorder={handelLinksOrderChange}
+                    values={socials}
+                    onReorder={handelOrderChange}
                     layoutScroll
                     
                     className={styles.linksContainer}
                   >
-                    {links.map((link, index) => (
-                      <Link
-                        key={link.UID}
-                        link={link}
+                    {socials.map((social, index) => (
+                      <Social
+                        key={social.UID}
+                        link={social}
                         treeUID={treeUID}
-                        deleteLink={deleteLink}
+                        deleteSocial={deleteSocial}
                       />
                     ))}
                   </Reorder.Group>

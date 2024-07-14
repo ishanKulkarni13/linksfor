@@ -1,0 +1,15 @@
+.container {
+
+  margin: 0px var(--margin-x);
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  color: var(--color-text-main);
+}
+
+
+.social svg{
+    font-size: 2.5rem;
+}

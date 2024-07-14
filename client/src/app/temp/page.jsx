@@ -7,25 +7,8 @@ export default function Page() {
 
   return (
     <>
-    <div>
-      <p>theme theme is {theme}</p>
-      <p> resolvedTheme theme is {resolvedTheme}</p>
-      <button onClick={(e) => setTheme("dark")}>
-        {" "}
-        <b>darkkkk</b>{" "}
-      </button>{" "}
-      <br />
-      <button onClick={(e) => setTheme("light")}>
-        {" "}
-        <b>Light</b>{" "}
-      </button>{" "}
-      <br />
-      <button onClick={(e) => setTheme("system")}>
-        {" "}
-        <b>System</b>{" "}
-      </button>{" "}
-      <br />
-
+    <div className="bg-yellow-300 w-fit ">
+      
     </div>
     </>
   );
