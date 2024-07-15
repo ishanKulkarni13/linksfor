@@ -58,6 +58,8 @@ const getTree = async (username) => {
   }
 };
 
+
+
 export default async function page({ params }) {
   let { tree, error } = await getTree(params.username);
 
@@ -69,3 +71,4 @@ export default async function page({ params }) {
   // if any erroe occured display error
   return <p>Error occured : {error}</p>;
 }
+

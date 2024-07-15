@@ -10,7 +10,7 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FiLayout } from "react-icons/fi";
-import { useState } from "react";
+import React, { useState } from "react";
 import { toast } from "sonner";
 // import LinkEditPopup from "./popup/linkEditPopup";
 import { FaRegImage } from "react-icons/fa6";
@@ -19,14 +19,14 @@ import Image from "next/image";
 
 // icons
 import { BsTelegram } from "react-icons/bs";
+import { socialIcons } from "@/constants/tree";
+import { SocialIcon } from "@/components/icons/social/socialIcon";
 
 export default function Social({ link, deleteSocial, treeUID }) {
   const [linkData, setLinkData] = useState(link);
   const [popup, setPopup] = useState();
   const controls = useDragControls();
   const [isLoading, setIsLoading] = useState({ link: false, deleting: false });
-
-  
 
   const closePopup = () => setPopup();
   const openPopup = (e) => setPopup(e.currentTarget.getAttribute("data-popup"));
@@ -136,9 +136,8 @@ export default function Social({ link, deleteSocial, treeUID }) {
             </div>
 
             <div className={styles.centre} onSubmit={handleSubmit}>
-
-            <div className={styles.logoContainer}>
-                <BsTelegram className={styles.logo} />
+              <div className={styles.logoContainer}>
+                <SocialIcon iconName={link.icon} />
               </div>
               {/* links for the social */}
               <form onSubmit={handleSubmit}>
@@ -159,8 +158,6 @@ export default function Social({ link, deleteSocial, treeUID }) {
                   </button>
                 </div>
               </form>
-
-           
             </div>
 
             <div className={styles.right}>

@@ -11,12 +11,15 @@
     position: relative;
     min-height: 100px;
     min-width: 100px;
+    color: white;
+    font-size: 1.3em;
 }
 
 .profilePicture{
     border-radius: 50%;
     object-fit:cover;
     object-position: center;
+    background-color: aqua;
 }
 
 .profileTextContainer{
