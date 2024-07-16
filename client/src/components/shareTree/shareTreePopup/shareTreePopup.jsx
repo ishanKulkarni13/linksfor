@@ -8,6 +8,7 @@ import Popup from "@/components/popup/popup";
 import { useEffect, useState } from "react";
 import { useTreeUID } from "@/hooks/treeUID";
 import axios from "axios";
+import AdaptiveDrawer from "@/components/adaptiveDrawer/adaptiveDrawer";
 
 export default function ShareTreePopup({ close }) {
   const [shareableLink, setShareableLink] = useState(null);
@@ -63,7 +64,8 @@ export default function ShareTreePopup({ close }) {
 
   return (
     <>
-      <Popup title={`Share tree`} close={close}>
+      <AdaptiveDrawer  heading={`Share tree`} close={close}>
+      {/* <Popup title={`Share tree`} close={close}> */}
         <div className={styles.shareContainer}>
           <div className={styles.copyToClipboardContainer}>
             <input
@@ -86,7 +88,10 @@ export default function ShareTreePopup({ close }) {
             </button>
           </div>
         </div>
-      </Popup>
+      {/* </Popup> */}
+      </AdaptiveDrawer>
     </>
   );
 }
+
+

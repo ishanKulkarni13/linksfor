@@ -21,6 +21,7 @@ import Image from "next/image";
 import { BsTelegram } from "react-icons/bs";
 import { socialIcons } from "@/constants/tree";
 import { SocialIcon } from "@/components/icons/social/socialIcon";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Social({ link, deleteSocial, treeUID }) {
   const [linkData, setLinkData] = useState(link);
@@ -180,4 +181,39 @@ export default function Social({ link, deleteSocial, treeUID }) {
       </Reorder.Item>
     </>
   );
+}
+
+export function SocialSkeleton() {
+  <Skeleton className={`${styles.DNDItem} bg-red-800 h-52`}>
+    <Skeleton className={styles.linkContainer}>
+      <Skeleton className={styles.link}>
+        <Skeleton className={`${styles.left}, ${styles.DNDIcon}`}>
+          <Skeleton className={`Fa-icon h-20 w-20 rounded-full`} />
+        </Skeleton>
+
+        <Skeleton className={styles.centre}>
+          <Skeleton className={styles.logoContainer}>
+          <Skeleton className={`Fa-icon h-20 w-20 rounded-full`} />
+          </Skeleton>
+          {/* links for the social */}
+          <Skeleton>
+            <Skeleton className={styles.URLContainer}>
+              <Skeleton className={styles.URLInput} type="text" name="URL" />
+              <Skeleton className={styles.submitButton} type="submit">
+                <Skeleton className={`Fa-icon h-20 w-20 rounded-full`} />
+              </Skeleton>
+            </Skeleton>
+          </Skeleton>
+        </Skeleton>
+
+        <Skeleton className={styles.right}>
+          <Skeleton className={styles.deleteButton}>
+            <Skeleton className={`Fa-icon h-20 w-20 rounded-full`} />
+          </Skeleton>
+        </Skeleton>
+      </Skeleton>
+
+      <Skeleton className={`Fa-icon h-20 w-20 rounded-full`} />
+    </Skeleton>
+  </Skeleton>;
 }

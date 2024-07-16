@@ -10,6 +10,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { useSelectTree } from "@/hooks/selectTree";
 import { useRouter } from "next/navigation";
+import AdaptiveDrawer from "@/components/adaptiveDrawer/adaptiveDrawer";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function SelectTreePopup({
   close,
@@ -66,9 +68,45 @@ export default function SelectTreePopup({
 
   return (
     <>
-      <Popup title={`Select Tree`}  close={close || false} >
+       <AdaptiveDrawer  heading={`Select tree`} close={close}>
         {isLoading ? (
-          <>Loading your Trees</>
+
+
+           <div className={styles.treesContainer}>
+              {[1,2,3,4,5,6,7,8,9,10].map(() => {
+                return (
+                  <>
+                    <Skeleton
+                      className={`${styles.treeContainer} `}
+                    >
+                      <Skeleton className={styles.treeProfileContainer}>
+                        <Skeleton className={styles.treeImageContainer}>
+                          
+                              <Skeleton
+                                fill={true}
+                                className={styles.profileImage}
+                                alt="Tree Image"></Skeleton>
+                        </Skeleton>
+                        <Skeleton className={styles.treeTextContainer}>
+                          <Skeleton className={`${styles.treeName} h-3 bg-[var(--color-surface-2)] w-32 mb-2`}></Skeleton>
+                          <Skeleton className={`${styles.treeName} h-3 bg-[var(--color-surface-2)] w-40`}></Skeleton>
+                        </Skeleton>
+                      </Skeleton>
+
+                      {/* <div className={styles.iconContainer}>
+                        {selectedTreeProfile &&
+                          tree.UID == selectedTreeProfile.UID && (
+                            <FontAwesomeIcon icon={faCheck} />
+                          )}
+                      </div> */}
+                    </Skeleton>
+                  </>
+                );
+              })}
+            </div>
+
+
+
         ) : (
           <>
             <div className={styles.treesContainer}>
@@ -121,7 +159,7 @@ export default function SelectTreePopup({
             </div>
           </>
         )}
-      </Popup>
+      </AdaptiveDrawer>
     </>
   );
 }

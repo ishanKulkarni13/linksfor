@@ -7,7 +7,7 @@
   overflow-y: scroll;
   position: relative;
   color: var(--color-text-main);
-  /* scrollbar-gutter: stable; */
+  
 }
 
 .linksEditorContainer::-webkit-scrollbar {

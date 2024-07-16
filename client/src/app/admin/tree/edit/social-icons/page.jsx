@@ -11,6 +11,7 @@ import useHandelReselectTree from "@/hooks/handelReselectTree";
 import TreePreviewToggleButton from "@/components/treePreview/treePreviewToggleButton/treePreviewToggleButton";
 import AddButton from "./components/add/addButton";
 import Social from "./components/social/social.jsx";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function SocialIconsEditor() {
   let treeUID = useTreeUID();
@@ -74,7 +75,7 @@ export default function SocialIconsEditor() {
 
   const deleteSocial = async (UID) => {
     toast.loading("deleting", {
-      id: 'deleting'
+      id: "deleting",
     });
     try {
       let res = await fetch(`/api/admin/tree/edit/socials/delete`, {
@@ -94,7 +95,7 @@ export default function SocialIconsEditor() {
 
       if (res.ok) {
         toast.success("Deleted", {
-          id: 'deleting',
+          id: "deleting",
           duration: 1000,
         });
         let responseData = await res.json();
@@ -102,13 +103,13 @@ export default function SocialIconsEditor() {
       } else {
         let responseData = await res.json();
         toast.error(responseData.message, {
-          id: 'deleting',
+          id: "deleting",
           duration: 3000,
         });
       }
     } catch (error) {
       toast.error(error.message, {
-        id: 'deleting',
+        id: "deleting",
         duration: 3000,
       });
       console.log("catched error", error);
@@ -123,7 +124,7 @@ export default function SocialIconsEditor() {
 
   async function sendLinksUIDToBackend(socialsUIDArray) {
     toast.loading(`Sinking to DB...`, {
-      id: 'sinking',
+      id: "sinking",
       position: "top-left",
     });
     try {
@@ -145,21 +146,21 @@ export default function SocialIconsEditor() {
       if (res.ok) {
         const responseData = await res.json();
         toast.success("Sinked", {
-          id:  'sinking',
+          id: "sinking",
           position: "top-left",
         });
       } else {
         const responseData = await res.json();
-        toast.error(responseData.message,{
-          id:  'sinking',
-          duration: 3000
+        toast.error(responseData.message, {
+          id: "sinking",
+          duration: 3000,
         });
       }
     } catch (error) {
       console.error("Error updating socials order:", error);
-      toast.error("Error updating socials order",{
-        id:  'sinking',
-        duration: 3000
+      toast.error("Error updating socials order", {
+        id: "sinking",
+        duration: 3000,
       });
     }
   }
@@ -179,7 +180,7 @@ export default function SocialIconsEditor() {
   return (
     <>
       {!treeUID ? (
-        <div className={styles.loadingContainer}>
+        <div className={styles.container}>
           <p>Loading...</p>
         </div>
       ) : (
@@ -196,7 +197,14 @@ export default function SocialIconsEditor() {
 
               {!areLinksFetched && (
                 <div className={styles.fetchingLinksContainer}>
-                  <h1>Fetching Links</h1>
+                    <div className=" h-full  w-full items-center justify-center flex-col">
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((x) => (
+                      <Skeleton
+                        key={x}
+                        className={`h-20 rounded-3xl mt-[20px] w-full bg-[var(--color-surface-2)]`}
+                      />
+                    ))}
+                  </div>
                 </div>
               )}
               {socials.length == 0 && areLinksFetched ? (
@@ -211,7 +219,6 @@ export default function SocialIconsEditor() {
                     values={socials}
                     onReorder={handelOrderChange}
                     layoutScroll
-                    
                     className={styles.linksContainer}
                   >
                     {socials.map((social, index) => (
@@ -226,11 +233,7 @@ export default function SocialIconsEditor() {
                 </>
               )}
             </div>
-
-            
           </div>
-
-
 
           <TreePreviewToggleButton treeUID={treeUID} alwaysVisible />
         </>

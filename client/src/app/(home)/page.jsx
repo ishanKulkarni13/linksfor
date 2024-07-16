@@ -11,8 +11,8 @@ export default async function page() {
     <main className={`${styles.main}`}>
       <div className={`${styles.homeContainer}`}>
         <div className={`${styles.topContainer}`}>
-          <h1>A Link-in-bio for you social profiles</h1>
-          <p>Wide varity of themes (soon), fast and totally free</p>
+          <h1>A Link-in-bio for your social profiles</h1>
+          <p>Wide varity of themes, fast and totally free</p>
         </div>
         {!user ? (
           <>

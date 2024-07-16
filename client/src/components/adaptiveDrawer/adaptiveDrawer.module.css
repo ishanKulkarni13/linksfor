@@ -1,0 +1,43 @@
+.content {
+  background-color: var(--color-background);
+  color: var(--color-text-main);
+  padding: 0px 15px 0px 15px;
+  margin: 0px 5px;
+}
+
+.content > div:nth-child(1) {
+  background-color: var(--color-surface-2);
+  margin: 15px auto;
+}
+
+.drawerHeader {
+  text-align: center;
+  padding: 0px;
+  margin-bottom: 15px;
+}
+
+.drawerChildren {
+  max-height: 80vh;
+  padding-bottom: 45px;
+  overflow-y: scroll;
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+  /* background-color: red; */
+}
+.drawerChildren::-webkit-scrollbar {
+  display: none;
+}
+
+.drawerFooter {
+  /* padding: 0.5rem; */
+}
+
+.drawerCloseButton {
+  background-color: var(--color-surface-1);
+  background-color: red;
+  border: var(--border-surface-1);
+  /* padding: 10px; */
+  width: 50%;
+  border-radius: 15px;
+  margin: 0px auto;
+}

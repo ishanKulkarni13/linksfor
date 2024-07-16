@@ -1,7 +1,5 @@
-.treesContainer {max-height: 70dvh;
+.treesContainer {
     padding: 3px 7px 0px 3px;
-    overflow-y: scroll;
-    scrollbar-width: auto;
 }
 
 
@@ -16,8 +14,12 @@
     margin-bottom: 15px;
     padding: 15px 10px;
     border-radius: 25px;
-    /* border: 2px solid green; */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
+.treeContainer::-webkit-scrollbar {
+    display: none;
+  }
 
 .selected{
     box-shadow: 0px 0px 2px white;
