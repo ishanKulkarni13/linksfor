@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import styles from "./adaptiveDrawer.module.css";
 import {
   Drawer,
@@ -20,15 +20,17 @@ export default function AdaptiveDrawer({
   description,
   children,
   close,
+  drawerSnapPoints,
 }) {
   const { width } = useWindowResize();
 
-  if (!width) return (<></>);
+  if (!width) return <></>;
 
   if (width < 640) {
     return (
       <Drawer
-        shouldScaleBackground
+        snapPoints={drawerSnapPoints}
+        // shouldScaleBackground
         className={styles.drawer}
         open
         onOpenChange={(v) => !v && close && close()}

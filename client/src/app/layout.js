@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
               showSpinner={false}
              
              />
-             <Toaster position="bottom-left" richColors closeButton={true} pauseWhenPageIsHidden={true} />
+             <Toaster position="top-left" richColors closeButton={true} pauseWhenPageIsHidden={true} />
 
           </main>
          

@@ -21,6 +21,7 @@
     border-radius: 15px;
     overflow: hidden;
     background-color: var(--color-surface-1);
+
 }
 
 .treeProfileContainer {
@@ -37,6 +38,8 @@
     border-bottom-right-radius: 15px;
     overflow: hidden;
     background-color: var(--color-surface-2);
+    border: var(--border-surface-2);
+    box-shadow: var(--shadow-2);
     text-align: center;
 }
 

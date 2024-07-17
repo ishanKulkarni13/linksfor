@@ -21,7 +21,6 @@ export default function SelectTreePopup({
   const [isLoading, setIsLoading] = useState(true);
   const [trees, setTrees] = useState([]);
   const { push } = useRouter();
-
   const select = useSelectTree();
 
   const getTrees = async () => {
@@ -68,7 +67,7 @@ export default function SelectTreePopup({
 
   return (
     <>
-       <AdaptiveDrawer  heading={`Select tree`} close={close}>
+       <AdaptiveDrawer  heading={`Select tree`} close={close} drawerSnapPoints={["350px", 1]}>
         {isLoading ? (
 
 

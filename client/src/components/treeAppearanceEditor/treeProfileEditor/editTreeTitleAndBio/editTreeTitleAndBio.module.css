@@ -14,6 +14,7 @@
 }
 .inputContainer{
     background-color: var(--color-surface-2);
+    border: var( --border-surface-2);
     padding: 15px;
     border-radius: 15px;
     display: flex;

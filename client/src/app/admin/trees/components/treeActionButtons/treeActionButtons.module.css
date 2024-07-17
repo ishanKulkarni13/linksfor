@@ -15,6 +15,8 @@
 
 .treeActionsButton{
     background-color: var(--color-surface-2);
+    border: var(--border-surface-2);
+    box-shadow: var(--shadow-2);
     padding: 10px 15px;
     border-radius: 50px;
     font-size: 1.1em;

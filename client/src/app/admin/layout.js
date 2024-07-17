@@ -4,7 +4,7 @@ export default function AdminLayout({ children }) {
   return (
     <>
       <TopBar />
-      <div  vaul-drawer-wrapper=''  className={styles.children}>
+      <div className={styles.children}>
         {children}
       </div>
     </>
