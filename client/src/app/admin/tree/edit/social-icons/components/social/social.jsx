@@ -19,7 +19,6 @@ import Image from "next/image";
 
 // icons
 import { BsTelegram } from "react-icons/bs";
-import { socialIcons } from "@/constants/tree";
 import { SocialIcon } from "@/components/icons/social/socialIcon";
 import { Skeleton } from "@/components/ui/skeleton";
 

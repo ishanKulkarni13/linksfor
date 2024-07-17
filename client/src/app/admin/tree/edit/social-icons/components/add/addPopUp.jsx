@@ -31,27 +31,31 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from "@/components/ui/command";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { FaCheck } from "react-icons/fa";
+import { socialIcons } from "@/constants/tree";
+import { SocialIcon } from "@/components/icons/social/socialIcon";
 
 export default function AddPopUp({ close, setSocials, treeUID }) {
-  const [social, setSocial] = useState({URL:'', icon:''});
+  const [social, setSocial] = useState({ URL: "", icon: "" });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState({});
 
   // handel form submit
-  const handleSubmit = async () => {
-    setError({})
-    if(  social.URL.length < 1  ) {
-      setError({...error, URL:"Please enter URL" })
-      return toast.error('Please provide required fields properly', {
-        id: 'socials'
-      })
-    } else if (  social.icon.length < 1) {
-      setError({...error, icon:"Please enter icon" })
-      return toast.error('Please provide required fields properly', {
-        id: 'socials'
-      })
+  const handleDone = async () => {
+    setError({});
+    if (social.URL.length < 1) {
+      setError({ ...error, URL: "Please enter URL" });
+      return toast.error("Please provide required fields properly", {
+        id: "socials",
+      });
+    } else if (social.icon.length < 1) {
+      setError({ ...error, icon: "Please enter icon" });
+      return toast.error("Please provide required fields properly", {
+        id: "socials",
+      });
     }
-
 
     const values = { URL: social.URL, icon: social.icon };
     try {
@@ -110,24 +114,51 @@ export default function AddPopUp({ close, setSocials, treeUID }) {
           </div>
 
           <div className={styles.iconSelectContainer}>
-            <label className={styles.lable} htmlFor="icon">
-              icon
-            </label>
-            <input
-              name="icon"
-              className={styles.iconInput}
-              placeholder="icon"
-              id="icon"
-              value={social.icon}
-              onChange={(e) =>
-                setSocial({ ...social, icon: e.currentTarget.value })
-              }
-            ></input>
+            {setSocial}
+            <Command className={styles.command}>
+              <CommandInput placeholder="Search Icons..." />
+              <CommandEmpty>No icon found.</CommandEmpty>
+              <CommandList>
+                <CommandGroup className={styles.commandGroup}>
+                  {Object.keys(socialIcons).map((ObjKey) => {
+
+                    return (
+                      <CommandItem
+                        className={styles.socialContainer}
+                        key={socialIcons[ObjKey].key}
+                        value={socialIcons[ObjKey].key}
+                        onSelect={(currentValue) => {
+                          setSocial((prev) => ({
+                            ...prev,
+                            icon: currentValue,
+                          }));
+                        }}
+                      >
+                        <SocialIcon
+                          className={styles.icon}
+                          iconName={socialIcons[ObjKey].key}
+                        />
+
+                        <span className={styles.socialIconName}>
+                          {socialIcons[ObjKey].name}
+                        </span>
+
+                        { social.icon == socialIcons[ObjKey].key &&
+                          <FaCheck
+                          className={`${styles.icon} ${styles.tick}`}
+                        />
+                        }
+                      </CommandItem>
+                    );
+                  })}
+                </CommandGroup>
+              </CommandList>
+            </Command>
           </div>
 
           <button
             disabled={isLoading && false}
-            onClick={handleSubmit}
+            onClick={handleDone}
             className={styles.doneButton}
           >
             {!isLoading && (

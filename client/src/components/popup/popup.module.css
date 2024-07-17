@@ -8,7 +8,7 @@
     height: 100dvh;
     width: 100vw;
     
-    z-index: calc(var(--NavContainerZIndex) + 1);
+    z-index: calc(var(--NavContainerZIndex) + 10);
 
     /* z-index: 90; */
 }
@@ -18,14 +18,14 @@
     position: absolute;
     top: 0;
     left: 0;
-    z-index: calc(var(--NavContainerZIndex) + 2);
+    z-index: calc(var(--NavContainerZIndex) + 11);
     height: 100dvh;
     width: 100vw;
     background: rgba(0, 0, 0, 0.544);
     backdrop-filter: blur(25px);
 }
 .popUpContainer {
-    z-index: calc(var(--NavContainerZIndex) + 3);
+    z-index: calc(var(--NavContainerZIndex) + 13);
     height: auto;
     width: 90vw;
     max-width: 500px;
@@ -60,10 +60,16 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    max-height: 70dvh;
 }
 
 
 .childrenContainer{
-    /* border: 1px solid gold; */
+    max-height: 70dvh;
+    overflow-y: scroll;
+    scrollbar-gutter: auto;
+    -ms-overflow-style: none; 
+    scrollbar-width: none;  
 }
+.childrenContainer::-webkit-scrollbar {
+    display: none;
+  }
