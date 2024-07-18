@@ -20,14 +20,11 @@ export default function SelectTree() {
   let treeUID = useTreeUID();
   const { width } = useWindowResize();
   const [selectedTreeProfile, setSelectedTreeProfile] = useState();
-  const [isPopUpActive, setIsPopUpActive] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const { redirectToSelectTree } = useHandelReselectTree();
 
   function onSwitchTreeButtonCLick() {
-    setIsPopUpActive(true);
-  }
-  function closePopUp() {
-    setIsPopUpActive(false);
+    setIsPopupOpen(true);
   }
 
   const getTreeProfile = async () => {
@@ -118,13 +115,14 @@ export default function SelectTree() {
               )}
             </div>
           </button>
-          {isPopUpActive && (
+          
             <SelectTreePopup
               selectedTreeProfile={selectedTreeProfile}
               setSelectedTreeProfile={setSelectedTreeProfile}
-              close={closePopUp}
+              open={isPopupOpen}
+              setOpen={setIsPopupOpen}
             />
-          )}
+          
         </>
       )}
 

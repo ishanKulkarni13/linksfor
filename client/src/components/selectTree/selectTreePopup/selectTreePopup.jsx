@@ -1,20 +1,19 @@
-'use client'
+"use client";
 
 import Popup from "@/components/popup/popup";
 import styles from "./selectTreePopup.module.css";
 import { useEffect, useState } from "react";
-import {  toast } from "sonner";
+import { toast } from "sonner";
 import axios from "axios";
 import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { useSelectTree } from "@/hooks/selectTree";
 import { useRouter } from "next/navigation";
 import AdaptiveDrawer from "@/components/adaptiveDrawer/adaptiveDrawer";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function SelectTreePopup({
-  close,
+  open,
+  setOpen,
   selectedTreeProfile,
   setSelectedTreeProfile,
 }) {
@@ -49,15 +48,15 @@ export default function SelectTreePopup({
     if (selectedTree) {
       setSelectedTreeProfile && setSelectedTreeProfile(selectedTree);
       select(treeUID);
-      toast.success('Tree selected, ', {
-        id: 'selectTree',
-        description:'redirecting...'
-      })
+      toast.success("Tree selected, ", {
+        id: "selectTree",
+        description: "redirecting...",
+      });
       push(`/admin/tree/edit/links`);
-      close && close();
+      setOpen && setOpen(false);
     } else {
-      toast.error(`Tree with UID ${treeUID} not found`,{
-        id: 'selectTree',
+      toast.error(`Tree with UID ${treeUID} not found`, {
+        id: "selectTree",
       });
     }
   };
@@ -67,48 +66,43 @@ export default function SelectTreePopup({
 
   return (
     <>
-       <AdaptiveDrawer  heading={`Select tree`} close={close} drawerSnapPoints={["350px", 1]}>
-        {isLoading ? (
-
-
-           <div className={styles.treesContainer}>
-              {[1,2,3,4,5,6,7,8,9,10].map(() => {
-                return (
-                  <>
-                    <Skeleton
-                      className={`${styles.treeContainer} `}
-                    >
-                      <Skeleton className={styles.treeProfileContainer}>
-                        <Skeleton className={styles.treeImageContainer}>
-                          
-                              <Skeleton
-                                fill={true}
-                                className={styles.profileImage}
-                                alt="Tree Image"></Skeleton>
-                        </Skeleton>
-                        <Skeleton className={styles.treeTextContainer}>
-                          <Skeleton className={`${styles.treeName} h-3 bg-[var(--color-surface-2)] w-32 mb-2`}></Skeleton>
-                          <Skeleton className={`${styles.treeName} h-3 bg-[var(--color-surface-2)] w-40`}></Skeleton>
-                        </Skeleton>
+      <AdaptiveDrawer
+        heading={`Select tree`}
+        open={open}
+        onOpenChange={setOpen}
+      >
+          <div className={styles.treesContainer} style={{ height: isLoading?'20vh':`${trees.length * 90}px` }} >
+        {isLoading || false ? (
+          <>
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(() => {
+              return (
+                <>
+                  <Skeleton className={`${styles.treeContainer} `}>
+                    <Skeleton className={styles.treeProfileContainer}>
+                      <Skeleton className={styles.treeImageContainer}>
+                        <Skeleton
+                          fill={true}
+                          className={styles.profileImage}
+                          alt="Tree Image"
+                        ></Skeleton>
                       </Skeleton>
-
-                      {/* <div className={styles.iconContainer}>
-                        {selectedTreeProfile &&
-                          tree.UID == selectedTreeProfile.UID && (
-                            <FontAwesomeIcon icon={faCheck} />
-                          )}
-                      </div> */}
+                      <Skeleton className={styles.treeTextContainer}>
+                        <Skeleton
+                          className={`${styles.treeName} h-3 bg-[var(--color-surface-2)] w-32 mb-2`}
+                        ></Skeleton>
+                        <Skeleton
+                          className={`${styles.treeName} h-3 bg-[var(--color-surface-2)] w-40`}
+                        ></Skeleton>
+                      </Skeleton>
                     </Skeleton>
-                  </>
-                );
-              })}
-            </div>
-
-
-
+                  </Skeleton>
+                </>
+              );
+            })}
+          </>
         ) : (
           <>
-            <div className={styles.treesContainer}>
+           <>
               {trees.map((tree) => {
                 return (
                   <>
@@ -144,20 +138,15 @@ export default function SelectTreePopup({
                           <p className={styles.treeUID}>{tree.UID}</p>
                         </div>
                       </div>
-
-                      {/* <div className={styles.iconContainer}>
-                        {selectedTreeProfile &&
-                          tree.UID == selectedTreeProfile.UID && (
-                            <FontAwesomeIcon icon={faCheck} />
-                          )}
-                      </div> */}
                     </button>
                   </>
                 );
               })}
-            </div>
+            </>
           </>
         )}
+
+       </div>
       </AdaptiveDrawer>
     </>
   );

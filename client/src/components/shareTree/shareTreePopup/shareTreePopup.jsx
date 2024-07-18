@@ -10,7 +10,7 @@ import { useTreeUID } from "@/hooks/treeUID";
 import axios from "axios";
 import AdaptiveDrawer from "@/components/adaptiveDrawer/adaptiveDrawer";
 
-export default function ShareTreePopup({ close }) {
+export default function ShareTreePopup({ open, setOpen }) {
   const [shareableLink, setShareableLink] = useState(null);
   const [isLinkCopyed, setIsLinkCopyed] = useState(false);
   let treeUID = useTreeUID();
@@ -30,11 +30,9 @@ export default function ShareTreePopup({ close }) {
 
   const handelSetShareableLink = async () => {
     if (!treeUID) {
-      console.log(treeUID);
       return toast.error("didn't got treeUID while getting treeprofile");
     }
     try {
-      console.log(`got treeUId in getShareableLink as:`, treeUID);
       const res = await axios.get(`/api/tree/shareableLink/${treeUID}`, {
         withCredentials: true,
       });
@@ -64,8 +62,7 @@ export default function ShareTreePopup({ close }) {
 
   return (
     <>
-      <AdaptiveDrawer  heading={`Share tree`} close={close}>
-      {/* <Popup title={`Share tree`} close={close}> */}
+      <AdaptiveDrawer  heading={`Share tree`} open={open} onOpenChange={setOpen}>
         <div className={styles.shareContainer}>
           <div className={styles.copyToClipboardContainer}>
             <input
@@ -79,7 +76,7 @@ export default function ShareTreePopup({ close }) {
               onClick={onCopyButtonClick}
               className={styles.copyIconContainer}
             >
-              {/* <FontAwesomeIcon className={styles.copyIcon}  icon={faCopy} /> */}
+              
               {!isLinkCopyed ? (
                 <FontAwesomeIcon className={styles.copyIcon} icon={faCopy} />
               ) : (
@@ -88,7 +85,6 @@ export default function ShareTreePopup({ close }) {
             </button>
           </div>
         </div>
-      {/* </Popup> */}
       </AdaptiveDrawer>
     </>
   );

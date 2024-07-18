@@ -5,6 +5,8 @@ import { NextResponse } from "next/server"
 
 export const GET = async () => {
 
+    await new Promise(resolve => setTimeout(resolve, 5000));
+
     try {
         await connectToDB()
         const session = await auth();

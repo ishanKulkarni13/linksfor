@@ -19,10 +19,12 @@ export default function AdaptiveDrawer({
   heading,
   description,
   children,
-  close,
+  open,
+  onOpenChange,
   drawerSnapPoints,
 }) {
   const { width } = useWindowResize();
+  // const [open, onOpenChange]= useState(true)
 
   if (!width) return <></>;
 
@@ -32,8 +34,8 @@ export default function AdaptiveDrawer({
         snapPoints={drawerSnapPoints}
         // shouldScaleBackground
         className={styles.drawer}
-        open
-        onOpenChange={(v) => !v && close && close()}
+        open={open}
+        onOpenChange={onOpenChange}
       >
         <DrawerContent className={`${styles.content} bg-white `}>
           <DrawerHeader className={styles.drawerHeader}>
@@ -56,9 +58,9 @@ export default function AdaptiveDrawer({
         </DrawerContent>
       </Drawer>
     );
-  } else {
+  } else if(open) {
     return (
-      <Popup title={heading} description={description} close={close}>
+      <Popup title={heading} description={description} close={()=> onOpenChange(false) }>
         {children}
       </Popup>
     );

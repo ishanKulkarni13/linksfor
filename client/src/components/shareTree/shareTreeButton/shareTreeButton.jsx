@@ -13,9 +13,6 @@ export default function ShareTreeButton() {
   function onShareButtonCLick() {
     setIsPopUpActive(true);
   }
-  function closeAddLinkPopUp() {
-    setIsPopUpActive(false);
-  }
   
   return (
     <>
@@ -26,7 +23,7 @@ export default function ShareTreeButton() {
       </button>
 
        {/* Popup  */}
-      {isPopUpActive && <ShareTreePopup close={closeAddLinkPopUp} />}
+       <ShareTreePopup open={isPopUpActive} setOpen={setIsPopUpActive} />
     </>
   );
 }
