@@ -1,5 +1,3 @@
-import React from "react";
-import styles from "../treeAppearanceEditor.module.css";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function TreeAppearanceEditorSkeleton() {
@@ -12,21 +10,26 @@ export default function TreeAppearanceEditorSkeleton() {
             )
         })        
       } */}
-      <div>
-        <Skeleton
-          className={`h-8 w-32 rounded-full  bg-[var(--color-surface-1)] mb-5 flex justify-center items-center`}
-        ></Skeleton>
+      <AppearanceEditorSubComponent />
 
-        <Skeleton className={`h-72 bg-[var(--color-surface-1)] rounded-2xl`} />
-      </div>
+      <AppearanceEditorSubComponent height={'770px'} />
+    </div>
+  );
+}
 
-      <div>
-        <Skeleton
-          className={`h-8 w-36 rounded-full  bg-[var(--color-surface-1)] mb-5 flex justify-center items-center`}
-        ></Skeleton>
+export function AppearanceEditorSubComponent({ height }) {
+  return (
+    <div>
+      <Skeleton
+        className={`h-8 w-36 rounded-full  bg-[var(--color-surface-1)] mb-5 flex justify-center items-center`}
+      ></Skeleton>
 
-        <Skeleton className={`h-[450px] bg-[var(--color-surface-1)] rounded-2xl`} />
-      </div>
+      <Skeleton
+        className={`h-[300px] bg-[var(--color-surface-1)] rounded-2xl`}
+        style={{
+            height : height? height : '330px'
+        }}
+      />
     </div>
   );
 }

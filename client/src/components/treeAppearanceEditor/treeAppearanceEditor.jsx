@@ -10,7 +10,7 @@ import { toast } from "sonner";
 import axios from "axios";
 import TreePreviewToggleButton from "../treePreview/treePreviewToggleButton/treePreviewToggleButton";
 import useHandelReselectTree from "@/hooks/handelReselectTree";
-import TreeAppearanceEditorSkeleton from "./skeletons/treeAppearanceEditorSkeleton";
+import TreeAppearanceEditorSkeleton, { AppearanceEditorSubComponent } from "./skeletons/treeAppearanceEditorSkeleton";
 
 const DynamicTreeProfileEditor = dynamic(
   () =>
@@ -19,9 +19,7 @@ const DynamicTreeProfileEditor = dynamic(
     ),
   {
     loading: () => (
-      <div className={styles.dynamicContainer}>
-        <p>Loading Dynamic Profile Editor</p>
-      </div>
+      <AppearanceEditorSubComponent/>
     ),
     ssr: false,
   }
@@ -31,10 +29,7 @@ const DynamicTreeThemeEditor = dynamic(
   () => import("@/components/treeAppearanceEditor/editTreeTheme/editTreeTheme"),
   {
     loading: () => (
-      <div className={styles.dynamicContainer}>
-        {" "}
-        <p>Loading Dynamic theme Editor</p>{" "}
-      </div>
+      <AppearanceEditorSubComponent height={'770px'} />
     ),
     ssr: false,
   }
@@ -84,7 +79,7 @@ export default function TreeAppearanceEditor() {
     }
   }, [treeUID]);
 
-  return <TreeAppearanceEditorSkeleton/>
+  // return <TreeAppearanceEditorSkeleton/>
   return (
     <>
       {treeProfile ? (
@@ -107,9 +102,7 @@ export default function TreeAppearanceEditor() {
         </>
       ) : (
         <>
-          <div className={styles.loadingContainer}>
-            <p>Loading Appreance Editor</p>
-          </div>
+         <TreeAppearanceEditorSkeleton/>
         </>
       )}
     </>
