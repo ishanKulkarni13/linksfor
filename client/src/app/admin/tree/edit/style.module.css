@@ -7,7 +7,11 @@
   display: none;
 }
 
-@media (width > 1024px) {
+.childrenContainer{
+  max-width: var(--desktopMainUIContainerMaxWidth);
+  margin: 0pc auto;
+}
+/* @media (width > 1024px) {
   .rootContainer {
     position: fixed;
     top: 0;
@@ -48,4 +52,4 @@
     border-radius: 15px;
     z-index: -1;
   }
-}
+} */

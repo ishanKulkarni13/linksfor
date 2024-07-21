@@ -15,7 +15,7 @@
     height: inherit;
     width: inherit;
     border-radius: inherit;
-    box-shadow: var(--shadow-floating);
+    /* box-shadow: var(--shadow-floating); */
     /* background-color: var(--backgroundSecondary); */
     backdrop-filter: blur(30px);
   

@@ -6,13 +6,13 @@ export default function AdminTreeEditRootLayout({ children }) {
     <>
     <div className={styles.rootContainer}>
       <div className={styles.childrenContainer}>{children}</div>
-      <div className={styles.treePreviewContainer}>
+      {/* <div className={styles.treePreviewContainer}>
         <div className={styles.treePreview}>
           <TreePreview showBorder={true} />
         </div>
-      </div>
+      </div> */}
+    <TreePreviewToggleButton alwaysVisible />
     </div>
-    <TreePreviewToggleButton/>
     </>
   );
 }

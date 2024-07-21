@@ -5,7 +5,7 @@
   margin: 0px 5px;
 }
 
-.content > div:nth-child(1) {
+.drawer .content > div:nth-child(1) {
   background-color: var(--color-surface-2);
   margin: 15px auto;
 }

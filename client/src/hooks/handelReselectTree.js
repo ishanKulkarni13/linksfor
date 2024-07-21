@@ -13,10 +13,10 @@ const useHandelReselectTree = () => {
         try {
             toast.info('Reedirecting you to select tree')
             await removeItem();
-            push('/admin/select-tree');
         } catch (error) {
             console.log(error);
         }
+        push('/admin/select-tree');
     }
 
     const handelInvalidTreeUID = redirectToSelectTree;

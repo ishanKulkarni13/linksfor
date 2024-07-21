@@ -56,12 +56,12 @@ export default function Social({ link, deleteSocial, treeUID }) {
       let res;
       if (link.type != `header`) {
         // for link
-        res = await fetch(`/api/tree/edit/link/titleAndURL/${treeUID}`, {
+        res = await fetch(`/api/admin/tree/edit/socials/update`, {
           method: "POST",
           cache: "no-store",
           body: JSON.stringify({
             treeUID,
-            linkUID: UID,
+            socialUID: UID,
             title,
             URL,
           }),
