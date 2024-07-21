@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import axios from "axios";
 import TreePreviewToggleButton from "../treePreview/treePreviewToggleButton/treePreviewToggleButton";
 import useHandelReselectTree from "@/hooks/handelReselectTree";
+import TreeAppearanceEditorSkeleton from "./skeletons/treeAppearanceEditorSkeleton";
 
 const DynamicTreeProfileEditor = dynamic(
   () =>
@@ -83,6 +84,7 @@ export default function TreeAppearanceEditor() {
     }
   }, [treeUID]);
 
+  return <TreeAppearanceEditorSkeleton/>
   return (
     <>
       {treeProfile ? (

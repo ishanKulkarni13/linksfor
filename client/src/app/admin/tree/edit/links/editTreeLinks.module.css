@@ -1,5 +1,6 @@
 .dynamicContainer{
     width: auto;
+    margin: auto;
     color: var(--color-text-main);
     font-size: 25px;
     font-weight: 500;

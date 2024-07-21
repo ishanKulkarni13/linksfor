@@ -9,8 +9,10 @@
 
 .childrenContainer{
   max-width: var(--desktopMainUIContainerMaxWidth);
-  margin: 0pc auto;
+  margin: 0px auto;
 }
+
+
 /* @media (width > 1024px) {
   .rootContainer {
     position: fixed;

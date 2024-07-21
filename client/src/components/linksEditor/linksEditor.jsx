@@ -1,18 +1,19 @@
 "use client";
 import styles from "@/components/linksEditor/linksEditor.module.css";
-import { backendBaseURL } from "@/constants/index";
-import { Reorder, useDragControls } from "framer-motion";
+import { Reorder } from "framer-motion";
 import { useEffect, useState } from "react";
 import Link from "@/components/linksEditor/link/link";
 import { toast } from "sonner";
 import AddButton from "./addLink/addLinkButton";
-import TreePreview from "../treePreview/treePreview";
-import TreePreviewToggleButton from "../treePreview/treePreviewToggleButton/treePreviewToggleButton";
 import { useDebounce } from "@/hooks/debounce";
-import { useLocalstorage } from "@/hooks/localStorage";
-import { useRouter } from "next/navigation";
 import { useTreeUID } from "@/hooks/treeUID";
 import useHandelReselectTree from "@/hooks/handelReselectTree";
+import { Skeleton } from "../ui/skeleton";
+import { LinkEditorSkeleton, LinksSkeleton } from "./skeletons/linksEditorSkeleton";
+
+
+
+
 
 export default function LinksEditor() {
   let treeUID = useTreeUID();
@@ -77,7 +78,7 @@ export default function LinksEditor() {
 
   const deleteLink = async (UID) => {
     toast.loading("deleting", {
-      id: 'deleting'
+      id: "deleting",
     });
     try {
       let res = await fetch(`/api/tree/edit/delete/link/${UID}`, {
@@ -97,7 +98,7 @@ export default function LinksEditor() {
 
       if (res.ok) {
         toast.success("Deleted", {
-          id: 'deleting',
+          id: "deleting",
           duration: 1000,
         });
         let responseData = await res.json();
@@ -105,13 +106,13 @@ export default function LinksEditor() {
       } else {
         let responseData = await res.json();
         toast.error(responseData.message, {
-          id: 'deleting',
+          id: "deleting",
           duration: 3000,
         });
       }
     } catch (error) {
       toast.error(error.message, {
-        id: 'deleting',
+        id: "deleting",
         duration: 3000,
       });
       console.log("catched error", error);
@@ -126,7 +127,7 @@ export default function LinksEditor() {
 
   async function sendLinksUIDToBackend(linksUIDArray) {
     toast.loading(`Sinking links...`, {
-      id: 'sinking',
+      id: "sinking",
       position: "top-left",
     });
     try {
@@ -148,27 +149,27 @@ export default function LinksEditor() {
       if (res.ok) {
         const responseData = await res.json();
         toast.success("Sinked", {
-          id:  'sinking',
+          id: "sinking",
           position: "top-left",
         });
       } else {
         const responseData = await res.json();
-        toast.error(responseData.message,{
-          id:  'sinking',
-          duration: 3000
+        toast.error(responseData.message, {
+          id: "sinking",
+          duration: 3000,
         });
       }
     } catch (error) {
       console.error("Error updating links order:", error);
-      toast.error("Error updating links order",{
-        id:  'sinking',
-        duration: 3000
+      toast.error("Error updating links order", {
+        id: "sinking",
+        duration: 3000,
       });
     }
   }
 
   useEffect(() => {
-    toast.dismiss('selectTree');
+    toast.dismiss("selectTree");
     if (treeUID) {
       updateLinks();
     }
@@ -180,72 +181,60 @@ export default function LinksEditor() {
     }
   }, [debouncelinksUIDOrder]);
 
+  // return <LinkEditorSkeleton />;
+
+
   return (
     <>
       {!treeUID ? (
-        <div className={styles.loadingContainer}>
-          <p>Loading...</p>
-        </div>
+        <LinkEditorSkeleton />
       ) : (
         <>
           {/* <div className={styles.container}> */}
-            <div className={styles.linksEditorContainer}>
-              <div className={styles.addLinkAndHeaderContainer}>
-                <AddButton
-                  disabled={!areLinksFetched}
-                  type="link"
-                  setLinks={setLinks}
-                  treeUID={treeUID}
-                />
-                <AddButton
-                  disabled={!areLinksFetched}
-                  type="header"
-                  setLinks={setLinks}
-                  treeUID={treeUID}
-                />
-              </div>
-
-              {!areLinksFetched && (
-                <div className={styles.fetchingLinksContainer}>
-                  <h1>Fetching Links</h1>
-                </div>
-              )}
-              {links.length == 0 && areLinksFetched ? (
-                <div className={styles.noLinksContainer}>
-                  <h1>
-                    No Links <br></br> Click on Add links to add a Link
-                  </h1>
-                </div>
-              ) : (
-                <>
-                  <Reorder.Group
-                    values={links}
-                    onReorder={handelLinksOrderChange}
-                    layoutScroll
-                    
-                    className={styles.linksContainer}
-                  >
-                    {links.map((link, index) => (
-                      <Link
-                        key={link.UID}
-                        link={link}
-                        treeUID={treeUID}
-                        deleteLink={deleteLink}
-                      />
-                    ))}
-                  </Reorder.Group>
-                </>
-              )}
+          <div className={styles.linksEditorContainer}>
+            <div className={styles.addLinkAndHeaderContainer}>
+              <AddButton
+                disabled={!areLinksFetched || !treeUID}
+                type="link"
+                setLinks={setLinks}
+                treeUID={treeUID}
+              />
+              <AddButton
+                disabled={!areLinksFetched || !treeUID}
+                type="header"
+                setLinks={setLinks}
+                treeUID={treeUID}
+              />
             </div>
 
-            {/* <div className={styles.treePreviewContainer}>
-              <div className={styles.treePreview}>
-                {" "}
-                <TreePreview showBorder={true} treeUID={treeUID} />
+            {!areLinksFetched && <LinksSkeleton/>}
+
+            {links.length == 0 && areLinksFetched ? (
+              <div className={styles.noLinksContainer}>
+                <h1>
+                  No Links <br></br> Click on Add links to add a Link
+                </h1>
               </div>
-            </div> */}
-          {/* </div> */}
-         
+            ) : (
+              <>
+                <Reorder.Group
+                  values={links}
+                  onReorder={handelLinksOrderChange}
+                  layoutScroll
+                  className={styles.linksContainer}
+                >
+                  {links.map((link, index) => (
+                    <Link
+                      key={link.UID}
+                      link={link}
+                      treeUID={treeUID}
+                      deleteLink={deleteLink}
+                    />
+                  ))}
+                </Reorder.Group>
+              </>
+            )}
+          </div>
         </>
       )}
     </>

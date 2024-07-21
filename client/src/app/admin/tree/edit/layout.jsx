@@ -11,8 +11,8 @@ export default function AdminTreeEditRootLayout({ children }) {
           <TreePreview showBorder={true} />
         </div>
       </div> */}
-    <TreePreviewToggleButton alwaysVisible />
     </div>
+    <TreePreviewToggleButton alwaysVisible />
     </>
   );
 }

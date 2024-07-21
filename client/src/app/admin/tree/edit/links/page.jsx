@@ -1,9 +1,9 @@
 "use client";
-import styles from "./editTreeLinks.module.css"
 import dynamic from "next/dynamic";
+import linksEditorSkeleton from "@/components/linksEditor/skeletons/linksEditorSkeleton.jsx"
 
 const DynamicLinksEditor = dynamic(()=> import('@/components/linksEditor/linksEditor'), {
-  loading: ()=> <div  className={styles.dynamicContainer} > <p>Loading Editor</p> </div>, ssr:false 
+  loading: ()=> <linksEditorSkeleton/>, ssr:true 
 })
 export default function TreeEdit() {
   return (
