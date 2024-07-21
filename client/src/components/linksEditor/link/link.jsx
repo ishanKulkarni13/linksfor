@@ -10,17 +10,20 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FiLayout } from "react-icons/fi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import LinkEditPopup from "./popup/linkEditPopup";
 import { FaRegImage } from "react-icons/fa6";
-import{CgSpinner} from "react-icons/cg"
+import { CgSpinner } from "react-icons/cg";
+import { useDebounce } from "@/hooks/debounce";
 
 export default function Link({ link, deleteLink, treeUID }) {
   const [linkData, setLinkData] = useState(link);
   const [popup, setPopup] = useState();
   const controls = useDragControls();
-  const [isLoading, setIsLoading] = useState({ link: false, deleting: false });
+  const [isLoading, setIsLoading] = useState({ link: false, deleting: false, mounted: false });
+
+  const debouncelinkData = useDebounce(linkData, 3000);
 
   const closePopup = () => setPopup();
   const openPopup = (e) => setPopup(e.currentTarget.getAttribute("data-popup"));
@@ -34,16 +37,30 @@ export default function Link({ link, deleteLink, treeUID }) {
     setLinkData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
   const handleSubmit = async (event) => {
+    return  event.preventDefault();
     setIsLoading({ ...isLoading, link: true });
-    event.preventDefault();
-    console.log(linkData);
     await sendLinkTitleAndURLToBackend();
     setIsLoading({ ...isLoading, link: false });
   };
 
+  useEffect(()=>{
+    (async () => {  
+      if(isLoading.mounted ){
+        setIsLoading({ ...isLoading, link: true });
+        await sendLinkTitleAndURLToBackend()
+       setIsLoading({ ...isLoading, link: false });
+  
+      }
+    })();
+  }, [debouncelinkData]);
+
+  useEffect(()=>{
+    setIsLoading({...isLoading, mounted: true})
+  }, [])
+
   const sendLinkTitleAndURLToBackend = async () => {
     toast.loading(`Updating link data...`, {
-      id: 'updating'
+      id: "updating",
     });
     let { title, URL, UID } = linkData;
     try {
@@ -87,21 +104,21 @@ export default function Link({ link, deleteLink, treeUID }) {
 
       if (res.ok) {
         toast.success("Updated", {
-          id:  'updating',
+          id: "updating",
           duration: 1250,
         });
         const responseData = await res.json();
       } else {
         const responseData = await res.json();
         toast.error(responseData.message, {
-          id:  'updating',
+          id: "updating",
           duration: 3500,
         });
       }
     } catch (error) {
       console.error("Error in sending header title to DB", error);
       toast.error("Error in sending header tltle to DB", {
-        id:  'updating',
+        id: "updating",
         duration: 3500,
       });
     }
@@ -139,13 +156,13 @@ export default function Link({ link, deleteLink, treeUID }) {
                     value={linkData.title}
                     onChange={handleInputChange}
                   />
-                  <button
+                  {/* <button
                     disabled={isLoading.link}
                     className={styles.submitButton}
                     type="submit"
                   >
                     <FontAwesomeIcon icon={faCheck} />
-                  </button>
+                  </button> */}
                 </div>
 
                 {link.type != `header` && (
@@ -157,43 +174,35 @@ export default function Link({ link, deleteLink, treeUID }) {
                       value={linkData.URL}
                       onChange={handleInputChange}
                     />
-                    <button
+                    {/* <button
                       disabled={isLoading.link}
                       className={styles.submitButton}
                       type="submit"
                     >
                       <FontAwesomeIcon icon={faCheck} />
-                    </button>
+                    </button> */}
                   </div>
                 )}
               </form>
+              {link.type == "link" && (
+                <div className={styles.OtherOptionsContainer}>
+                  <button
+                    className={styles.thumbnailContainer}
+                    data-popup={`thumbnail`}
+                    onClick={openPopup}
+                  >
+                    <FaRegImage className={styles.icon} />
+                  </button>
 
-              <div className={styles.OtherOptionsContainer}>
-                <button
-                  className={styles.thumbnailContainer}
-                  data-popup={`thumbnail`}
-                  onClick={openPopup}
-                >
-                  {/* <FontAwesomeIcon className={styles.icon} icon={faImage} /> */}
-                  <FaRegImage className={styles.icon} />
-                </button>
-
-                {/* <button
-                  className={styles.layoutContainer}
-                  data-popup={`layout`}
-                  onClick={openPopup}
-                >
-                  <FiLayout />
-                </button> */}
-
-                <LinkEditPopup
-                  treeUID={treeUID}
-                  setLinkData={setLinkData}
-                  linkData={linkData}
-                  openPopup={popup}
-                  closePopup={closePopup}
-                />
-              </div>
+                  <LinkEditPopup
+                    treeUID={treeUID}
+                    setLinkData={setLinkData}
+                    linkData={linkData}
+                    openPopup={popup}
+                    closePopup={closePopup}
+                  />
+                </div>
+              )}
             </div>
 
             <div className={styles.right}>
@@ -203,9 +212,9 @@ export default function Link({ link, deleteLink, treeUID }) {
                 onClick={handelDeleteButtonClick}
               >
                 {!isLoading.deleting ? (
-                  <FontAwesomeIcon icon={faTrash}  className={styles.icon}/>
+                  <FontAwesomeIcon icon={faTrash} className={styles.icon} />
                 ) : (
-                  <CgSpinner  className={`${styles.icon} spiner`}/>
+                  <CgSpinner className={`${styles.icon} spiner`} />
                 )}
               </button>
             </div>

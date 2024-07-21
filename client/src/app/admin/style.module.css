@@ -1,4 +1,5 @@
 .children{
+    background: var(--color-background) !important;
     position: relative;
     margin:  0px var(--margin-x)  ;
     margin-top: calc(var(--topBarHeight) + var(--space-top));

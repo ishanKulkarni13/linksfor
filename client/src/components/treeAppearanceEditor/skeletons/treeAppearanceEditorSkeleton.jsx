@@ -11,7 +11,6 @@ export default function TreeAppearanceEditorSkeleton() {
         })        
       } */}
       <AppearanceEditorSubComponent />
-
       <AppearanceEditorSubComponent height={'770px'} />
     </div>
   );

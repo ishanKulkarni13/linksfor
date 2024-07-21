@@ -7,7 +7,7 @@ export function LinkEditorSkeleton() {
         {["b1", "b2"].map((b) => (
           <Skeleton
             key={b}
-            className={`addButton h-14 w-full rounded-full  bg-[var(--color-surface-2)]`}
+            className={`addButton h-14 w-full rounded-full  bg-[var(--color-surface-1)]`}
           />
         ))}
       </div>
@@ -22,7 +22,7 @@ export function LinksSkeleton() {
     <div className={`mt-5  flex flex-col gap-5`}>
       {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((i) => (
         <Skeleton
-          className={`h-24 bg-[var(--color-surface-2)]  rounded-2xl`}
+          className={`h-20 bg-[var(--color-surface-1)]  rounded-3xl`}
           key={i}
         />
       ))}

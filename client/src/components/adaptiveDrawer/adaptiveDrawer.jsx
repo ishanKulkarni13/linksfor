@@ -37,7 +37,7 @@ export default function AdaptiveDrawer({
         open={open}
         onOpenChange={onOpenChange}
       >
-        <DrawerContent className={`${styles.content} bg-white `}>
+        <DrawerContent className={`${styles.drawerContent} bg-white `}>
           <DrawerHeader className={styles.drawerHeader}>
             <DrawerTitle className={`font-medium tracking-tight text-xl`}>
               {heading}

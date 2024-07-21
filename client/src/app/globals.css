@@ -241,7 +241,6 @@
 body {
   background: var(--color-background);
   color: var(--color-text-main);
-  
 }
 
 @media (width < 640px) {
