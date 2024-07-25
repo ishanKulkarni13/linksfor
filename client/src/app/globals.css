@@ -243,6 +243,13 @@ body {
   color: var(--color-text-main);
 }
 
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+
 @media (width < 640px) {
   :root,
   .light,

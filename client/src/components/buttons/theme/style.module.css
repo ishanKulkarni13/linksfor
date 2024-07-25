@@ -1,9 +1,80 @@
-.themeButton{
-    padding: 5px;
-    /* border: 1px solid red; */
-    font-size: 2.5em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
+.themeToggleButton {
+  --button-diameter: 15px;
+  --shape-size: 15px;
+  --color: var(--color-text-main);
+  border: none;
+  outline: none;
+  display: flex;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow 500ms;
+  font-size: var(--shape-size);
+  width: var(--button-diameter);
+  height: var(--button-diameter);
+  /* border: 1px solid blue; */
+}
+.dark ~ .themeToggleButton {
+  box-shadow: 4px 4px 15px rgb(29 27 58);
+}
+.themeToggleButton span {
+  display: inline-block;
+}
+.themeToggleButton .raysContainer {
+  width: auto;
+  height: auto;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+}
+.themeToggleButton .raysContainer .ray {
+  position: absolute;
+  border-radius: 50%;
+  transition: all 500ms;
+}
+.themeToggleButton .raysContainer .ray:nth-child(2) {
+  transform: rotate(45deg);
+}
+.themeToggleButton .raysContainer .ray:nth-child(3) {
+  transform: rotate(90deg);
+}
+.themeToggleButton .raysContainer .ray:nth-child(4) {
+  transform: rotate(-45deg);
+}
+.themeToggleButton .shape {
+  z-index: 1;
+  position: absolute;
+  border-radius: 50%;
+  /* background: #fff; */
+  border: 2px solid var(--color-background);
+  transition: all 500ms, border 100ms;
+}
+.themeToggleButton .shape.moon {
+  width: 1.667em;
+  height: 1.667em;
+  box-shadow: inset -0.5em -0.5em var(--color);
+  
+  transform: rotate(90deg);
+}
+.themeToggleButton .shape.moon ~ .raysContainer .ray {
+  width: 0;
+  height: 0;
+}
+.themeToggleButton .shape.sun {
+  width: 1em;
+  height: 1em;
+  box-shadow: inset -0.7em -0  .7em var(--color);
+  
+  transform: rotate(90deg);
+}
+.themeToggleButton .shape.sun ~ .raysContainer {
+  transform: rotate(90deg);
+  transition: transform 750ms 400ms;
+}
+.themeToggleButton .shape.sun ~ .raysContainer .ray {
+  width: 0.334em;
+  height: 1.667em;
+  background-color: var(--color);
+}
