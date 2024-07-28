@@ -17,6 +17,7 @@ export default function SocialIconsEditor() {
   let treeUID = useTreeUID();
   const [areLinksFetched, setAreLinksFetched] = useState();
   const [socials, setSocials] = useState([]);
+  const [selectedSocialIconsPlacement ,setSelectedSocialIconsPlacement] = useState('')
   const [reorderedLinksUID, setReorderedLinksUID] = useState();
   const debouncelinksUIDOrder = useDebounce(reorderedLinksUID, 3000);
   const { redirectToSelectTree } = useHandelReselectTree();
@@ -25,6 +26,9 @@ export default function SocialIconsEditor() {
     let { success, response, error, statusCode } = await getSocials(treeUID);
     if (success) {
       setSocials(response.socials);
+      console.log(response.socialIconsPreference);
+      toast( response.socialIconsPreference?.socialIconsPlacement)
+      setSelectedSocialIconsPlacement( response.socialIconsPreference?.socialIconsPlacement);
       setAreLinksFetched(true);
     } else {
       if (error) {
@@ -165,6 +169,47 @@ export default function SocialIconsEditor() {
     }
   }
 
+  async function handlesocialIconsPlacementChange(e){
+    setSelectedSocialIconsPlacement(()=> e.target.value);
+    try {
+      const res = await fetch(`/api/admin/tree/edit/socials/preference`, {
+        method: "POST",
+        cache: "no-store",
+        body: JSON.stringify({
+          treeUID,
+          socialIconsPlacement: e.target.value ,
+        }),
+        credentials: "include",
+        headers: {
+          Accept: "applications/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      });
+
+      if (res.ok) {
+
+      } else {
+        setSelectedSocialIconsPlacement(selectedSocialIconsPlacement)
+        const responseData = await res.json();
+        toast.error(responseData.message, {
+          id: "sinking",
+          duration: 3000,
+        });
+      }
+    } catch (error) {
+      
+      setSelectedSocialIconsPlacement(selectedSocialIconsPlacement)
+      console.error("Error updating socials placement:", error);
+      toast.error("Error updating socials placement", {
+        id: "sinking",
+        duration: 3000,
+      });
+    }
+
+  }
+
+
   useEffect(() => {
     if (treeUID) {
       updateSocials();
@@ -197,7 +242,7 @@ export default function SocialIconsEditor() {
 
               {!areLinksFetched && (
                 <div className={styles.fetchingLinksContainer}>
-                    <div className=" h-full  w-full items-center justify-center flex-col">
+                  <div className=" h-full  w-full items-center justify-center flex-col">
                     {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((x) => (
                       <Skeleton
                         key={x}
@@ -232,6 +277,38 @@ export default function SocialIconsEditor() {
                   </Reorder.Group>
                 </>
               )}
+
+              <div className={styles.preferenceContainer}>
+                <div className={styles.socialIconsPlacementContainer}>
+                  <div>
+                    <h5>Placement</h5>
+                    <p>Display icons at the:</p>
+                  </div>
+
+                  <form className={styles.socialIconsPlacementForm}>
+                    <label>
+                    <input
+                        type="radio"
+                        name="radio"
+                        value="top"
+                        checked={selectedSocialIconsPlacement == "top"}
+                        onChange={handlesocialIconsPlacementChange}
+                      />
+                      <span>Top</span>
+                    </label>
+                    <label>
+                      <input
+                        type="radio"
+                        name="radio"
+                        value="bottom"
+                        checked={selectedSocialIconsPlacement == "bottom"}
+                        onChange={handlesocialIconsPlacementChange}
+                      />
+                      <span>Bottom</span>
+                    </label>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
 

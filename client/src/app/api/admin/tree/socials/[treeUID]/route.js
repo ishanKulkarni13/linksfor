@@ -16,7 +16,7 @@ export const GET = async (req, { params }) => {
             return NextResponse.json({ success: false, message: "Unautherised access to edit tree"}, {status: 401})
         } 
 
-        return NextResponse.json({ success: true, socials: tree.treeContent.socials })
+        return NextResponse.json({ success: true, socials: tree.treeContent.socials  , socialIconsPreference : tree.theme.themePreference?.socialIcons})
         
 
     } catch (error) {

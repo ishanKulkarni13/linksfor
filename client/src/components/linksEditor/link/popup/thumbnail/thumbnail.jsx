@@ -78,7 +78,7 @@ export default function ThumbnailPopup({ update, linkData, close }) {
                 }
                 return (
                   <button className={styles.changeButton} onClick={handleOnClick}>
-                    Change
+                    {(linkData.thumbnail && linkData.thumbnail.URL)?'Change':'Add Thumbnail'} 
                   </button>
                 );
                 // <button onClick={handleOnClick}>Upload an Image</button>;

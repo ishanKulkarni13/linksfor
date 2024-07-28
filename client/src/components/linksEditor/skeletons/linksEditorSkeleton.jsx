@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
-export function LinkEditorSkeleton() {
+export  function LinkEditorSkeleton() {
   return (
     <div className={` `}>
       <div className={` flex gap-6 h-auto`}>

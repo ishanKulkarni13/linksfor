@@ -16,6 +16,7 @@
     flex-direction: column;
     border-radius: 25px;
     color: var(--color-text-main);
+    padding: 5px;
 }
 /* 
 .container::before {
@@ -46,7 +47,7 @@
 
 .addLinkButton {
     background-color: var(--color-primary);
-    color: var(--color-text-contrast-main);
+    color: var(--color-text-contrast-primary);
 }
 
 .addIconContainer{
@@ -117,7 +118,7 @@
     font-size: 20px;
     height: 50px;
     background-color: var(--color-primary);
-    color: var(--color-text-contrast-main);
+    color: var(--color-text-contrast-primary);
     font-weight: 600;
     border-radius: 50px;
     width: 125px;

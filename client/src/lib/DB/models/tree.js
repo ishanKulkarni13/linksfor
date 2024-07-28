@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import User from './user.js'
 import { Columns } from "lucide-react";
 import { values } from "lodash";
+import { socialIcons } from "@/constants/tree.js";
 const treeSchema = mongoose.Schema({
     owner: {
         type: mongoose.Schema.Types.ObjectId,
@@ -448,7 +449,20 @@ const treeSchema = mongoose.Schema({
                 type: String,
                 default: "Arial"
             }
+        },
+        themePreference:{
+            socialIcons:{
+                socialIconsPlacement:{
+                    type: String,
+                    enum: {
+                        values: ['top', 'bottom'],
+                        message: 'Icons can be placed on either top or buttom'
+                    },
+                    default: 'top'
+                },
+            }
         }
+
     },
 }, { timestamps: true });
 

@@ -62,7 +62,7 @@
   display: flex;
   justify-content: center;
   align-items: stretch;
-  flex-direction: column;
+  flex-direction: column; /* dynamically set in jsx */
   gap: 25px;
 }
 

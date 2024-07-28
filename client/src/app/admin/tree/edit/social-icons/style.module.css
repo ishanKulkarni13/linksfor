@@ -37,43 +37,85 @@
   gap: 20px;
 }
 
-.treePreviewContainer {
-  position: sticky;
-  z-index: 1;
-  bottom: 0%;
-  right: 0%;
-  padding-top: var(--topBarHeight);
-  height: 100dvh;
-  width: auto;
+
+/* .socialIconsPlacementForm  */
+
+
+.socialIconsPlacementContainer div:nth-child(1) h5{
+ font-weight: 600 ;
+ font-size: 1.1em;
+}
+.socialIconsPlacementContainer div:nth-child(1) p{
+  opacity: 0.8;
+  font-weight: 400;
+ font-size: 0.9em;
+}
+.socialIconsPlacementForm  {
+  margin-top: 5px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 25px;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
 
-.treePreview {
-  height: 80dvh;
-  width: inherit;
-  border-radius: inherit;
-  background-color: inherit;
+
+.socialIconsPlacementForm label {
+  display: flex;
+  cursor: pointer;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0.375em;
 }
+
+.socialIconsPlacementForm label input {
+  position: absolute;
+  left: -9999px;
+}
+
+/* .socialIconsPlacementForm label input:checked + span {
+  background-color: var(--color-text-main);
+} */
+
+.socialIconsPlacementForm label input:checked + span:before {
+  box-shadow: inset 0 0 0 0.4375em var(--color-text-main);
+  
+}
+.socialIconsPlacementForm label input + span:before {
+  background-color: var(--color-text-contrast-main);
+  box-shadow: 0px 0px 3px 0.5px var(--color-text-main);
+  /* border: 2px solid var(--color-text-main); */
+}
+
+
+
+.socialIconsPlacementForm label span {
+  display: flex;
+  align-items: center;
+  padding: 0.375em 0.75em 0.375em 0.375em;
+  border-radius: 99em; /* or something higher... */
+  transition: 0.25s ease;
+}
+
+.socialIconsPlacementForm label span:hover {
+  background-color: mix(#fff, var(--color-text-main), 84%);
+}
+
+.socialIconsPlacementForm label span:before {
+  display: flex;
+  flex-shrink: 0;
+  content: "";
+  background-color: #fff;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  margin-right: 0.375em;
+  transition: 0.25s ease;
+  box-shadow: inset 0 0 0 0.125em var(--primary-color);
+}
+
 
 @media (width<1204px) {
   .container {
-    display: block;
-  }
-
-  .linksEditorContainer {
-    border-right: none;
-  }
-
-  .treePreviewContainer {
-    display: none;
-  }
-}
-
-@media (width<640px) {
-  .linksEditorContainer {
     display: block;
   }
 }
