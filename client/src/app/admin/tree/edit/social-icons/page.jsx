@@ -27,7 +27,6 @@ export default function SocialIconsEditor() {
     if (success) {
       setSocials(response.socials);
       console.log(response.socialIconsPreference);
-      toast( response.socialIconsPreference?.socialIconsPlacement)
       setSelectedSocialIconsPlacement( response.socialIconsPreference?.socialIconsPlacement);
       setAreLinksFetched(true);
     } else {
