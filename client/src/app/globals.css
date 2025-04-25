@@ -93,8 +93,8 @@
   /* --color-text-primary: hsl(210, 40%, 98%); */
 
   --color-text-main: white;
-  --color-text-primary: var(--color-text-main);
   --color-text-contrast-main: rgb(0, 0, 0); /* changed */
+  --color-text-primary: var(--color-text-main);
   --color-text-contrast-primary: rgb(255, 255, 255);
 
   --color-text-secondary: hsl(210, 40%, 80%);
