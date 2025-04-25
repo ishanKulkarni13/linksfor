@@ -1,17 +1,21 @@
 "use client";
-import styles from "./popup.module.css";
+import styles from "./dialog.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faMinus, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
 
-export default function Popup({ close, title, children }) {
-
+export default function CustomeDialog({ close, title, children }) {
   return (
     <>
-      <div className={`${styles.container}`}>
-        <div className={styles.popUpContainer}>
+      <Dialog className={`${styles.container}`}>
           <div className={styles.top}>
             <div className={styles.popUpTitle}>
               <h1>{title}</h1>
@@ -26,8 +30,9 @@ export default function Popup({ close, title, children }) {
           </div>
 
           <div className={styles.childrenContainer}>{children}</div>
-        </div>
-      </div>
+      </Dialog>
+
+      
     </>
   );
 }

@@ -1,7 +1,8 @@
 "use client";
-import styles from "./add.module.css";
+import styles from "./addLinkDialog.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { useRef } from 'react';
 import { useRouter } from "next/navigation";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -15,17 +16,28 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {  toast } from "sonner";
+import { toast } from "sonner";
 import { useState } from "react";
 import Popup from "@/components/popup/popup";
 import CustomeDialog from "@/components/Dialog/dialog";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { FaPlus } from "react-icons/fa";
 
 const AddLinkFormSchema = z
   .object({
     URL: z.string().min(1, { message: `Plesae entre a URL` }).url(), // tempppppp
     title: z
       .string()
-      .min(1, { message: `Title should be if at least 1 character long` }).max(20, { message: `Title must be of at most 20 character long` }),
+      .min(1, { message: `Title should be if at least 1 character long` })
+      .max(20, { message: `Title must be of at most 20 character long` }),
   })
   .refine(
     (data) => {
@@ -37,15 +49,15 @@ const AddLinkFormSchema = z
     }
   );
 
-  const AddHeaderFormSchema = z
-  .object({
-    title: z
-      .string()
-      .min(1, { message: `Header title should be if at least 1 character long` }),
-  })
+const AddHeaderFormSchema = z.object({
+  title: z
+    .string()
+    .min(1, { message: `Header title should be if at least 1 character long` }),
+});
 
-export default function AddPopUp({ close, setLinks, treeUID, type }) {
+export default function AddLinkDialog({ setLinks, treeUID, type, disabled }) {
   const { push } = useRouter();
+  const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const AddLinkForm = useForm({
@@ -66,8 +78,7 @@ export default function AddPopUp({ close, setLinks, treeUID, type }) {
 
   // handel form submit
   const handleSubmit = async (values) => {
-    const handelAdd = async (title, URL ) => {
-      
+    const handelAdd = async (title, URL) => {
       try {
         setIsLoading(true);
         let res = await fetch(`/api/tree/edit/add/${type}/${treeUID}`, {
@@ -103,12 +114,13 @@ export default function AddPopUp({ close, setLinks, treeUID, type }) {
     //calling function and gettting data
     let { success, response, error } = await handelAdd(
       values.title,
-      (type != 'header') && values.URL,
+      type != "header" && values.URL
     );
     if (success) {
       console.log(`Added ${type}`);
       setLinks(response.links);
-      close();
+      // close();
+      setOpen(false);
     } else {
       if (error) {
         // if catched error in fetch
@@ -121,12 +133,29 @@ export default function AddPopUp({ close, setLinks, treeUID, type }) {
     }
   };
 
- 
-
   return (
     <>
-        <Popup close={close} title={(type != `header`)?('Add Link'):('Add Header')}>
-        <div className={styles.popUpContainer}>
+      <Dialog open={open} onOpenChange={setOpen} className={styles.dialog}>
+        <DialogTrigger asChild>
+          <button className={styles.addLinkButton}>
+            <div className={styles.addIconContainer}>
+              <FaPlus />{" "}
+            </div>
+            {type == `header` ? <p>Header</p> : <p>Link</p>}
+          </button>
+        </DialogTrigger>
+
+        {/* <DialogContent> */}
+        <DialogContent className={styles.popUpContainer}>
+          <DialogHeader className={styles.DialogHeader}>
+            <DialogTitle className={styles.dialogTitle}>
+              Edit profile
+            </DialogTitle>
+            {/* <DialogDescription className={styles.DialogDescription}>
+              Make changes to your profile here. Click save when you're done.
+            </DialogDescription> */}
+          </DialogHeader>
+
           <div className={styles.popUpFormContainer}>
             {type == `header` ? (
               <>
@@ -135,27 +164,6 @@ export default function AddPopUp({ close, setLinks, treeUID, type }) {
                     onSubmit={AddHeaderForm.handleSubmit(handleSubmit)}
                     className={styles.form}
                   >
-                    {/* <FormField
-                      control={AddHeaderForm.control}
-                      name="URL"
-                      render={({ field }) => {
-                        return (
-                          <FormItem className={styles.inputContainer}>
-                            <FormLabel className={styles.lable}>URL</FormLabel>
-                            <FormControl>
-                              <Input
-                                className={styles.URLInput}
-                                placeholder="URL"
-                                type="text"
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        );
-                      }}
-                    /> */}
-
                     <FormField
                       control={AddHeaderForm.control}
                       name="title"
@@ -178,7 +186,11 @@ export default function AddPopUp({ close, setLinks, treeUID, type }) {
                         );
                       }}
                     />
-                    <button disabled={isLoading} type="submit" className={styles.doneButton}>
+                    <button
+                      disabled={isLoading}
+                      type="submit"
+                      className={styles.doneButton}
+                    >
                       {!isLoading && (
                         <FontAwesomeIcon
                           className={styles.doneIcon}
@@ -241,7 +253,11 @@ export default function AddPopUp({ close, setLinks, treeUID, type }) {
                         );
                       }}
                     />
-                    <button disabled={isLoading && false}  type="submit" className={styles.doneButton}>
+                    <button
+                      disabled={isLoading && false}
+                      type="submit"
+                      className={styles.doneButton}
+                    >
                       {!isLoading && (
                         <FontAwesomeIcon
                           className={styles.doneIcon}
@@ -257,8 +273,11 @@ export default function AddPopUp({ close, setLinks, treeUID, type }) {
               </>
             )}
           </div>
-        </div>
-        </Popup>
+
+          
+        </DialogContent>
+        {/* </DialogContent> */}
+      </Dialog>
     </>
   );
 }

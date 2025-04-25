@@ -10,6 +10,7 @@ import { useTreeUID } from "@/hooks/treeUID";
 import useHandelReselectTree from "@/hooks/handelReselectTree";
 import { Skeleton } from "../ui/skeleton";
 import { LinkEditorSkeleton, LinksSkeleton } from "./skeletons/linksEditorSkeleton";
+import AddLinkDialog from "./addLink/addLinkDialog";
 
 
 
@@ -193,13 +194,25 @@ export default function LinksEditor() {
           {/* <div className={styles.container}> */}
           <div className={styles.linksEditorContainer}>
             <div className={styles.addLinkAndHeaderContainer}>
-              <AddButton
+              {/* <AddButton
+                disabled={!areLinksFetched || !treeUID}
+                type="link"
+                setLinks={setLinks}
+                treeUID={treeUID}
+              /> */}
+              <AddLinkDialog
                 disabled={!areLinksFetched || !treeUID}
                 type="link"
                 setLinks={setLinks}
                 treeUID={treeUID}
               />
-              <AddButton
+              {/* <AddButton
+                disabled={!areLinksFetched || !treeUID}
+                type="header"
+                setLinks={setLinks}
+                treeUID={treeUID}
+              /> */}
+              <AddLinkDialog
                 disabled={!areLinksFetched || !treeUID}
                 type="header"
                 setLinks={setLinks}
