@@ -14,6 +14,8 @@
   /* Text colors */
   --color-text-main: black;
   --color-text-link: white;
+  --color-social-icons: black;
+  
   --color-text-header: var(--color-text-main);
   --color-text-profile: var(--color-text-main);
   /* Borders */

@@ -13,12 +13,13 @@ export default function Socials({ socials }) {
             className={styles.social}
             href={social.URL}
           >
+            
             <SocialIcon iconName={social.icon} />
           </Link>
         );
       })}
     </div>
   );
-}
+};
 
 
