@@ -2,7 +2,7 @@
 import styles from "./addLinkDialog.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { useRef } from 'react';
+import { useRef } from "react";
 import { useRouter } from "next/navigation";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -121,6 +121,13 @@ export default function AddLinkDialog({ setLinks, treeUID, type, disabled }) {
       setLinks(response.links);
       // close();
       setOpen(false);
+      setIsLoading(false);
+      // Reset the form inputs after successful submission
+      if (type === "header") {
+        AddHeaderForm.reset();
+      } else {
+        AddLinkForm.reset();
+      }
     } else {
       if (error) {
         // if catched error in fetch
@@ -273,8 +280,6 @@ export default function AddLinkDialog({ setLinks, treeUID, type, disabled }) {
               </>
             )}
           </div>
-
-          
         </DialogContent>
         {/* </DialogContent> */}
       </Dialog>

@@ -51,7 +51,7 @@
 .saveButton {
     background-color: var(--color-primary);
     border: var(--border-surface-1);
-    color: var(--color-text-contrast-main);
+    color: var(--color-text-contrast-primary);
     font-weight: 450;
     border-radius: 50px;
     padding: 10px;
