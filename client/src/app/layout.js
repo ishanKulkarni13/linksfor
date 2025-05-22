@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
     <html suppressHydrationWarning lang="en">
       <body  className={`${inter.className}`}>
         <ThemeProvider attribute="class">
-          <main >
+          < >
             <>
              {children}
              </>
@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
              />
              <Toaster position="top-left" richColors closeButton={true} pauseWhenPageIsHidden={true} />
 
-          </main>
+          </>
          
         </ThemeProvider>
       </body>

@@ -1,6 +1,11 @@
-.skyMint {
+body:has(> .skyMint) {
+  /* selected the body too */
   --margin-x: 15px;
-  --color-background: white;
+  /* --background: radial-gradient(transparent 34%, #4f46e4 35%, #4f46e4 45%, transparent 46%) 0 0 / 3em 3em repeat,
+  radial-gradient(circle at left, transparent 39%, #4f46e480 40%, #4f46e480 45%, transparent 46%) 0 0 / 3em 3em repeat,
+  radial-gradient(circle at right, transparent 39%, #4f46e480 40%, #4f46e480 45%, transparent 46%) 0 0 / 3em 3em repeat,
+  #ffffff; */
+  --background: whitesmoke;  
   --color-surface-1: hsl(57, 70%, 10%);
   --color-surface-2: hsl(57, 60%, 15%);
   --color-surface-3: hsl(57, 50%, 20%);
@@ -15,7 +20,7 @@
   --color-text-main: black;
   --color-text-link: white;
   --color-social-icons: black;
-  
+
   --color-text-header: var(--color-text-main);
   --color-text-profile: var(--color-text-main);
   /* Borders */

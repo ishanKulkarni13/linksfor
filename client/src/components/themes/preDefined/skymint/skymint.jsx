@@ -8,8 +8,8 @@ export default function TreeThemeSkymint({ tree }) {
   console.log(tree?.theme?.themePreference?.socialIcons?.socialIconsPlacement);
   return (
     <>
+    <BackgroundSkymint />
       <main className={`${styles.skyMint}`}>
-        <BackgroundSkymint />
 
         <div className={styles.profileContainer}>
           <PofileSkymint
