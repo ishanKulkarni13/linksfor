@@ -19,7 +19,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { useState } from "react";
 import Popup from "@/components/popup/popup";
-import CustomeDialog from "@/components/Dialog/dialog";
+
 import {
   Dialog,
   DialogClose,

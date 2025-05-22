@@ -1,24 +1,22 @@
 .drawerContent {
   background-color: var(--color-background);
   color: var(--color-text-main);
-  padding: 0px 15px 0px 15px;
-  margin: 0px 5px;
+  /* padding: 0px 15px 0px 15px; */
+  /* margin: 0px 5px; */
 }
 
 .drawerContent > div:nth-child(1) {
-  background: var(--color-surface-1) !important;
-  margin: 15px auto;
+  /* background: var(--color-surface-1) !important; */
 }
 
 .drawerHeader {
-  text-align: center;
-  padding: 0px;
-  margin-bottom: 15px;
+  /* padding: 0px; */
+  /* margin-bottom: 15px; */
 }
 
-.drawerHeader h2{  
+/* .drawerHeader h2{  
   line-height: 100%;
-}
+} */
 
 .drawerChildren {
   max-height: 80vh;
@@ -32,16 +30,12 @@
   display: none;
 }
 
-.drawerFooter {
-  /* padding: 0.5rem; */
-}
 
-.drawerCloseButton {
+/* .drawerCloseButton {
   background-color: var(--color-surface-1);
   background-color: red;
   border: var(--border-surface-1);
-  /* padding: 10px; */
   width: 50%;
   border-radius: 15px;
   margin: 0px auto;
-}
+} */

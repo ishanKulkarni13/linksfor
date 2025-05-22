@@ -60,10 +60,9 @@ export default function ShareTreePopup({ open, setOpen }) {
   }, [treeUID]);
 
 
-  return (
-    <>
-      <AdaptiveDrawer  heading={`Share tree`} open={open} onOpenChange={setOpen}>
-        <div className={styles.shareContainer}>
+  function Content(){
+    return (
+       <div className={styles.shareContainer}>
           <div className={styles.copyToClipboardContainer}>
             <input
               className={styles.linkContainer}
@@ -85,6 +84,12 @@ export default function ShareTreePopup({ open, setOpen }) {
             </button>
           </div>
         </div>
+    );
+  }
+  return (
+    <>
+      <AdaptiveDrawer  heading={`Share tree`} open={open} onOpenChange={setOpen}>
+       <Content/>
       </AdaptiveDrawer>
     </>
   );

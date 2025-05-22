@@ -48,13 +48,6 @@ export default function AdaptiveDrawer({
           </DrawerHeader>
 
           <div className={styles.drawerChildren}>{children}</div>
-          {/* <DrawerFooter className={styles.drawerFooter}>
-            <DrawerClose className={styles.drawerClose} asChild>
-              <button className={styles.drawerCloseButton} variant="outline">
-                Close
-              </button>
-            </DrawerClose>
-          </DrawerFooter> */}
         </DrawerContent>
       </Drawer>
     );

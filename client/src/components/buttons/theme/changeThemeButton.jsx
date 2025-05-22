@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import styles from "./style.module.css";
 
-export function ThemeModeToggle() {
+export function ThemeModeToggle(props) {
   const [mounted, setMounted] = useState(false);
   const { setTheme, resolvedTheme } = useTheme();
   let isDarkThemeActive = resolvedTheme == "dark" ? true : false;
@@ -70,15 +70,13 @@ export function ThemeModeToggle() {
 
   return (
     <>
-      {/* <button ref={ref} onClick={toggleDarkMode} >
-    {resolvedTheme}
-   </button> */}
         <button
           ref={ref}
+          styles={props.styles}
           onClick={toggleDarkMode}
           className={`${
             isDarkThemeActive ? styles.dark  : styles.light
-          } ${styles.themeToggleButton}`}
+          } ${styles.themeToggleButton} ${props.className}`}
           aria-label="Toggle Theme"
         >
           <span
@@ -91,7 +89,6 @@ export function ThemeModeToggle() {
             <span className={`${styles.ray}`}></span>
           </span>
         </button>
-        {/* {`${isDarkThemeActive}`} */}
     </>
   );
 }

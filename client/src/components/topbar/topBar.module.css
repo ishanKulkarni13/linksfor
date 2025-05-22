@@ -50,6 +50,11 @@
     padding: 0px 20px;
 }
 
+.right{
+    display: flex;
+}
+
+
 
 @media (width < 640px) {
     .mobieTopBarContainer {

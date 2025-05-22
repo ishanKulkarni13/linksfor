@@ -1,4 +1,4 @@
-.container{
+.shareTreeButtoncontainer{
     background-color: var(--color-surface-2);
     display: flex;
     justify-content: center;
@@ -13,10 +13,14 @@
     width: 25px;
 }
 
-/* .shareContainer{
+
+
+
+
+.shareContainer{
     width: inherit;
     height: 50px;
-    background-color: var(--backgroundSecondary);
+    background-color: var(--color-background);
 }
 
 .copyToClipboardContainer {
@@ -28,8 +32,8 @@
 }
 
 .copyToClipboardContainer > input{
-    background-color: var(--backgroundSecondary);
-    color: white;
+    background-color: var( --color-surface-1);
+    color: var(--color-text-primary);
     overflow: hidden;
     padding: 10px;
 }
@@ -41,6 +45,8 @@
 }
 
 .copyIconContainer{
+
+    background-color: var( --color-surface-1);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -50,4 +56,4 @@
 
 .copyIcon{
     margin: 5px;
-} */
+}
