@@ -1,16 +1,16 @@
-import Popup from "@/components/popup/popup";
+// import Popup from "@/components/popup/popup";
 import { CldUploadWidget } from "next-cloudinary";
 import styles from "./thumbnail.module.css";
 import Image from "next/image";
 
-export default function ThumbnailPopup({ update, linkData, close }) {
+export default function ThumbnailUpdationContent({ update, linkData, close }) {
  // console.log(linkData);
 
   return (
     <>
       {/* <Popup close={close} title={"Thumbnail"}> */}
 
-        <div className={styles.popupContent}>
+        <div className={styles.content}>
 
           <div className={styles.imageContainer}>
             {linkData.thumbnail && linkData.thumbnail.URL ? (
@@ -75,6 +75,7 @@ export default function ThumbnailPopup({ update, linkData, close }) {
               {({ open }) => {
                 function handleOnClick() {
                   open();
+                  
                 }
                 return (
                   <button className={styles.changeButton} onClick={handleOnClick}>

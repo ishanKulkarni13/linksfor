@@ -24,10 +24,16 @@
 }
 
 .input{
-    border: 0px;
-    /* border: 1px solid green; */
+    border: none;
     background-color: inherit;
-    border-radius: 5px;
+    /* border: 1px solid green; */
+
+    
+}
+
+.input:focus{
+    border: none;
+    box-shadow: none;
 }
 
 .lable{

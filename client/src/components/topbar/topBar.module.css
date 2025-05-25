@@ -1,69 +1,67 @@
 .topBarContainer {
-    position: fixed;
-    top: 0%;
-    width: 100vw;
-    height: var(--topBarHeight);
-    border-bottom: 1px solid white;
-    z-index: var(--NavContainerZIndex);
-    background: var(--color-top-bar);
-    /* background: black; */
+  position: fixed;
+  top: 0%;
+  width: 100vw;
+  height: var(--topBarHeight);
+  border-bottom: 1px solid white;
+  z-index: var(--NavContainerZIndex);
+  background: var(--color-top-bar);
+  box-shadow: var(--shadow-1);
 }
 
 .mobieTopBarContainer {
-    display: none;
-    border-bottom: 1px solid white;
-    height: var(--topBarHeight);
+  display: none;
+  border-bottom: 1px solid white;
+  height: var(--topBarHeight);
 }
 
 .topContainer,
 .bottomContainer {
-    border: var(--border-surface-1);
-    border-width: 1px;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: calc(var(--topBarHeight)/ 2);
+  border: var(--border-surface-1);
+  border-width: 1px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: calc(var(--topBarHeight) / 2);
 }
 
 .topContainer {
-    align-items: center;
-    padding: 0px var(--margin-x);
+  align-items: center;
+  padding: 0px var(--margin-x);
 }
 
-.bottomContainer{
-    align-items: stretch;
+.bottomContainer {
+  align-items: stretch;
 }
 
 .icon {
-    width: 25px;
+  width: 25px;
 }
 
 .desktopTopBarContainer {
-    border-bottom: 1px solid white;
-    height: var(--topBarHeight);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0px 20px;
+  border-bottom: 1px solid white;
+  height: var(--topBarHeight);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 20px;
 }
 
-.right{
-    display: flex;
-    gap: 15px;  
-    align-items:center;
+.right {
+  display: flex;
+  gap: 15px;
+  align-items: center;
 }
-
-
 
 @media (width < 640px) {
-    .mobieTopBarContainer {
-        display: block;
-    }
+  .mobieTopBarContainer {
+    display: block;
+  }
 
-    .desktopTopBarContainer {
-        display: none;
-    }
+  .desktopTopBarContainer {
+    display: none;
+  }
 }

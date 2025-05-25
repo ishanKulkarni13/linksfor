@@ -13,8 +13,8 @@
     width: inherit;
     padding: 10px;
     background-color: var(--color-surface-1);
-    border-radius: 25px;
     border: var(--border-surface-1);
+    border-radius: 25px;
     box-shadow: var(--shadow-1);
     color: var(--color-text-main);
 }

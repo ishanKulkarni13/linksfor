@@ -46,6 +46,9 @@
   width: 100%;
   aspect-ratio: 9 / 14.5;
   border-radius: 15px;
+  
+  box-shadow: var(--shadow-1);
+  /* box-shadow: 1px 4px 8px rgb(254, 1, 1); */
 }
 
 .themeInput:checked + .themeLable .themeDisplayPictureContainer {

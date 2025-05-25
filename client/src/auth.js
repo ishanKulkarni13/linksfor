@@ -25,6 +25,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             },
             authorize: async (credincials) => {
 
+                // let userr = await User.create({ name:'temp', email:"temp@gmail.com" , authMethod:'email', password:'temp123' });
+            
+                // let treee = await Tree.create({ owner: userr._id, treeName: `@${userr.name}`, treePicture: { URL: userr.profilePic.URL } });
+                        
+                // console.log("custome user created");
+                
+
                 let { email, password } = credincials;
 
                 console.log(email, password);
@@ -43,8 +50,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
                     let isPasswordValid = await user.isValidPassword(password, user);
                     if (isPasswordValid) {
-                        console.log(user);
-                        console.log("user._id", user._id);
+                        // console.log(user);
+                        // console.log("user._id", user._id);
                         return { id: user._id }
                     } else {
                         throw new CredentialsSignin("Password is invalid")

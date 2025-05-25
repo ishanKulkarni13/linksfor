@@ -9,10 +9,9 @@ import {
   faImage,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
-import { FiLayout } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import LinkEditPopup from "./popup/linkEditPopup";
+import LinkEditPopups from "./popups/linkEditPopups";
 import { FaRegImage } from "react-icons/fa6";
 import { CgSpinner } from "react-icons/cg";
 import { useDebounce } from "@/hooks/debounce";
@@ -125,7 +124,7 @@ export default function Link({ link, deleteLink, treeUID }) {
   };
 
   return (
-    <>
+    
       <Reorder.Item
         className={styles.DNDItem}
         value={link}
@@ -194,12 +193,12 @@ export default function Link({ link, deleteLink, treeUID }) {
                     <FaRegImage className={styles.icon} />
                   </button>
 
-                  <LinkEditPopup
+                  <LinkEditPopups
                     treeUID={treeUID}
                     setLinkData={setLinkData}
-                    linkData={linkData}
-                    openPopup={popup}
-                    closePopup={closePopup}
+                    linkData={linkData} 
+                    openPopup={popup} // the popup which is supposed to be opened 
+                    closePopup={closePopup} // fn to close any popup
                   />
                 </div>
               )}
@@ -223,6 +222,6 @@ export default function Link({ link, deleteLink, treeUID }) {
           {/* <EditLinkPanel className={styles.editPanelContainer} /> */}
         </div>
       </Reorder.Item>
-    </>
+    
   );
 }

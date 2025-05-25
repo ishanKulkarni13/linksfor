@@ -26,6 +26,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { FaRegShareFromSquare } from "react-icons/fa6";
+import { Separator } from "@/components/ui/separator";
 
 function ShareTreeContent() {
   const [shareableLink, setShareableLink] = useState(null);
@@ -85,6 +86,7 @@ function ShareTreeContent() {
           readOnly
           value={shareableLink ? shareableLink : `Loading...`}
         />
+        <Separator className={styles.separator} />
         <button
           disabled={!shareableLink}
           onClick={onCopyButtonClick}
@@ -145,7 +147,7 @@ export function ShareTreeButton({ type }) {
         {/* fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg transition duration-300 ease-in-out */}
         <button className={styles.dialogShareButton} ><FaRegShareFromSquare /> <span>Share</span> </button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent >
         <DialogHeader>
           <DialogTitle>Edit profile</DialogTitle>
           <DialogDescription>

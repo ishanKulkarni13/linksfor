@@ -4,7 +4,8 @@
   justify-content: center;
   align-items: center;
   gap: 5px;
-  border: var(--border-surface-1);
+  border: var(--border-surface-2);
+  box-shadow: var(--shadow-2);
   border-radius: 225px;
   padding: 5px 10px;
 }
@@ -16,7 +17,7 @@
 .shareContainer {
   width: inherit;
   height: 50px;
-  background-color: var(--color-background);
+  /* background-color: var(--color-background) ; */
 }
 
 .copyToClipboardContainer {
@@ -24,7 +25,8 @@
   display: flex;
   justify-content: stretch;
   align-items: stretch;
-  border: 1px solid rgba(255, 255, 255, 0.371);
+  border: var(--border-surface-1);
+  box-shadow: var(--shadow-3);
 }
 
 .copyToClipboardContainer > input {
@@ -40,6 +42,12 @@
   font-size: 20px;
 }
 
+.separator{
+  width: 2px;
+  height: 100%;
+  background-color: var(--color-border);
+}
+
 .copyIconContainer {
   background-color: var(--color-surface-1);
   display: flex;
@@ -48,6 +56,8 @@
   font-size: 35px;
   border-left: 1px solid white;
 }
+
+
 
 .copyIcon {
   margin: 5px;
@@ -66,11 +76,11 @@
   padding: 5px 15px;
   border: var(--border-surface-1);
   border-radius: 50px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-floating);
   cursor: pointer;
   transition: transform 0.3s ease;
 }
 
-.dialogShareButton:hover{
-    transform: scale(1.05);
+.dialogShareButton:hover {
+  transform: scale(1.05);
 }

@@ -1,8 +1,9 @@
 import axios from "axios";
 import LayoutPopup from "./layout/layout";
-import ThumbnailPopup from "./thumbnail/thumbnail";
+import ThumbnailUpdationContent from "./thumbnail/thumbnail";
 import { toast } from "sonner";
 import { Dialog } from "@radix-ui/react-dialog";
+import { DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 export default function LinkEditPopups({openPopup, closePopup, setLinkData, linkData, treeUID}) {
 
@@ -41,25 +42,32 @@ export default function LinkEditPopups({openPopup, closePopup, setLinkData, link
     }
   };
      
-  return (
-    <>
-   {openPopup == `thumbnail` && <ThumbnailPopup isOpen={openPopup == `thumbnail`? true:false} onOpenChange={null} update={update} linkData={linkData} close={closePopup} /> }
-   {openPopup == `layout` && <LayoutPopup update={update} linkData={linkData} close={closePopup} /> }
-    </>
-  )
-
-  // return(
+  // return (
   //   <>
-  //     // Thumbnail
-  //     <Dialog open={openPopup == `thumbnail`? true:false} onOpenChange={(open)=> open? openPopup('thumbnail') : closePopup()}>
-  //       <thumbnailContent update linkData />
-  //     </Dialog>
-
-  //     // layout
-  //     <Dialog open={openPopup == `thumbnail`? true:false} onOpenChange={(open)=> open? openPopup('thumbnail') : closePopup()}>
-  //       <layoutlContent/>
-  //     </Dialog>
-
+  //  {openPopup == `thumbnail` && <ThumbnailUpdationContent isOpen={openPopup == `thumbnail`? true:false} onOpenChange={null} update={update} linkData={linkData} close={closePopup} /> }
+  //  {openPopup == `layout` && <LayoutPopup update={update} linkData={linkData} close={closePopup} /> }
   //   </>
   // )
+
+  return(
+    <>
+      {/* Thumbnail */}
+      <Dialog open={openPopup == `thumbnail`? true:false} onOpenChange={(open)=> open? openPopup('thumbnail') : closePopup()}>
+        
+         <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Edit {openPopup}</DialogTitle>
+                  <DialogDescription>Update thumbnail for {linkData.title}</DialogDescription>
+                </DialogHeader>
+                <ThumbnailUpdationContent update linkData />
+              </DialogContent>
+      </Dialog>
+
+      {/* // layout
+      <Dialog open={openPopup == `thumbnail`? true:false} onOpenChange={(open)=> open? openPopup('thumbnail') : closePopup()}>
+        <layoutlContent/>
+      </Dialog> */}
+
+    </>
+  )
 }

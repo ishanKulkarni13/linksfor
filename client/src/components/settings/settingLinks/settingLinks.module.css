@@ -9,6 +9,7 @@
     background-color: var(--color-surface-1);
     border-radius: 20px;
     padding: 10px;
+    box-shadow: var(--shadow-1);
 }
 
 .link.delete{
@@ -37,4 +38,5 @@
 .separator{
     height: 1px;
     background-color: var(--color-border);
+    /* background-color: black; */
 }

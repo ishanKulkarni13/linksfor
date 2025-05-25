@@ -1,7 +1,8 @@
 .treesContainer {
-    padding: 3px 7px 0px 3px;
-    /* height is dynamically change using style in jsx */
+    padding: 3px 7px 10px 3px;
+    /* !!!!!!! height is dynamically change using style in jsx */
     max-height: fit-content;
+    /* border: 2px solid rebeccapurple; */
     transition: height .5s ease-out;
 }
 
@@ -18,14 +19,16 @@
     padding: 15px 10px;
     border-radius: 25px;
     -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    scrollbar-width: none;  /* Firefox */ 
+    
+    /* border: 2px solid red; */
 }
 .treeContainer::-webkit-scrollbar {
     display: none;
   }
 
 .selected{
-    box-shadow: 0px 0px 2px white;
+    box-shadow: var(--shadow-1);
     background-color: var(--color-surface-1);
 }
 
@@ -47,6 +50,7 @@
     border-radius: 50%;
     overflow: hidden;
     background-color: var(--color-surface-2);
+     box-shadow: var(--shadow-2);
     text-align: center;
 }
 

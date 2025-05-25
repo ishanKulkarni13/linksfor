@@ -71,7 +71,7 @@ export default function SelectTreePopup({
         open={open}
         onOpenChange={setOpen}
       >
-          <div className={styles.treesContainer} style={{ height: isLoading?'20vh':`${trees.length * 90}px` }} >
+          <div className={styles.treesContainer} style={{ height: isLoading?'20vh':`${trees.length * 90 + 8}px` }} >
         {isLoading || false ? (
           <>
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(() => {

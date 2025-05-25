@@ -113,7 +113,7 @@
 
   /* Shadows */
   --shadow-1: 0px 1px 3px rgba(0, 0, 0, 0.24);
-  --shadow-2:  0 25px 50px hsla(0, 0%, 0%, 0.15);
+  --shadow-2:  0PX 25px 50px hsla(0, 0%, 0%, 0.15);
   --shadow-3: 0px 10px 20px rgba(0, 0, 0, 0.48);
   --shadow-floating: 0px 2px 10px rgba(0, 0, 0, 0.771);
 
@@ -186,10 +186,10 @@
   --color-border-muted: hsl(215, 20%, 50%);
 
   /* Shadows */
-  --shadow-1:  0px;
-  --shadow-2:  0px;
-  --shadow-3:  0px;
-  --shadow-floating: 0px 3px 15px 1.5px rgba(0, 0, 0, 0.544);
+  --shadow-1:  1px 4px 8px rgba(0, 0, 0, 0.1);
+  --shadow-2:  1px 4px 8px rgba(0, 0, 0, 0.2);
+  --shadow-3:  1px 4px 8px rgba(0, 0, 0, 0.2);
+  --shadow-floating: 1px 4px 8px rgba(0, 0, 0, 0.3);
 
   /* Primary colors */
   /* --color-primary: rgb(153, 0, 255); Declared in root */
