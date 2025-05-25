@@ -1,60 +1,31 @@
-/* .container{
-    padding-top: calc(var(--topBarHeight));
-}
- */
-.rootContainer {
-  scrollbar-gutter: stable;
+/* .rootContainer {
+  scrollbar-gutter: stable;  
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows:  1fr;
+  gap: 10px;
+  border: 3px solid green;
+  overflow: visible;
+  height: 87vh !important;
+
 }
 
+
+.childrenContainer{
+  max-width: var(--desktopMainUIContainerMaxWidth);
+  margin: 0px auto;
+  border: 3px solid red;
+  overflow-y: auto !important;
+  height: 100%;
+  width: 100%;
+} */
+
 .treePreviewContainer {
-  display: none;
+  height: 100%;
+  /* border: 3px solid yellow; */
 }
 
 .childrenContainer{
   max-width: var(--desktopMainUIContainerMaxWidth);
   margin: 0px auto;
 }
-
-
-/* @media (width > 1024px) {
-  .rootContainer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100dvh;
-    width: 100vw;
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    z-index: calc(var(--NavContainerZIndex) - 1);
-
-    padding-top: calc(var(--topBarHeight) + var(--space-top));
-  }
-  .childrenContainer {
-    margin: 0px var(--margin-x);
-
-    overflow-y: scroll;
-  }
-  .childrenContainer::-webkit-scrollbar {
-    width: 10px;
-    display: none;
-  }
-
-  .treePreviewContainer {
-    display: block;
-    position: relative;
-  }
-
-  .treePreview {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    width: 75%;
-    height: 90%;
-    max-width: 295px;
-    overflow: hidden;
-    border-radius: 15px;
-    z-index: -1;
-  }
-} */

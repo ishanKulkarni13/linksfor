@@ -13,11 +13,9 @@
 }
 
 .children {
-  flex: 1 1 0;
   padding: 0px var(--margin-x);
   padding-bottom: var(--space-bottom);
   padding-top:  var(--space-top);
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
-  /* Optional: add padding if you want spacing around content */
 }
