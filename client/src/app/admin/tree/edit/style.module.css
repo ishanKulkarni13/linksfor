@@ -2,6 +2,9 @@
     padding-top: calc(var(--topBarHeight));
 }
  */
+.rootContainer {
+  scrollbar-gutter: stable;
+}
 
 .treePreviewContainer {
   display: none;

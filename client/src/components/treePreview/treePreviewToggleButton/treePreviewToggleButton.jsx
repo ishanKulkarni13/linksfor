@@ -7,12 +7,13 @@ import TreePreview from "../treePreview";
 import useWindowResize from "@/hooks/useWindowSize";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
+import { Drawer } from "vaul";
+// import {
+//   Drawer,
+//   DrawerClose,
+//   DrawerContent,
+//   DrawerTrigger,
+// } from "@/components/ui/drawer";
 
 export default function TreePreviewToggleButton({ treeUID, alwaysVisible }) {
   const [isPreviewActive, setIsPreviewActive] = useState(false);
@@ -20,15 +21,11 @@ export default function TreePreviewToggleButton({ treeUID, alwaysVisible }) {
   function handleToggleButtonCLick(e) {
     setIsPreviewActive((pre) => !pre);
   }
-  return (
-    <Drawer
-      noBodyStyles={true}
-      className={styles.drawer}
-      open={isPreviewActive}
-      onOpenChange={setIsPreviewActive}
-    >
-      <DrawerTrigger asChild >
-        <button
+
+  return(
+       <Drawer.Root>
+      <Drawer.Trigger asChild>
+         <button
           className={styles.toggleButton}
           onClick={handleToggleButtonCLick}
         >
@@ -41,15 +38,18 @@ export default function TreePreviewToggleButton({ treeUID, alwaysVisible }) {
           </div>
           <p>Preview</p>
         </button>
-      </DrawerTrigger>
-
-      <DrawerContent className={`${styles.drawerContent} `}>
-        <div className={styles.drawerChildren}>
+      </Drawer.Trigger>
+      <Drawer.Portal>
+        <Drawer.Overlay className="fixed inset-0 bg-black/40" />
+        <Drawer.Content className={`bg-gray-100 flex flex-col rounded-t-[10px] mt-24 h-fit fixed bottom-0 left-0 right-0 outline-none ${styles.drawerContent}`}>
+          
+            <div className={styles.drawerChildren}>
           {" "}
           <TreePreview treeUID={treeUID} />
         </div>
 
-        <DrawerClose asChild>
+
+            < Drawer.Close asChild>
           <button
             className={styles.toggleButton}
             onClick={handleToggleButtonCLick}
@@ -63,15 +63,12 @@ export default function TreePreviewToggleButton({ treeUID, alwaysVisible }) {
             </div>
             <p>Preview</p>
           </button>
-        </DrawerClose>
-        {/* <DrawerFooter className={styles.drawerFooter}>
-            <DrawerClose className={styles.drawerClose} asChild>
-              <button className={styles.drawerCloseButton} variant="outline">
-                Close
-              </button>
-            </DrawerClose>
-          </DrawerFooter> */}
-      </DrawerContent>
-    </Drawer>
-  );
+        </Drawer.Close >
+
+        </Drawer.Content>
+      </Drawer.Portal>
+    </Drawer.Root>
+  )
+
+
 }
