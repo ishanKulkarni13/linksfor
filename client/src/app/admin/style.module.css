@@ -1,8 +1,23 @@
-.children{
+/* .children{
     background: var(--color-background) !important;
     position: relative;
-    margin:  0px var(--margin-x)  ;
     margin-top: calc(var(--topBarHeight) + var(--space-top));
     margin-bottom: var(--space-bottom);
     padding: 1px;
+    } */
+
+.layoutRoot {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.children {
+  flex: 1 1 0;
+  padding: 0px var(--margin-x);
+  padding-bottom: var(--space-bottom);
+  padding-top:  var(--space-top);
+  display: flex;
+  flex-direction: column;
+  /* Optional: add padding if you want spacing around content */
 }

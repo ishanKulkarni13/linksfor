@@ -72,11 +72,11 @@
   --margin-x: 20px;
   --space-top: 25px; /* gap between topbar and the component */
   --space-bottom: 100px; /* space at bottom */
-  --topBarHeight: 70px;
+  /* --topBarHeight: 70px; */
   --NavContainerZIndex: 10;
   --desktopMainUIContainerMaxWidth: 800px;
   --temp-b: 1px solid green;
-  --color-primary: rgb(153, 0, 255);
+  --color-primary: hsl(270, 100%, 50%);;
 }
 
 .dark {
@@ -93,9 +93,10 @@
   /* --color-text-primary: hsl(210, 40%, 98%); */
 
   --color-text-main: white;
-  --color-text-contrast-main: rgb(0, 0, 0); /* changed */
+  --color-text-main-muted: hsl(0, 0%, 63%);
+  --color-text-contrast-main: hsl(0, 0%, 0%);
   --color-text-primary: var(--color-text-main);
-  --color-text-contrast-primary: rgb(255, 255, 255);
+  --color-text-contrast-primary: hsl(0, 0%, 100%);
 
   --color-text-secondary: hsl(210, 40%, 80%);
   --color-text-floating: white;
@@ -108,14 +109,14 @@
   --border-surface-1: 1px solid var(--color-border);
   --border-surface-2: var(--border-surface-1);
   --border-surface-3: var(--border-surface-1);
-  --border-surface-floating: 1px solid rgba(255, 255, 255, 0.326);
-  --color-border-muted: hsl(215, 20%, 50%);
+  --border-surface-floating: 1px solid hsla(0, 0%, 100%, 0.326);
+   --color-border-muted: hsl(215, 20%, 50%);
 
   /* Shadows */
-  --shadow-1: 0px 1px 3px rgba(0, 0, 0, 0.24);
-  --shadow-2:  0PX 25px 50px hsla(0, 0%, 0%, 0.15);
-  --shadow-3: 0px 10px 20px rgba(0, 0, 0, 0.48);
-  --shadow-floating: 0px 2px 10px rgba(0, 0, 0, 0.771);
+  --shadow-1: 0px 1px 3px hsla(0, 0%, 0%, 0.24);
+  --shadow-2: 0px 25px 50px hsla(0, 0%, 0%, 0.15);
+  --shadow-3: 0px 10px 20px hsla(0, 0%, 0%, 0.48);
+  --shadow-floating: 0px 2px 10px hsla(0, 0%, 0%, 0.77);
 
   /* Primary colors */
   /* --color-primary: hsl(210, 40%, 98%); */
@@ -169,6 +170,7 @@
   /* Text colors */
   --color-text-primary: var(--color-text-main);
   --color-text-main: black;
+  --color-text-main-muted: hsl(0, 0%, 27%);  /*  0, 0%, 9% */
   --color-text-contrast-main: white;
   --color-text-contrast-primary: white;
   --color-text-secondary: black;
@@ -186,10 +188,10 @@
   --color-border-muted: hsl(215, 20%, 50%);
 
   /* Shadows */
-  --shadow-1:  1px 4px 8px rgba(0, 0, 0, 0.1);
-  --shadow-2:  1px 4px 8px rgba(0, 0, 0, 0.2);
-  --shadow-3:  1px 4px 8px rgba(0, 0, 0, 0.2);
-  --shadow-floating: 1px 4px 8px rgba(0, 0, 0, 0.3);
+  --shadow-1: 1px 4px 8px hsla(0, 0%, 0%, 0.1);
+  --shadow-2: 1px 4px 8px hsla(0, 0%, 0%, 0.2);
+  --shadow-3: 1px 4px 8px hsla(0, 0%, 0%, 0.2);
+  --shadow-floating: 1px 4px 8px hsla(0, 0%, 0%, 0.3);
 
   /* Primary colors */
   /* --color-primary: rgb(153, 0, 255); Declared in root */
@@ -198,11 +200,10 @@
   --color-primary-foreground: hsl(222.2, 47.4%, 11.2%);
 
   /* Secondary colors */
-  --color-secondary: rgb(153, 0, 255);
-  --color-secondary-light: rgb(153, 0, 255);
-  --color-secondary-dark: hsl(210, 40%, 96.1%);
+  --color-secondary: hsl(270, 100%, 50%);
+  --color-secondary-light: hsl(270, 100%, 50%);
+  --color-secondary-dark: hsl(210, 40%, 96%);
   --color-secondary-foreground: hsl(210, 40%, 98%);
-
   /* Accent colors */
   --color-accent: hsl(174, 100%, 50%);
   --color-accent-foreground: hsl(210, 40%, 98%);
@@ -248,13 +249,13 @@ body {
 }
 
 
-@media (width < 640px) {
+/* @media (width < 640px) {
   :root,
   .light,
   .dark {
     --topBarHeight: 120px;
   }
-}
+} */
 
 .spiner {
   animation: spin 1100ms ease-in-out 0ms infinite;

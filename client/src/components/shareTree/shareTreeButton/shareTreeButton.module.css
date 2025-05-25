@@ -65,8 +65,9 @@
 
 .dialogShareButton {
   position: fixed;
-  top: calc(var(--topBarHeight) + var(--space-top));
-  right: 20px;
+  /* top: calc(var(--topBarHeight) + var(--space-top)); */
+  top: 90px;
+  left: 20px;
   display: flex;
   justify-content: center;
   align-items: center;

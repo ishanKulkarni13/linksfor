@@ -27,7 +27,7 @@ export default function Nav() {
   return (
     <nav className={styles.nav} ref={containerRef} style={{ position: "relative" }}>
       {navLinks.map((link, index) => (
-        <div className={styles.navItemContainer} key={`navitem${index}`}>
+        <div className={`${styles.navItemContainer} ${pathname === link.path ? `${styles.activeNavItem}`:""}`} key={`navitem${index}`}>
           <NavItem link={link} data-active={pathname === link.path} />
         </div>
       ))}

@@ -1,48 +1,52 @@
 .nav {
-     position: relative;
+  position: relative;
   display: flex;
-  
-    flex: 1;
-    display: flex;
-    margin: 0px var(--margin-x);
-    justify-content: space-between;
-    align-items: stretch;
-    gap: 10px;
-    width: auto;
-    flex-grow: 1;
+  flex: 1;
+  display: flex;
+  /* margin: 0px var(--margin-x); */
+  justify-content: space-between;
+  align-items: stretch;
+  /* gap: 10px; */
+  width: auto;
+  flex-grow: 1;
 }
+
+
+@media (width > 1024px) {
+  .nav {
+    /* gap: 15px; */
+  }
+}
+
 
 .activeBar {
   position: absolute;
   bottom: 0;
-  height: 3px;
-  background: #0070f3;
+  height: 2px;
+  background: var(--color-text-main);
   border-radius: 2px;
-  transition:
-    left 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 0.2s;
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    width 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s;
   z-index: 10;
   will-change: left, width;
-  transform: translateY(2px);
+  transform: translateY(1px);
 }
 
 .navItemContainer {
-    /* flex: 1; */
-    height: 100%;
-    /* width:fit-content; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    font-weight: 400;
-    color: var( --color-text-main);
-    border-radius: 10px;
-    font-size: 1.2em;
+  /* flex: 1; */
+  height: 100%;
+  /* width:fit-content; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  font-weight: 400;
+  color: var(--color-text-main-muted);
+  border-radius: 10px;
+  font-size: 1.2em;
+  transition: color 0.1s ease-out;
 }
 
-@media (width > 1024px){
-    .nav{
-        gap: 15px;
-    }
+.navItemContainer:hover , .activeNavItem{
+   color: var(--color-text-main);
 }

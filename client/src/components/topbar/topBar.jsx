@@ -44,9 +44,11 @@ export default function TopBar() {
         </div>
 
         <div className={styles.right}>
-          <ShareTreeButton type={'floating'} />
+          
           <ThemeModeToggle className={styles.themetogglebtn} />
         </div>
+
+        <ShareTreeButton type={'floating'} />
       </div>
     </div>
   );

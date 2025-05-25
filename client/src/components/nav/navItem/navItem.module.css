@@ -3,16 +3,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    
+  padding: 5px 20px 5px 20px; /* t r b l  */
+  /* border: 3px solid greenyellow; */
     flex-direction: column-reverse;
+
 }
 
-.link{
-    /* color: blue; */
-}
-
-.active{
- color: red !important;
-}
 
 @media (width < 1204px) {
     .container {}

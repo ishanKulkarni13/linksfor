@@ -1,9 +1,16 @@
 .topBarContainer {
-  position: fixed;
+  /* position: fixed;
   top: 0%;
   width: 100vw;
-  height: var(--topBarHeight);
-  border-bottom: 1px solid white;
+  height: var(--topBarHeight); */
+
+   position: sticky; /* or fixed */
+  top: 0;
+  z-index: 100;
+  width: 100%;
+
+
+  /* border-bottom: 1px solid white; */
   z-index: var(--NavContainerZIndex);
   background: var(--color-top-bar);
   box-shadow: var(--shadow-1);
@@ -11,9 +18,13 @@
 
 .mobieTopBarContainer {
   display: none;
-  border-bottom: 1px solid white;
+  /* border-bottom: 1px solid white; */
   height: var(--topBarHeight);
 }
+
+.topContainer{
+  height: 60px;
+} 
 
 .topContainer,
 .bottomContainer {
@@ -25,7 +36,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: calc(var(--topBarHeight) / 2);
 }
 
 .topContainer {
@@ -35,6 +45,7 @@
 
 .bottomContainer {
   align-items: stretch;
+  justify-content: stretch;
 }
 
 .icon {
@@ -42,7 +53,7 @@
 }
 
 .desktopTopBarContainer {
-  border-bottom: 1px solid white;
+  border-bottom: var(--border-surface-1);
   height: var(--topBarHeight);
   display: flex;
   justify-content: space-between;
@@ -51,6 +62,7 @@
 }
 
 .right {
+  position: relative;
   display: flex;
   gap: 15px;
   align-items: center;
