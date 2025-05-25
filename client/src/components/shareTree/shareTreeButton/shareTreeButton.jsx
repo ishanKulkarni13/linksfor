@@ -2,22 +2,30 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./shareTreeButton.module.css";
 import { faCheck, faCopy, faShare } from "@fortawesome/free-solid-svg-icons";
-// import ShareTreePopup from "../shareTreePopup/shareTreePopup";
 import { useEffect, useState } from "react";
-// import Popup from "@/components/popup/popup";
 import { toast } from "sonner";
-
-// import styles from "./shareTreePopup.module.css";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faCheck, faCopy } from "@fortawesome/free-solid-svg-icons";
-// import { Input } from "@/components/ui/input";
-// import {  toast } from "sonner";
-// import Popup from "@/components/popup/popup";
-// import { useEffect, useState } from "react";
 import { useTreeUID } from "@/hooks/treeUID";
 import axios from "axios";
-import AdaptiveDrawer from "@/components/adaptiveDrawer/adaptiveDrawer";
-import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import useWindowResize from "@/hooks/useWindowSize";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { FaRegShareFromSquare } from "react-icons/fa6";
 
 function ShareTreeContent() {
   const [shareableLink, setShareableLink] = useState(null);
@@ -93,64 +101,61 @@ function ShareTreeContent() {
   );
 }
 
-export function ShareTreeButton() {
-  const [isPopUpActive, setIsPopUpActive] = useState(false);
+export function ShareTreeButton({ type }) {
+  // const [isPopUpActive, setIsPopUpActive] = useState(false);
+  // const { width } = useWindowResize();
 
-  function onShareButtonCLick() {
-    setIsPopUpActive(true);
+  // function onShareButtonCLick() {
+  //   setIsPopUpActive(true);
+  // }
+
+  // if (!width) return <></>;
+
+  if (type != "floating" ) {
+    return (
+      <Drawer>
+        <DrawerTrigger asChild>
+          <button
+            // onClick={onShareButtonCLick}
+            className={styles.shareTreeButtoncontainer}
+          >
+            <FontAwesomeIcon className={styles.icon} icon={faShare} />
+            <span>Share</span>
+          </button>
+        </DrawerTrigger>
+        <DrawerContent>
+          <DrawerHeader>
+            <DrawerTitle>Edit profile</DrawerTitle>
+            
+          </DrawerHeader>
+          <ShareTreeContent />
+          <DrawerFooter className="pt-2">
+            {/* <DrawerClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DrawerClose> */}
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
+    );
   }
 
   return (
-    <Drawer open={isPopUpActive} onOpenChange={setIsPopUpActive}>
-      <DrawerTrigger asChild>
-       <button
-        onClick={onShareButtonCLick}
-        className={styles.shareTreeButtoncontainer}
-      >
-        <FontAwesomeIcon className={styles.icon} icon={faShare} />
-        <span>Share</span>
-      </button>
-      </DrawerTrigger>
-      <DrawerContent>
-        <DrawerHeader >
-          <DrawerTitle>Edit profile</DrawerTitle>
-          <DrawerDescription>
-            Make changes to your profile here. Click save when you're done.
-          </DrawerDescription>
-        </DrawerHeader>
-        <ShareTreeContent/>
-        <DrawerFooter className="pt-2">
-          {/* <DrawerClose asChild>
-            <Button variant="outline">Cancel</Button>
-          </DrawerClose> */}
-        </DrawerFooter>
-      </DrawerContent>
-    </Drawer>
-  );
-
-  return (
-    <>
-      {/* button */}
-      <button
-        onClick={onShareButtonCLick}
-        className={styles.shareTreeButtoncontainer}
-      >
-        <FontAwesomeIcon className={styles.icon} icon={faShare} />
-        <span>Share</span>
-      </button>
-
-      {/* Popup  */}
-      <ShareTreePopup open={isPopUpActive} setOpen={setIsPopUpActive} />
-    </>
-  );
-}
-
-export default function ShareTreePopup({ open, setOpen }) {
-  return (
-    <>
-      <AdaptiveDrawer heading={`Share tree`} open={open} onOpenChange={setOpen}>
+    <Dialog>
+      <DialogTrigger asChild>
+        {/* fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg transition duration-300 ease-in-out */}
+        <button className={styles.dialogShareButton} ><FaRegShareFromSquare /> <span>Share</span> </button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Edit profile</DialogTitle>
+          <DialogDescription>
+            Make changes to your profile here. Click save when you re done.
+          </DialogDescription>
+        </DialogHeader>
         <ShareTreeContent />
-      </AdaptiveDrawer>
-    </>
+      </DialogContent>
+    </Dialog>
   );
+
+  
 }

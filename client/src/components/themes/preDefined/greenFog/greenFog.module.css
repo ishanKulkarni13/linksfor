@@ -4,11 +4,9 @@
     --color-surface-1: hsl(57, 70%, 10%);
     --color-surface-2: hsl(57, 60%, 15%);
     --color-surface-3: hsl(57, 50%, 20%);
-    --color-surface-floating: hsl(57, 50%, 20%);
 
     --color-link: rgb(126, 235, 120);
-  
-    /* --color-surface-floating: hsl(118, 100%, 27%); */
+
     --color-overlay: hsl(57, 80%, 5%);
   
     /* Text colors */

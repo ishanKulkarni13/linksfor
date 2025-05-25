@@ -1,59 +1,76 @@
-.shareTreeButtoncontainer{
-    background-color: var(--color-surface-2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    border: var(--border-surface-1);
-    border-radius: 225px;
-    padding: 5px 10px;
+.shareTreeButtoncontainer {
+  background-color: var(--color-surface-2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  border: var(--border-surface-1);
+  border-radius: 225px;
+  padding: 5px 10px;
 }
 
-.icon{
-    width: 25px;
+.icon {
+  width: 25px;
 }
 
-
-
-
-
-.shareContainer{
-    width: inherit;
-    height: 50px;
-    background-color: var(--color-background);
+.shareContainer {
+  width: inherit;
+  height: 50px;
+  background-color: var(--color-background);
 }
 
 .copyToClipboardContainer {
-    height: inherit;
-    display: flex;
-    justify-content: stretch;
-    align-items: stretch;
-    border:1px solid rgba(255, 255, 255, 0.371);
+  height: inherit;
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+  border: 1px solid rgba(255, 255, 255, 0.371);
 }
 
-.copyToClipboardContainer > input{
-    background-color: var( --color-surface-1);
-    color: var(--color-text-primary);
-    overflow: hidden;
-    padding: 10px;
+.copyToClipboardContainer > input {
+  background-color: var(--color-surface-1);
+  color: var(--color-text-primary);
+  overflow: hidden;
+  padding: 10px;
 }
 
-.linkContainer{
-    width: auto;
-    flex: 1;
-    font-size: 20px;
+.linkContainer {
+  width: auto;
+  flex: 1;
+  font-size: 20px;
 }
 
-.copyIconContainer{
-
-    background-color: var( --color-surface-1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 35px;
-    border-left: 1px solid white;
+.copyIconContainer {
+  background-color: var(--color-surface-1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 35px;
+  border-left: 1px solid white;
 }
 
-.copyIcon{
-    margin: 5px;
+.copyIcon {
+  margin: 5px;
+}
+
+.dialogShareButton {
+  position: fixed;
+  top: calc(var(--topBarHeight) + var(--space-top));
+  right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  background-color: var(--color-surface-floating-btn);
+  font-size: 20px;
+  padding: 5px 15px;
+  border: var(--border-surface-1);
+  border-radius: 50px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.dialogShareButton:hover{
+    transform: scale(1.05);
 }

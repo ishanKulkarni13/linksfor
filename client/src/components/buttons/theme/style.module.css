@@ -13,7 +13,6 @@
   font-size: var(--shape-size);
   width: var(--button-diameter);
   height: var(--button-diameter);
-  /* border: 1px solid blue; */
 }
 .dark ~ .themeToggleButton {
   box-shadow: 4px 4px 15px rgb(29 27 58);

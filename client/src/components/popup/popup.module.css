@@ -31,7 +31,7 @@
     max-width: 500px;
     padding: 15px 15px;
     flex-direction: column;
-    background-color: var(--color-surface-floating);
+    background-color: var(--color-background);
     border: 2px solid white;
     border-radius: 25px;
     color: var(--color-text-main);
