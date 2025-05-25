@@ -15,6 +15,7 @@ export default function LinkAirblack({ link }) {
               fill={true}
               object-fit="cover"
               src={link.thumbnail.URL}
+              alt="link image"
             />
           )}
         </div>

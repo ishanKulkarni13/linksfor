@@ -2,8 +2,9 @@ import axios from "axios";
 import LayoutPopup from "./layout/layout";
 import ThumbnailPopup from "./thumbnail/thumbnail";
 import { toast } from "sonner";
+import { Dialog } from "@radix-ui/react-dialog";
 
-export default function LinkEditPopup({openPopup, closePopup, setLinkData, linkData, treeUID}) {
+export default function LinkEditPopups({openPopup, closePopup, setLinkData, linkData, treeUID}) {
 
   const update = async (data) => {
     data.thumbnailURL && setLinkData({...linkData, thumbnail:{URL:data.thumbnailURL}})
@@ -13,7 +14,7 @@ export default function LinkEditPopup({openPopup, closePopup, setLinkData, linkD
         { ...data,  treeUID, linkUID:linkData.UID },
         { withCredentials: true }
       );
-      console.log(res)
+      // console.log(res)
     } catch (error) {
       console.log(error);
       if (error.response) {
@@ -42,8 +43,23 @@ export default function LinkEditPopup({openPopup, closePopup, setLinkData, linkD
      
   return (
     <>
-   {openPopup == `thumbnail` && <ThumbnailPopup update={update} linkData={linkData} close={closePopup} /> }
+   {openPopup == `thumbnail` && <ThumbnailPopup isOpen={openPopup == `thumbnail`? true:false} onOpenChange={null} update={update} linkData={linkData} close={closePopup} /> }
    {openPopup == `layout` && <LayoutPopup update={update} linkData={linkData} close={closePopup} /> }
     </>
   )
+
+  // return(
+  //   <>
+  //     // Thumbnail
+  //     <Dialog open={openPopup == `thumbnail`? true:false} onOpenChange={(open)=> open? openPopup('thumbnail') : closePopup()}>
+  //       <thumbnailContent update linkData />
+  //     </Dialog>
+
+  //     // layout
+  //     <Dialog open={openPopup == `thumbnail`? true:false} onOpenChange={(open)=> open? openPopup('thumbnail') : closePopup()}>
+  //       <layoutlContent/>
+  //     </Dialog>
+
+  //   </>
+  // )
 }

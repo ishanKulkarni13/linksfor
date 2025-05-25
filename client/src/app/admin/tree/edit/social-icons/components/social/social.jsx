@@ -12,7 +12,6 @@ import {
 import { FiLayout } from "react-icons/fi";
 import React, { useState } from "react";
 import { toast } from "sonner";
-// import LinkEditPopup from "./popup/linkEditPopup";
 import { FaRegImage } from "react-icons/fa6";
 import { CgSpinner } from "react-icons/cg";
 import Image from "next/image";

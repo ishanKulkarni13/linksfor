@@ -10,6 +10,7 @@ export default function PofileAirblack({ treeName, treePicture, treeBio }) {
           fill={true}
           // object-fit="cover"
           src={treePicture.URL}
+          alt="profile pic"
         ></Image>
       </div>
       <div className={styles.profileTextContainer}>

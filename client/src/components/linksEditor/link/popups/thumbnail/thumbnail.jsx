@@ -4,11 +4,11 @@ import styles from "./thumbnail.module.css";
 import Image from "next/image";
 
 export default function ThumbnailPopup({ update, linkData, close }) {
-  console.log(linkData);
+ // console.log(linkData);
 
   return (
-    <div>
-      <Popup close={close} title={"Thumbnail"}>
+    <>
+      {/* <Popup close={close} title={"Thumbnail"}> */}
 
         <div className={styles.popupContent}>
 
@@ -86,7 +86,8 @@ export default function ThumbnailPopup({ update, linkData, close }) {
             </CldUploadWidget>
           </div>
         </div>
-      </Popup>
-    </div>
+        
+      {/* </Popup> */}
+    </>
   );
 }
