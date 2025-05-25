@@ -1,8 +1,17 @@
 .container {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column-reverse;
+}
+
+.link{
+    /* color: blue; */
+}
+
+.active{
+ color: red !important;
 }
 
 @media (width < 1204px) {

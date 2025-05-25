@@ -1,4 +1,7 @@
 .nav {
+     position: relative;
+  display: flex;
+  
     flex: 1;
     display: flex;
     margin: 0px var(--margin-x);
@@ -7,6 +10,21 @@
     gap: 10px;
     width: auto;
     flex-grow: 1;
+}
+
+.activeBar {
+  position: absolute;
+  bottom: 0;
+  height: 3px;
+  background: #0070f3;
+  border-radius: 2px;
+  transition:
+    left 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.2s;
+  z-index: 10;
+  will-change: left, width;
+  transform: translateY(2px);
 }
 
 .navItemContainer {

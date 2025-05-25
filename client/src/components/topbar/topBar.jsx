@@ -2,13 +2,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Nav from "../nav/nav";
 import styles from "./topBar.module.css";
-import { faLink, faShare, faUser } from "@fortawesome/free-solid-svg-icons";
-import useWindowResize from "@/hooks/useWindowSize";
-import Link from "next/link";
+import { faLink } from "@fortawesome/free-solid-svg-icons";
 import { ThemeModeToggle } from "../buttons/theme/changeThemeButton";
 import { ShareTreeButton } from "../shareTree/shareTreeButton/shareTreeButton";
 export default function TopBar() {
-  const { width, heigth } = useWindowResize();
   return (
     <div className={styles.topBarContainer}>
       <div className={styles.mobieTopBarContainer}>
