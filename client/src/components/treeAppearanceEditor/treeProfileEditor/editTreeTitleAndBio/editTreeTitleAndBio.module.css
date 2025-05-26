@@ -33,7 +33,7 @@
 
 .input:focus{
     border: none;
-    box-shadow: none;
+    outline: none;
 }
 
 .lable{

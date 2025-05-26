@@ -51,8 +51,12 @@
   justify-content: flex-start;
   align-items: stretch;
   gap: 10px;
+  width: 100%;
 }
 
+.URLContainer{
+  width: 100%;
+}
 
 .URLInput {
   width: 100%;

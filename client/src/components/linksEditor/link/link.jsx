@@ -15,12 +15,17 @@ import LinkEditPopups from "./popups/linkEditPopups";
 import { FaRegImage } from "react-icons/fa6";
 import { CgSpinner } from "react-icons/cg";
 import { useDebounce } from "@/hooks/debounce";
+import Image from "next/image";
 
 export default function Link({ link, deleteLink, treeUID }) {
   const [linkData, setLinkData] = useState(link);
   const [popup, setPopup] = useState();
   const controls = useDragControls();
-  const [isLoading, setIsLoading] = useState({ link: false, deleting: false, mounted: false });
+  const [isLoading, setIsLoading] = useState({
+    link: false,
+    deleting: false,
+    mounted: false,
+  });
 
   const debouncelinkData = useDebounce(linkData, 3000);
 
@@ -36,26 +41,25 @@ export default function Link({ link, deleteLink, treeUID }) {
     setLinkData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
   const handleSubmit = async (event) => {
-    return  event.preventDefault();
-    setIsLoading({ ...isLoading, link: true });
-    await sendLinkTitleAndURLToBackend();
-    setIsLoading({ ...isLoading, link: false });
+    return event.preventDefault();
+    // setIsLoading({ ...isLoading, link: true });
+    // await sendLinkTitleAndURLToBackend();
+    // setIsLoading({ ...isLoading, link: false });
   };
 
-  useEffect(()=>{
-    (async () => {  
-      if(isLoading.mounted ){
+  useEffect(() => {
+    (async () => {
+      if (isLoading.mounted) {
         setIsLoading({ ...isLoading, link: true });
-        await sendLinkTitleAndURLToBackend()
-       setIsLoading({ ...isLoading, link: false });
-  
+        await sendLinkTitleAndURLToBackend();
+        setIsLoading({ ...isLoading, link: false });
       }
     })();
   }, [debouncelinkData]);
 
-  useEffect(()=>{
-    setIsLoading({...isLoading, mounted: true})
-  }, [])
+  useEffect(() => {
+    setIsLoading({ ...isLoading, mounted: true });
+  }, []);
 
   const sendLinkTitleAndURLToBackend = async () => {
     toast.loading(`Updating link data...`, {
@@ -124,104 +128,99 @@ export default function Link({ link, deleteLink, treeUID }) {
   };
 
   return (
-    
-      <Reorder.Item
-        className={styles.DNDItem}
-        value={link}
-        id={link}
-        dragListener={false}
-        dragControls={controls}
-      >
-        <div className={styles.linkContainer}>
-          <div className={styles.link}>
-            <div
-              className={`${styles.left}, ${styles.DNDIcon}`}
-              onPointerDown={(e) => {
-                if (!isLoading.deleting && !isLoading.link) {
-                  controls.start(e);
-                }
-              }}
-            >
-              <FontAwesomeIcon icon={faGripVertical} />{" "}
-            </div>
+    <Reorder.Item
+      className={styles.DNDItem}
+      value={link}
+      id={link}
+      dragListener={false}
+      dragControls={controls}
+    >
+      <div className={styles.linkContainer}>
+        <div className={styles.link}>
+          <div
+            className={`${styles.left}, ${styles.DNDIcon}`}
+            onPointerDown={(e) => {
+              if (!isLoading.deleting && !isLoading.link) {
+                controls.start(e);
+              }
+            }}
+          >
+            <FontAwesomeIcon icon={faGripVertical} />{" "}
+          </div>
 
-            <div className={styles.centre} onSubmit={handleSubmit}>
-              <form onSubmit={handleSubmit}>
-                <div className={styles.titleContainer}>
-                  <input
-                    className={styles.titleInput}
-                    type="text"
-                    name="title"
-                    value={linkData.title}
-                    onChange={handleInputChange}
-                  />
-                  {/* <button
+          <div className={styles.centre} onSubmit={handleSubmit}>
+           
+            {/* <form onSubmit={handleSubmit}> */}
+            <div className={styles.titleContainer}>
+              <input
+                className={styles.titleInput}
+                type="text"
+                name="title"
+                value={linkData.title}
+                onChange={handleInputChange}
+              />
+              {/* <button
                     disabled={isLoading.link}
                     className={styles.submitButton}
                     type="submit"
                   >
                     <FontAwesomeIcon icon={faCheck} />
                   </button> */}
-                </div>
-
-                {link.type != `header` && (
-                  <div className={styles.URLContainer}>
-                    <input
-                      className={styles.URLInput}
-                      type="text"
-                      name="URL"
-                      value={linkData.URL}
-                      onChange={handleInputChange}
-                    />
-                    {/* <button
-                      disabled={isLoading.link}
-                      className={styles.submitButton}
-                      type="submit"
-                    >
-                      <FontAwesomeIcon icon={faCheck} />
-                    </button> */}
-                  </div>
-                )}
-              </form>
-              {link.type == "link" && (
-                <div className={styles.OtherOptionsContainer}>
-                  <button
-                    className={styles.thumbnailContainer}
-                    data-popup={`thumbnail`}
-                    onClick={openPopup}
-                  >
-                    <FaRegImage className={styles.icon} />
-                  </button>
-
-                  <LinkEditPopups
-                    treeUID={treeUID}
-                    setLinkData={setLinkData}
-                    linkData={linkData} 
-                    openPopup={popup} // the popup which is supposed to be opened 
-                    closePopup={closePopup} // fn to close any popup
-                  />
-                </div>
-              )}
             </div>
 
-            <div className={styles.right}>
-              <button
-                disabled={isLoading.deleting}
-                className={styles.deleteButton}
-                onClick={handelDeleteButtonClick}
-              >
-                {!isLoading.deleting ? (
-                  <FontAwesomeIcon icon={faTrash} className={styles.icon} />
-                ) : (
-                  <CgSpinner className={`${styles.icon} spiner`} />
-                )}
-              </button>
-            </div>
+            {link.type != `header` && (
+              <div className={styles.URLContainer}>
+                <input
+                  className={styles.URLInput}
+                  type="text"
+                  name="URL"
+                  value={ linkData.URL}
+                  onChange={handleInputChange}
+                />
+              </div>
+            )}
+            {/* </form> */}
+            {link.type == "link" && (
+              <div className={styles.OtherOptionsContainer}>
+                <button
+                  className={styles.thumbnailContainer}
+                  data-popup={`thumbnail`}
+                  onClick={openPopup}
+                >
+                  <FaRegImage className={styles.icon} />
+                </button>
+
+                <LinkEditPopups
+                  treeUID={treeUID}
+                  setLinkData={setLinkData}
+                  linkData={linkData}
+                  openPopup={popup} // the popup which is supposed to be opened
+                  closePopup={closePopup} // fn to close any popup
+                />
+              </div>
+            )}
           </div>
 
-          {/* <EditLinkPanel className={styles.editPanelContainer} /> */}
+          <div className={styles.right}>
+          
+
+
+            <button
+              disabled={isLoading.deleting}
+              className={styles.deleteButton}
+              onClick={handelDeleteButtonClick}
+            >
+              {!isLoading.deleting ? (
+                <FontAwesomeIcon icon={faTrash} className={styles.icon} />
+              ) : (
+                <CgSpinner className={`${styles.icon} spiner`} />
+              )}
+            </button>
+          </div>
         </div>
-      </Reorder.Item>
-    
+
+        {/* <EditLinkPanel className={styles.editPanelContainer} /> */}
+      </div>
+    </Reorder.Item>
   );
 }

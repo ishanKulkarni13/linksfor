@@ -83,6 +83,7 @@
 .socialIconsPlacementForm label input + span:before {
   background-color: var(--color-text-contrast-main);
   box-shadow: 0px 0px 3px 0.5px var(--color-text-main);
+  box-shadow:0 0px 0px 0.5px var(--color-text-main);
   /* border: 2px solid var(--color-text-main); */
 }
 

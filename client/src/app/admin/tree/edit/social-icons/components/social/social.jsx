@@ -10,25 +10,27 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FiLayout } from "react-icons/fi";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { FaRegImage } from "react-icons/fa6";
 import { CgSpinner } from "react-icons/cg";
 import Image from "next/image";
 
 // icons
-import { BsTelegram } from "react-icons/bs";
 import { SocialIcon } from "@/components/icons/social/socialIcon";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useDebounce } from "@/hooks/debounce";
 
 export default function Social({ link, deleteSocial, treeUID }) {
   const [linkData, setLinkData] = useState(link);
   const [popup, setPopup] = useState();
   const controls = useDragControls();
-  const [isLoading, setIsLoading] = useState({ link: false, deleting: false });
+  const [isLoading, setIsLoading] = useState({ link: false, deleting: false, mounted:false });
 
   const closePopup = () => setPopup();
   const openPopup = (e) => setPopup(e.currentTarget.getAttribute("data-popup"));
+
+  const debouncelinkData = useDebounce(linkData, 3000);
 
   const handelDeleteButtonClick = () => {
     setIsLoading({ ...isLoading, deleting: true });
@@ -39,15 +41,32 @@ export default function Social({ link, deleteSocial, treeUID }) {
     setLinkData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
   const handleSubmit = async (event) => {
-    setIsLoading({ ...isLoading, link: true });
-    event.preventDefault();
-    console.log(linkData);
-    await sendLinkTitleAndURLToBackend();
-    setIsLoading({ ...isLoading, link: false });
+    return  event.preventDefault();
+    // setIsLoading({ ...isLoading, link: true });
+    // event.preventDefault();
+    // console.log(linkData);
+    // await sendLinkTitleAndURLToBackend();
+    // setIsLoading({ ...isLoading, link: false });
   };
 
+  useEffect(()=>{
+      (async () => {  
+        if(isLoading.mounted ){
+          setIsLoading({ ...isLoading, link: true });
+          await sendLinkTitleAndURLToBackend()
+         setIsLoading({ ...isLoading, link: false });
+    
+        }
+      })();
+    }, [debouncelinkData]);
+  
+    useEffect(()=>{
+      setIsLoading({...isLoading, mounted: true})
+    }, [])
+
+
   const sendLinkTitleAndURLToBackend = async () => {
-    toast.loading(`Updating link data...`, {
+    toast.loading(`Updating data...`, {
       id: "updating",
     });
     let { title, URL, UID } = linkData;
@@ -139,7 +158,7 @@ export default function Social({ link, deleteSocial, treeUID }) {
                 <SocialIcon iconName={link.icon} />
               </div>
               {/* links for the social */}
-              <form onSubmit={handleSubmit}>
+              {/* <form onSubmit={handleSubmit}> */}
                 <div className={styles.URLContainer}>
                   <input
                     className={styles.URLInput}
@@ -156,7 +175,7 @@ export default function Social({ link, deleteSocial, treeUID }) {
                     <FontAwesomeIcon icon={faCheck} />
                   </button>
                 </div>
-              </form>
+              {/* </form> */}
             </div>
 
             <div className={styles.right}>
