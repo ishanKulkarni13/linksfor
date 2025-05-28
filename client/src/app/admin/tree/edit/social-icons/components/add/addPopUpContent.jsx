@@ -36,6 +36,7 @@ import { Button } from "@/components/ui/button";
 import { FaCheck } from "react-icons/fa";
 import { socialIcons } from "@/constants/tree";
 import { SocialIcon } from "@/components/icons/social/socialIcon";
+import { set } from "lodash";
 
 export default function AddPopUpContent({ close, setSocials, treeUID }) {
   const [social, setSocial] = useState({ URL: "", icon: "" });
@@ -43,16 +44,24 @@ export default function AddPopUpContent({ close, setSocials, treeUID }) {
   const [error, setError] = useState({});
 
   // handel form submit
-  const handleDone = async () => {
-    setError({});
+ const handleDone = async () => {
+  setIsLoading(true);
+    await Promise.resolve(); //  Allows React to re-render before continuing
+  addSocial().finally(() => {
+    setIsLoading(false);
+  });
+};
+
+  const addSocial = async ()=>{
+     setError({});
     if (social.URL.length < 1) {
       setError({ ...error, URL: "Please enter URL" });
-      return toast.error("Please provide required fields properly", {
+      return toast.error("Please provide a URL", {
         id: "socials",
       });
     } else if (social.icon.length < 1) {
       setError({ ...error, icon: "Please enter icon" });
-      return toast.error("Please provide required fields properly", {
+      return toast.error("Please select a icon", {
         id: "socials",
       });
     }
@@ -90,9 +99,8 @@ export default function AddPopUpContent({ close, setSocials, treeUID }) {
           id: "socials",
         });
       }
-    }
-  };
-
+    } 
+  }
   return (
     <>
       {/* <Popup close={close} title={"Add Social"}> */}
@@ -157,7 +165,7 @@ export default function AddPopUpContent({ close, setSocials, treeUID }) {
           </div>
 
           <button
-            disabled={isLoading && false}
+            disabled={isLoading}
             onClick={handleDone}
             className={styles.doneButton}
           >

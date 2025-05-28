@@ -261,7 +261,7 @@ export default function AddLinkDialog({ setLinks, treeUID, type, disabled }) {
                       }}
                     />
                     <button
-                      disabled={isLoading && false}
+                      disabled={isLoading}
                       type="submit"
                       className={styles.doneButton}
                     >

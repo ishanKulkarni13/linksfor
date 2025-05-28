@@ -18,7 +18,7 @@ import { RiGalleryView } from "react-icons/ri";
 import { transform } from "lodash";
 import GalleryImage from "./galleryImage";
 
-export default function ThumbnailUpdationContent({ update, linkData, close }) {
+export default function ThumbnailUpdationContent({ update, close }) {
   const [imageSrc, setImageSrc] = useState(null);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
@@ -44,14 +44,18 @@ export default function ThumbnailUpdationContent({ update, linkData, close }) {
     setSelectedGalleryImage(img.uid);
     // Send to backend
     update({ thumbnailURL: img.url });
-    toast.success("Thumbnail updated from gallery!");
+    toast.success("Thumbnail updated from gallery!", {
+      id: "thumbnail-image-update",
+    });
     close();
   };
 
   // Handle delete
   const handleDelete = () => {
     update({ thumbnailURL: "" });
-    toast.success("Thumbnail deleted!");
+    toast.success("Thumbnail deleted!", {
+      id: "thumbnail-image-update",
+    });
     close();
   };
 
@@ -81,7 +85,9 @@ export default function ThumbnailUpdationContent({ update, linkData, close }) {
   async function uploadToCloudinary(blob) {
     setUploading(true);
     setUploadProgress(0);
-    toast.info("Uploading image...", { id: "upload" });
+    toast.loading("Uploading image...",  {
+      id: "thumbnail-image-update",
+    });
 
     const url = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`;
     const formData = new FormData();
@@ -101,18 +107,24 @@ export default function ThumbnailUpdationContent({ update, linkData, close }) {
         setUploading(false);
         setUploadProgress(0);
         if (xhr.status === 200) {
-          toast.success("Image uploaded!", { id: "upload" });
+          toast.success("Image uploaded!", {
+      id: "thumbnail-image-update",
+    });
           resolve(JSON.parse(xhr.responseText));
         } else {
           console.error("Cloudinary error:", xhr.responseText);
-          toast.error("Upload failed", { id: "upload" });
+          toast.error("Upload failed", {
+      id: "thumbnail-image-update",
+    });
           reject(xhr.responseText);
         }
       };
       xhr.onerror = () => {
         setUploading(false);
         setUploadProgress(0);
-        toast.error("Upload failed", { id: "upload" });
+        toast.error("Upload failed", {
+      id: "thumbnail-image-update",
+    });
         reject(xhr.responseText);
       };
       xhr.send(formData);
@@ -135,7 +147,9 @@ export default function ThumbnailUpdationContent({ update, linkData, close }) {
     } catch (e) {
       console.log(e);
 
-      toast.error("Failed to crop or upload image");
+      toast.error("Failed to crop or upload image", {
+      id: "thumbnail-image-update",
+    });
     }
   };
 

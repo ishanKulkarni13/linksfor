@@ -69,7 +69,6 @@ export default function LinkEditPopups({openPopup, closePopup, setLinkData, link
     if (res.data && res.data.success && res.data.link) {
       // Use the updated link object from backend
       setLinkData(res.data.link);
-      toast.success("Thumbnail updated!");
     } else {
       toast.error(res.data?.message || "Failed to update link", { id: "linkUpdate" });
     }
