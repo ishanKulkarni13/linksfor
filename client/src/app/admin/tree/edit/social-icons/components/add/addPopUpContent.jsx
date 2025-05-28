@@ -37,7 +37,7 @@ import { FaCheck } from "react-icons/fa";
 import { socialIcons } from "@/constants/tree";
 import { SocialIcon } from "@/components/icons/social/socialIcon";
 
-export default function AddPopUp({ close, setSocials, treeUID }) {
+export default function AddPopUpContent({ close, setSocials, treeUID }) {
   const [social, setSocial] = useState({ URL: "", icon: "" });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState({});
@@ -95,7 +95,7 @@ export default function AddPopUp({ close, setSocials, treeUID }) {
 
   return (
     <>
-      <Popup close={close} title={"Add Social"}>
+      {/* <Popup close={close} title={"Add Social"}> */}
         <div className={styles.popUpContainer}>
           <div className={styles.URLContainer}>
             <label className={styles.lable} htmlFor="URLInput">
@@ -169,7 +169,7 @@ export default function AddPopUp({ close, setSocials, treeUID }) {
             </span>
           </button>
         </div>
-      </Popup>
+      {/* </Popup> */}
     </>
   );
 }

@@ -4,7 +4,7 @@ export default function AdminLayout({ children }) {
   return (
     <>
 
-     <div className={styles.layoutRoot}>
+     <div className={styles.layoutRoot} >
       <TopBar />
       <div className={styles.children}>
         {children}

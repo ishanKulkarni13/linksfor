@@ -118,10 +118,11 @@ export function ShareTreeButton({ type }) {
       <Drawer>
         <DrawerTrigger asChild>
           <button
+            // onClick={onShareButtonCLick}
             className={styles.shareTreeButtoncontainer}
           >
             <FontAwesomeIcon className={styles.icon} icon={faShare} />
-            {type == 'logoOnly'?<></>: <span>Share</span>}
+            <span>Share</span>
           </button>
         </DrawerTrigger>
         <DrawerContent>
