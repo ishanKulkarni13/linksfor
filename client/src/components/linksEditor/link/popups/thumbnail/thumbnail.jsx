@@ -67,7 +67,7 @@ export default function ThumbnailUpdationContent({ update, linkData, close }) {
           toast.success("Image uploaded!", { id: "upload" });
           resolve(JSON.parse(xhr.responseText));
         } else {
-           console.error("Cloudinary error:", xhr.responseText);
+          console.error("Cloudinary error:", xhr.responseText);
           toast.error("Upload failed", { id: "upload" });
           reject(xhr.responseText);
         }
@@ -85,15 +85,19 @@ export default function ThumbnailUpdationContent({ update, linkData, close }) {
   // Handle crop confirm
   const handleCropConfirm = async () => {
     try {
-      const croppedBlob = await getCroppedImg(imageSrc, croppedAreaPixels, rotation);
+      const croppedBlob = await getCroppedImg(
+        imageSrc,
+        croppedAreaPixels,
+        rotation
+      );
       const result = await uploadToCloudinary(croppedBlob);
       update({ thumbnailURL: result.secure_url });
-      
+
       setShowCropper(false);
       setImageSrc(null);
     } catch (e) {
       console.log(e);
-      
+
       toast.error("Failed to crop or upload image");
     }
   };
@@ -105,96 +109,120 @@ export default function ThumbnailUpdationContent({ update, linkData, close }) {
 
   // useEffect(() => {
   //   console.log("Thumbnail URL:", linkData.thumbnail?.URL);
-    
+
   // } , [linkData.thumbnail]);
 
   return (
     <div className={styles.content}>
-      <div className={styles.imageContainer}>
-        {(linkData.thumbnail && linkData.thumbnail.URL)? (
-         <>
-            <span>Loading...</span>
-          <Image
-            fill={true}
-            className={styles.image}
-            src={linkData.thumbnail.URL}
-            alt="link thumbnail"
-          />
-         
-         </>
-        ) : (
-          <span>NA</span>
-        )}
-      </div>
+      {showCropper ? ( // Show cropper when image is selected else show dropzone
+        <div className={styles.cropperDialog}>
+          <div className={styles.cropperWrapper}>
+            <div className={styles.cropperArea}>
+              <Cropper
+                image={imageSrc}
+                crop={crop}
+                zoom={zoom}
+                rotation={rotation}
+                aspect={1}
+                onCropChange={setCrop}
+                onZoomChange={setZoom}
+                onRotationChange={setRotation}
+                onCropComplete={onCropComplete}
+                cropShape="round"
+                showGrid={false}
+              />
+            </div>
 
-      <div className={styles.profileImageEditOptionsContainer}>
-        {/* Drag & Drop area */}
-        <div {...getRootProps({ className: styles.dropzone })}>
-          <input {...getInputProps()} ref={inputRef} />
-          {isDragActive ? (
-            <p>Drop the image here ...</p>
-          ) : (
-            <p>
-              Drag & drop an image here, or{" "}
-              <button
-                type="button"
-                className={styles.chooseFileBtn}
-                onClick={() => inputRef.current.click()}
-              >
-                Choose file
-              </button>
-            </p>
-          )}
+            <div className={styles.cropControlsAndButtonsWrapper}>
+              <div className={styles.cropControlsWrapper}>
+                <label>
+                  <span>Zoom</span>
+                  <input
+                    type="range"
+                    min={1}
+                    max={3}
+                    step={0.01}
+                    value={zoom}
+                    onChange={(e) => setZoom(Number(e.target.value))}
+                  />
+                </label>
+
+                <button
+                  onClick={() => setRotation((r) => r - 90)}
+                  title="Rotate Left"
+                >
+                  <FaRotateLeft />
+                </button>
+
+                <button
+                  onClick={() => setRotation((r) => r + 90)}
+                  title="Rotate Right"
+                >
+                  <FaRotateRight />
+                </button>
+              </div>
+              <div className={styles.cropButtonsWrapper}>
+                <button
+                  className={styles.cropBtn}
+                  onClick={handleCropConfirm}
+                  disabled={uploading}
+                >
+                  {uploading
+                    ? `Uploading... ${uploadProgress}%`
+                    : "Crop & Upload"}
+                </button>
+
+                <button
+                  className={styles.cancelBtn}
+                  onClick={handleCropCancel}
+                  disabled={uploading}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className={styles.thumbnailAndDropzoneContainer}>
+          <div className={styles.imageContainer}>
+            {linkData.thumbnail && linkData.thumbnail.URL ? (
+              <>
+                <span>Loading...</span>
+                <Image
+                  fill={true}
+                  className={styles.image}
+                  src={linkData.thumbnail.URL}
+                  alt="link thumbnail"
+                />
+              </>
+            ) : (
+              <span>NA</span>
+            )}
+          </div>
 
-      {/* Cropper Dialog */}
-      {showCropper && (
-  <div className={styles.cropperDialog}>
-    <div className={styles.cropperWrapper}>
-      <div className={styles.cropperArea}>
-        <Cropper
-          image={imageSrc}
-          crop={crop}
-          zoom={zoom}
-          rotation={rotation}
-          aspect={1}
-          onCropChange={setCrop}
-          onZoomChange={setZoom}
-          onRotationChange={setRotation}
-          onCropComplete={onCropComplete}
-          cropShape="round"
-          showGrid={false}
-        />
-      </div>
-      <div className={styles.cropControls}>
-        <label>
-          Zoom
-          <input
-            type="range"
-            min={1}
-            max={3}
-            step={0.01}
-            value={zoom}
-            onChange={e => setZoom(Number(e.target.value))}
-          />
-        </label>
-        <button onClick={() => setRotation(r => r - 90)} title="Rotate Left">
-          <FaRotateLeft />
-        </button>
-        <button onClick={() => setRotation(r => r + 90)} title="Rotate Right">
-          <FaRotateRight />
-        </button>
-        <button className={styles.cropBtn} onClick={handleCropConfirm} disabled={uploading}>
-          {uploading ? `Uploading... ${uploadProgress}%` : "Crop & Upload"}
-        </button>
-        <button className={styles.cancelBtn} onClick={handleCropCancel} disabled={uploading}>
-          Cancel
-        </button>
-      </div>
-    </div>
-  </div>
-)}
+          <div className={styles.profileImageEditOptionsContainer}>
+            {/* Drag & Drop area */}
+            <div {...getRootProps({ className: styles.dropzone })}>
+              <input {...getInputProps()} ref={inputRef} />
+              {isDragActive ? (
+                <p>Drop the image here ...</p>
+              ) : (
+                <p>
+                  Drag & drop an image here, or{" "}
+                  <button
+                    type="button"
+                    className={styles.chooseFileBtn}
+                    onClick={() => inputRef.current.click()}
+                  >
+                    Choose file
+                  </button>
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
