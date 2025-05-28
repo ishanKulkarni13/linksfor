@@ -86,7 +86,7 @@
   --color-surface-2: hsl(240, 2%, 14%);
   --color-surface-3: hsl(240, 2%, 15%);
   --color-top-bar: var(--color-background);
-  --color-surface-floating: var(--color-background);
+  --color-surface-floating-btn: var(--color-background);
   --color-overlay: var(--color-background);
 
   /* Text colors */
@@ -97,10 +97,8 @@
   --color-text-contrast-main: hsl(0, 0%, 0%);
   --color-text-primary: var(--color-text-main);
   --color-text-contrast-primary: hsl(0, 0%, 100%);
-
   --color-text-secondary: hsl(210, 40%, 80%);
   --color-text-floating: white;
-
   --color-text-muted: hsl(215, 20.2%, 65.1%);
 
   /* Borders */

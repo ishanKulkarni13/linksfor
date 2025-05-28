@@ -15,7 +15,7 @@ export default function TopBar() {
           </div>
 
           <div className={styles.share}>
-            <ShareTreeButton/>
+            <ShareTreeButton />
           </div>
 
           <div className={styles.profile} href={"/admin"}>
@@ -34,7 +34,7 @@ export default function TopBar() {
 
       {/* desktop */}
       <div className={styles.desktopTopBarContainer}>
-        <div className={styles.logoContainer}>
+        <div className={styles.left}>
           <FontAwesomeIcon className={styles.icon} icon={faLink} />
           <span>Link</span>
         </div>
@@ -44,11 +44,10 @@ export default function TopBar() {
         </div>
 
         <div className={styles.right}>
-          
           <ThemeModeToggle className={styles.themetogglebtn} />
         </div>
 
-        <ShareTreeButton type={'floating'} />
+        <ShareTreeButton type={"floating"} />
       </div>
     </div>
   );

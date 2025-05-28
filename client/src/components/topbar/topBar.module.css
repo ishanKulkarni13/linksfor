@@ -4,11 +4,10 @@
   width: 100vw;
   height: var(--topBarHeight); */
 
-   position: sticky; /* or fixed */
+  position: sticky; /* or fixed */
   top: 0;
   z-index: 100;
   width: 100%;
-
 
   /* border-bottom: 1px solid white; */
   z-index: var(--NavContainerZIndex);
@@ -22,9 +21,9 @@
   height: var(--topBarHeight);
 }
 
-.topContainer{
+.topContainer {
   height: 60px;
-} 
+}
 
 .topContainer,
 .bottomContainer {
@@ -58,14 +57,25 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
   padding: 0px 20px;
 }
 
+.left, .right{
+  flex: 1;
+}
+.centre{
+  flex: 0 1 auto;
+}
+.spacer{
+  flex: 1;
+}
 .right {
-  position: relative;
+  /* flex: 1; */
   display: flex;
-  gap: 15px;
+  justify-content: flex-end;
   align-items: center;
+  gap: 1em;
 }
 
 @media (width < 640px) {

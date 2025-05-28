@@ -101,7 +101,7 @@ export default function LinkEditPopups({openPopup, closePopup, setLinkData, link
                   <DialogTitle>Edit {openPopup}</DialogTitle>
                   <DialogDescription>Update thumbnail for {linkData.title}</DialogDescription>
                 </DialogHeader>
-                <ThumbnailUpdationContent update={update} linkData={linkData} />
+                <ThumbnailUpdationContent update={update} linkData={linkData} close={closePopup} />
               </DialogContent>
       </Dialog>
 

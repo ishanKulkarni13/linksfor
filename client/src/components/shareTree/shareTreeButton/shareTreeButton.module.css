@@ -42,7 +42,7 @@
   font-size: 20px;
 }
 
-.separator{
+.separator {
   width: 2px;
   height: 100%;
   background-color: var(--color-border);
@@ -57,17 +57,19 @@
   border-left: 1px solid white;
 }
 
-
-
 .copyIcon {
   margin: 5px;
 }
 
 .dialogShareButton {
   position: fixed;
-  /* top: calc(var(--topBarHeight) + var(--space-top)); */
-  top: 90px;
-  left: 20px;
+  /* top: 90px;
+  bottom: auto;
+  right: 20px; */
+
+  top: auto;
+  bottom: 30px;
+  right: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -84,4 +86,13 @@
 
 .dialogShareButton:hover {
   transform: scale(1.05);
+}
+
+@media (max-width: 1060px) {
+  .dialogShareButton {
+    position: fixed;
+    top: auto;
+    bottom: 30px;
+    right: 20px;
+  }
 }
