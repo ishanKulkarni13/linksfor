@@ -128,3 +128,14 @@ outline: none;
 
     /* display: none; */
 }
+
+/* .layoutContainer {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+  cursor: pointer;
+  transition: background 0.18s;
+} */

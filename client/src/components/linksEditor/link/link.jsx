@@ -16,6 +16,9 @@ import { FaRegImage } from "react-icons/fa6";
 import { CgSpinner } from "react-icons/cg";
 import { useDebounce } from "@/hooks/debounce";
 import Image from "next/image";
+import { FaDotCircle } from "react-icons/fa";
+import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
+import { LuLayoutPanelLeft } from "react-icons/lu";
 
 export default function Link({ link, deleteLink, treeUID }) {
   const [linkData, setLinkData] = useState(link);
@@ -189,7 +192,13 @@ export default function Link({ link, deleteLink, treeUID }) {
                 >
                   <FaRegImage className={styles.icon} />
                 </button>
-
+                <button
+                  className={styles.layoutContainer}
+                  data-popup={`layout`}
+                  onClick={openPopup}
+                >
+                  <LuLayoutPanelLeft />
+                </button>
                 <LinkEditPopups
                   treeUID={treeUID}
                   setLinkData={setLinkData}

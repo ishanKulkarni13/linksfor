@@ -17,5 +17,7 @@
   padding-bottom: var(--space-bottom);
   padding-top:  var(--space-top);
   /* display: flex; */
+
   flex-direction: column;
+  
 }

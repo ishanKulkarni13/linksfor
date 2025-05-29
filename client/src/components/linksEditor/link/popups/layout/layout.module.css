@@ -1,0 +1,206 @@
+/* Layout selection dialog styles */
+.layoutDialogRoot {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-width: 320px;
+  /* padding: 1.5rem 0.5rem 0.5rem 0.5rem; */
+  /* border: 3px solid red; */
+
+}
+
+.layoutDialogTitle {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  margin-bottom: 0.2em;
+}
+
+.layoutDialogDesc {
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  margin-bottom: 0.5em;
+  display: block;
+}
+
+.layoutOptionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.layoutOptionCard {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--color-surface-1);
+  /* border: 2px solid var(--color-border); */
+  border-radius: 1.2em;
+  padding: 1em 1.2em;
+  cursor: pointer;
+  /* transition: border 0.18s, box-shadow 0.18s; */
+  box-shadow: var(--shadow-1);
+  position: relative;
+
+  /* border: 3px solid yellow; */
+}
+
+.layoutOptionCard.selected {
+  border: 2.35px solid var(--color-text-main);
+  /* box-shadow: 0 2px 12px 0 rgba(0,0,0,0.08); */
+  /* background: var(--color-background); */
+}
+
+.radioWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.7em;
+}
+
+
+
+.radioSelected {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background:  var(--color-text-main);
+  border: 2.5px solid var(--color-text-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.radioSelected::after {
+  content: "";
+  display: block;
+  width: 8px;
+  height: 8px;
+  background:  var(--color-text-contrast-main);
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.radioUnselected {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2.5px solid var(--color-border);
+  background: white;
+}
+
+.layoutTextAndPreviewWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  gap: 0.8em;
+  text-align: left;
+  
+    /* border: 3px solid rgb(0, 18, 218); */
+}
+
+.layoutOptionPreview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+   /* aspect-ratio: 2/1; */
+  /*width: 100px;
+  max-width: 160px;
+  min-width: 60px;
+  height: auto;
+  min-height: 32px;
+  max-height: 80px; */
+  position: relative;
+  margin-left: 1.2em;
+  overflow: hidden;
+  flex-shrink: 0;
+  border-radius: 0.8em;
+  background: var(--color-surface-2, #f5f5f5);
+
+  width: 170px;
+  height: 150px;
+  /* height: auto; */
+    /* border: 3px solid rgb(6, 234, 227); */
+}
+
+
+/* .layoutOptionsList > button:nth-child(1) > .layoutTextAndPreviewWrapper > .layoutOptionPreview {
+  border: 3px solid rgb(0, 0, 0);
+  height: 50px;  
+} */
+
+.previewImage {
+  object-fit: cover;
+  border-radius: 0.8em;
+  
+    /* border: 3px solid rgb(60, 255, 0); */
+}
+
+@media (max-width: 480px) {
+  .layoutTextAndPreviewWrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5em;
+  }
+  .layoutOptionPreview {
+    margin-left: 0;
+    margin-top: 0.5em;
+    width: 100%;
+    /* max-width: 100%; */
+    /* aspect-ratio: 2/1; */
+    min-width: 0;
+  }
+}
+
+.layoutOptionText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2em;
+  width: auto;
+}
+.layoutOptionTitle {
+  font-weight: 600;
+  font-size: 1.08em;
+  color: var(--color-text-main);
+}
+.layoutOptionDesc {
+  font-size: 0.98em;
+  color: var(--color-text-muted);
+}
+
+.layoutDialogActions {
+  display: flex;
+  gap: 1em;
+  justify-content: flex-end;
+  /* margin-top: 1.2em; */
+}
+.saveBtn {
+  background: var(--color-primary);
+  color: var(--color-text-contrast-primary);
+  border: none;
+  border-radius: var(--radius-medium);
+  padding: 0.5em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: var(--shadow-1);
+  transition: background 0.18s;
+}
+
+.cancelBtn {
+  background: transparent;
+  color: var(--color-text-muted);
+  border: none;
+  border-radius: var(--radius-medium);
+  padding: 0.5em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+}

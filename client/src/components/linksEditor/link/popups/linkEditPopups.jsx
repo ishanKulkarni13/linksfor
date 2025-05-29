@@ -90,25 +90,29 @@ export default function LinkEditPopups({openPopup, closePopup, setLinkData, link
   }
 };
 
-  return(
+  return (
     <>
       {/* Thumbnail */}
-      <Dialog open={openPopup == `thumbnail`? true:false} onOpenChange={(open)=> open? openPopup('thumbnail') : closePopup()}>
-        
-         <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Edit {openPopup}</DialogTitle>
-                  <DialogDescription>Update thumbnail for {linkData.title}</DialogDescription>
-                </DialogHeader>
-                <ThumbnailUpdationContent update={update} linkData={linkData} close={closePopup} />
-              </DialogContent>
+      <Dialog open={openPopup == `thumbnail`} onOpenChange={(open)=> open? openPopup('thumbnail') : closePopup()}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Edit {openPopup}</DialogTitle>
+            <DialogDescription>Update thumbnail for {linkData.title}</DialogDescription>
+          </DialogHeader>
+          <ThumbnailUpdationContent update={update} linkData={linkData} close={closePopup} />
+        </DialogContent>
       </Dialog>
 
-      {/* // layout
-      <Dialog open={openPopup == `thumbnail`? true:false} onOpenChange={(open)=> open? openPopup('thumbnail') : closePopup()}>
-        <layoutlContent/>
-      </Dialog> */}
-
+      {/* Layout */}
+      <Dialog open={openPopup == `layout`} onOpenChange={(open)=> open? openPopup('layout') : closePopup()}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Edit {openPopup}</DialogTitle>
+            <DialogDescription>Choose a layout for {linkData.title}</DialogDescription>
+          </DialogHeader>
+          <LayoutPopup update={update} linkData={linkData} close={closePopup} />
+        </DialogContent>
+      </Dialog>
     </>
   )
 }
