@@ -4,3 +4,49 @@
     height: 100vh;
     height: 100dvh;
 }
+.loginBox {
+  background: var(--color-surface-1, #fff);
+  border-radius: 1.2em;
+  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.10);
+  padding: 2.5rem 2.2rem 2rem 2.2rem;
+  min-width: 320px;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text-main, #222);
+  margin-bottom: 0.2em;
+}
+.subtitle {
+  color: var(--color-text-muted, #666);
+  font-size: 1.1rem;
+  margin-bottom: 1.2em;
+  text-align: center;
+}
+.loadingFeedback {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  margin-top: 1.2em;
+  color: var(--color-primary, #1976d2);
+  font-weight: 500;
+  font-size: 1.08em;
+}
+.spinner {
+  width: 1.2em;
+  height: 1.2em;
+  border: 2.5px solid #c3dafe;
+  border-top: 2.5px solid var(--color-primary, #1976d2);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

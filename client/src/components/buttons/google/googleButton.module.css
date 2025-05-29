@@ -4,29 +4,50 @@
 } */
 
 .container button {
+  width: 50vw;
+  max-width: 500px;
+  min-width: 300px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row-reverse;
+  gap: 10px;
+  font-size: 1.3em;
+  border-radius: 50px;
+  background-color: var(--color-surface-1);
+  border: var(--border-surface-1);
+  color: var(--color-text-main);
+  text-align: center;
+}
 
-    width: 50vw;
-    max-width: 500px;
-    min-width: 300px;
-    height: 45px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row-reverse;
-    gap: 10px;
-    font-size: 1.3em;
-    border-radius: 50px;
-    background-color: var(--color-surface-1);
-    border: var(--border-surface-1);
-    color: var(--color-text-main);
-    text-align: center;
+.container button[disabled] {
+  opacity: 0.7;
+  pointer-events: none;
 }
 
 .container p {
-    font-weight: 600;
+  font-weight: 600;
 }
 
-
 .icon {
-    width: auto;
+  width: auto;
+}
+
+.spinner {
+  width: 1.2em;
+  height: 1.2em;
+  border: 2.5px solid #959595;
+  border-top: 2.5px solid white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
