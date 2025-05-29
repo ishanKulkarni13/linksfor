@@ -12,7 +12,9 @@ import { useTreeUID } from "@/hooks/treeUID";
 import { toast } from "sonner";
 import axios from "axios";
 import Link from "next/link";
-import SelectTreePopup from "./selectTreePopup/selectTreePopup";
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle } from "@/components/ui/drawer";
+import { SelectTreeContent } from "./selectTreePopup/selectTreeContent";
 import useWindowResize from "@/hooks/useWindowSize";
 import useHandelReselectTree from "@/hooks/handelReselectTree";
 
@@ -22,6 +24,7 @@ export default function SelectTree() {
   const [selectedTreeProfile, setSelectedTreeProfile] = useState();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const { redirectToSelectTree } = useHandelReselectTree();
+
 
   function onSwitchTreeButtonCLick() {
     setIsPopupOpen(true);
@@ -57,13 +60,14 @@ export default function SelectTree() {
     }
   };
 
-  const onSwitchTreeCLick = () => {};
-
   useEffect(() => {
     if (treeUID) {
       getTreeProfile();
     }
   }, [treeUID]);
+
+  // Responsive: use Drawer for mobile, Dialog for desktop
+  const isMobile = width < 768;
 
   return (
     <div className={styles.container}>
@@ -73,56 +77,121 @@ export default function SelectTree() {
         </div>
       ) : (
         <>
-          <button
-            onClick={onSwitchTreeButtonCLick}
-            className={styles.selectedTreeContainer}
-          >
-            <div className={styles.selectedTreeProfileContainer}>
-              <div className={styles.selectedTreeImageContainer}>
-                {selectedTreeProfile.treePicture &&
-                selectedTreeProfile.treePicture.URL ? (
-                  <>
-                    <span>Loading</span>
-                    <Image
-                      fill={true}
-                      className={styles.profileImage}
-                      src={`${selectedTreeProfile.treePicture.URL}`}
-                      alt="Tree Image"
-                    />
-                  </>
-                ) : (
-                  <span>NA</span>
-                )}
-              </div>
-              <div className={styles.selectedTreeTextContainer}>
-                <h1 className={styles.selectedTreeName}>
-                  {selectedTreeProfile.treeName}
-                </h1>
-                <p className={styles.selectedTreeUID}>
-                  {selectedTreeProfile.UID}
-                </p>
-              </div>
-            </div>
-
-            <div className={styles.switchTree}>
-              {width < 540 ? (
-                <FontAwesomeIcon
-                  className={styles.changeIcon}
-                  icon={faRepeat}
+          {isMobile ? (
+            <Drawer open={isPopupOpen} onOpenChange={setIsPopupOpen}>
+              <DrawerTrigger asChild>
+                <button
+                  onClick={onSwitchTreeButtonCLick}
+                  className={styles.selectedTreeContainer}
+                >
+                  <div className={styles.selectedTreeProfileContainer}>
+                    <div className={styles.selectedTreeImageContainer}>
+                      {selectedTreeProfile.treePicture &&
+                      selectedTreeProfile.treePicture.URL ? (
+                        <>
+                          <span>Loading</span>
+                          <Image
+                            fill={true}
+                            className={styles.profileImage}
+                            src={`${selectedTreeProfile.treePicture.URL}`}
+                            alt="Tree Image"
+                          />
+                        </>
+                      ) : (
+                        <span>NA</span>
+                      )}
+                    </div>
+                    <div className={styles.selectedTreeTextContainer}>
+                      <h1 className={styles.selectedTreeName}>
+                        {selectedTreeProfile.treeName}
+                      </h1>
+                      <p className={styles.selectedTreeUID}>
+                        {selectedTreeProfile.UID}
+                      </p>
+                    </div>
+                  </div>
+                  <div className={styles.switchTree}>
+                    {width < 540 ? (
+                      <FontAwesomeIcon
+                        className={styles.changeIcon}
+                        icon={faRepeat}
+                      />
+                    ) : (
+                      <p className={styles.changeIcon}>Switch Tree</p>
+                    )}
+                  </div>
+                </button>
+              </DrawerTrigger>
+              <DrawerContent>
+                <DrawerHeader>
+                  <DrawerTitle>Select tree</DrawerTitle>
+                </DrawerHeader>
+                <SelectTreeContent
+                  open={isPopupOpen}
+                  setOpen={setIsPopupOpen}
+                  selectedTreeProfile={selectedTreeProfile}
+                  setSelectedTreeProfile={setSelectedTreeProfile}
                 />
-              ) : (
-                <p className={styles.changeIcon}>Switch Tree</p>
-              )}
-            </div>
-          </button>
-          
-            <SelectTreePopup
-              selectedTreeProfile={selectedTreeProfile}
-              setSelectedTreeProfile={setSelectedTreeProfile}
-              open={isPopupOpen}
-              setOpen={setIsPopupOpen}
-            />
-          
+              </DrawerContent>
+            </Drawer>
+          ) : (
+            <Dialog open={isPopupOpen} onOpenChange={setIsPopupOpen}>
+              <DialogTrigger asChild>
+                <button
+                  onClick={onSwitchTreeButtonCLick}
+                  className={styles.selectedTreeContainer}
+                >
+                  <div className={styles.selectedTreeProfileContainer}>
+                    <div className={styles.selectedTreeImageContainer}>
+                      {selectedTreeProfile.treePicture &&
+                      selectedTreeProfile.treePicture.URL ? (
+                        <>
+                          <span>Loading</span>
+                          <Image
+                            fill={true}
+                            className={styles.profileImage}
+                            src={`${selectedTreeProfile.treePicture.URL}`}
+                            alt="Tree Image"
+                          />
+                        </>
+                      ) : (
+                        <span>NA</span>
+                      )}
+                    </div>
+                    <div className={styles.selectedTreeTextContainer}>
+                      <h1 className={styles.selectedTreeName}>
+                        {selectedTreeProfile.treeName}
+                      </h1>
+                      <p className={styles.selectedTreeUID}>
+                        {selectedTreeProfile.UID}
+                      </p>
+                    </div>
+                  </div>
+                  <div className={styles.switchTree}>
+                    {width < 540 ? (
+                      <FontAwesomeIcon
+                        className={styles.changeIcon}
+                        icon={faRepeat}y
+                      />
+                    ) : (
+                      <p className={styles.changeIcon}>Switch Tree</p>
+                    )}
+                  </div>
+                </button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Select tree</DialogTitle>
+                </DialogHeader>
+                <SelectTreeContent
+                  open={isPopupOpen}
+                  setOpen={setIsPopupOpen}
+                  selectedTreeProfile={selectedTreeProfile}
+                  setSelectedTreeProfile={setSelectedTreeProfile}
+                />
+              </DialogContent>
+            </Dialog>
+          )}
         </>
       )}
 

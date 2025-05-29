@@ -127,7 +127,7 @@ export function ShareTreeButton({ type }) {
         </DrawerTrigger>
         <DrawerContent>
           <DrawerHeader>
-            <DrawerTitle>Edit profile</DrawerTitle>
+            <DrawerTitle>Shere Tree</DrawerTitle>
             
           </DrawerHeader>
           <ShareTreeContent />
@@ -149,10 +149,10 @@ export function ShareTreeButton({ type }) {
       </DialogTrigger>
       <DialogContent >
         <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
-          <DialogDescription>
+          <DialogTitle>Share Tree</DialogTitle>
+          {/* <DialogDescription>
             Make changes to your profile here. Click save when you re done.
-          </DialogDescription>
+          </DialogDescription> */}
         </DialogHeader>
         <ShareTreeContent />
       </DialogContent>

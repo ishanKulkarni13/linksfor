@@ -13,7 +13,6 @@
   align-items: stretch;
   justify-content: center;
   width: 100%;
-  border: 3px solid pink; 
 }
 
 .optionContent {
@@ -177,9 +176,7 @@
   box-shadow: none;
   padding: 0;
   margin: 0;
-
   width: 100%;
-  /* border: 3px solid teal !important; */
 }
 .cropperWrapper {
   border-radius: 16px;
