@@ -43,7 +43,7 @@
 
 .createTreeButton {
     background-color: var(--color-primary);
-    color: var(--color-text-contrast-main);
+    color: var(--color-text-contrast-primary);
     padding: 10px 15px;
     border-radius: 50px;
     margin: auto;

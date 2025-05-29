@@ -81,7 +81,11 @@ export function SelectTreeContent({
   return (
     <div
       className={styles.treesContainer}
-      style={{ height: isLoading ? "20vh" : `${trees.length * 90 + 8}px` }}
+      style={{
+        height: isLoading ? "20vh" : `${trees.length * 90 + 8}px`,
+        overflowY: isLoading ? "hidden" : "auto",
+        overflowX: "hidden",
+      }}
     >
       {isLoading ? (
         <>

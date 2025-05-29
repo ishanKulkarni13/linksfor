@@ -1,9 +1,11 @@
 .treesContainer {
     padding: 3px 7px 10px 3px;
     /* !!!!!!! height is dynamically change using style in jsx */
-    max-height: fit-content;
+    /* max-height: fit-content; */
+    max-height: 80dvh;
     /* border: 2px solid rebeccapurple; */
     transition: height .5s ease-out;
+    /* background-color: red; */
 }
 
 
