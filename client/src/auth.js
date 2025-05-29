@@ -4,7 +4,6 @@ import CredentialProvider from "next-auth/providers/credentials"
 import { connectToDB } from "./lib/DB/connectDB";
 import { User } from "./lib/DB/models/user";
 import { Tree } from "./lib/DB/models/tree";
-
 export const { handlers, signIn, signOut, auth } = NextAuth({
     providers: [
         GoogleProvider({

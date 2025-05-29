@@ -61,7 +61,7 @@ export default function EditTreePicture({
   return (
     <div className={styles.profileImageEditContainer}>
       <div className={styles.profileImageContainer}>
-        {treeProfile.treePicture.URL ? (
+        {treeProfile.treePicture  && treeProfile.treePicture.URL ? (
           <>
             <span>Loading...</span>
             <Image

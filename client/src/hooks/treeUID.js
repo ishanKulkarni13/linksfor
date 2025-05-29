@@ -54,7 +54,7 @@ export const useTreeUID = () => {
                         toast.error(`gg${response.message}`)
                         if (statusCode === 404 || statusCode === 400) {
                             removeItem()
-                            return push("/admin/selectTree?removeSelectedTree")
+                            return push("/admin/select-tree?removeSelectedTree")
                         } 
                         console.log("can't get treeUID", response.message);
                     }

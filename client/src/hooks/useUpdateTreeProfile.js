@@ -43,7 +43,7 @@ const useUpdateTreeProfile = (treeUID) => {
                 if (error.response.status === 404 || error.response.status === 400) {
                     console.log(error.response);
                     removeItem();
-                    return push("/admin/selectTree?removeSelectedTree");
+                    return push("/admin/select-tree?removeSelectedTree");
                 }
             } else if (error.request) {
                 return { error: { message: `Error occurred` } }

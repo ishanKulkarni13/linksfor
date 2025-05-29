@@ -12,6 +12,10 @@ export const POST = async (req, { params }) => {
     try {
         let { treeName, treeBio, profilePicturePublicUrl, selectedThemeID, treeProfileLayout } = await req.json();
 
+        console.log("treeName=", treeName);
+        console.log("treeBio=", treeBio);
+        
+
         if (!treeName && !treeBio && !profilePicturePublicUrl && !selectedThemeID && !treeProfileLayout) {
             return NextResponse.json({success: false, message: "Nothing to change" },{status: 500})
         }
@@ -47,13 +51,17 @@ export const POST = async (req, { params }) => {
             }
 
             await tree.save();
-            return NextResponse.json({success: true, treeProfile: { treeBio, treeName, profilePicturePublicUrl: tree.treePicture.URL,  } })
+            return NextResponse.json({success: true, treeProfile: { treeBio: tree.treeBio, treeName: tree.treeName , profilePicturePublicUrl: tree.treePicture.URL,  } })
         } else {
-            return NextResponse.json({success: false, message: "Unautherised access to edit tree"},{status: 401})
+            return NextResponse.json({success: false, treeBio: tree.treeBio, treeName: tree.treeName, message: "Unautherised access to edit tree"},{status: 401})
         }
         
     } catch (error) {
         console.log(error);
-        return NextResponse.json({success: false, message: error.message },{status: 500})
+        if (error.name === 'ValidationError') {
+            return NextResponse.json({success: false, message: error.message },{status: 400})
+        }
+        
+        return NextResponse.json({success: false,  message: error.message },{status: 500})
     }
 }

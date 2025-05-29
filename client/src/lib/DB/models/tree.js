@@ -49,7 +49,7 @@ const treeSchema = mongoose.Schema({
     },
     treeBio: {
         type: String,
-        minLength: [2, "Cannot save treeBio, bio sould be at least 2 caracters long"],
+        // minLength: [2, "Cannot save treeBio, bio sould be at least 2 caracters long"], // no nedd of this requirement 
         maxLength: [25, "Cannot save treeBio, bio sould be at most 25 caracters long"],
     },
     treeDescription: { // for AI chat bot 
