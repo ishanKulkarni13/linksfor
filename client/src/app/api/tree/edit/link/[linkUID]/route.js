@@ -5,9 +5,9 @@ import { NextResponse } from "next/server";
 
 export const POST = async (req, { params }) => {
     let { URL, title, thumbnailURL, layout, linkUID , treeUID} = await req.json();
-    if (!(URL) && !(title) && !(thumbnailURL) && !(layout)) {
-        return NextResponse.json({ success: false, message:  "Nothing to change" }, { status: 500 })
-    }
+    // if (!(URL) && !(title) && !(thumbnailURL) && !(layout)) {
+    //     return NextResponse.json({ success: false, message:  "Nothing to change" }, { status: 500 })
+    // }
     if (!linkUID) {
         return NextResponse.json({ success: false, message: "linkUID not provided" }, { status: 401 })
         
@@ -43,8 +43,9 @@ export const POST = async (req, { params }) => {
             link.title = title;
         }
 
-        if(thumbnailURL){
-            link.thumbnail.URL = thumbnailURL
+        // Fix: allow empty string to remove thumbnail
+        if (typeof thumbnailURL === "string") {
+            link.thumbnail.URL = thumbnailURL;
         }
 
         if(layout){

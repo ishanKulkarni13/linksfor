@@ -12,11 +12,11 @@ export const POST = async (req, { params }) => {
     try {
         let { treeName, treeBio, profilePicturePublicUrl, selectedThemeID, treeProfileLayout } = await req.json();
 
-        console.log("treeName=", treeName);
-        console.log("treeBio=", treeBio);
         
 
-        if (!treeName && !treeBio && !profilePicturePublicUrl && !selectedThemeID && !treeProfileLayout) {
+        // Fix: allow empty string for profilePicturePublicUrl
+        const hasProfilePictureUpdate = typeof profilePicturePublicUrl === "string";
+        if (!treeName && !treeBio && !hasProfilePictureUpdate && !selectedThemeID && !treeProfileLayout) {
             return NextResponse.json({success: false, message: "Nothing to change" },{status: 500})
         }
         const session = await auth()
@@ -37,8 +37,9 @@ export const POST = async (req, { params }) => {
                 tree.treeBio = treeBio
             }
 
-            if(profilePicturePublicUrl){
-                tree.treePicture.URL = profilePicturePublicUrl
+            // Fix: allow empty string to remove profile picture
+            if (hasProfilePictureUpdate) {
+                tree.treePicture.URL = profilePicturePublicUrl;
             }
 
             if(selectedThemeID){
