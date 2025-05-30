@@ -5,54 +5,49 @@ import { NextResponse } from "next/server";
 export const POST = async (req, { params }) => {
     const { treeUID } = params;
     if (!treeUID) {
-        return NextResponse.json({ success: false, message: "treeUID not provided"}, { status: 500 })
+        return NextResponse.json({ success: false, message: "treeUID not provided"}, { status: 400 })
     } 
     
     
     try {
         let { treeName, treeBio, profilePicturePublicUrl, selectedThemeID, treeProfileLayout } = await req.json();
 
-        
-
-        // Fix: allow empty string for profilePicturePublicUrl
         const hasProfilePictureUpdate = typeof profilePicturePublicUrl === "string";
         if (!treeName && !treeBio && !hasProfilePictureUpdate && !selectedThemeID && !treeProfileLayout) {
-            return NextResponse.json({success: false, message: "Nothing to change" },{status: 500})
+            return NextResponse.json({success: false, message: "Nothing to change" },{status: 400})
         }
         const session = await auth()
         const userID = session.user.id
         
         let tree = await Tree.findOne({ UID: treeUID });
         if (!tree) {
-            return NextResponse.json({ success: false, message: 'Tree not found'}, { status: 400 })
+            return NextResponse.json({ success: false, message: 'Tree not found'}, { status: 404 })
         };
         
         if (tree.owner.equals(userID)) {
             
-            if (treeName) {
+            if (typeof treeName === "string") {
                 tree.treeName = treeName
             }
             
-            if (treeBio) {
+            if (typeof treeBio === "string") {
                 tree.treeBio = treeBio
             }
 
-            // Fix: allow empty string to remove profile picture
             if (hasProfilePictureUpdate) {
                 tree.treePicture.URL = profilePicturePublicUrl;
             }
 
-            if(selectedThemeID){
-                // validatin cheakes.... 
+            if(typeof selectedThemeID === "number"){
                 tree.theme.selectedTheme.themeID = selectedThemeID
             }
 
-            if(treeProfileLayout){
+            if(typeof treeProfileLayout === "string"){
                 tree.treeProfileLayout  = treeProfileLayout;
             }
 
             await tree.save();
-            return NextResponse.json({success: true, treeProfile: { treeBio: tree.treeBio, treeName: tree.treeName , profilePicturePublicUrl: tree.treePicture.URL,  } })
+            return NextResponse.json({success: true, treeProfile: { treeBio: tree.treeBio, treeName: tree.treeName , profilePicturePublicUrl: tree.treePicture.URL,  } }, {status: 200})
         } else {
             return NextResponse.json({success: false, treeBio: tree.treeBio, treeName: tree.treeName, message: "Unautherised access to edit tree"},{status: 401})
         }

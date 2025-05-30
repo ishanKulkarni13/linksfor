@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 
 export const POST = async (req, {params}) => {
     let { URL, title } = await req.json();
-    if(!URL || !title){  return NextResponse.json({ success: false, message: "the required fields are not provided" }, {status:500}) }
+    if (!URL || !title) { return NextResponse.json({ success: false, message: "the required fields are not provided" }, { status: 400 }) }
     let treeUID =  params.treeUID
     let updatedLinkObject = { type: "link", title, URL };
     
@@ -16,11 +16,10 @@ export const POST = async (req, {params}) => {
         await connectToDB()
         // let isTreeOfUser = await Tree
         let UpdatedTree = await Tree.findOneAndUpdate({ UID: treeUID, owner: userID }, { $push: { 'treeContent.links': { $each: [updatedLinkObject], $position: 0 } } }, { new: true });
-        if (!UpdatedTree) { return next(new ErrorHandelar('Tree not found')) }
-        return NextResponse.json({ success: true, links: UpdatedTree.treeContent.links })
-
+        if (!UpdatedTree) { return NextResponse.json({ success: false, message: 'Tree not found' }, { status: 404 }) }
+        return NextResponse.json({ success: true, links: UpdatedTree.treeContent.links }, { status: 200 })
     } catch (error) {
         console.log(error);
-        return NextResponse.json({ success: false, message: error.message }, {status:500})
+        return NextResponse.json({ success: false, message: error.message }, { status: 500 })
     }
 }

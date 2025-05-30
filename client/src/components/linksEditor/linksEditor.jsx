@@ -40,9 +40,8 @@ export default function LinksEditor() {
         //no error in fetch and success is false(from server)
         setLinks([]);
         toast.error(`Link not added: ${response.message}`);
-        console.log(`code in updateLinks`, statusCode);
-        if (statusCode === 400 || statusCode === 401) {
-          return redirectToSelectTree();
+        if (statusCode === 400 || statusCode === 401 || statusCode === 404) {
+          return redirectToSelectTree(); // recheak
         }
       }
     }

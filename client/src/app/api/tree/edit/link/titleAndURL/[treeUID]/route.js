@@ -5,16 +5,15 @@ import { NextResponse } from "next/server";
 
 export const POST = async (req, { params }) => {
     let { URL, title, linkUID } = await req.json();
-    if (!(URL) || !(title)) {
-        return NextResponse.json({ success: false, message:  "URL or title not provided, nothing to change" }, { status: 500 })
+    if (!URL || !title) {
+        return NextResponse.json({ success: false, message: "URL or title not provided, nothing to change" }, { status: 400 })
     }
     if (!linkUID) {
-        return NextResponse.json({ success: false, message: "linkUID not provided" }, { status: 500 })
-        
+        return NextResponse.json({ success: false, message: "linkUID not provided" }, { status: 400 })
     }
-    const {treeUID} = params;
+    const { treeUID } = params;
     if (!treeUID) {
-        return NextResponse.json({ success: false, message: "treeUID not provided" }, { status: 500 })
+        return NextResponse.json({ success: false, message: "treeUID not provided" }, { status: 400 })
     }
     // console.log(URL, title, linkUID, treeUID)
     try {
@@ -25,7 +24,7 @@ export const POST = async (req, { params }) => {
         const tree = await Tree.findOne({ UID: treeUID, owner: userID });
         
         if (!tree) {
-            return NextResponse.json({ success: false, message: "Tree Not Found"  }, { status: 404 })
+            return NextResponse.json({ success: false, message: "Tree Not Found" }, { status: 404 })
         }
         
         // Find the link within the tree
@@ -46,9 +45,9 @@ export const POST = async (req, { params }) => {
         await tree.save();
         
         // Send the updated link back in the response
-        return NextResponse.json({success: true, link: link  })
+        return NextResponse.json({ success: true, link: link }, { status: 200 })
     } catch (error) {
         console.log(error);
-        return NextResponse.json({success: false, message: error.message  } , {status:500})
+        return NextResponse.json({ success: false, message: error.message }, { status: 500 })
     }
 }

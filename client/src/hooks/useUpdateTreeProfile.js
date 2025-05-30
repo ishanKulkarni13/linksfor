@@ -40,14 +40,15 @@ const useUpdateTreeProfile = (treeUID) => {
             console.log(error);
             if (error.response) {
                 toast.error(error.response.data.message);
-                if (error.response.status === 404 || error.response.status === 400) {
-                    console.log(error.response);
+                if (error.response.status === 404 || error.response.status === 400 || error.response.status === 401) {
                     removeItem();
                     return push("/admin/select-tree?removeSelectedTree");
                 }
             } else if (error.request) {
-                return { error: { message: `Error occurred` } }
+                toast.error("Network error occurred");
+                return { error: { message: `Network error occurred` } }
             } else {
+                toast.error(`Some error occurred: ${error.message}`);
                 return { error: { message: `Some error occurred: ${error.message}` } }
             }
         }

@@ -155,7 +155,7 @@ userSchema.pre("save", async function (next) {
                     console.log('erroe in db saving');
                 }
             }
-            this.username = tempUserName.toLowerCase();
+            // this.username = tempUserName.toLowerCase();
             console.log(this.username, tempUserName);
         }
 

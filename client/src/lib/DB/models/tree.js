@@ -50,7 +50,7 @@ const treeSchema = mongoose.Schema({
     treeBio: {
         type: String,
         // minLength: [2, "Cannot save treeBio, bio sould be at least 2 caracters long"], // no nedd of this requirement 
-        maxLength: [25, "Cannot save treeBio, bio sould be at most 25 caracters long"],
+        maxLength: [100, "Cannot save treeBio, bio sould be at most 25 caracters long"],
     },
     treeDescription: { // for AI chat bot 
         type: String,
@@ -146,7 +146,7 @@ const treeSchema = mongoose.Schema({
                 },
                 color: {
                     type: String,
-                    match: [/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/, 'Invalid HEX color format for background color.']
+                    match: [/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/, 'Invalid HEX color format for background color.'] // update this to allow hsla
                 },
                 gradient: {
                     direction: {

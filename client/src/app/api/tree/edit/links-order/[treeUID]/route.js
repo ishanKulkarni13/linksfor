@@ -7,12 +7,11 @@ export const POST = async (req,{params}) => {
     const userID = session.user.id;
     let {treeUID} = params
     if (!treeUID) {
-        return NextResponse.json({ sucess: false, message:"treeUID not provided"}, {status:500})
+        return NextResponse.json({ success: false, message: "treeUID not provided" }, { status: 400 })
     } 
-
-    let {linksUIDArray} = await req.json();
+    let { linksUIDArray } = await req.json();
     if (!linksUIDArray) {
-        return NextResponse.json({ sucess: false, message:"linksUIDArray not provided"}, {status:500})
+        return NextResponse.json({ success: false, message: "linksUIDArray not provided" }, { status: 400 })
     }
  
     try {
@@ -20,7 +19,7 @@ export const POST = async (req,{params}) => {
         const tree = await Tree.findOne({ UID: treeUID, owner: userID });
 
         if (!tree) {
-            return NextResponse.json({ sucess: false, message:"Tree Not Found"}, {status:404})
+            return NextResponse.json({ success: false, message: "Tree Not Found" }, { status: 404 })
         }
 
         // Map through the linksUIDArray to update the order of links in treeContent.links
@@ -34,9 +33,9 @@ export const POST = async (req,{params}) => {
 
         await tree.save();
 
-        return NextResponse.json({ success: true, links: tree.treeContent.links });
+        return NextResponse.json({ success: true, links: tree.treeContent.links }, { status: 200 });
     } catch (error) {
         console.log(error);
-        return NextResponse.json({ sucess: false, message:error.message }, {status:500})
+        return NextResponse.json({ success: false, message: error.message }, { status: 500 })
     }
 }

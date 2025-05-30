@@ -64,7 +64,6 @@ export default function EditTreeTitleAndBio({ treeUID, treeProfile }) {
       if (error.response) {
         // if server responded
         toast.error(error.response.data.message);
-        console.log(error.response.data);
         setWarning(error.response.data.message);
 
         if (
@@ -72,15 +71,13 @@ export default function EditTreeTitleAndBio({ treeUID, treeProfile }) {
           error.response.status === 400 ||
           error.response.status === 401
         ) {
-          console.log(error.response);
           removeItem();
           return push("/admin/select-tree?removeSelectedTree");
         }
       } else if (error.request) {
-        //req was made but go no response
-        toast.error(`error occured`);
+        toast.error(`Network error occurred`);
       } else {
-        toast.error(`some error occured: ${error.message}`);
+        toast.error(`Some error occurred: ${error.message}`);
       }
     }
   };
