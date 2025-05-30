@@ -1,7 +1,21 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt"
+import { log } from "console";
 
 // { $regex: new RegExp(username, "i") }
+
+// Reusable type for user document in hooks
+export type IUserDoc = mongoose.Document & {
+  name?: string;
+  username?: string;
+  password?: string;
+  googleOAuthID?: string;
+  _id?: any;
+  isModified: (field: string) => boolean;
+  isNew: boolean;
+};
+
+export type IUserModel = mongoose.Model<IUserDoc>;
 
 
 const userSchema = new mongoose.Schema({
@@ -134,35 +148,24 @@ const userSchema = new mongoose.Schema({
 
 
 
-// Reusable type for user document in hooks
-export type IUserDoc = mongoose.Document & {
-  name?: string;
-  username?: string;
-  password?: string;
-  googleOAuthID?: string;
-  _id?: any;
-  isModified: (field: string) => boolean;
-  isNew: boolean;
-};
 
 userSchema.pre("save", async function (this: IUserDoc, next) {
+    console.log("pre save hook called");
     try {
-        // Check if googleOAuthID is provided and validate uniqueness
+        const UserModel = this.constructor as IUserModel;
         if (this.isModified && this.isModified("googleOAuthID") && this.googleOAuthID && this.isNew) {
-            const isGoogleOAuthIDUserExist = await mongoose.model("User").findOne({ googleOAuthID: this.googleOAuthID });
-
+            const isGoogleOAuthIDUserExist = await UserModel.findOne({ googleOAuthID: this.googleOAuthID });
             if (isGoogleOAuthIDUserExist && isGoogleOAuthIDUserExist._id && this._id && isGoogleOAuthIDUserExist._id.toString() !== this._id.toString()) {
                console.log("This google id is already used to regester")
             }
         }
-
         if (!this.username && this.name) {
             let tempUserName = this.name.split(' ')[0].toLowerCase().replace(/\s+/g, '_');
-            let isUsernameExists = await mongoose.model("User").exists({ username: { $regex: new RegExp(tempUserName, "i") } });
+            let isUsernameExists = await UserModel.exists({ username: { $regex: new RegExp(tempUserName, "i") } });
             let count = 0;
             while (isUsernameExists) {
                 tempUserName = `${this.name.split(' ')[0].toLowerCase().replace(/\s+/g, '_')}_${Math.floor(Math.random() * 1000)}${count}`;
-                isUsernameExists = await mongoose.model("User").exists({ username: { $regex: new RegExp(tempUserName, "i") } });
+                isUsernameExists = await UserModel.exists({ username: { $regex: new RegExp(tempUserName, "i") } });
                 count++;
                 if(count>10){
                     console.log('erroe in db saving');
@@ -171,44 +174,13 @@ userSchema.pre("save", async function (this: IUserDoc, next) {
             // this.username = tempUserName.toLowerCase();
             console.log(this.username, tempUserName);
         }
-
-        // Validate name format and length
-        // if (this.isModified("name") || this.isNew) {
-        //     console.log('this.name is:',this.name);
-        //     const isValidName = /^[a-zA-Z]+(?:[ a-zA-Z0-9_.-]+){0,2}$/.test(this.name);
-        //     if (!isValidName || this.name.length > 30) {
-        //         return next(new ErrorHandler("Invalid name format or length in DB"));
-        //     }
-        // }
-
-
-        // Validate email format
-        // if (this.isModified("email") || this.isNew) {
-        //     const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email);
-        //     if (!isValidEmail) {
-        //         return console.log(" error from DB Invalid email format");
-        //     }
-        //     this.email = this.email.toLowerCase();
-        // }
-
-        // Validate username format
-        // if (this.isModified("username") || this.isNew) {
-        //     const isValidUsername = /^[a-zA-Z][a-zA-Z0-9_.-]{2,29}$/.test(this.username);
-        //     if (!isValidUsername) {
-        //         return next(new ErrorHandler("Invalid username format"));
-        //     }
-        //     this.username = this.username.toLowerCase();
-        // }
-
-
-        // Hash the password if it exists and is modified or if it's a new user
         if (this.isModified && (this.isModified("password") || this.isNew) && this.password && typeof this.password === 'string') {
             this.password = await bcrypt.hash(this.password, 10);
         }
-
         next();
     } catch (error) {
         console.log(error);
+        next(error instanceof Error ? error : undefined);
     }
 })
 
@@ -224,4 +196,4 @@ userSchema.methods.isValidPassword = async function (password: string, user: any
 
 
 
-export const User =  mongoose.models?.User ||  mongoose.model("User", userSchema);
+export const User = mongoose.models?.User as IUserModel || mongoose.model<IUserDoc, IUserModel>("User", userSchema);
