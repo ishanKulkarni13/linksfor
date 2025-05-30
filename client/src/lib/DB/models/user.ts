@@ -17,11 +17,13 @@ const userSchema = new mongoose.Schema({
         minLength: [3, "username must be of at least 3 characters"],
         maxLength: [25, "username can be of at most 25 characters"],
         validate: {
-            validator: function(v) {
+            validator: function(this: { username: string }, v: string) {
                 // Check for whitespace
                 return !/\s/.test(v);
             },
-            message: props => `${props.value} should not contain spaces`
+            message: function(this: { username: string }, props: { value: string }) {
+                return `${props.value} should not contain spaces`;
+            }
         },
         // required: [true, "Username is required"] // if username is not provide it is sutomatically generated
     },
@@ -69,7 +71,7 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: [function () { return this.authMethod === 'email' }, "Password is required when loggin with email"],
+        required: [function (this: { authMethod: string }) { return this.authMethod === 'email'; }, "Password is required when loggin with email"],
         minLength: [6, "Password must be of at least 6 characters"],
         select: false
     },
@@ -132,24 +134,35 @@ const userSchema = new mongoose.Schema({
 
 
 
-userSchema.pre("save", async function (next) {
+// Reusable type for user document in hooks
+export type IUserDoc = mongoose.Document & {
+  name?: string;
+  username?: string;
+  password?: string;
+  googleOAuthID?: string;
+  _id?: any;
+  isModified: (field: string) => boolean;
+  isNew: boolean;
+};
+
+userSchema.pre("save", async function (this: IUserDoc, next) {
     try {
         // Check if googleOAuthID is provided and validate uniqueness
-        if (this.isModified("googleOAuthID") && this.googleOAuthID && this.isNew) {
+        if (this.isModified && this.isModified("googleOAuthID") && this.googleOAuthID && this.isNew) {
             const isGoogleOAuthIDUserExist = await mongoose.model("User").findOne({ googleOAuthID: this.googleOAuthID });
 
-            if (isGoogleOAuthIDUserExist && isGoogleOAuthIDUserExist._id.toString() !== this._id.toString()) {
+            if (isGoogleOAuthIDUserExist && isGoogleOAuthIDUserExist._id && this._id && isGoogleOAuthIDUserExist._id.toString() !== this._id.toString()) {
                console.log("This google id is already used to regester")
             }
         }
 
-        if (!this.username) {
+        if (!this.username && this.name) {
             let tempUserName = this.name.split(' ')[0].toLowerCase().replace(/\s+/g, '_');
-            let isUsernameExists = await User.exists({ username: { $regex: new RegExp(tempUserName, "i") } });
+            let isUsernameExists = await mongoose.model("User").exists({ username: { $regex: new RegExp(tempUserName, "i") } });
             let count = 0;
             while (isUsernameExists) {
                 tempUserName = `${this.name.split(' ')[0].toLowerCase().replace(/\s+/g, '_')}_${Math.floor(Math.random() * 1000)}${count}`;
-                isUsernameExists = await User.exists({ username: { $regex: new RegExp(tempUserName, "i") } });
+                isUsernameExists = await mongoose.model("User").exists({ username: { $regex: new RegExp(tempUserName, "i") } });
                 count++;
                 if(count>10){
                     console.log('erroe in db saving');
@@ -189,7 +202,7 @@ userSchema.pre("save", async function (next) {
 
 
         // Hash the password if it exists and is modified or if it's a new user
-        if ((this.isModified("password") || this.isNew) && this.password) {
+        if (this.isModified && (this.isModified("password") || this.isNew) && this.password && typeof this.password === 'string') {
             this.password = await bcrypt.hash(this.password, 10);
         }
 
@@ -199,7 +212,7 @@ userSchema.pre("save", async function (next) {
     }
 })
 
-userSchema.methods.isValidPassword = async function (password, user) {
+userSchema.methods.isValidPassword = async function (password: string, user: any) {
     try {
         return await bcrypt.compare(password, user.password);
     } catch (error) {

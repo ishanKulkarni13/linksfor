@@ -6,21 +6,6 @@ import type React from "react";
 import { treeSchema } from "@/lib/DB/models/tree";
 import type mongoose from "mongoose";
 
-export type ButtonProps = {
-  children: React.ReactNode;
-  onClick?: () => void;
-};
-
-// Example: Tree profile type
-export interface TreeProfile {
-  UID: string;
-  treeName: string;
-  treeBio: string;
-  treePicture?: {
-    URL: string;
-  };
-  // Add more fields as needed
-}
 
 export type TreeType = mongoose.InferSchemaType<typeof treeSchema>;
 
