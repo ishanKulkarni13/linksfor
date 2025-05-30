@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
-import bcrypt from "bcryptjs"
-import Tree from "./tree.js"
+import bcrypt from "bcrypt"
 
 // { $regex: new RegExp(username, "i") }
 
@@ -137,7 +136,8 @@ userSchema.pre("save", async function (next) {
     try {
         // Check if googleOAuthID is provided and validate uniqueness
         if (this.isModified("googleOAuthID") && this.googleOAuthID && this.isNew) {
-            const isGoogleOAuthIDUserExist = await User.findOne({ googleOAuthID: this.googleOAuthID });
+            const isGoogleOAuthIDUserExist = await mongoose.model("User").findOne({ googleOAuthID: this.googleOAuthID });
+
             if (isGoogleOAuthIDUserExist && isGoogleOAuthIDUserExist._id.toString() !== this._id.toString()) {
                console.log("This google id is already used to regester")
             }
