@@ -38,7 +38,7 @@ export const POST = async (req, { params }) => {
                 tree.treePicture.URL = profilePicturePublicUrl;
             }
 
-            if(typeof selectedThemeID === "number" || typeof selectedThemeID === "string"){ // revisit this later
+            if(typeof selectedThemeID === "number"){
                 tree.theme.selectedTheme.themeID = selectedThemeID
             }
 

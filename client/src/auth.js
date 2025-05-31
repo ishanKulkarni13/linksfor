@@ -100,8 +100,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                         // if (public_id && url) {
                         //     profilePic = { public_id, URL: url }
                         // }
-                        user = await User.create({ name, email, googleOAuthID: id, authMethod: 'google' });
-            
+                        // user = await User.create({ name, email, googleOAuthID: id, authMethod: 'google' });
+                        user = new User({ name, email, googleOAuthID: id, authMethod: 'google' });
+                        await user.save(); // use this approach as it will run presav hook and create username( if not provided
+
+
                         let tree = await Tree.create({ owner: user._id, treeName: `@${user.name}`, treePicture: { URL: user.profilePic.URL } });
                         await User.findByIdAndUpdate(user._id, { $set: { 'trees.profileDefaultTree': tree._id } });
                     }

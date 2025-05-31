@@ -1,0 +1,24 @@
+.container {
+  margin: 0px var(--margin-x);
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  color: var(--color-text-main);
+}
+
+.social{
+  transition-duration: 0.2;
+}
+
+.social:hover{
+  transform: scale(1.1);
+}
+
+.social svg {
+  color: var(--color-social-icons);
+  height: 2.5rem;
+  width: 2.5rem;
+  /* font-size: 2.5rem; */
+}

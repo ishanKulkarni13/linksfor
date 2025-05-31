@@ -1,0 +1,11 @@
+.container{
+
+    margin: 0px var(--margin-x);
+    display: flex;
+    justify-content:center;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 10px;
+    width: auto;
+}
+
