@@ -64,7 +64,7 @@ export default function EditTreeTheme({ treeUID, treeProfile }) {
                         />
                       </div>
                     </div>
-                    <div className={`${styles.themeName}`}>{theme.name}</div>
+                    <div className={`${styles.themeName}`}>{theme.displayName}</div>
                   </div>
                 </label>
               </div>

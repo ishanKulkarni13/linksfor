@@ -2,14 +2,14 @@ import Socials from "@/components/themes/themeComponents/socials/default/socials
 import Background from "./background/background";
 import Links from "./links/links";
 import Pofile from "./profile/profile";
-import styles from "./skymint.module.css";
+import styles from "./minerialBlue.module.css";
 
 export default function TreeTheme({ tree }) {
   console.log(tree?.theme?.themePreference?.socialIcons?.socialIconsPlacement);
   return (
     <>
     <Background />
-      <main className={`${styles.skyMint}`}>
+      <main className={`${styles.skyMint} ${styles.treeContainer}`}>
 
         <div className={styles.profileContainer}>
           <Pofile

@@ -22,10 +22,16 @@ export const navLinks = [
 
 export const avaibleTreeThemes = [
     {
-        displayName: 'Air-Black',
+        displayName: 'Air Black',
         id: 10000,
         name: "airBlack",
         displayPicture: "https://res.cloudinary.com/kakashib2k/image/upload/v1717148505/LinksFor/important/themes/pictures/nvqkazndfccqksyztfkm.jpg"
+    },
+    {
+        displayName: 'Air White',
+        id: 951111,
+        name: 'minerialBlue',
+        displayPicture: "https://res.cloudinary.com/kakashib2k/image/upload/v1748727064/LinksFor/important/themes/pictures/1d418fb6-7f5b-42ba-840d-7abda6e8c035.png"
     },
 
     {
@@ -47,4 +53,11 @@ export const avaibleTreeThemes = [
         name: 'spray',
         displayPicture: "https://res.cloudinary.com/kakashib2k/image/upload/v1717148506/LinksFor/important/themes/pictures/eltih4qrwjvfr3mz66qs.jpg"
     },
+    {
+        displayName: 'Minerial Blue',
+        id: 941111,
+        name: 'minerialBlue',
+        displayPicture: "https://res.cloudinary.com/kakashib2k/image/upload/v1748725930/LinksFor/important/themes/pictures/8e63a94b-4814-479d-9ba1-6326722110c6.png"
+    },
+
 ]

@@ -1,0 +1,7 @@
+.background {
+  display: none;
+}
+
+body:has(.background) {
+  background: var(--background);
+}

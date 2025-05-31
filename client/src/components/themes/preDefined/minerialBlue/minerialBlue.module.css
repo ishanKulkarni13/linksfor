@@ -1,0 +1,78 @@
+body:has(> .treeContainer) {
+  /* selected the body too */
+  --margin-x: 15px;
+  /* --background: radial-gradient(transparent 34%, #4f46e4 35%, #4f46e4 45%, transparent 46%) 0 0 / 3em 3em repeat,
+  radial-gradient(circle at left, transparent 39%, #4f46e480 40%, #4f46e480 45%, transparent 46%) 0 0 / 3em 3em repeat,
+  radial-gradient(circle at right, transparent 39%, #4f46e480 40%, #4f46e480 45%, transparent 46%) 0 0 / 3em 3em repeat,
+  #ffffff; */
+  --background: rgb(224, 246, 255);  
+  --color-surface-1: hsl(57, 70%, 10%);
+  --color-surface-2: hsl(57, 60%, 15%);
+  --color-surface-3: hsl(57, 50%, 20%);
+
+  --color-link: rgba(0, 0, 0, 0);
+  --color-overlay: hsl(57, 80%, 5%);
+
+  /* Text colors */
+  --color-text-main: black;
+  --color-text-link: var(--color-text-main);
+  --color-social-icons: var(--color-text-main);
+
+  --color-text-header: var(--color-text-main);
+  --color-text-profile: var(--color-text-main);
+  /* Borders */
+  --color-border: rgb(179, 197, 204)
+  --border-surface-floating: 1px solid rgba(255, 255, 255, 0.326);
+  --color-border-muted: hsl(215, 20%, 50%);
+  --border-link: 1px solid rgb(179, 197, 204); 
+  /* Borders Radius */
+  --border-radius-link: 50px;
+  --border-radius-thumbnail: 50px;
+
+  /* Shadows */
+  --shadow-1: 0px 1px 3px rgba(0, 0, 0, 0.24);
+  --shadow-2: 0px 3px 6px rgba(0, 0, 0, 0.32);
+  --shadow-3: 0px 10px 20px rgba(0, 0, 0, 0.48);
+  --shadow-floating: 0px 2px 10px rgba(0, 0, 0, 0.771);
+
+  /* Primary colors */
+  --color-primary: hsl(210, 40%, 98%);
+  --color-primary-light: hsl(210, 40%, 90%);
+  --color-primary-dark: hsl(57, 47.4%, 11.2%);
+  --color-primary-foreground: hsl(57, 47.4%, 11.2%);
+
+  /* Secondary colors */
+  --color-secondary: hsl(217.2, 32.6%, 17.5%);
+  --color-secondary-light: hsl(217.2, 42.6%, 27.5%);
+  --color-secondary-dark: hsl(210, 40%, 96.1%);
+  --color-secondary-foreground: hsl(210, 40%, 98%);
+
+  /* Accent colors */
+  --color-accent: hsl(174, 100%, 50%);
+  --color-accent-foreground: hsl(210, 40%, 98%);
+
+  /* Destructive colors */
+  --color-destructive: hsl(0, 62.8%, 30.6%);
+  --color-destructive-foreground: hsl(210, 40%, 98%);
+}
+
+.treeContainer {
+  margin: 100px 0px;
+}
+
+.treeContentContainer {
+  margin-top: 25px;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-direction: column; /* dynamically set in jsx */
+  gap: 25px;
+}
+
+.linksContainer {
+  margin: 0pc auto;
+  flex: 1;
+  width: 100%;
+  max-width: var(--desktopMainUIContainerMaxWidth);
+}
