@@ -160,6 +160,8 @@ userSchema.pre("save", async function (this: IUserDoc, next) {
             }
         }
         if (!this.username && this.name) {
+            console.log("  username is not provided, generating username from name");
+            
             let tempUserName = this.name.split(' ')[0].toLowerCase().replace(/\s+/g, '_');
             let isUsernameExists = await UserModel.exists({ username: { $regex: new RegExp(tempUserName, "i") } });
             let count = 0;
@@ -171,7 +173,7 @@ userSchema.pre("save", async function (this: IUserDoc, next) {
                     console.log('erroe in db saving');
                 }
             }
-            // this.username = tempUserName.toLowerCase();
+            this.username = tempUserName.toLowerCase();
             console.log(this.username, tempUserName);
         }
         if (this.isModified && (this.isModified("password") || this.isNew) && this.password && typeof this.password === 'string') {

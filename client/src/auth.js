@@ -4,6 +4,7 @@ import CredentialProvider from "next-auth/providers/credentials"
 import { connectToDB } from "./lib/DB/connectDB";
 import { User } from "./lib/DB/models/user";
 import { Tree } from "./lib/DB/models/tree";
+import { log } from "console";
 export const { handlers, signIn, signOut, auth } = NextAuth({
     providers: [
         GoogleProvider({
@@ -25,11 +26,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             authorize: async (credincials) => {
 
                 // let userr = await User.create({ name:'temp', email:"temp@gmail.com" , authMethod:'email', password:'temp123' });
-            
+
                 // let treee = await Tree.create({ owner: userr._id, treeName: `@${userr.name}`, treePicture: { URL: userr.profilePic.URL } });
-                        
+
                 // console.log("custome user created");
-                
+
 
                 let { email, password } = credincials;
 
@@ -69,13 +70,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     //     signIn: "/login"
     // },
     callbacks: {
-        jwt({token, user}){
-            if(user){
+        jwt({ token, user }) {
+            if (user) {
                 token.id = user.id
             }
             return token
         },
-        session({session, token}){
+        session({ session, token }) {
             // console.log(token);
             session.user.id = token.id
             return session
@@ -84,15 +85,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             // { user, account, profile, email }
             if (data.account.provider === 'google') {
                 try {
-                    
+
                     const email = data.user.email
                     const name = data.profile.given_name
-                    const googleProfilePhoto = data.user.image
+                    // const googleProfilePhoto = data.user.image
                     const id = data.user.id
                     await connectToDB();
 
                     // let { provider, id, name, emails, photos } = user;
-                    
+
                     let user = await User.findOne({ email });
                     if (!user) {
                         // let { public_id, url } = await uploadToCloudinary(googleProfilePhoto);
@@ -100,8 +101,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                         // if (public_id && url) {
                         //     profilePic = { public_id, URL: url }
                         // }
-                        user = await User.create({ name, email, googleOAuthID: id, authMethod: 'google' });
-            
+                        // user = await User.create({ name, email, googleOAuthID: id, authMethod: 'google' });
+                        user = new User({ name, email, googleOAuthID: id, authMethod: 'google' });
+                        await user.save(); // use this approach as it will run presav hook and create username( if not provided)
+
+                        console.log("User created with Google OAuth", user._id);
+
+
                         let tree = await Tree.create({ owner: user._id, treeName: `@${user.name}`, treePicture: { URL: user.profilePic.URL } });
                         await User.findByIdAndUpdate(user._id, { $set: { 'trees.profileDefaultTree': tree._id } });
                     }
@@ -114,7 +120,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     throw new AuthError("Error while creating user");
                 }
 
-            } else if (data.account.provider === 'credentials'){
+            } else if (data.account.provider === 'credentials') {
                 return true
             } else {
                 return false
