@@ -17,10 +17,13 @@ export interface IThemeConfig {
   bio?: IThemeComponentConfig;
   linksContainer?: IThemeComponentConfig;
   linkCard?: IThemeComponentConfig;
+  // Add more themeable components here as you create them
   linkThumbnail?: IThemeComponentConfig;
   linkTitle?: IThemeComponentConfig;
   moreMenu?: IThemeComponentConfig;
   headerCard?: IThemeComponentConfig;
+  socialIconsContainer?: IThemeComponentConfig;
+  socialIcon?: IThemeComponentConfig;
   notificationButton?: IThemeComponentConfig;
   // Add more as your system grows
 }
