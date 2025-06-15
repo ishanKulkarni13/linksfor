@@ -176,7 +176,7 @@ export default async function Page() {
                 readOnly
                 defaultValue={user?.email}
               />
-              <Separator className={styles.separator} />
+              <Separator  className={styles.separator} />
               <label
                 className={` ${styles.lable} ${styles.info}`}
                 htmlFor="email"
@@ -189,7 +189,7 @@ export default async function Page() {
             <AccountInfoChangePopupTrigger
               className={`${styles.submit}`}
               changeAccountInfo={changeAccountInfo}
-              user={{ username: user?.username }}
+              user={{ username: (!!user && user.username)? user.username : "NoUsername" }}
               type={"username"}
             >
               Edit

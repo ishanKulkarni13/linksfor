@@ -11,6 +11,27 @@ import { useRouter, useSearchParams } from "next/navigation";
 import AdaptiveDrawer from "@/components/adaptiveDrawer/adaptiveDrawer";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useLocalstorage } from "@/hooks/localStorage";
+import { TreeDocType } from "@/types";
+
+
+// interface TreeType {
+//   UID: string;
+//   treeName: string;
+//   treePicture?: {
+//     URL?: string;
+//     public_id?: string;
+//   };
+//   // Only allow string values for unknown props (if really needed)
+//   [key: string]: string | number | object | undefined;
+// }
+
+
+interface SelectTreeContentProps {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  selectedTreeProfile?: TreeDocType | null;
+  setSelectedTreeProfile?: (tree: TreeDocType) => void;
+}
 
 // Extracted content for reuse
 export function SelectTreeContent({
@@ -18,9 +39,9 @@ export function SelectTreeContent({
   setOpen,
   selectedTreeProfile,
   setSelectedTreeProfile,
-}) {
-  const [isLoading, setIsLoading] = useState(true);
-  const [trees, setTrees] = useState([]);
+}: SelectTreeContentProps) {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [trees, setTrees] = useState<TreeDocType[]>([]);
   const { push } = useRouter();
   const select = useSelectTree();
   const { removeItem } = useLocalstorage("selectedTree");
@@ -38,12 +59,18 @@ export function SelectTreeContent({
 
   const getTrees = async () => {
     try {
-      const res = await axios.get(`/api/tree/admin/trees`, {
+      const res = await axios.get<{ trees: TreeDocType[] }>(`/api/tree/admin/trees`, {
         withCredentials: true,
       });
+      if (!res.data.trees || res.data.trees.length === 0) {
+        toast.error("No trees found");
+        setIsLoading(false);
+        return;
+      };
       setTrees(res.data.trees);
+     
       setIsLoading(false);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       if (error.response) {
         // if server responded
@@ -57,7 +84,7 @@ export function SelectTreeContent({
     }
   };
 
-  const selectTree = async (treeUID) => {
+  const selectTree = async (treeUID: string) => {
     const selectedTree = trees.find((tree) => tree.UID === treeUID);
     if (selectedTree) {
       setSelectedTreeProfile && setSelectedTreeProfile(selectedTree);
@@ -89,28 +116,22 @@ export function SelectTreeContent({
     >
       {isLoading ? (
         <>
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(() => (
-            <>
-              <Skeleton className={`${styles.treeContainer} `}>
-                <Skeleton className={styles.treeProfileContainer}>
-                  <Skeleton className={styles.treeImageContainer}>
-                    <Skeleton
-                      fill={true}
-                      className={styles.profileImage}
-                      alt="Tree Image"
-                    ></Skeleton>
-                  </Skeleton>
-                  <Skeleton className={styles.treeTextContainer}>
-                    <Skeleton
-                      className={`${styles.treeName} h-3 bg-[var(--color-surface-2)] w-32 mb-2`}
-                    ></Skeleton>
-                    <Skeleton
-                      className={`${styles.treeName} h-3 bg-[var(--color-surface-2)] w-40`}
-                    ></Skeleton>
-                  </Skeleton>
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, idx) => (
+            <Skeleton key={idx} className={`${styles.treeContainer} `}>
+              <Skeleton className={styles.treeProfileContainer}>
+                <Skeleton className={styles.treeImageContainer}>
+                  <Skeleton className={styles.profileImage} />
+                </Skeleton>
+                <Skeleton className={styles.treeTextContainer}>
+                  <Skeleton
+                    className={`${styles.treeName} h-3 bg-[var(--color-surface-2)] w-32 mb-2`}
+                  />
+                  <Skeleton
+                    className={`${styles.treeName} h-3 bg-[var(--color-surface-2)] w-40`}
+                  />
                 </Skeleton>
               </Skeleton>
-            </>
+            </Skeleton>
           ))}
         </>
       ) : (
@@ -155,7 +176,7 @@ export function SelectTreeContent({
 }
 
 // Remove AdaptiveDrawer and use only for legacy fallback
-export default function SelectTreePopup(props) {
+export default function SelectTreePopup(props: any) {
   // Legacy fallback, not used in new implementation
   return null;
 }

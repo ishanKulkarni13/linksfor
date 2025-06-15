@@ -6,7 +6,7 @@ import type mongoose from "mongoose";
 import { treeSchema } from "@/lib/DB/models/tree";
 import { userSchema } from "@/lib/DB/models/user";
 
-export type TreeType = mongoose.InferSchemaType<typeof treeSchema>;
+export type TreeDocType = mongoose.InferSchemaType<typeof treeSchema>;
 
 // User document type for use with Mongoose queries
 export type UserDocType =  mongoose.InferSchemaType<typeof userSchema>;
