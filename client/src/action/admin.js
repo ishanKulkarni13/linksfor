@@ -25,8 +25,8 @@ export async function changeAdminAccountInfo(data) {
 
     if (name) user.name = name;
 
-    if (username) {
-      const isUsernameExists = await User.exists({ username: { $regex: new RegExp(username, "i") } });
+    if (username) { 
+      const isUsernameExists = await User.exists({ username: { $regex: new RegExp(`^${username}$`, "i") }});
       if (isUsernameExists) {
         return { success: false, message: "Username unavaible, please select any other username" };
       } else {

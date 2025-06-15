@@ -1,4 +1,4 @@
-import { User } from "@/lib/DB/models/user";
+import { User as UserModel } from "@/lib/DB/models/user";
 import styles from "./style.module.css";
 import { Separator } from "@/components/ui/separator";
 import { connectToDB } from "@/lib/DB/connectDB";
@@ -6,7 +6,28 @@ import { auth } from "@/auth";
 import { revalidatePath } from "next/cache";
 import { toast } from "sonner";
 import AccountInfoChangePopupTrigger from "./components/changeUsername/changeAccountInfo";
-const getUserInfo = async () => {
+import { UserDocType } from "@/types";
+import { DEFAULT_PROFILE_PIC } from "@/constants/user";
+
+interface UserInfo {
+  name: string;
+  username: string;
+  publicUID: number;
+  profilePic: {
+    public_id: string;
+    URL: string;
+  };
+  email: string;
+  bio: string;
+}
+
+interface GetUserInfoResult {
+  success: boolean;
+  message?: string;
+  user?: UserInfo;
+}
+
+const getUserInfo = async (): Promise<GetUserInfoResult> => {
   try {
     await connectToDB();
     const session = await auth();
@@ -15,13 +36,24 @@ const getUserInfo = async () => {
 
     const userID = session.user.id;
 
-    let user = await User.findById(userID);
+    let user: UserDocType | null = await UserModel.findById(userID);
 
     if (!user) {
       return { success: false, message: "User not found" };
     }
 
-    let responseUser = {
+    if (!user.username) {
+      user.username = "NoUsername";
+    }
+
+    if (!user.profilePic) {
+      user.profilePic = {
+        public_id: DEFAULT_PROFILE_PIC.public_id,
+        URL: DEFAULT_PROFILE_PIC.URL,
+      };
+    }
+
+    let responseUser: UserInfo = {
       name: user.name,
       username: user.username,
       publicUID: user.publicUID,
@@ -31,14 +63,26 @@ const getUserInfo = async () => {
     };
 
     return { success: true, user: responseUser };
-  } catch (error) {
+  } catch (error: any) {
     return { success: false, message: error.message };
   }
 };
 
-async function changeAccountInfo(data) {
-  "use server";
+interface ChangeAccountInfoData {
+  name?: string;
+  username?: string;
+}
 
+interface ChangeAccountInfoResult {
+  success: boolean;
+  message?: string;
+  user?: { username: string; name: string };
+}
+
+async function changeAccountInfo(
+  data: ChangeAccountInfoData
+): Promise<ChangeAccountInfoResult> {
+  "use server";
   try {
     let { name, username } = data;
 
@@ -49,7 +93,7 @@ async function changeAccountInfo(data) {
 
     const userID = session.user.id;
 
-    const user = await User.findById(userID);
+    const user = await UserModel.findById(userID);
 
     if (!user) {
       return { success: false, message: "User not found" };
@@ -60,13 +104,21 @@ async function changeAccountInfo(data) {
 
     await user.save();
 
-    toast("hiiii");
+    // Professional: throw if required fields are missing
+    if (!user.username || !user.name) {
+      throw new Error(
+        "Corrupt user data: username or name missing after save."
+      );
+    }
 
-    let responseUser = { username: user.username, name: user.name };
+    let responseUser = {
+      username: user.username,
+      name: user.name,
+    };
 
     revalidatePath("/admin/account");
     return { success: true, user: responseUser };
-  } catch (error) {
+  } catch (error: any) {
     console.log(error);
     return { success: false, message: error.message };
   }
@@ -83,7 +135,6 @@ export default async function Page() {
     );
   }
 
-  // const onFormSubmit = (e)=> e.preventDefault()
   return (
     <>
       <div className={styles.container}>
@@ -91,17 +142,6 @@ export default async function Page() {
 
         <div className={styles.accountInfoContainer}>
           <div className={styles.accountInfo}>
-            {/* <div className={styles.accountNameContainer}>
-              <label htmlFor="name">Name</label>
-              <AccountInfoChangePopupTrigger user={user} type={} />
-              <input
-                type="text"
-                name="name"
-                id="name"
-                defaultValue={user.name}
-              />
-              <Separator className={styles.separator} />
-            </div> */}
             <div className={styles.accountUsernameContainer}>
               <label className={styles.lable} htmlFor="username">
                 Username
@@ -112,7 +152,7 @@ export default async function Page() {
                 type="text"
                 name="username"
                 id="username"
-                value={user.username}
+                defaultValue={user?.username}
                 readOnly
               />
               <label
@@ -125,18 +165,20 @@ export default async function Page() {
               <Separator className={styles.separator} />
             </div>
             <div className={styles.accountEmailContainer}>
-              <label className={styles.lable} htmlFor="email">Email</label>
+              <label className={styles.lable} htmlFor="email">
+                Email
+              </label>
               <input
                 className={styles.input}
                 type="text"
                 name="email"
                 id="email"
                 readOnly
-                defaultValue={user.email}
+                defaultValue={user?.email}
               />
               <Separator className={styles.separator} />
               <label
-                 className={` ${styles.lable} ${styles.info}`}
+                className={` ${styles.lable} ${styles.info}`}
                 htmlFor="email"
                 style={{ lineHeight: "103%" }}
               >
@@ -147,7 +189,7 @@ export default async function Page() {
             <AccountInfoChangePopupTrigger
               className={`${styles.submit}`}
               changeAccountInfo={changeAccountInfo}
-              user={{ username: user.username , }}
+              user={{ username: user?.username }}
               type={"username"}
             >
               Edit

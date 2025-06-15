@@ -8,8 +8,10 @@ const getTree = async (username) => {
     await connectToDB();
 
     const user = await User.findOne({
-      username:  { $regex: new RegExp(username, "i") },
+      username: { $regex: new RegExp(`^${username}$`, "i") },
     }).select("verified trees _id");
+
+    // const user = await User.findOne({username}).select("verified trees _id");
 
     if (!user) {
       return { error: "User not found" };
@@ -58,8 +60,6 @@ const getTree = async (username) => {
   }
 };
 
-
-
 export default async function page({ params }) {
   let { tree, error } = await getTree(params.username);
 
@@ -71,4 +71,3 @@ export default async function page({ params }) {
   // if any erroe occured display error
   return <p>Error occured : {error}</p>;
 }
-

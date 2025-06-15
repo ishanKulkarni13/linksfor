@@ -13,7 +13,7 @@ export const GET = async (req,{params}) => {
         await connectToDB()
         // Find the user by username and select verified and trees fields
         console.log(username);
-        const user = await User.findOne({ username }).select('verified trees _id');
+        const user = await User.findOne({ username: { $regex: new RegExp(`^${username}$`, "i") } }).select('verified trees _id');
         if (!user) {
             return NextResponse.json({success: false, message : "User not found"}, {status: 404} )
         }

@@ -24,6 +24,7 @@ export const POST = async (req) => {
         if (name) user.name = name;
 
         if (username) {
+            console.log("hiuhijilhiuh")
             const isUsernameExists = await User.exists({ username: { $regex: new RegExp(username, "i") } });
             if(isUsernameExists){
                 return NextResponse.json({ success: false, message: "Username unavaible, please select any other username" });

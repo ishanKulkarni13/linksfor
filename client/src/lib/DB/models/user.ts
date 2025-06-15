@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt"
 import { log } from "console";
+import { DEFAULT_PROFILE_PIC } from "@/constants/user";
 
-// { $regex: new RegExp(username, "i") }
+
 
 // Reusable type for user document in hooks
 export type IUserDoc = mongoose.Document & {
@@ -18,7 +19,7 @@ export type IUserDoc = mongoose.Document & {
 export type IUserModel = mongoose.Model<IUserDoc>;
 
 
-const userSchema = new mongoose.Schema({
+export const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, "Name is required"],
@@ -51,11 +52,11 @@ const userSchema = new mongoose.Schema({
     profilePic: {
         public_id: {
             type: String, 
-            default: "uiccf1wbzyioazqgve5q"
+            default: DEFAULT_PROFILE_PIC.public_id
         },
         URL: {
             type: String,
-            default: 'http://res.cloudinary.com/kakashib2k/image/upload/v1713685024/uiccf1wbzyioazqgve5q.png'
+            default: DEFAULT_PROFILE_PIC.URL
         },
     },
     email: {

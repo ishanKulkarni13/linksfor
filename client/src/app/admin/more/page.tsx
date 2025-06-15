@@ -1,9 +1,6 @@
 import SelectTree from "@/components/selectTree/selectTree";
 import styles from "./morePage.module.css";
-import TopBar from "@/components/topbar/topBar";
-import SettingLinks from "@/components/settings/settingLinks/settingLinks";
-import { FiLayout, FiInstagram } from "react-icons/fi";
-
+import {  FiInstagram } from "react-icons/fi";
 import { RiArchiveStackLine} from "react-icons/ri";
 import { IoIosSearch} from "react-icons/io";
 import { IoMailUnreadOutline } from "react-icons/io5";
@@ -11,6 +8,7 @@ import { PiSignOut } from "react-icons/pi";
 import { LuTreePine } from "react-icons/lu";
 import { AiOutlineDelete } from "react-icons/ai";
 import { MdOutlineAccountBox } from "react-icons/md";
+import SettingLinks from "@/components/settings/settingLinks/settingLinks";
 
 export default function AdminMorePage() {
   const accountSettingLinks = [
@@ -20,24 +18,12 @@ export default function AdminMorePage() {
       path: "/admin/account",
       key: "information",
     },
-    // {
-    //   title: "Privacy",
-    //   icon: FiLayout,
-    //   path: "/admin/settings/privacy",
-    //   key: "privacy",
-    // },
     {
       title: "My trees",
       icon: LuTreePine,
       path: "/admin/trees",
       key: "trees",
     },
-    // {
-    //   title: "Delete Account",
-    //   icon: AiOutlineDelete,
-    //   path: "/admin/settings/delete-account",
-    //   key: "deleteAccount",
-    // },
   ];
 
   const treeSettingLinks = [
