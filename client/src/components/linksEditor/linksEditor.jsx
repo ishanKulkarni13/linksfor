@@ -223,9 +223,8 @@ export default function LinksEditor() {
 
             {links.length == 0 && areLinksFetched ? (
               <div className={styles.noLinksContainer}>
-                <h1>
-                  No Links <br></br> Click on Add links to add a Link
-                </h1>
+                  <h1 className={styles.title}>No Links yet</h1>
+                  <p className={styles.subtitle}> Add websites, videos, or custom links to share with your audience.</p>
               </div>
             ) : (
               <>

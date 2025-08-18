@@ -14,25 +14,25 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  gap: 20px;
 }
 .title {
   font-size: 2rem;
   font-weight: 700;
   color: var(--color-text-main, #222);
-  margin-bottom: 0.2em;
+  /* margin-bottom: 0.2em; */
 }
 .subtitle {
   color: var(--color-text-muted, #666);
   font-size: 1.1rem;
-  margin-bottom: 1.2em;
+  /* margin-bottom: 1.2em; */
   text-align: center;
 }
 .loadingFeedback {
   display: flex;
   align-items: center;
   gap: 0.7em;
-  margin-top: 1.2em;
+  /* margin-top: 1.2em; */
   color: var(--color-primary, #1976d2);
   font-weight: 500;
   font-size: 1.08em;

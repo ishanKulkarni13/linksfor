@@ -4,16 +4,30 @@ import { User } from "@/lib/DB/models/user";
 import { NextResponse } from "next/server";
 
 export const POST = async (req) => {
+
+    return NextResponse.json({
+            success: false,
+            message: "You cant regester with email and password, please use Google to regester",
+        });
+
     let { email, name, username, password } = await req.json();
     console.log(email, name, username, password);
     let user;
     if (!password) {
-        
-        throw new Error("Password is not provided")
+        return NextResponse.json({
+            success: false,
+            message: "Password is not provided"
+        });
     } else if (!email) {
-        throw new Error("Email is not provided")
+        return NextResponse.json({
+            success: false,
+            message: "Email is not provided"
+        });
     } else if (!username) {
-        throw new Error("Username is not provided")
+        return NextResponse.json({
+            success: false,
+            message: "Username is not provided"
+        });
     }
 
     try {
@@ -23,9 +37,15 @@ export const POST = async (req) => {
         let emailUser = await User.findOne({ email });
         let usernameUser = await User.findOne({ username });
         if (emailUser) {
-            throw new Error(`Email already used to regester by someone with ${emailUser.authMethod}`)
+            return NextResponse.json({
+                success: false,
+                message: `Email already used to regester by someone with ${emailUser.authMethod}`
+            });
         } else if (usernameUser) {
-            throw new Error(`Username already used to regester by someone with ${usernameUser.authMethod}`)
+            return NextResponse.json({
+                success: false,
+                message: `Username already used to regester by someone with ${usernameUser.authMethod}`
+            });
         }
 
 
@@ -57,17 +77,20 @@ export const POST = async (req) => {
         let tree = await Tree.create({ owner: user._id, treeName: `@${user.name}` });
         await User.findByIdAndUpdate(user._id, { $set: { 'trees.profileDefaultTree': tree._id } });
         console.log({
-            sucess: true,
+            success: true,
             message: "User created sucessfuully",
             user
         });
         return NextResponse.json({
-            sucess: true,
+            success: true,
             message: "User created sucessfuully",
             user
         });
 
     } catch (error) {
-        throw new Error(error)
+       return NextResponse.json({
+            success: false,
+            message: error.message || "An error occurred while creating the user",
+        });
     }
 }

@@ -17,7 +17,8 @@ export default function SocialIconsEditor() {
   let treeUID = useTreeUID();
   const [areLinksFetched, setAreLinksFetched] = useState();
   const [socials, setSocials] = useState([]);
-  const [selectedSocialIconsPlacement ,setSelectedSocialIconsPlacement] = useState('')
+  const [selectedSocialIconsPlacement, setSelectedSocialIconsPlacement] =
+    useState("");
   const [reorderedLinksUID, setReorderedLinksUID] = useState();
   const debouncelinksUIDOrder = useDebounce(reorderedLinksUID, 3000);
   const { redirectToSelectTree } = useHandelReselectTree();
@@ -27,7 +28,9 @@ export default function SocialIconsEditor() {
     if (success) {
       setSocials(response.socials);
       console.log(response.socialIconsPreference);
-      setSelectedSocialIconsPlacement( response.socialIconsPreference?.socialIconsPlacement);
+      setSelectedSocialIconsPlacement(
+        response.socialIconsPreference?.socialIconsPlacement
+      );
       setAreLinksFetched(true);
     } else {
       if (error) {
@@ -168,15 +171,15 @@ export default function SocialIconsEditor() {
     }
   }
 
-  async function handlesocialIconsPlacementChange(e){
-    setSelectedSocialIconsPlacement(()=> e.target.value);
+  async function handlesocialIconsPlacementChange(e) {
+    setSelectedSocialIconsPlacement(() => e.target.value);
     try {
       const res = await fetch(`/api/admin/tree/edit/socials/preference`, {
         method: "POST",
         cache: "no-store",
         body: JSON.stringify({
           treeUID,
-          socialIconsPlacement: e.target.value ,
+          socialIconsPlacement: e.target.value,
         }),
         credentials: "include",
         headers: {
@@ -187,9 +190,8 @@ export default function SocialIconsEditor() {
       });
 
       if (res.ok) {
-
       } else {
-        setSelectedSocialIconsPlacement(selectedSocialIconsPlacement)
+        setSelectedSocialIconsPlacement(selectedSocialIconsPlacement);
         const responseData = await res.json();
         toast.error(responseData.message, {
           id: "sinking",
@@ -197,17 +199,14 @@ export default function SocialIconsEditor() {
         });
       }
     } catch (error) {
-      
-      setSelectedSocialIconsPlacement(selectedSocialIconsPlacement)
+      setSelectedSocialIconsPlacement(selectedSocialIconsPlacement);
       console.error("Error updating socials placement:", error);
       toast.error("Error updating socials placement", {
         id: "sinking",
         duration: 3000,
       });
     }
-
   }
-
 
   useEffect(() => {
     if (treeUID) {
@@ -251,11 +250,13 @@ export default function SocialIconsEditor() {
                   </div>
                 </div>
               )}
+
               {socials.length == 0 && areLinksFetched ? (
                 <div className={styles.noLinksContainer}>
-                  <h1>
-                    No Links <br></br> Click on Add links to add a Link
-                  </h1>
+                  <h1 className={styles.title}>No Social icons added {`:(`} </h1>
+                  <p className={styles.subtitle}>
+                    Highlight your social presence with easy-to-spot icons.
+                  </p>
                 </div>
               ) : (
                 <>
@@ -274,40 +275,40 @@ export default function SocialIconsEditor() {
                       />
                     ))}
                   </Reorder.Group>
+
+                  <div className={styles.preferenceContainer}>
+                    <div className={styles.socialIconsPlacementContainer}>
+                      <div>
+                        <h5>Placement</h5>
+                        <p>Display icons at the:</p>
+                      </div>
+
+                      <form className={styles.socialIconsPlacementForm}>
+                        <label>
+                          <input
+                            type="radio"
+                            name="radio"
+                            value="top"
+                            checked={selectedSocialIconsPlacement == "top"}
+                            onChange={handlesocialIconsPlacementChange}
+                          />
+                          <span>Top</span>
+                        </label>
+                        <label>
+                          <input
+                            type="radio"
+                            name="radio"
+                            value="bottom"
+                            checked={selectedSocialIconsPlacement == "bottom"}
+                            onChange={handlesocialIconsPlacementChange}
+                          />
+                          <span>Bottom</span>
+                        </label>
+                      </form>
+                    </div>
+                  </div>
                 </>
               )}
-
-              <div className={styles.preferenceContainer}>
-                <div className={styles.socialIconsPlacementContainer}>
-                  <div>
-                    <h5>Placement</h5>
-                    <p>Display icons at the:</p>
-                  </div>
-
-                  <form className={styles.socialIconsPlacementForm}>
-                    <label>
-                    <input
-                        type="radio"
-                        name="radio"
-                        value="top"
-                        checked={selectedSocialIconsPlacement == "top"}
-                        onChange={handlesocialIconsPlacementChange}
-                      />
-                      <span>Top</span>
-                    </label>
-                    <label>
-                      <input
-                        type="radio"
-                        name="radio"
-                        value="bottom"
-                        checked={selectedSocialIconsPlacement == "bottom"}
-                        onChange={handlesocialIconsPlacementChange}
-                      />
-                      <span>Bottom</span>
-                    </label>
-                  </form>
-                </div>
-              </div>
             </div>
           </div>
 

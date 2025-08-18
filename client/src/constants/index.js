@@ -11,8 +11,8 @@ export const navLinks = [
         path: '/admin/tree/edit/appearance'
     },
     {
-        title: 'analytics',
-        path: '/api/auth/signin'
+        title: 'Socials',
+        path: '/admin/tree/edit/social-icons'
     },
     {
         title: 'More',

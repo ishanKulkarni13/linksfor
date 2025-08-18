@@ -6,14 +6,18 @@ import  { SelectTreeContent } from "@/components/selectTree/selectTreePopup/sele
 export default function Page() {
   const [open, setOpen] = useState(true);
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Select Tree</h1>
-      <p className={styles.description}>
-        Select a tree to manage its links and settings.
-      </p>
-      <Suspense fallback={null}>
-        <SelectTreeContent open={open} setOpen={setOpen} />
-      </Suspense>
+    <div className={styles.pageWrapper}>
+      <div className={styles.card}>
+        <h1 className={styles.title}>Select Tree</h1>
+        <p className={styles.description}>
+          Select a tree to manage its links and settings.
+        </p>
+        <Suspense fallback={null}>
+          <div className={styles.selectTreeWrapper}>
+          <SelectTreeContent open={open} setOpen={setOpen} />
+          </div>
+        </Suspense>
+      </div>
     </div>
   );
 }

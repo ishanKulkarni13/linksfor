@@ -58,7 +58,7 @@ export default function Home() {
   });
 
   const handleSubmit = async (values) => {
-    toast(`form submitted`);
+    toast.info("Submitting registration...");
     console.log("got values as", values);
     async function postFormData(name ,username, email, password) {
       try {
@@ -82,14 +82,17 @@ export default function Home() {
         });
         if (res.ok) {
           let responseData = await res.json();
-          return { success: true, error: false, response: responseData };
+
+          if (!responseData.success) {
+            return { success: false, error: null, response: responseData };
+          }
+          return { success: true, error: null, response: responseData };
         } else {
           let responseData = await res.json();
-          return { success: false, error: false, response: responseData };
+          return { success: false, error: null, response: responseData };
         }
       } catch (error) {
-        toast,error(error.message)
-        return { success: false, error: error, response: error };
+        return { success: false, error: error, response: null };
       }
     }
     let { success, response, error } = await postFormData(
@@ -99,23 +102,27 @@ export default function Home() {
       values.password
     );
     if (success) {
-      toast.success("Regestered sucessful")
+      toast.success("Registration successful! Please log in.");
       push('/login');
-    } else{
+    } else {
       if (error) {
-        toast.error(`some error occured, ${response.message}`)
-      push('/regester');
-      } else{
-        console.log("User not regestered", response.message );
+        toast.error(`Network error: ${error.message || "Unknown error"}`);
+      } else if (response && response.message) {
+        toast.error(`Registration failed: ${response.message}`);
+      } else {
+        toast.error("Registration failed. Please try again.");
       }
+      // Do not redirect on error
     }
   };
 
   return (
     <main className={` ${styles.regesterContainer}`}>
+
       <div className={`${styles.titleContainer}`}>
         <h1>Regester</h1>
       </div>
+
       <div className={`${styles.regesterFormContainer}`}>
         <Form {...form}>
           <form
@@ -223,14 +230,16 @@ export default function Home() {
           </form>
         </Form>
       </div>
+
       <div className={`${styles.otherRegesterWaysContainer}`}>
         <span>OR</span>
-        <div className={`${styles.otherRegesterWays}`}>
+        {/* <div className={`${styles.otherRegesterWays}`}> */}
         <div className={`${styles.regesterWithGoogleContiner}`}>
             <GoogleButton/>
         </div>
-        </div>
+        {/* </div> */}
       </div>
+
     </main>
   );
 }

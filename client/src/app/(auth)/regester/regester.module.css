@@ -1,43 +1,91 @@
-.regesterContainer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 25px;
-    height: 100dvh;
-    border: 5px solid white;
+.regesterContainer {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--color-background, #181818);
+  /* border: 2px solid var(--color-text-muted, #666); */
+  /* padding: 24px 8px; */
 }
-.titleContainer > h1{
-    font-size: 45px;
-    font-weight: bolder;
+.titleContainer > h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bolder;
+  color: var(--color-text, #fff);
+  margin-bottom: 15px;
+  letter-spacing: 1px;
 }
-.regesterFormContainer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: inherit;
-    /* border: 10px solid palegoldenrod; */
+.regesterFormContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  background: var(--color-surface, #232323);
+  border-radius: 18px;
+  padding: 32px 24px 24px 24px;
+  box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.1);
 }
-
-.regesterFormContainer input{
-    color: white;
+.regesterFormContainer input {
+  color: var(--color-text, #fff);
+  background: var(--color-input-bg, #181818);
+  border: 1.5px solid var(--color-text-muted, #666);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 0;
+  outline: none;
+  transition: border 0.2s;
 }
-
-.otherRegesterWaysContainer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.regesterFormContainer input:focus {
+  border: 1.5px solid var(--color-primary, #2196f3);
 }
-
-.regesterButton{
-    height: 50px;
-    border-radius: 50px;
-    background-color: white;
-    color: black;
+.regesterButton {
+  height: 48px;
+  border-radius: 50px;
+  background-color: var(--color-primary, #fff);
+  color: var(--color-text-contrast-primary, #000);
+  font-weight: 600;
+  font-size: 1.1rem;
+  border: none;
+  cursor: pointer;
+  margin-top: 8px;
+  width: 100%;
+  transition: background 0.2s, color 0.2s;
 }
-
-.regesterWithGoogleContiner{
-    width: 45vw;
+.regesterButton:hover {
+  transform: scale(1.02);
+}
+.otherRegesterWaysContainer {
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+.otherRegesterWaysContainer > span {
+  color: var(--color-text-muted, #666);
+  font-weight: 500;
+  text-align: center;
+}
+.regesterWithGoogleContiner {
+  margin-top: 10px;
+}
+@media (max-width: 600px) {
+  .regesterFormContainer {
+    max-width: 98vw;
+    padding: 16px 6px 12px 6px;
+  }
+  .titleContainer > h1 {
+    font-size: 1.6rem;
+    margin-bottom: 18px;
+  }
+  .regesterContainer {
+    padding: 8px 2px;
+  }
 }

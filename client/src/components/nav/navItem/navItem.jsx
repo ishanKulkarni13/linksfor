@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styles from "./navItem.module.css";
 import { PiLinkSimpleHorizontal } from "react-icons/pi";
-import { IoAnalytics } from "react-icons/io5";
+import { AiOutlineInstagram } from "react-icons/ai"; 
 import { CiSettings } from "react-icons/ci";
 import { FaRegEye } from "react-icons/fa6";
 import { usePathname } from "next/navigation";
@@ -17,8 +17,8 @@ export default function NavItem({ link, ...props }) {
         return <PiLinkSimpleHorizontal className={styles.icon} />;
       case "appearance":
         return <FaRegEye strokeWidth={"0.001px"} className={styles.icon} />;
-      case "analytics":
-        return <IoAnalytics className={styles.icon} />;
+      case "socials":
+        return <AiOutlineInstagram className={styles.icon} />;
       case "more":
         return <CiSettings strokeWidth={0.4} className={styles.icon} />;
       default:

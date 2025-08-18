@@ -3,17 +3,32 @@
     /* !!!!!!! height is dynamically change using style in jsx */
     /* max-height: fit-content; */
     max-height: 80dvh;
-    /* border: 2px solid rebeccapurple; */
     transition: height .5s ease-out;
+    overflow-y: auto;
     /* background-color: red; */
 }
 
-
+/* Show scrollbar only when needed for Webkit browsers */
+.treesContainer::-webkit-scrollbar {
+    width: 8px;
+    background: transparent;
+}
+.treesContainer:hover::-webkit-scrollbar-thumb {
+    background: var(--color-text-muted, #888);
+    border-radius: 4px;
+}
+.treesContainer::-webkit-scrollbar-thumb {
+    background: var(--color-text-muted, #888);
+    border-radius: 4px;
+    visibility: hidden;
+}
+.treesContainer:hover::-webkit-scrollbar-thumb {
+    visibility: visible;
+}
 
 .treeContainer {
     flex: 1;
     width: 100%;
-    overflow: scroll;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -21,7 +36,7 @@
     padding: 15px 10px;
     border-radius: 25px;
     -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */ 
+    scrollbar-width: thin;  /* Firefox: show thin scrollbar when needed */ 
     
     /* border: 2px solid red; */
 }
