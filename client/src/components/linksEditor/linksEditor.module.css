@@ -69,6 +69,7 @@
 }
 
 .linksContainer {
+  margin-top: 20px;
   width: inherit;
   gap: 20px;
 }
