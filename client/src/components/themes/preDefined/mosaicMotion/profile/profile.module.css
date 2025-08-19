@@ -20,10 +20,9 @@
 }
 
 .profilePicture{
-    border-radius: 50%;
+    border-radius: var(--profilePicture-border-radius);
     object-fit:cover;
     object-position: center;
-    background-color: aqua;
 }
 
 .profileTextContainer{
@@ -37,6 +36,10 @@
     font-size: 25px;
     font-weight: 600;
 }
+.nameContainer p{
+  text-align: center;  
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.785); /* helps on noisy bg */
+}
 
 .bioContainer{
     font-size: 20px;
@@ -45,7 +48,8 @@
 
 .bioContainer p {
   white-space: pre-line;
-  text-align: center;
+  text-align: center;  
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.785); 
 }
 
 .avatarFallback{

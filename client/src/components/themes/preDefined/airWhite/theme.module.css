@@ -1,11 +1,7 @@
 body:has(> .treeContainer) {
   /* selected the body too */
   --margin-x: 15px;
-  /* --background: radial-gradient(transparent 34%, #4f46e4 35%, #4f46e4 45%, transparent 46%) 0 0 / 3em 3em repeat,
-  radial-gradient(circle at left, transparent 39%, #4f46e480 40%, #4f46e480 45%, transparent 46%) 0 0 / 3em 3em repeat,
-  radial-gradient(circle at right, transparent 39%, #4f46e480 40%, #4f46e480 45%, transparent 46%) 0 0 / 3em 3em repeat,
-  #ffffff; */
-  --background: rgb(255, 255, 255);  
+  --background: rgb(255, 255, 255);
   --color-surface-1: hsl(57, 70%, 10%);
   --color-surface-2: hsl(57, 60%, 15%);
   --color-surface-3: hsl(57, 50%, 20%);
@@ -24,7 +20,7 @@ body:has(> .treeContainer) {
   --color-border: rgb(179, 197, 204);
   --border-surface-floating: 1px solid rgba(255, 255, 255, 0.326);
   --color-border-muted: hsl(215, 20%, 50%);
-  --border-link: none; 
+  --border-link: none;
   /* Borders Radius */
   --border-radius-link: 8px;
   --border-radius-thumbnail: 8px;
@@ -54,6 +50,54 @@ body:has(> .treeContainer) {
   /* Destructive colors */
   --color-destructive: hsl(0, 62.8%, 30.6%);
   --color-destructive-foreground: hsl(210, 40%, 98%);
+
+  /* Avatar */
+  --color-border-avatar: hsl(210, 40%, 90%);
+  --avatar-fallback-bg: var(--color-primary, #0a40ee);
+  --avatar-fallback-color: var(--color-primary-foreground, #22223b);
+  --shadow-avatar: var(--shadow-2, 0px 10px 20px rgba(0, 0, 0, 0.48));
+
+  /* Link Shared Variables */
+  --link-width: 500px;
+
+  /* Non-Featured Link Variables */
+  --link-height: 64px;
+  --link-radius: 12px;
+  --link-shadow: var(--shadow-3, 0px 10px 20px rgba(0, 0, 0, 0.48));
+  --link-shadow-hover: var(
+    --shadow-floating,
+    0px 2px 10px rgba(0, 0, 0, 0.771)
+  );
+
+  --link-title-font: "Inter", Arial, sans-serif;
+  --link-title-size: 1.1rem;
+  --link-title-weight: 500;
+  --link-title-color: var(--color-text-link);
+  --link-gap: 16px;
+  --link-padding-y: 0.75rem;
+  --link-padding-x: 1.25rem;
+  --link-padding-x-mobile: 0.75rem;
+  --link-thumbnail-size: 48px;
+  --link-options-size: 40px;
+
+  /* Featured Link Variables */
+  --link-featured-width: var(--link-width);
+  --link-featured-height: 220px;
+  --link-featured-radius: 18px;
+  --link-featured-title-font: "Inter", Arial, sans-serif;
+  --link-featured-title-size: 1.35rem;
+  --link-featured-title-weight: 700;
+  --link-featured-title-color: #fff;
+  --link-featured-overlay-gradient: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.82) 0%,
+    rgba(0, 0, 0, 0.55) 40%,
+    rgba(0, 0, 0, 0.18) 75%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  --link-featured-overlay-height: 45%;
+  --link-featured-overlay-padding: 1.2rem;
+  --link-featured-gap: 1rem;
 }
 
 .treeContainer {

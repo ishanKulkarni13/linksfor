@@ -1,5 +1,6 @@
 import TreeThemeAirBlack from "./preDefined/airBlack/airBlack";
 import TreeThemeAirWhite from "./preDefined/airWhite/theme";
+import MosaicMotion from "./preDefined/mosaicMotion/theme";
 import TreeThemeGreenFog from "./preDefined/greenFog/greenFog";
 import TreeThemeMinerialBlue from "./preDefined/minerialBlue/minerialBlue";
 import TreeThemeSkyMint from "./preDefined/skymint/skymint";
@@ -18,6 +19,8 @@ export default function Tree({ tree }) {
     return <TreeThemeMinerialBlue tree={tree} />;
   } else if (tree.theme.selectedTheme.themeID === 951111) {
     return <TreeThemeAirWhite tree={tree} />;
+   } else if (tree.theme.selectedTheme.themeID === 961111) {
+    return <MosaicMotion tree={tree} />;
   } else {
     return (
       <>
