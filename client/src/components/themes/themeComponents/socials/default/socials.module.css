@@ -1,23 +1,43 @@
 .container {
-  margin: 0px var(--margin-x);
+  margin: var(--links-container-margin, 0px var(--gap-medium, 16px));
   display: flex;
-  justify-content:center;
-  align-items: center;
-  gap: 25px;
+  justify-content: var(--links-container-justify, center);
+  align-items: var(--links-container-align, center);
+  gap: var(--socials-gap, 25px);
   flex-wrap: wrap;
-  color: var(--color-text-main);
+  color: var(--socials-color, var(--color-accent, #0078d4));
+  background: var(--links-container-bg, none);
+  border-radius: var(--links-container-radius, 0);
+  border: var(--links-container-border, none);
+  box-shadow: var(--links-container-shadow, none);
+  opacity: var(--links-container-opacity, 1);
+  filter: var(--links-container-filter, none);
+  animation: var(--links-container-animation, none);
+  transition: var(--links-container-transition, none);
 }
 
-.social{
-  transition-duration: 0.2;
+.social {
+  background: var(--socials-bg, none);
+  padding: var(--socials-padding);
+  border-radius: var(--socials-radius, none);
+  border: var(--socials-border, none);
+  box-shadow: var(--socials-shadow, none);
+  opacity: var(--socials-opacity, 1);
+  transition: var(--socials-transition, background 0.2s, color 0.2s, box-shadow 0.2s);
+  animation: var(--socials-animation, none);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.social:hover{
+.social:hover {
   transform: scale(1.1);
+  background: var(--socials-bg-hover, var(--color-accent-light, #e6f4ff));
+  color: var(--socials-color-hover, var(--color-accent-dark, #005fa3));
 }
 
 .social svg {
-  color: var(--color-social-icons);
-  height: 2.5rem;
-  width: 2.5rem;
+  color: var(--color-social-icons, var(--socials-color, var(--color-text-main, #fff)));
+  height: var(--socials-size, 2.5rem);
+  width: var(--socials-size, 2.5rem);
 }

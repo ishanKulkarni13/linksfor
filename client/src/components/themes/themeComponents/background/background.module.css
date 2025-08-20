@@ -1,0 +1,10 @@
+.background {
+  display: none;
+}
+
+body:has(.background) {
+  background: var(--background);
+  /* use css variables */
+  background-size: var(--background-size);
+  
+}

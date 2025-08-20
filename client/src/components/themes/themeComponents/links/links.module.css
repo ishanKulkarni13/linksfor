@@ -1,0 +1,18 @@
+.container{
+    margin: var(--links-container-margin, 0px var(--gap-medium, 16px));
+    display: flex;
+    justify-content: var(--links-container-justify-content, center);
+    align-items: var(--links-container-align-items, stretch);
+    flex-direction: var(--links-container-flex-direction, column);
+    gap: var(--links-container-gap, 10px);
+    flex: var(--links-container-flex, 1);
+    background: var(--links-container-bg, none);
+    border: var(--links-container-border, none);
+    border-radius: var(--links-container-radius, 0);
+    box-shadow: var(--links-container-shadow, none);
+    opacity: var(--links-container-opacity, 1);
+    filter: var(--links-container-filter, none);
+    animation: var(--links-container-animation, none);
+    transition: var(--links-container-transition, none);
+}
+

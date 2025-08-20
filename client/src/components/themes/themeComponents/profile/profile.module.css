@@ -1,0 +1,73 @@
+.profileContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: var(--gap-medium, 16px);
+    color: var(--profile-name-color, #222);
+    background: var(--profile-bg, none);
+    background-image: var(--profile-bg-gradient, none);
+    border: var(--profile-border, none);
+    border-radius: var(--profile-radius, 12px);
+    padding: var(--profile-padding, 1.25rem);
+    box-shadow: var(--profile-shadow, none);
+    opacity: var(--profile-opacity, 1);
+    animation: var(--profile-animation, none);
+    transition: var(--profile-transition, box-shadow 0.2s);
+}
+
+.profilePictureContainer{
+    position: relative;
+    min-height: var(--profile-picture-size, 96px);
+    min-width: var(--profile-picture-size, 96px);
+    color: var(--profile-picture-color, white);
+    font-size: calc(var(--profile-picture-size, 96px) * 0.13);
+    border: var(--profile-picture-border, 2px solid var(--color-border, #eee));
+    box-shadow: var(--profile-picture-shadow, none);
+    border-radius: var(--profile-picture-border-radius, 50%);
+    background: var(--profile-picture-bg, none);
+}
+
+.profilePicture{
+    border-radius: var(--profile-picture-border-radius, 50%);
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+.profileTextContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.nameContainer{
+    font-size: var(--profile-name-font-size, 1.27rem);
+    font-weight: var(--profile-name-font-weight, 700);
+    color: var(--profile-name-color, var( --color-text-main));
+}
+/* .nameContainer p{
+  text-align: center;  
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.785);
+} already down */ 
+
+.bioContainer{
+    font-size: var(--profile-bio-font-size, 1rem);
+    font-weight: var(--profile-bio-font-weight, 600);
+    color: var(--profile-bio-color, var(--profile-name-color));
+    line-height: var(--profile-bio-line-height);
+}
+
+.nameContainer p, .bioContainer p {
+  white-space: pre-line;
+  text-align: center;  
+  text-shadow: var(--profile-text-shadow);
+}
+
+.avatarFallback{
+  background: var(--avatar-fallback-bg, var(--profile-picture-bg, #eaeaea));
+  color: var(--avatar-fallback-color, var(--profile-picture-color, #222));
+  font-size: large;
+}

@@ -1,0 +1,331 @@
+/* 
+  Example Theme CSS Variables Reference
+  -------------------------------------
+  Organised by section, fully documented, and designed for maintainability and easy theme creation.
+  Variables use dependencies for consistency and edge-case handling.
+*/
+
+/* === Base Typography === */
+:root {
+  --font-family-base: "Inter", Arial, sans-serif; /* Base font family */
+  --font-size-base: 1rem; /* Base font size */
+  --font-size-small: 0.95rem; /* Small font size */
+  --font-size-large: 1.15rem; /* Large font size */
+  --font-size-xlarge: 2rem; /* Extra large font size */
+  --font-weight-light: 400; /* Light font weight */
+  --font-weight-normal: 500; /* Normal font weight */
+  --font-weight-bold: 700; /* Bold font weight */
+  --line-height-base: 1.3; /* Base line height */
+  --letter-spacing-base: normal; /* Base letter spacing */
+
+  /* === Color Palette === */
+
+  --color-bg: #fff; /* Main background color */
+  --color-surface-1: #f7f7f7; /* Surface color 1 */
+  --color-surface-2: #ededed; /* Surface color 2 */
+  --color-surface-3: #e0e0e0; /* Surface color 3 */
+  --color-surface-overlay: rgba(255, 255, 255, 0.85); /* Overlay surface */
+  --color-primary: #222; /* Primary text color */
+  --color-secondary: #666; /* Secondary text color */
+  --color-accent: #0078d4; /* Accent color */
+  --color-accent-light: #e6f4ff; /* Accent light */
+  --color-accent-dark: #005fa3; /* Accent dark */
+  --color-link: #0078d4; /* Link text color */
+  --color-link-hover: #005fa3; /* Link hover color */
+  --color-border: #eee; /* Border color */
+  --color-border-muted: #e0e0e0; /* Muted border */
+  --color-shadow: rgba(0, 0, 0, 0.12); /* Shadow color */
+  --color-shadow-hover: rgba(0, 0, 0, 0.18); /* Shadow color on hover */
+  --color-overlay: rgba(0, 0, 0, 0.82); /* Overlay color */
+  --color-destructive: #d32f2f; /* Destructive (error) color */
+  --color-success: #388e3c; /* Success color */
+  --color-warning: #fbc02d; /* Warning color */
+  --color-info: #1976d2; /* Info color */
+
+  /* === Sizing & Spacing === */
+
+  --radius-xs: 4px;
+  --radius-small: 6px;
+  --radius-medium: 8px;
+  --radius-large: 12px;
+  --radius-xlarge: 24px;
+  --gap-xs: 4px;
+  --gap-small: 10px;
+  --gap-medium: 16px;
+  --gap-large: 24px;
+  --gap-xlarge: 40px;
+  --padding-xs: 0.25rem;
+  --padding-small: 0.5rem;
+  --padding-medium: 0.75rem;
+  --padding-large: 1.25rem;
+  --padding-xlarge: 2rem;
+  --width-main: 500px;
+  --width-full: 100%;
+  --max-width-container: 900px;
+
+  /* === Backgrounds === */
+
+  --background-main: var(--color-bg, #fff); /* Main background */
+  --background-gradient: linear-gradient(
+    135deg,
+    var(--color-surface-1, #f7f7f7) 0%,
+    var(--color-surface-2, #ededed) 100%
+  );
+  --background-overlay: var(--color-surface-overlay, rgba(255, 255, 255, 0.85));
+  --background-blur: blur(6px);
+  --background-image: none;
+  --background-opacity: 1;
+
+  /* === Header Styles === */
+
+  --header-font-size: calc(
+    var(--font-size-large, 1.15rem) * 1.2
+  ); /* 20% larger than link title */
+  --header-font-weight: var(--font-weight-bold, 700);
+  --header-font-family: var(--font-family-base);
+  --header-padding: var(--padding-medium, 0.75rem) 0;
+  --header-margin: none; /* no need for more space*/
+  --header-letter-spacing: var(--letter-spacing-base);
+  --header-bg: none;
+  --header-radius: 0;
+  --header-opacity: 1;
+  --header-border: none;
+  --header-box-shadow: none;
+  --header-filter: none;
+  --header-animation: none;
+  --header-transition: none;
+  --header-text-shadow: 0 2px 9px rgba(0, 0, 0, 0.919);
+  --color-text-header: var(--color-primary);
+
+  /* === Profile Section === */
+
+  --profile-bg: var(--color-surface-1, #f7f7f7);
+  --profile-bg-gradient: linear-gradient(
+    120deg,
+    var(--color-surface-1, #f7f7f7),
+    var(--color-surface-2, #ededed)
+  );
+  --profile-border: 1px solid var(--color-border-muted, #e0e0e0);
+  --profile-radius: var(--radius-large, 12px);
+  --profile-padding: var(--padding-large, 1.25rem);
+  --profile-shadow: 0px 2px 8px var(--color-shadow, rgba(0, 0, 0, 0.12));
+  --profile-opacity: 1;
+  --profile-animation: none;
+  --profile-transition: box-shadow 0.2s;
+  --profile-picture-size: 96px;
+  --profile-picture-border-radius: 50%;
+  --profile-picture-border: 2px solid var(--color-border, #eee);
+  --profile-picture-shadow: 0px 2px 8px var(--color-shadow, rgba(0, 0, 0, 0.12));
+  --profile-text-shadow: none;
+  --profile-name-font-size: calc(var(--font-size-large, 1.15rem) * 1.1);
+  --profile-name-font-weight: var(--font-weight-bold, 700);
+  --profile-name-color: var(--color-primary, #222);
+  --profile-bio-font-size: var(--font-size-base, 1rem);
+  --profile-bio-color: var(--color-secondary, #666);
+  --profile-bio-line-height: 1.5;
+  --profile-link-color: var(--color-link, #0078d4);
+  --profile-link-hover-color: var(--color-link-hover, #005fa3);
+
+  /* === Social Icons === */
+  --socials-gap: 0px;
+  --socials-padding: 0.5rem;
+  --socials-size: 32px;
+  --socials-bg: var(--color-surface-2, #ededed);
+  --socials-bg-hover: var(--color-accent-light, #e6f4ff);
+  --socials-color: var(--color-accent, #0078d4);
+  --socials-color-hover: var(--color-accent-dark, #005fa3);
+  --socials-radius: var(--radius-large, 12px);
+  --socials-border: 1px solid var(--color-border-muted, #e0e0e0);
+  --socials-shadow: none;
+  --socials-opacity: 1;
+  --socials-transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  --socials-animation: none;
+
+  /* === Link Container Styles === */
+
+  --bg-color-link: var(--color-surface-1, #fff);
+  --color-text-link: var(--color-link, #0078d4);
+  --border-link: 1px solid var(--color-border, #eee);
+  --link-radius: var(--radius-medium, 8px);
+  --link-gap: var(--gap-medium, 16px);
+  --link-padding-y: var(--padding-medium, 0.75rem);
+  --link-padding-x: var(--padding-large, 1.25rem);
+  --link-padding-x-mobile: var(--padding-medium, 0.75rem);
+  --link-width: var(--width-main, 500px);
+  --link-height: 64px;
+  --link-shadow: 0px 1px 3px var(--color-shadow, rgba(0, 0, 0, 0.12));
+  --link-shadow-hover: 0px 2px 10px
+    var(--color-shadow-hover, rgba(0, 0, 0, 0.18));
+  --link-title-font: var(--font-family-base);
+  --link-title-size: var(--font-size-large, 1.15rem);
+  --link-title-weight: var(--font-weight-normal, 500);
+  --link-title-color: var(--color-link, #0078d4);
+  --link-thumbnail-size: 48px;
+  --link-options-size: 40px;
+
+  /* === Links Container Styles === */
+  --links-container-margin: 0 auto var(--link-gap, 16px) auto;
+  --links-container-flex-direction: row;
+  --links-container-align-items: center;
+  --links-container-justify-content: flex-start;
+  --links-container-transition: transform 0.2s, box-shadow 0.2s;
+  --links-container-text-align: left;
+  --links-container-width: 100%;
+  --links-container-bg: color-mix(
+    in srgb,
+    var(--color-surface-1, #fff) 85%,
+    transparent
+  );
+  --links-container-backdrop-filter: blur(6px);
+  --links-container-hover-transform: scale(0.98);
+  --links-container-opacity: 1;
+  --links-container-border-width: initial;
+  --links-container-border-style: initial;
+  --links-container-border-color: initial;
+  --links-container-filter: none;
+  --links-container-animation: none;
+  --links-container-hover-opacity: 1;
+  --links-container-hover-filter: none;
+  --links-container-hover-animation: none;
+  --links-container-hover-transition: transform 0.2s, box-shadow 0.2s;
+  --links-container-mobile-opacity: 1;
+  --links-container-mobile-filter: none;
+  --links-container-mobile-animation: none;
+  --links-container-mobile-transition: none;
+
+  /* === Thumbnail Styles === */
+
+  --border-radius-thumbnail: var(--radius-medium, 8px);
+  --thumbnail-bg: #eaeaea;
+  --thumbnail-object-fit: cover;
+  --thumbnail-opacity: 1;
+  --thumbnail-border: none;
+  --thumbnail-box-shadow: none;
+  --thumbnail-filter: none;
+  --thumbnail-animation: none;
+  --thumbnail-transition: none;
+  --thumbnail-img-opacity: 1;
+  --thumbnail-img-filter: none;
+  --thumbnail-img-transition: none;
+
+  /* === Text Container Styles === */
+
+  --text-container-gap: 0;
+  --text-container-opacity: 1;
+  --text-container-filter: none;
+  --text-container-animation: none;
+  --text-container-transition: none;
+
+  /* === Title Styles === */
+
+  --title-margin: 0;
+  --title-line-height: var(--line-height-base, 1.3);
+  --title-white-space: nowrap;
+  --title-overflow: hidden;
+  --title-text-overflow: ellipsis;
+  --title-letter-spacing: var(--letter-spacing-base, normal);
+  --title-opacity: 1;
+  --title-filter: none;
+  --title-animation: none;
+  --title-transition: none;
+
+  /* === Options Button/Icon Styles === */
+
+  --options-button-font-size: 1.2rem;
+  --options-button-bg: none;
+  --options-button-border: none;
+  --options-button-outline: none;
+  --options-button-radius: 50%;
+  --options-button-color: inherit;
+  --options-button-opacity: 1;
+  --options-button-box-shadow: none;
+  --options-button-filter: none;
+  --options-button-animation: none;
+  --options-button-transition: none;
+  --options-icon-width: 18px;
+  --options-icon-height: 18px;
+  --options-icon-opacity: 1;
+  --options-icon-filter: none;
+  --options-icon-transition: none;
+
+  /* === Featured Link Styles === */
+
+  --link-featured-width: var(
+    --link-width,
+    500px
+  ); /* Featured width same as link width */
+  --link-featured-radius: var(--link-radius, 8px);
+  --link-featured-gap: var(--link-gap, 16px);
+  --link-featured-height: 220px;
+  --link-featured-title-font: var(--font-family-base);
+  --link-featured-title-size: calc(
+    var(--link-title-size, 1.15rem) * 1.18
+  ); /* Featured title 18% larger */
+  --link-featured-title-weight: var(--font-weight-bold, 700);
+  --link-featured-title-color: #fff;
+  --link-featured-overlay-gradient: linear-gradient(
+    to top,
+    var(--color-overlay, rgba(0, 0, 0, 0.82)) 0%,
+    rgba(0, 0, 0, 0.55) 40%,
+    rgba(0, 0, 0, 0.18) 75%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  --link-featured-overlay-height: 45%;
+  --link-featured-overlay-padding: 1.2rem;
+  --featured-container-margin: 0 auto var(--link-featured-gap, 1rem) auto;
+  --featured-container-transition: box-shadow 0.2s;
+  --featured-container-opacity: 1;
+  --featured-container-border: var(--border-link, none);
+  --featured-container-filter: none;
+  --featured-container-animation: none;
+  --featured-container-hover-opacity: 1;
+  --featured-container-hover-filter: none;
+  --featured-container-hover-animation: none;
+  --featured-container-hover-transition: box-shadow 0.2s;
+  --featured-thumbnail-bg: #eee;
+  --featured-thumbnail-object-fit: cover;
+  --featured-thumbnail-wrapper-opacity: 1;
+  --featured-thumbnail-wrapper-border: none;
+  --featured-thumbnail-wrapper-box-shadow: none;
+  --featured-thumbnail-wrapper-filter: none;
+  --featured-thumbnail-wrapper-animation: none;
+  --featured-thumbnail-wrapper-transition: none;
+  --featured-thumbnail-opacity: 1;
+  --featured-thumbnail-filter: none;
+  --featured-thumbnail-transition: none;
+  --featured-overlay-opacity: 1;
+  --featured-overlay-filter: none;
+  --featured-overlay-animation: none;
+  --featured-overlay-transition: none;
+  --featured-text-opacity: 1;
+  --featured-text-filter: none;
+  --featured-text-animation: none;
+  --featured-text-transition: none;
+  --featured-title-margin: 0;
+  --featured-title-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --featured-title-line-height: 1.2;
+  --featured-title-word-break: break-word;
+  --featured-title-letter-spacing: normal;
+  --featured-title-opacity: 1;
+  --featured-title-filter: none;
+  --featured-title-animation: none;
+  --featured-title-transition: none;
+  --featured-container-mobile-height: 48vw;
+
+  /* === Links Container Styles === */
+
+  --links-container-margin: 0 auto var(--link-gap, 18px) auto; /* changed*/
+  --links-container-justify: center;
+  --links-container-align: stretch;
+  --links-container-direction: column;
+  --links-container-gap: var(--gap-small, 10px);
+  --links-container-flex: 1;
+  --links-container-bg: none;
+  --links-container-border: none;
+  --links-container-radius: 0;
+  --links-container-shadow: none;
+  --links-container-opacity: 1;
+  --links-container-filter: none;
+  --links-container-animation: none;
+  --links-container-transition: none;
+}
