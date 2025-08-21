@@ -1,7 +1,6 @@
 body:has(> .treeContainer) {
   /* === Background & Grid === */
-
-  --background: rgb(181, 154, 107);
+  --background: var(--color-bg, #fff);
 
   /* === Layout & Spacing === */
   --margin-x: 15px;
@@ -41,18 +40,12 @@ body:has(> .treeContainer) {
   --color-success: #388e3c;
   --color-warning: #fbc02d;
   --color-info: #1976d2;
+  /* Text colors */
   --color-text-main: black;
-  --color-text-link: #67434f;
+  --color-text-profile: var(--color-text-main);
   --color-social-icons: var(--color-text-main);
+  --color-text-link: var(--color-text-main);
   --color-text-header: var(--color-text-main);
-  --color-text-profile: black;
-
-  /* === Borders & Radius === */
-
-  --border-surface-floating: 1.5px solid #c3ccaf;
-  --border-radius-link: 50px;
-  --border-radius-profile: 12px;
-  --border-radius-socials: 12px;
 
   /* === Shadows === */
   --shadow-1: 0px 1px 6px rgba(103, 67, 79, 0.1);
@@ -72,6 +65,10 @@ body:has(> .treeContainer) {
   --line-height-base: 1.3;
   --letter-spacing-base: normal;
 
+  /* === Borders & Radius === */
+  --border-surface-floating: 1.5px solid #c3ccaf;
+  /* --border-radius-link: 50px; */
+
   /* === Header === */
   --header-font-size: calc(var(--font-size-large, 1.15rem) * 1.2);
   --header-font-weight: var(--font-weight-bold, 700);
@@ -89,21 +86,30 @@ body:has(> .treeContainer) {
   --header-transition: none;
   --header-text-shadow: none;
 
-  /* === Profile === */
+  /* === Avatar === */
+  /* --color-border-avatar: #5900ff; */
+  /* --shadow-avatar: 0px 0px 15px rgb(85, 255, 0); */
+  /* --profilePicture-border-radius: 100%; */
 
+  /* === Profile === */
+  /* --- for profile container ---*/
   --profile-border: none;
-  --profile-radius: var(--border-radius-profile, 12px);
+  --profile-radius: none;
   --profile-padding: var(--padding-large, 1.5rem);
   --profile-shadow: 0px 2px 8px var(--shadow-2, rgba(103, 67, 79, 0.16));
   --profile-opacity: 1;
   --profile-animation: none;
   --profile-transition: box-shadow 0.2s;
+  /* --- for profile picture ---*/
   --profile-picture-size: 96px;
   --profile-picture-border-radius: 50%;
-  --profile-picture-border: 2px solid var(--color-border, #bfc8a6);
+  --profile-picture-border: 2px solid var(--color-border, #eee);
   --profile-picture-shadow: 0px 2px 8px var(--shadow-2, rgba(103, 67, 79, 0.16));
-  --profile-picture-bg: #e6e9d8;
-  --profile-picture-color: #67434f;
+  --profile-picture-color: var(--color-text-main, #fff);
+  --profile-picture-bg: var(--color-surface-1);
+  --avatar-fallback-bg: var(--profile-picture-bg);
+  --avatar-fallback-color: var(--profile-picture-color);
+  /* --- for profile text --- */
   --profile-text-shadow: none;
   --profile-name-font-size: 1.5rem;
   --profile-name-font-weight: var(--font-weight-bold, 700);
@@ -116,6 +122,7 @@ body:has(> .treeContainer) {
   --profile-link-hover-color: var(--color-accent, #4fbfa5);
 
   /* === Socials === */
+  --border-radius-socials: 12px;
   --socials-gap: 0px;
   --socials-padding: 0.5rem;
   --socials-size: 35px;
@@ -130,26 +137,40 @@ body:has(> .treeContainer) {
   --socials-transition: background 0.2s, color 0.2s, box-shadow 0.2s;
   --socials-animation: none;
 
+  /* === Links Container === */
+  --links-container-margin: 0 auto 0 auto;
+  --links-container-margin-mobile: 0 var(--link-gap);
+  --links-container-gap: var(--link-gap, 10px);
+  --links-container-flex: 1;
+  --links-container-bg: none;
+  --links-container-border: none;
+  --links-container-radius: 0;
+  --links-container-shadow: none;
+  --links-container-opacity: 1;
+  --links-container-filter: none;
+  --links-container-animation: none;
+  --links-container-transition: none;
+
   /* === Link Container === */
-  --bg-color-link: rgb(139, 114, 70);
-  --color-text-link: var(--color-link, #67434f);
-  --border-link: 2px solid rgb(88, 73, 44);
-  --link-radius: var(--border-radius-link, 16px);
   --link-gap: 20px;
+  --bg-color-link: var(--color-surface-1, none);
+  /* --link-container-bor */
+  --border-link: 2px solid var(--color-border);
+  --link-radius: 32px;
   --link-padding-y: var(--padding-medium, 0.85rem);
   --link-padding-x: var(--padding-large, 1.5rem);
   --link-padding-x-mobile: var(--padding-medium, 1rem);
   --link-width: var(--width-main, 500px);
   --link-height: 68px;
-  --link-shadow: rgb(88, 72, 44) 7px 7px 0px 0px;
-  --link-shadow-hover: rgb(88, 72, 44) 10px 10px 0px 0px;
+  --link-shadow: var(--color-border) 7px 7px 0px 0px;
+  --link-shadow-hover:  var(--color-border) 10px 10px 0px 0px;
   --link-title-font: var(--font-family-base, "Inter", Arial, sans-serif);
   --link-title-size: var(--font-size-large, 1.15rem);
   --link-title-weight: 600;
   --link-title-color: var(--color-text-link, #fff);
   --link-thumbnail-size: 52px;
   --link-options-size: 44px;
-
+  
   --container-flex-direction: row;
   --container-align-items: center;
   --container-justify-content: flex-start;
@@ -289,30 +310,6 @@ body:has(> .treeContainer) {
   --featured-title-animation: none;
   --featured-title-transition: none;
   --featured-container-mobile-height: 48vw;
-
-  /* === Links Container === */
-  --links-container-margin: 0 auto 0 auto;
-  --links-container-margin-mobile: 0 var(--link-gap);
-  --links-container-justify-content: center;
-  --links-container-align-items: stretch;
-  --links-container-flex-direction: column;
-  --links-container-gap: var(--gap-small, 10px);
-  --links-container-flex: 1;
-  --links-container-bg: none;
-  --links-container-border: none;
-  --links-container-radius: 0;
-  --links-container-shadow: none;
-  --links-container-opacity: 1;
-  --links-container-filter: none;
-  --links-container-animation: none;
-  --links-container-transition: none;
-
-  /* === Avatar === */
-  --color-border-avatar: #bfc8a6;
-  --avatar-fallback-bg: #c3ccaf;
-  --avatar-fallback-color: #67434f;
-  --shadow-avatar: 0px 0px 15px rgba(0, 0, 0, 0.844);
-  --profilePicture-border-radius: 100%;
 }
 
 .treeContainer {

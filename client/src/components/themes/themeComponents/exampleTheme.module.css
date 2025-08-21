@@ -83,7 +83,7 @@
   ); /* 20% larger than link title */
   --header-font-weight: var(--font-weight-bold, 700);
   --header-font-family: var(--font-family-base);
-  --header-padding: var(--padding-medium, 0.75rem) 0;
+  --header-padding: 0;
   --header-margin: none; /* no need for more space*/
   --header-letter-spacing: var(--letter-spacing-base);
   --header-bg: none;
@@ -147,7 +147,7 @@
   --color-text-link: var(--color-link, #0078d4);
   --border-link: 1px solid var(--color-border, #eee);
   --link-radius: var(--radius-medium, 8px);
-  --link-gap: var(--gap-medium, 16px);
+  --link-gap: 20px;
   --link-padding-y: var(--padding-medium, 0.75rem);
   --link-padding-x: var(--padding-large, 1.25rem);
   --link-padding-x-mobile: var(--padding-medium, 0.75rem);
@@ -165,6 +165,7 @@
 
   /* === Links Container Styles === */
   --links-container-margin: 0 auto var(--link-gap, 16px) auto;
+  --links-container-margin-mobile: 0 var(--link-gap);
   --links-container-flex-direction: row;
   --links-container-align-items: center;
   --links-container-justify-content: flex-start;

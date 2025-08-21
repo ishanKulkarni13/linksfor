@@ -37,8 +37,8 @@
   width: var(--container-width, 100%);
   max-width: var(--link-width, 500px);
   min-height: var(--link-height, 64px);
-  box-shadow: var(--link-shadow, 0px 1px 3px rgba(0,0,0,0.12));
-  margin: var(--container-margin, 0 auto var(--link-gap, 16px) auto);
+  box-shadow: var(--link-shadow, 0px 1px 3px rgba(0, 0, 0, 0.12));
+  margin: var(--link-container-margin, 0 auto var(--link-gap, 16px) auto);
   position: relative;
   /* background: var(--container-bg, color-mix(in srgb, var(--color-surface-1, #fff) 85%, transparent)); */
   backdrop-filter: var(--container-backdrop-filter, blur(6px));
@@ -46,17 +46,6 @@
   opacity: var(--container-opacity, 1);
   filter: var(--container-filter, none);
   animation: var(--container-animation, none);
-}
-
-@media (width > 640px) {
-  .container:hover {
-    transform: var(--container-hover-transform, scale(0.98));
-    box-shadow: var(--link-shadow-hover, 0px 2px 10px rgba(0,0,0,0.18));
-    opacity: var(--container-hover-opacity, 1);
-    filter: var(--container-hover-filter, none);
-    animation: var(--container-hover-animation, none);
-    transition: var(--container-hover-transition, transform 0.2s, box-shadow 0.2s);
-  }
 }
 
 .thumbnailContainer {
@@ -151,10 +140,13 @@
 .featuredContainer {
   width: var(--link-featured-width, 100%);
   max-width: 100%;
-  margin: var(--featured-container-margin, 0 auto var(--link-featured-gap, 1rem) auto);
+  margin: var(
+    --featured-container-margin,
+    0 auto var(--link-featured-gap, 1rem) auto
+  );
   border-radius: var(--link-featured-radius, 12px);
   overflow: hidden;
-  box-shadow: var(--link-shadow, 0px 1px 3px rgba(0,0,0,0.12));
+  box-shadow: var(--link-shadow, 0px 1px 3px rgba(0, 0, 0, 0.12));
   display: flex;
   flex-direction: column;
   position: relative;
@@ -165,13 +157,13 @@
   height: var(--link-featured-height, 220px);
   opacity: var(--featured-container-opacity, 1);
   border: var(--featured-container-border, none);
-  box-shadow: var(--link-shadow, 0px 1px 3px rgba(0,0,0,0.12));
+  box-shadow: var(--link-shadow, 0px 1px 3px rgba(0, 0, 0, 0.12));
   filter: var(--featured-container-filter, none);
   animation: var(--featured-container-animation, none);
 }
 
 .featuredContainer:hover {
-  box-shadow: var(--link-shadow-hover, 0px 2px 10px rgba(0,0,0,0.18));
+  box-shadow: var(--link-shadow-hover, 0px 2px 10px rgba(0, 0, 0, 0.18));
   opacity: var(--featured-container-hover-opacity, 1);
   filter: var(--featured-container-hover-filter, none);
   animation: var(--featured-container-hover-animation, none);
@@ -219,7 +211,16 @@
   bottom: 0;
   width: 100%;
   height: var(--link-featured-overlay-height, 45%);
-  background: var(--link-featured-overlay-gradient, linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.55) 40%, rgba(0,0,0,0.18) 75%, rgba(0,0,0,0) 100%));
+  background: var(
+    --link-featured-overlay-gradient,
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.82) 0%,
+      rgba(0, 0, 0, 0.55) 40%,
+      rgba(0, 0, 0, 0.18) 75%,
+      rgba(0, 0, 0, 0) 100%
+    )
+  );
   display: flex;
   align-items: flex-end;
   z-index: 2;
@@ -325,7 +326,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: var(--socials-transition, background 0.2s, color 0.2s, box-shadow 0.2s);
+  transition: var(
+    --socials-transition,
+    background 0.2s,
+    color 0.2s,
+    box-shadow 0.2s
+  );
   animation: var(--socials-animation, none);
 }
 .socialIcon:hover {
@@ -334,6 +340,22 @@
 }
 
 /* Responsive adjustments */
+
+@media (width > 640px) {
+  .container:hover {
+    transform: var(--container-hover-transform, scale(0.98));
+    box-shadow: var(--link-shadow-hover, 0px 2px 10px rgba(0, 0, 0, 0.18));
+    opacity: var(--container-hover-opacity, 1);
+    filter: var(--container-hover-filter, none);
+    animation: var(--container-hover-animation, none);
+    transition: var(
+      --container-hover-transition,
+      transform 0.2s,
+      box-shadow 0.2s
+    );
+  }
+}
+
 @media (max-width: 600px) {
   .featuredContainer,
   .container {
@@ -363,6 +385,6 @@
 @media (width > 640px) {
   .container:hover {
     transform: var(--container-hover-transform, scale(0.98));
-    box-shadow: var(--link-shadow-hover, 0px 2px 10px rgba(0,0,0,0.18));
+    box-shadow: var(--link-shadow-hover, 0px 2px 10px rgba(0, 0, 0, 0.18));
   }
 }

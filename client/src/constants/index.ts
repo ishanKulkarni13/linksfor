@@ -22,6 +22,12 @@ export const navLinks = [
 
 export const avaibleTreeThemes = [
     {
+        displayName: 'Classic',
+        id: 1,
+        name: "classic",
+        displayPicture: "https://res.cloudinary.com/kakashib2k/image/upload/v1717148505/LinksFor/important/themes/pictures/nvqkazndfccqksyztfkm.jpg"
+    },
+    {
         displayName: 'Air Black',
         id: 10000,
         name: "airBlack",

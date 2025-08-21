@@ -1,11 +1,11 @@
 "use client";
 import styles from "./editTreeTheme.module.css";
 import { useRouter } from "next/navigation";
-import {  toast } from "sonner";
+import { toast } from "sonner";
 import axios from "axios";
 import { useLocalstorage } from "@/hooks/localStorage";
 import { useEffect, useRef, useState } from "react";
-import { avaibleTreeThemes } from "@/constants";
+import { avaibleTreeThemes } from "@/constants/index";
 import Image from "next/image";
 import useUpdateTreeProfile from "@/hooks/useUpdateTreeProfile";
 
@@ -14,24 +14,36 @@ export default function EditTreeTheme({ treeUID, treeProfile }) {
   const { removeItem, getItem } = useLocalstorage("selectedTree");
   const { updateTreeProfile } = useUpdateTreeProfile(treeUID);
   const formRef = useRef(null);
-  const [selectedTreeThemeID, setSelectedTreeThemeID] = useState(treeProfile.theme.selectedTheme.themeID);
+  const [selectedTreeThemeID, setSelectedTreeThemeID] = useState(
+    treeProfile.theme.selectedTheme.themeID
+  );
 
   const handleInputChange = async (e) => {
-    console.log(e.target.id);
-    setSelectedTreeThemeID(e.target.id)
+    const themeID = e.target.id;
+    const themeName = e.target.dataset.themeName;
+    // console.log(themeID);
+    setSelectedTreeThemeID(themeID);
 
-    const { response, error } = await updateTreeProfile({ selectedThemeID: e.target.id });
+    toast.loading(`Updating theme to ${themeName || themeID}`, {
+      id: "theme-update-toast",
+    });
+    const { response, error } = await updateTreeProfile({
+      selectedThemeID: themeID,
+    });
     if (response) {
-      toast.success(`updated theme to ${e.target.id}`)
+      toast.success(`Updated theme to ${themeName || themeID}`, {
+        id: "theme-update-toast",
+      });
     }
     if (error) {
-      toast.error(error.message)
-      setSelectedTreeThemeID(selectedTreeThemeID)
-    }
+      toast.error(error.message, {
+        id: "theme-update-toast",
+      });
 
+      setSelectedTreeThemeID(selectedTreeThemeID);
+    }
   };
 
-  
   const onSubmit = async (e) => {
     e.preventDefault();
   };
@@ -49,6 +61,7 @@ export default function EditTreeTheme({ treeUID, treeProfile }) {
                   type="radio"
                   name="themes"
                   id={theme.id}
+                  data-theme-name={theme.displayName}
                   checked={selectedTreeThemeID == theme.id}
                   onChange={handleInputChange}
                 />
@@ -64,7 +77,9 @@ export default function EditTreeTheme({ treeUID, treeProfile }) {
                         />
                       </div>
                     </div>
-                    <div className={`${styles.themeName}`}>{theme.displayName}</div>
+                    <div className={`${styles.themeName}`}>
+                      {theme.displayName}
+                    </div>
                   </div>
                 </label>
               </div>
