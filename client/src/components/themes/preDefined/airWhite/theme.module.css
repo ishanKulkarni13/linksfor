@@ -1,117 +1,328 @@
 body:has(> .treeContainer) {
-  /* selected the body too */
+  /* === Background & Grid === */
+  --background: var(--color-bg, #fff);
+
+  /* === Layout & Spacing === */
   --margin-x: 15px;
-  --background: rgb(255, 255, 255);
-  --color-surface-1: hsl(57, 70%, 10%);
-  --color-surface-2: hsl(57, 60%, 15%);
-  --color-surface-3: hsl(57, 50%, 20%);
+  --gap-xs: 4px;
+  --gap-small: 10px;
+  --gap-medium: 16px;
+  --gap-large: 24px;
+  --gap-xlarge: 40px;
+  --padding-xs: 0.25rem;
+  --padding-small: 0.5rem;
+  --padding-medium: 0.85rem;
+  --padding-large: 1.5rem;
+  --padding-xlarge: 2rem;
+  --width-main: 500px;
+  --width-full: 100%;
+  --max-width-container: 900px;
 
-  --color-link: rgb(235, 238, 241);
-  --color-overlay: hsl(57, 80%, 5%);
-
+  /* === Color Palette === */
+  --color-bg: #fff;
+  --color-surface-1: #ebeef1;
+  --color-surface-2: #bfc8a6;
+  --color-surface-3: #a39e9e;
+  --color-surface-overlay: rgba(255, 255, 255, 0.85);
+  --color-primary: #67434f;
+  --color-secondary: #a39e9e;
+  --color-accent: #4fbfa5;
+  --color-accent-light: #e6f4ff;
+  --color-accent-dark: #2d1e2f;
+  --color-link: #fff;
+  --color-link-hover: #4fbfa5;
+  --color-border: #dbe6f0;
+  --color-border-muted: #a39e9e;
+  --color-shadow: rgba(103, 67, 79, 0.12);
+  --color-shadow-hover: rgba(103, 67, 79, 0.22);
+  --color-overlay: #bfc8a6;
+  --color-destructive: #a34f4f;
+  --color-success: #388e3c;
+  --color-warning: #fbc02d;
+  --color-info: #1976d2;
   /* Text colors */
   --color-text-main: black;
-  --color-text-link: var(--color-text-main);
-  --color-social-icons: var(--color-text-main);
-
-  --color-text-header: var(--color-text-main);
   --color-text-profile: var(--color-text-main);
-  /* Borders */
-  --color-border: rgb(179, 197, 204);
-  --border-surface-floating: 1px solid rgba(255, 255, 255, 0.326);
-  --color-border-muted: hsl(215, 20%, 50%);
+  --color-social-icons: var(--color-text-main);
+  --color-text-link: var(--color-text-main);
+  --color-text-header: var(--color-text-main);
+
+  /* === Shadows === */
+  --shadow-1: 0px 1px 3px rgba(0, 0, 0, .24);
+  --shadow-2: 0px 3px 6px rgba(0, 0, 0, .32);
+  --shadow-3: 0px 10px 20px rgba(0, 0, 0, .48);
+  --shadow-floating: 0px 2px 10px rgba(0, 0, 0, .771);
+
+  /* === Typography === */
+  --font-family-base: "Inter", Arial, sans-serif;
+  --font-size-base: 1rem;
+  --font-size-small: 0.95rem;
+  --font-size-large: 1.15rem;
+  --font-size-xlarge: 2rem;
+  --font-weight-light: 400;
+  --font-weight-normal: 500;
+  --font-weight-bold: 700;
+  --line-height-base: 1.3;
+  --letter-spacing-base: normal;
+
+  /* === Borders & Radius === */
+  --border-surface-floating: 1.5px solid #c3ccaf;
+  /* --border-radius-link: 50px; */
+
+  /* === Header === */
+  --link-header-container-font-size: calc(var(--font-size-large, 1.15rem) * 1.2);
+  --link-header-container-font-weight: var(--font-weight-bold, 700);
+  --link-header-container-font-family: var(--font-family-base);
+  --link-header-container-padding: 0;
+  --link-header-container-margin: none; /* no need for more space*/
+  --link-header-container-letter-spacing: var(--letter-spacing-base);
+  --link-header-container-bg: none;
+  --link-header-container-radius: 0;
+  --link-header-container-opacity: 1;
+  --link-header-container-border: none;
+  --link-header-container-box-shadow: none;
+  --link-header-container-filter: none;
+  --link-header-container-animation: none;
+  --link-header-container-transition: none;
+  --link-header-container-text-shadow: none;
+
+  /* === Avatar === */
+  /* --color-border-avatar: #5900ff; */
+  /* --shadow-avatar: 0px 0px 15px rgb(85, 255, 0); */
+  /* --profilePicture-border-radius: 100%; */
+
+  /* === Profile === */
+  /* --- for profile container ---*/
+  --profile-border: none;
+  --profile-radius: none;
+  --profile-padding: var(--padding-large, 1.5rem);
+  --profile-shadow: 0px 2px 8px var(--shadow-2, rgba(103, 67, 79, 0.16));
+  --profile-opacity: 1;
+  --profile-animation: none;
+  --profile-transition: box-shadow 0.2s;
+  /* --- for profile picture ---*/
+  --profile-picture-size: 96px;
+  --profile-picture-border-radius: 50%;
+  --profile-picture-border: 2px solid var(--color-border, #eee);
+  --profile-picture-shadow: var(--shadow-2,0px 10px 20px rgba(0,0,0,.48));
+  --profile-picture-color: var(--color-text-main, #fff);
+  --profile-picture-bg: var(--color-surface-1);
+  --avatar-fallback-bg: var(--profile-picture-bg);
+  --avatar-fallback-color: var(--profile-picture-color);
+  /* --- for profile text --- */
+  --profile-text-shadow: none;
+  --profile-name-font-size: 1.5rem;
+  --profile-name-font-weight: var(--font-weight-bold, 700);
+  --profile-name-color: var(--color-text-profile, #ffffff);
+  --profile-bio-font-size: var(--font-size-base, 1rem);
+  --profile-bio-font-weight: 600;
+  --profile-bio-color: var(--profile-name-color, #a39e9e);
+  --profile-bio-line-height: 1.5;
+  --profile-link-color: var(--color-link, #67434f);
+  --profile-link-hover-color: var(--color-accent, #4fbfa5);
+
+  /* === Socials === */
+  --border-radius-socials: 12px;
+  --socials-gap: 0px;
+  --socials-padding: 0.5rem;
+  --socials-size: 35px;
+  --socials-bg: none;
+  --socials-bg-hover: var(--socials-bg);
+  --socials-color: var(--color-accent, #4fbfa5);
+  --socials-color-hover: var(--color-accent-dark, #2d1e2f);
+  --socials-radius: var(--border-radius-socials, 12px);
+  --socials-border: none;
+  --socials-shadow: none;
+  --socials-opacity: 1;
+  --socials-transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  --socials-animation: none;
+
+  /* === Links Container === */
+  --links-container-margin: 0 auto 0 auto;
+  --links-container-margin-mobile: 0 var(--link-gap);
+  --links-container-gap: var(--link-gap, 10px);
+  --links-container-flex: 1;
+  --links-container-bg: none;
+  --links-container-border: none;
+  --links-container-radius: 0;
+  --links-container-shadow: none;
+  --links-container-opacity: 1;
+  --links-container-filter: none;
+  --links-container-animation: none;
+  --links-container-transition: none;
+
+  /* === Link Container === */
+  --link-gap: 20px;
+  --bg-color-link: var(--color-surface-1, none);
   --border-link: none;
-  /* Borders Radius */
-  --border-radius-link: 8px;
-  --border-radius-thumbnail: 8px;
-
-  /* Shadows */
-  --shadow-1: 0px 1px 3px rgba(0, 0, 0, 0.24);
-  --shadow-2: 0px 3px 6px rgba(0, 0, 0, 0.32);
-  --shadow-3: 0px 10px 20px rgba(0, 0, 0, 0.48);
-  --shadow-floating: 0px 2px 10px rgba(0, 0, 0, 0.771);
-
-  /* Primary colors */
-  --color-primary: hsl(210, 40%, 98%);
-  --color-primary-light: hsl(210, 40%, 90%);
-  --color-primary-dark: hsl(57, 47.4%, 11.2%);
-  --color-primary-foreground: hsl(57, 47.4%, 11.2%);
-
-  /* Secondary colors */
-  --color-secondary: hsl(217.2, 32.6%, 17.5%);
-  --color-secondary-light: hsl(217.2, 42.6%, 27.5%);
-  --color-secondary-dark: hsl(210, 40%, 96.1%);
-  --color-secondary-foreground: hsl(210, 40%, 98%);
-
-  /* Accent colors */
-  --color-accent: hsl(174, 100%, 50%);
-  --color-accent-foreground: hsl(210, 40%, 98%);
-
-  /* Destructive colors */
-  --color-destructive: hsl(0, 62.8%, 30.6%);
-  --color-destructive-foreground: hsl(210, 40%, 98%);
-
-  /* Avatar */
-  --color-border-avatar: hsl(210, 40%, 90%);
-  --avatar-fallback-bg: var(--color-primary, #0a40ee);
-  --avatar-fallback-color: var(--color-primary-foreground, #22223b);
-  --shadow-avatar: var(--shadow-2, 0px 10px 20px rgba(0, 0, 0, 0.48));
-
-  /* Link Shared Variables */
-  --link-width: 500px;
-
-  /* Non-Featured Link Variables */
-  --link-height: 64px;
-  --link-radius: 12px;
-  --link-shadow: var(--shadow-3, 0px 10px 20px rgba(0, 0, 0, 0.48));
-  --link-shadow-hover: var(
-    --shadow-floating,
-    0px 2px 10px rgba(0, 0, 0, 0.771)
+  --link-border-radius: 12px;
+  --link-padding-y: var(--padding-medium, 0.85rem);
+   --link-padding-x: var(--link-padding-y);
+  --link-padding-x-mobile: var(--padding-medium, 1rem);
+  --link-width: var(--width-main, 500px);
+  --link-height: 68px;
+  --link-shadow: var(--shadow-3,0px 10px 20px rgba(0,0,0,.48));
+  --link-shadow-hover:  var(
+    --shadow-floating,0px 2px 10px rgba(0,0,0,.771)
   );
+  --link-title-font: var(--font-family-base, "Inter", Arial, sans-serif);
+  --link-title-size: var(--font-size-large, 1.15rem);
+  --link-title-weight: 600;
+  --link-title-color: var(--color-text-link, #fff);
+  --link-thumbnail-size: 52px;
+  --link-options-size: 44px;
 
-  --link-title-font: "Inter", Arial, sans-serif;
-  --link-title-size: 1.1rem;
-  --link-title-weight: 500;
-  --link-title-color: var(--color-text-link);
-  --link-gap: 16px;
-  --link-padding-y: 0.75rem;
-  --link-padding-x: 1.25rem;
-  --link-padding-x-mobile: 0.75rem;
-  --link-thumbnail-size: 48px;
-  --link-options-size: 40px;
+  /* --- Standardize link container variables --- */
+  --link-container-flex-direction: row;
+  --link-container-align-items: center;
+  --link-container-justify-content: flex-start;
+  --link-container-transition: transform 0.2s, box-shadow 0.2s;
+  --link-container-text-align: left;
+  --link-container-width: var(--width-full, 100%);
+  --link-container-margin: 0 auto 0 auto;
+  --link-container-bg: var(--bg-color-link);
+  --link-container-backdrop-filter: blur(6px);
+  --link-container-hover-transform: scale(0.98);
+  --link-container-opacity: 1;
+  --link-container-filter: none;
+  --link-container-animation: none;
+  --link-container-hover-opacity: 1;
+  --link-container-hover-filter: none;
+  --link-container-hover-animation: none;
+  --link-container-hover-transition: transform 0.2s, box-shadow 0.2s;
+  --link-container-mobile-opacity: 1;
+  --link-container-mobile-filter: none;
+  --link-container-mobile-animation: none;
+  --link-container-mobile-transition: none;
 
-  /* Featured Link Variables */
-  --link-featured-width: var(--link-width);
-  --link-featured-height: 220px;
-  --link-featured-radius: 18px;
-  --link-featured-title-font: "Inter", Arial, sans-serif;
-  --link-featured-title-size: 1.35rem;
+  /* === Thumbnail === */
+  --border-radius-thumbnail: var(--link-border-radius, 32px);
+  --thumbnail-bg: var(--color-surface-2);
+  --thumbnail-object-fit: cover;
+  --thumbnail-opacity: 1;
+  --thumbnail-border: none;
+  --thumbnail-box-shadow: none;
+  --thumbnail-filter: none;
+  --thumbnail-animation: none;
+  --thumbnail-transition: none;
+  --thumbnail-img-opacity: 1;
+  --thumbnail-img-filter: none;
+  --thumbnail-img-transition: none;
+
+  /* === Text Container === */
+  --text-container-gap: 0;
+  --text-container-opacity: 1;
+  --text-container-filter: none;
+  --text-container-animation: none;
+  --text-container-transition: none;
+
+  /* === Title === */
+  --title-margin: 0;
+  --title-line-height: var(--line-height-base, 1.3);
+  --title-white-space: nowrap;
+  --title-overflow: hidden;
+  --title-text-overflow: ellipsis;
+  --title-letter-spacing: var(--letter-spacing-base, normal);
+  --title-opacity: 1;
+  --title-filter: none;
+  --title-animation: none;
+  --title-transition: none;
+
+  /* === Options Button/Icon === */
+  --options-button-font-size: 1.2rem;
+  --options-button-bg: none;
+  --options-button-border: none;
+  --options-button-outline: none;
+  --options-button-radius: 50%;
+  --options-button-color: inherit;
+  --options-button-opacity: 1;
+  --options-button-box-shadow: none;
+  --options-button-filter: none;
+  --options-button-animation: none;
+  --options-button-transition: none;
+  --options-icon-width: 18px;
+  --options-icon-height: 18px;
+  --options-icon-opacity: 1;
+  --options-icon-filter: none;
+  --options-icon-transition: none;
+
+  /* === Featured Link === */
+  --link-featured-width: var(--link-width, 500px);
+  --link-featured-radius: var(--link-border-radius);
+  --link-featured-gap: var(--link-gap, 18px);
+  --link-featured-height: 230px;
+  --link-featured-title-font: var(
+    --font-family-base,
+    "Inter",
+    Arial,
+    sans-serif
+  );
+  --link-featured-title-size: 1.45rem;
   --link-featured-title-weight: 700;
-  --link-featured-title-color: #fff;
+  --link-featured-title-color: #f6f7f2;
   --link-featured-overlay-gradient: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.82) 0%,
-    rgba(0, 0, 0, 0.55) 40%,
-    rgba(0, 0, 0, 0.18) 75%,
+    rgba(103, 67, 79, 0.82) 0%,
+    rgba(103, 67, 79, 0.55) 40%,
+    rgba(103, 67, 79, 0.18) 75%,
     rgba(0, 0, 0, 0) 100%
   );
-  --link-featured-overlay-height: 45%;
-  --link-featured-overlay-padding: 1.2rem;
-  --link-featured-gap: 1rem;
+  --link-featured-overlay-height: 48%;
+  --link-featured-overlay-padding: 1.4rem;
+  --link-featured-container-margin: 0 auto var(--link-featured-gap, 1.2rem) auto;
+  --link-featured-container-transition: var(--link-container-transition, box-shadow 0.2s);
+  --link-featured-container-opacity: 1;
+  --link-featured-container-border: var(--border-link, none);
+  --link-featured-container-filter: none;
+  --link-featured-container-animation: none;
+  --link-featured-container-hover-opacity: 1;
+  --link-featured-container-hover-filter: none;
+  --link-featured-container-hover-animation: none;
+  --link-featured-container-hover-transition: box-shadow 0.2s;
+  --link-featured-thumbnail-bg: #eee;
+  --link-featured-thumbnail-object-fit: cover;
+  --link-featured-thumbnail-wrapper-opacity: 1;
+  --link-featured-thumbnail-wrapper-border: none;
+  --link-featured-thumbnail-wrapper-box-shadow: none;
+  --link-featured-thumbnail-wrapper-filter: none;
+  --link-featured-thumbnail-wrapper-animation: none;
+  --link-featured-thumbnail-wrapper-transition: none;
+  --link-featured-thumbnail-opacity: 1;
+  --link-featured-thumbnail-filter: none;
+  --link-featured-thumbnail-transition: none;
+  --link-featured-overlay-opacity: 1;
+  --link-featured-overlay-filter: none;
+  --link-featured-overlay-animation: none;
+  --link-featured-overlay-transition: none;
+  --link-featured-text-opacity: 1;
+  --link-featured-text-filter: none;
+  --link-featured-text-animation: none;
+  --link-featured-text-transition: none;
+  --link-featured-title-margin: 0;
+  --link-featured-title-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --link-featured-title-line-height: 1.2;
+  --link-featured-title-word-break: break-word;
+  --link-featured-title-letter-spacing: normal;
+  --link-featured-title-opacity: 1;
+  --link-featured-title-filter: none;
+  --link-featured-title-animation: none;
+  --link-featured-title-transition: none;
+  --link-featured-container-mobile-height: 48vw;
 }
+
 
 .treeContainer {
   margin: 100px 0px;
 }
 
 .treeContentContainer {
-  margin-top: 25px;
+  /* margin-top: 25px; */
   width: auto;
   display: flex;
   justify-content: center;
   align-items: stretch;
   flex-direction: column; /* dynamically set in jsx */
-  gap: 25px;
+  gap: 18px;
 }
 
 .linksContainer {

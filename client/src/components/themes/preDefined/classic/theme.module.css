@@ -1,7 +1,8 @@
 body:has(> .treeContainer) {
   /* === Background & Grid === */
   --background: var(--color-bg, #fff);
-
+  --background-blend-mode: normal;
+  --background-opacity: 1;
   /* === Layout & Spacing === */
   --margin-x: 15px;
   --gap-xs: 4px;
@@ -69,22 +70,25 @@ body:has(> .treeContainer) {
   --border-surface-floating: 1.5px solid #c3ccaf;
   /* --border-radius-link: 50px; */
 
-  /* === Header === */
-  --header-font-size: calc(var(--font-size-large, 1.15rem) * 1.2);
-  --header-font-weight: var(--font-weight-bold, 700);
-  --header-font-family: var(--font-family-base);
-  --header-padding: 0;
-  --header-margin: none; /* no need for more space*/
-  --header-letter-spacing: var(--letter-spacing-base);
-  --header-bg: none;
-  --header-radius: 0;
-  --header-opacity: 1;
-  --header-border: none;
-  --header-box-shadow: none;
-  --header-filter: none;
-  --header-animation: none;
-  --header-transition: none;
-  --header-text-shadow: none;
+  /* === Link Header container === */
+  --link-header-container-font-size: calc(
+    var(--font-size-large, 1.15rem) * 1.2
+  );
+  --link-header-container-font-weight: var(--font-weight-bold, 700);
+  --link-header-container-font-family: var(--font-family-base);
+  --link-header-container-padding: 0;
+  --link-header-container-margin: none; /* no need for more space*/
+  --link-header-container-letter-spacing: var(--letter-spacing-base);
+  --link-header-container-bg: none;
+  --link-header-container-radius: 0;
+  --link-header-container-opacity: 1;
+  --link-header-container-border: none;
+  --link-header-container-box-shadow: none;
+  --link-header-container-filter: none;
+  --link-header-container-animation: none;
+  --link-header-container-transition: none;
+  --link-header-container-text-shadow: none;
+  --link-header-container-backdrop-filter: none;
 
   /* === Avatar === */
   /* --color-border-avatar: #5900ff; */
@@ -157,12 +161,12 @@ body:has(> .treeContainer) {
   --border-link: 2px solid var(--color-border);
   --link-border-radius: 32px;
   --link-padding-y: var(--padding-medium, 0.85rem);
-   --link-padding-x: var(--link-padding-y);
+  --link-padding-x: var(--link-padding-y);
   --link-padding-x-mobile: var(--padding-medium, 1rem);
   --link-width: var(--width-main, 500px);
   --link-height: 68px;
   --link-shadow: var(--color-border) 7px 7px 0px 0px;
-  --link-shadow-hover:  var(--color-border) 10px 10px 0px 0px;
+  --link-shadow-hover: var(--color-border) 10px 10px 0px 0px;
   --link-title-font: var(--font-family-base, "Inter", Arial, sans-serif);
   --link-title-size: var(--font-size-large, 1.15rem);
   --link-title-weight: 600;
@@ -268,7 +272,10 @@ body:has(> .treeContainer) {
   --link-featured-overlay-height: 48%;
   --link-featured-overlay-padding: 1.4rem;
   --link-featured-container-margin: 0 auto var(--link-featured-gap, 1.2rem) auto;
-  --link-featured-container-transition: var(--link-container-transition, box-shadow 0.2s);
+  --link-featured-container-transition: var(
+    --link-container-transition,
+    box-shadow 0.2s
+  );
   --link-featured-container-opacity: 1;
   --link-featured-container-border: var(--border-link, none);
   --link-featured-container-filter: none;
@@ -307,7 +314,6 @@ body:has(> .treeContainer) {
   --link-featured-title-transition: none;
   --link-featured-container-mobile-height: 48vw;
 }
-
 
 .treeContainer {
   margin: 100px 0px;

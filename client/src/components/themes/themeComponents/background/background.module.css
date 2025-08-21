@@ -4,5 +4,6 @@
 
 body:has(.background) {
   background: var(--background);
-  
+  opacity: var(--background-opacity, 1);
+  background-blend-mode: var(--background-blend-mode, normal);
 }
