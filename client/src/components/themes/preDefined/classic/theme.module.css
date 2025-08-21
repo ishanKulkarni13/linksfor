@@ -268,7 +268,7 @@ body:has(> .treeContainer) {
   --link-featured-overlay-height: 48%;
   --link-featured-overlay-padding: 1.4rem;
   --link-featured-container-margin: 0 auto var(--link-featured-gap, 1.2rem) auto;
-  --link-featured-container-transition: box-shadow 0.2s;
+  --link-featured-container-transition: var(--link-container-transition, box-shadow 0.2s);
   --link-featured-container-opacity: 1;
   --link-featured-container-border: var(--border-link, none);
   --link-featured-container-filter: none;
@@ -307,6 +307,7 @@ body:has(> .treeContainer) {
   --link-featured-title-transition: none;
   --link-featured-container-mobile-height: 48vw;
 }
+
 
 .treeContainer {
   margin: 100px 0px;

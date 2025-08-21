@@ -44,6 +44,7 @@ export default function Link({ link }) {
     }
     return (
       <NextLink className={styles.container} href={link.URL}>
+
         {link.thumbnail?.URL ? (
           <div className={styles.thumbnailContainer}>
               <Image
@@ -59,9 +60,11 @@ export default function Link({ link }) {
             {/* <p className={styles.placeholderText}>No Image</p> */}
           </div>
         )}
+
         <div className={styles.textContainer}>
           <p className={styles.title}>{link.title}</p>
         </div>
+        
         <button className={styles.optionsButton}>
           {/* <FontAwesomeIcon icon={faEllipsisVertical} className={styles.optionsIcon}/> */}
         </button>
