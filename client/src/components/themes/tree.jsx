@@ -3,7 +3,7 @@ import TreeThemeAirWhite from "./preDefined/airWhite/theme";
 import MosaicMotion from "./preDefined/mosaicMotion/theme";
 import Sand from "./preDefined/sand/theme";
 import Classic from "./preDefined/classic/theme";
-import TreeThemeGreenFog from "./preDefined/greenFog/greenFog";
+import TreeThemeGreenFog from "./preDefined/greenFog/theme";
 import TreeThemeMinerialBlue from "./preDefined/minerialBlue/minerialBlue";
 import TreeThemeSkyMint from "./preDefined/skymint/theme";
 import TreeThemeSpray from "./preDefined/spray/spray";
