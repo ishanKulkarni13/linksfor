@@ -154,9 +154,8 @@ body:has(> .treeContainer) {
   /* === Link Container === */
   --link-gap: 20px;
   --bg-color-link: var(--color-surface-1, none);
-  /* --link-container-bor */
   --border-link: 2px solid var(--color-border);
-  --link-radius: 32px;
+  --link-border-radius: 32px;
   --link-padding-y: var(--padding-medium, 0.85rem);
   --link-padding-x: var(--padding-large, 1.5rem);
   --link-padding-x-mobile: var(--padding-medium, 1rem);
@@ -170,36 +169,33 @@ body:has(> .treeContainer) {
   --link-title-color: var(--color-text-link, #fff);
   --link-thumbnail-size: 52px;
   --link-options-size: 44px;
-  
-  --container-flex-direction: row;
-  --container-align-items: center;
-  --container-justify-content: flex-start;
-  --container-transition: transform 0.2s, box-shadow 0.2s;
-  --container-text-align: left;
-  --container-width: var(--width-full, 100%);
+
+  /* --- Standardize link container variables --- */
+  --link-container-flex-direction: row;
+  --link-container-align-items: center;
+  --link-container-justify-content: flex-start;
+  --link-container-transition: transform 0.2s, box-shadow 0.2s;
+  --link-container-text-align: left;
+  --link-container-width: var(--width-full, 100%);
   --link-container-margin: 0 auto 0 auto;
-  --container-bg: color-mix(
-    in srgb,
-    var(--color-surface-1, #e6e9d8) 85%,
-    transparent
-  );
-  --container-backdrop-filter: blur(6px);
-  --container-hover-transform: scale(0.98);
-  --container-opacity: 1;
-  --container-filter: none;
-  --container-animation: none;
-  --container-hover-opacity: 1;
-  --container-hover-filter: none;
-  --container-hover-animation: none;
-  --container-hover-transition: transform 0.2s, box-shadow 0.2s;
-  --container-mobile-opacity: 1;
-  --container-mobile-filter: none;
-  --container-mobile-animation: none;
-  --container-mobile-transition: none;
+  --link-container-bg: var(--bg-color-link);
+  --link-container-backdrop-filter: blur(6px);
+  --link-container-hover-transform: scale(0.98);
+  --link-container-opacity: 1;
+  --link-container-filter: none;
+  --link-container-animation: none;
+  --link-container-hover-opacity: 1;
+  --link-container-hover-filter: none;
+  --link-container-hover-animation: none;
+  --link-container-hover-transition: transform 0.2s, box-shadow 0.2s;
+  --link-container-mobile-opacity: 1;
+  --link-container-mobile-filter: none;
+  --link-container-mobile-animation: none;
+  --link-container-mobile-transition: none;
 
   /* === Thumbnail === */
-  --border-radius-thumbnail: 50px;
-  --thumbnail-bg: #eaeaea;
+  --border-radius-thumbnail: var(--link-border-radius, 32px);
+  --thumbnail-bg: var(--color-surface-2);
   --thumbnail-object-fit: cover;
   --thumbnail-opacity: 1;
   --thumbnail-border: none;
@@ -250,7 +246,7 @@ body:has(> .treeContainer) {
 
   /* === Featured Link === */
   --link-featured-width: var(--link-width, 500px);
-  --link-featured-radius: 32px;
+  --link-featured-radius: var(--link-border-radius);
   --link-featured-gap: var(--link-gap, 18px);
   --link-featured-height: 230px;
   --link-featured-title-font: var(
@@ -271,45 +267,45 @@ body:has(> .treeContainer) {
   );
   --link-featured-overlay-height: 48%;
   --link-featured-overlay-padding: 1.4rem;
-  --featured-container-margin: 0 auto var(--link-featured-gap, 1.2rem) auto;
-  --featured-container-transition: box-shadow 0.2s;
-  --featured-container-opacity: 1;
-  --featured-container-border: var(--border-link, none);
-  --featured-container-filter: none;
-  --featured-container-animation: none;
-  --featured-container-hover-opacity: 1;
-  --featured-container-hover-filter: none;
-  --featured-container-hover-animation: none;
-  --featured-container-hover-transition: box-shadow 0.2s;
-  --featured-thumbnail-bg: #eee;
-  --featured-thumbnail-object-fit: cover;
-  --featured-thumbnail-wrapper-opacity: 1;
-  --featured-thumbnail-wrapper-border: none;
-  --featured-thumbnail-wrapper-box-shadow: none;
-  --featured-thumbnail-wrapper-filter: none;
-  --featured-thumbnail-wrapper-animation: none;
-  --featured-thumbnail-wrapper-transition: none;
-  --featured-thumbnail-opacity: 1;
-  --featured-thumbnail-filter: none;
-  --featured-thumbnail-transition: none;
-  --featured-overlay-opacity: 1;
-  --featured-overlay-filter: none;
-  --featured-overlay-animation: none;
-  --featured-overlay-transition: none;
-  --featured-text-opacity: 1;
-  --featured-text-filter: none;
-  --featured-text-animation: none;
-  --featured-text-transition: none;
-  --featured-title-margin: 0;
-  --featured-title-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-  --featured-title-line-height: 1.2;
-  --featured-title-word-break: break-word;
-  --featured-title-letter-spacing: normal;
-  --featured-title-opacity: 1;
-  --featured-title-filter: none;
-  --featured-title-animation: none;
-  --featured-title-transition: none;
-  --featured-container-mobile-height: 48vw;
+  --link-featured-container-margin: 0 auto var(--link-featured-gap, 1.2rem) auto;
+  --link-featured-container-transition: box-shadow 0.2s;
+  --link-featured-container-opacity: 1;
+  --link-featured-container-border: var(--border-link, none);
+  --link-featured-container-filter: none;
+  --link-featured-container-animation: none;
+  --link-featured-container-hover-opacity: 1;
+  --link-featured-container-hover-filter: none;
+  --link-featured-container-hover-animation: none;
+  --link-featured-container-hover-transition: box-shadow 0.2s;
+  --link-featured-thumbnail-bg: #eee;
+  --link-featured-thumbnail-object-fit: cover;
+  --link-featured-thumbnail-wrapper-opacity: 1;
+  --link-featured-thumbnail-wrapper-border: none;
+  --link-featured-thumbnail-wrapper-box-shadow: none;
+  --link-featured-thumbnail-wrapper-filter: none;
+  --link-featured-thumbnail-wrapper-animation: none;
+  --link-featured-thumbnail-wrapper-transition: none;
+  --link-featured-thumbnail-opacity: 1;
+  --link-featured-thumbnail-filter: none;
+  --link-featured-thumbnail-transition: none;
+  --link-featured-overlay-opacity: 1;
+  --link-featured-overlay-filter: none;
+  --link-featured-overlay-animation: none;
+  --link-featured-overlay-transition: none;
+  --link-featured-text-opacity: 1;
+  --link-featured-text-filter: none;
+  --link-featured-text-animation: none;
+  --link-featured-text-transition: none;
+  --link-featured-title-margin: 0;
+  --link-featured-title-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --link-featured-title-line-height: 1.2;
+  --link-featured-title-word-break: break-word;
+  --link-featured-title-letter-spacing: normal;
+  --link-featured-title-opacity: 1;
+  --link-featured-title-filter: none;
+  --link-featured-title-animation: none;
+  --link-featured-title-transition: none;
+  --link-featured-container-mobile-height: 48vw;
 }
 
 .treeContainer {
