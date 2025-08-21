@@ -4,7 +4,7 @@ import MosaicMotion from "./preDefined/mosaicMotion/theme";
 import Sand from "./preDefined/sand/theme";
 import Classic from "./preDefined/classic/theme";
 import TreeThemeGreenFog from "./preDefined/greenFog/theme";
-import TreeThemeMinerialBlue from "./preDefined/minerialBlue/minerialBlue";
+import TreeThemeMinerialBlue from "./preDefined/minerialBlue/theme";
 import TreeThemeSkyMint from "./preDefined/skymint/theme";
 import TreeThemeSpray from "./preDefined/spray/theme";
 
