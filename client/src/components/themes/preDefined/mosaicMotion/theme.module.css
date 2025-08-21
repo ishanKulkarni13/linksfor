@@ -30,7 +30,7 @@ body:has(> .treeContainer) {
   --color-text-main: #ffffff;
   --color-text-link: #67434f;
   --color-social-icons:  var(--color-text-main);
-  --color-text-header: var(--color-text-main);
+  --color-text-header: var(--link-title-color);
   --color-text-profile:  var(--color-text-main);
   /* Borders */
   --color-border: #bfc8a6;

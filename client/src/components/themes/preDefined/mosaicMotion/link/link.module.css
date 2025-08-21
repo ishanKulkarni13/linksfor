@@ -1,13 +1,22 @@
 .headerContainer {
+  width: fit-content;
+  margin: auto;
+  padding: 0 10px;
   font-size: 1.5rem;
   font-weight: 500;
   color: var(--color-text-header);
   display: flex;
   justify-content: center;
   align-items: center;
+
+  background: color-mix(in srgb, var(--color-surface-1) 85%, transparent);
+  backdrop-filter: blur(6px);
+  border-radius: var(--link-radius);
+  box-shadow: var(--link-shadow);
+  border-radius: 50px;
 }
 .headerContainer p {
-  text-shadow: 0 2px 9px rgba(0, 0, 0, 0.919); /* helps on noisy bg */
+  /* text-shadow: 0 0px 14px rgb(0, 0, 0);  */
 }
 .container {
   background-color: var(--bg-color-link);
@@ -56,6 +65,15 @@
   justify-content: center;
 }
 
+.thumbnailPlaceholder {
+  position: relative;
+  width: var(--link-thumbnail-size, 48px);
+  height: var(--link-thumbnail-size, 48px);
+  border-radius: var(--border-radius-thumbnail, 8px);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
 .thumbnail {
   width: 100%;
   height: 100%;
@@ -71,6 +89,7 @@
 }
 
 .title {
+  text-align: center;
   font-family: var(--link-title-font);
   font-size: var(--link-title-size);
   font-weight: var(--link-title-weight);

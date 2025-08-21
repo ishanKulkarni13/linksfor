@@ -1,15 +1,20 @@
-import Socials from "@/components/themes/preDefined/mosaicMotion/socials/default/socials";
-import Background from "./background/background";
-import Links from "./links/links";
-import Pofile from "./profile/profile";
-import styles from "./theme.module.css";
+// import Socials from "@/components/themes/themeComponents/socials/default/socials.jsx";
+// import Background from "./background/background";
+// import Links from "./links/links";
+// import Pofile from "./profile/profile";
+// import styles from "./theme.module.css";
 
-export default function TreeTheme({ tree }) {
+// import all from @/components/themes/themeComponents
+import Socials from "@/components/themes/themeComponents/socials/default/socials.jsx";
+import Background from "@/components/themes/themeComponents/background/background";
+import Links from "@/components/themes/themeComponents/links/links";
+import Pofile from "@/components/themes/themeComponents/profile/profile";
+
+export default function Tree({ tree, styles }) {
   return (
     <>
-    <Background />
+      <Background />
       <main className={` ${styles.treeContainer}`}>
-
         <div className={styles.profileContainer}>
           <Pofile
             treeName={tree.treeName}
@@ -21,18 +26,11 @@ export default function TreeTheme({ tree }) {
         <div
           className={styles.treeContentContainer}
           style={{
-            flexDirection: 
-              // tree?.theme?.themePreference?.socialIcons?.socialIconsPlacement &&
+            flexDirection:
               tree?.theme?.themePreference?.socialIcons?.socialIconsPlacement ==
-                "top"
+              "top"
                 ? `column`
                 : `column-reverse`,
-              // background: 
-              // tree?.theme?.themePreference?.socialIcons?.socialIconsPlacement &&
-              // tree?.theme?.themePreference?.socialIcons?.socialIconsPlacement ==
-              //   "top"
-              //   ? `yellow`
-              //   : `red`,
           }}
         >
           <div className={styles.socialsContainer}>

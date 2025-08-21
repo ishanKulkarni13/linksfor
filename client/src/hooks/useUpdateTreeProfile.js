@@ -11,8 +11,7 @@ const useUpdateTreeProfile = (treeUID) => {
 
     const updateTreeProfile = useCallback(async (updateData) => {
         if (!treeUID) {
-            console.log(treeUID);
-            return toast.error("Didn't get treeUID");
+            return toast.error("Didn't get treeUID" , {id: "treeUpdation"});
         }
         // setLoading(true);
         try {
@@ -39,16 +38,16 @@ const useUpdateTreeProfile = (treeUID) => {
         } catch (error) {
             console.log(error);
             if (error.response) {
-                toast.error(error.response.data.message);
+                toast.error(error.response.data.message, {id: "treeUpdation"});
                 if (error.response.status === 404 || error.response.status === 400 || error.response.status === 401) {
                     removeItem();
                     return push("/admin/select-tree?removeSelectedTree");
                 }
             } else if (error.request) {
-                toast.error("Network error occurred");
+                toast.error("Network error occurred", {id: "treeUpdation"});
                 return { error: { message: `Network error occurred` } }
             } else {
-                toast.error(`Some error occurred: ${error.message}`);
+                toast.error(`Some error occurred: ${error.message}`, {id: "treeUpdation"});
                 return { error: { message: `Some error occurred: ${error.message}` } }
             }
         }

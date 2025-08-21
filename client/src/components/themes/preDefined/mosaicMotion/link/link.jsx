@@ -7,7 +7,10 @@ import NextLink from "next/link";
 // Reusable FeaturedLink component
 function FeaturedLink({ link }) {
   return (
-    <NextLink className={`${styles.container} ${styles.featuredContainer}`} href={link.URL}>
+    <NextLink
+      className={`${styles.container} ${styles.featuredContainer}`}
+      href={link.URL}
+    >
       <div className={styles.featuredThumbnailWrapper}>
         {link.thumbnail?.URL && (
           <Image
@@ -35,15 +38,14 @@ function FeaturedLink({ link }) {
 }
 
 export default function Link({ link }) {
-  
   if (link.type == `link`) {
     if (link.layout === "featured") {
       return <FeaturedLink link={link} />;
     }
     return (
       <NextLink className={styles.container} href={link.URL}>
-        <div className={styles.thumbnailContainer}>
-          {link.thumbnail?.URL && (
+        {link.thumbnail?.URL ? (
+          <div className={styles.thumbnailContainer}>
             <Image
               className={styles.thumbnail}
               fill={true}
@@ -51,8 +53,12 @@ export default function Link({ link }) {
               alt="link image"
               style={{ objectFit: "cover" }}
             />
-          )}
-        </div>
+          </div>
+        ) : (
+          <div className={styles.thumbnailPlaceholder}>
+            {/* <p className={styles.placeholderText}>No Image</p> */}
+          </div>
+        )}
         <div className={styles.textContainer}>
           <p className={styles.title}>{link.title}</p>
         </div>

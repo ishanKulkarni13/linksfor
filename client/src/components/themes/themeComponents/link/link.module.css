@@ -74,16 +74,6 @@
   border-radius: var(--border-radius-thumbnail, 8px);
   overflow: hidden;
   flex-shrink: 0;
-  /* background: var(--thumbnail-bg, #eaeaea); */
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
-  /* opacity: var(--thumbnail-opacity, 1);
-  border: var(--thumbnail-border, none);
-  box-shadow: var(--thumbnail-box-shadow, none);
-  filter: var(--thumbnail-filter, none);
-  animation: var(--thumbnail-animation, none);
-  transition: var(--thumbnail-transition, none); */
 }
 
 .thumbnail {

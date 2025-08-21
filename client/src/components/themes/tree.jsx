@@ -29,10 +29,8 @@ export default function Tree({ tree }) {
     return <Classic tree={tree} />;
   } else {
     return (
-      <>
-        No tree found to have theme id: {tree.theme.selectedTheme.themeID},
-        contact the dev to know more
-      </>
+      // default
+       <TreeThemeAirBlack tree={tree} />
     );
   }
 }

@@ -160,7 +160,7 @@ body:has(> .treeContainer) {
    --link-padding-x: var(--link-padding-y);
   --link-padding-x-mobile: var(--padding-medium, 1rem);
   --link-width: var(--width-main, 500px);
-  --link-height: 680px;
+  --link-height: 68px;
   --link-shadow: var(--color-border) 7px 7px 0px 0px;
   --link-shadow-hover:  var(--color-border) 10px 10px 0px 0px;
   --link-title-font: var(--font-family-base, "Inter", Arial, sans-serif);
