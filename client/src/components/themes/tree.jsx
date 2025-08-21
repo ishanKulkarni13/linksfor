@@ -1,4 +1,4 @@
-import TreeThemeAirBlack from "./preDefined/airBlack/airBlack";
+import TreeThemeAirBlack from "./preDefined/airBlack/theme";
 import TreeThemeAirWhite from "./preDefined/airWhite/theme";
 import MosaicMotion from "./preDefined/mosaicMotion/theme";
 import Sand from "./preDefined/sand/theme";
