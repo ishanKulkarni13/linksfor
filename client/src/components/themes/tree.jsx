@@ -6,7 +6,7 @@ import Classic from "./preDefined/classic/theme";
 import TreeThemeGreenFog from "./preDefined/greenFog/theme";
 import TreeThemeMinerialBlue from "./preDefined/minerialBlue/minerialBlue";
 import TreeThemeSkyMint from "./preDefined/skymint/theme";
-import TreeThemeSpray from "./preDefined/spray/spray";
+import TreeThemeSpray from "./preDefined/spray/theme";
 
 export default function Tree({ tree }) {
   if (tree.theme.selectedTheme.themeID === 10000) {
