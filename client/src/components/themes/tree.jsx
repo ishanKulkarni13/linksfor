@@ -5,7 +5,7 @@ import Sand from "./preDefined/sand/theme";
 import Classic from "./preDefined/classic/theme";
 import TreeThemeGreenFog from "./preDefined/greenFog/greenFog";
 import TreeThemeMinerialBlue from "./preDefined/minerialBlue/minerialBlue";
-import TreeThemeSkyMint from "./preDefined/skymint/skymint";
+import TreeThemeSkyMint from "./preDefined/skymint/theme";
 import TreeThemeSpray from "./preDefined/spray/spray";
 
 export default function Tree({ tree }) {
