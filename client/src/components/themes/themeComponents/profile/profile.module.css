@@ -4,7 +4,7 @@
     align-items: center;
     flex-direction: column;
     gap: var(--gap-medium, 16px);
-    color: var(--profile-name-color, #222);
+    color: var(--profile-name-color);
     background: var(--profile-bg, none);
     background-image: var(--profile-bg-gradient, none);
     border: var(--profile-border, none);
@@ -20,9 +20,8 @@
     position: relative;
     min-height: var(--profile-picture-size, 96px);
     min-width: var(--profile-picture-size, 96px);
-    /* color: var(--profile-picture-color, white); */
     font-size: calc(var(--profile-picture-size, 96px) * 0.13);
-    border: var(--profile-picture-border, 2px solid var(--color-border, #eee));
+    border: var(--profile-picture-border, none);
     box-shadow: var(--profile-picture-shadow, none);
     border-radius: var(--profile-picture-border-radius, 50%);
     background: var(--profile-picture-bg, none);
@@ -67,7 +66,7 @@
 }
 
 .avatarFallback{
-  background: var(--avatar-fallback-bg, var(--profile-picture-bg, #eaeaea));
-  color: var(--avatar-fallback-color, #222);
+  background: var(--avatar-fallback-bg, var(--profile-picture-bg));
+  color: var(--avatar-fallback-color);
   font-size: large;
 }

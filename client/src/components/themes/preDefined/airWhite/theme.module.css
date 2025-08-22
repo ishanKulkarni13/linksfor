@@ -197,7 +197,7 @@ body:has(> .treeContainer) {
 
   /* === Thumbnail === */
   --border-radius-thumbnail: var(--link-border-radius, 32px);
-  --thumbnail-bg: var(--color-surface-2);
+  --thumbnail-bg: none;
   --thumbnail-object-fit: cover;
   --thumbnail-opacity: 1;
   --thumbnail-border: none;

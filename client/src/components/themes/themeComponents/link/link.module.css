@@ -1,12 +1,12 @@
 .headerContainer {
   font-size: var(--link-header-container-font-size, 1.5rem);
   font-weight: var(--link-header-container-font-weight, 500);
-  color: var(--color-text-header, #222);
+  color: var(--color-text-header, var(--color-text-main));
   display: flex;
   justify-content: center;
   align-items: center;
   padding: var(--link-header-container-padding, 0);
-  margin: var(--link-header-container-margin, 0 0 1rem 0);
+  margin: var(--link-header-container-margin, 1rem 0 0 0);
   letter-spacing: var(--link-header-container-letter-spacing, normal);
   background: var(--link-header-container-bg, none);
   border-radius: var(--link-header-container-radius, 0);
@@ -19,16 +19,13 @@
   backdrop-filter: var(--link-header-container-backdrop-filter);
 }
 .headerContainer p {
-  text-shadow: var(
-    --link-header-container-text-shadow,
-    0 2px 9px rgba(0, 0, 0, 0.919)
-  );
+  text-shadow: var(--link-header-container-text-shadow, none);
 }
 
 .container {
   background: var(--link-container-bg, transparent);
   background-color: var(--bg-color-link, transparent);
-  color: var(--color-text-link, black);
+  color: var(--color-text-link);
   border: var(--border-link, 1px solid white);
   border-radius: var(--link-border-radius, 32px);
   display: flex;
@@ -39,15 +36,14 @@
   gap: 16px;
   padding: var(--link-padding-y, 0.75rem) var(--link-padding-x, 1.25rem);
   transition: var(--link-container-transition, transform 0.2s, box-shadow 0.2s);
-  text-align: var(--link-container-text-align, left);
+  text-align: var(--link-container-text-align, center);
   width: var(--link-container-width, 100%);
-  max-width: var(--link-width, 500px);
-  min-height: var(--link-height, 64px);
-  box-shadow: var(--link-shadow, 0px 1px 3px rgba(0, 0, 0, 0.12));
-  margin: var(--link-container-margin, 0 auto var(--link-gap, 16px) auto);
+  max-width: var(--link-width, var(--width-main, 500px));
+  min-height: var(--link-height, 68px);
+  box-shadow: var(--link-shadow, none);
+  margin: var(--link-container-margin, 0 auto 0 auto);
   position: relative;
   backdrop-filter: var(--link-container-backdrop-filter);
-  color: var(--link-title-color, #222);
   opacity: var(--link-container-opacity, 1);
   filter: var(--link-container-filter, none);
   animation: var(--link-container-animation, none);
@@ -57,10 +53,13 @@
   position: relative;
   width: var(--link-thumbnail-size, 48px);
   height: var(--link-thumbnail-size, 48px);
-  border-radius: var(--border-radius-thumbnail, 8px);
+  border-radius: var(
+    --border-radius-thumbnail,
+    var(--link-border-radius, 32px)
+  );
   overflow: hidden;
   flex-shrink: 0;
-  background: var(--thumbnail-bg, #eaeaea);
+  background: var(--thumbnail-bg, none);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -85,7 +84,7 @@
   width: 100%;
   height: 100%;
   object-fit: var(--thumbnail-object-fit, cover);
-  border-radius: var(--border-radius-thumbnail, 8px);
+  /* border-radius: var(--border-radius-thumbnail, 8px); */
   opacity: var(--thumbnail-img-opacity, 1);
   filter: var(--thumbnail-img-filter, none);
   transition: var(--thumbnail-img-transition, none);
@@ -109,7 +108,7 @@
   font-family: var(--link-title-font, "Inter", Arial, sans-serif);
   font-size: var(--link-title-size, 1.1rem);
   font-weight: var(--link-title-weight, 500);
-  color: var(--link-title-color, #222);
+  color: var(--link-title-color);
   margin: var(--title-margin, 0);
   line-height: var(--title-line-height, 1.3);
   white-space: var(--title-white-space, nowrap);
@@ -135,7 +134,7 @@
   cursor: pointer;
   margin-left: auto;
   border-radius: var(--options-button-radius, 50%);
-  color: var(--options-button-color, inherit);
+  color: var(--options-button-color);
   opacity: var(--options-button-opacity, 1);
   border: var(--options-button-border, none);
   box-shadow: var(--options-button-box-shadow, none);
@@ -154,22 +153,19 @@
 
 .featuredContainer {
   width: var(--link-featured-width, 100%);
-  max-width: 100%;
+  max-width: var(--width-main, 500px);
   margin: var(
     --link-featured-container-margin,
-    0 auto var(--link-featured-gap, 1rem) auto
+    0 auto 0 auto
   );
-  border-radius: var(--link-featured-radius, 12px);
+  border-radius: var(--link-featured-radius, var(--link-border-radius, 32px));
   overflow: hidden;
-  box-shadow: var(--link-shadow, 0px 1px 3px rgba(0, 0, 0, 0.12));
+  box-shadow: var(--link-shadow, none);
   display: flex;
   flex-direction: column;
   position: relative;
-  background: var(--color-link, #f5f5f5);
-  transition: var(
-    --link-featured-container-transition,
-    box-shadow 0.32s cubic-bezier(0.4, 0, 0.2, 1)
-  );
+  background: var(--color-link, transparent);
+  transition: var(--link-featured-container-transition, transform 0.2s);
   animation: var(
     --link-featured-container-animation,
     var(--link-container-animation, none)
@@ -179,13 +175,13 @@
   height: var(--link-featured-height, 220px);
   opacity: var(--link-featured-container-opacity, 1);
   border: var(--link-featured-container-border, none);
-  box-shadow: var(--link-shadow, 0px 1px 3px rgba(0, 0, 0, 0.12));
+  box-shadow: var(--link-shadow, none);
   filter: var(--link-featured-container-filter, none);
   animation: var(--link-featured-container-animation, none);
 }
 
 .featuredContainer:hover {
-  box-shadow: var(--link-shadow-hover, 0px 2px 10px rgba(0, 0, 0, 0.18));
+  box-shadow: var(--link-shadow-hover);
   opacity: var(--link-featured-container-hover-opacity, 1);
   filter: var(--link-featured-container-hover-filter, none);
   animation: var(--link-featured-container-hover-animation, none);
@@ -202,7 +198,7 @@
   width: 100%;
   height: 100%;
   min-height: var(--link-featured-height, 220px);
-  background: var(--link-featured-thumbnail-bg, #eee);
+  background: var(--link-featured-thumbnail-bg, none);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -293,7 +289,7 @@
 @media (width > 640px) {
   .container:hover {
     transform: var(--link-container-hover-transform, scale(0.98));
-    box-shadow: var(--link-shadow-hover, 0px 2px 10px rgba(0, 0, 0, 0.18));
+    box-shadow: var(--link-shadow-hover);
     opacity: var(--link-container-hover-opacity, 1);
     filter: var(--link-container-hover-filter, none);
     animation: var(--link-container-hover-animation, none);
@@ -311,7 +307,6 @@
     width: 100%;
     min-width: unset;
     max-width: 100vw;
-    /* border-radius: var(--link-border-radius, 8px); */
     opacity: var(--link-container-mobile-opacity, 1);
     filter: var(--link-container-mobile-filter, none);
     animation: var(--link-container-mobile-animation, none);
@@ -334,6 +329,6 @@
 @media (width > 640px) {
   .container:hover {
     transform: var(--link-container-hover-transform, scale(0.98));
-    box-shadow: var(--link-shadow-hover, 0px 2px 10px rgba(0, 0, 0, 0.18));
+    box-shadow: var(--link-shadow-hover);
   }
 }

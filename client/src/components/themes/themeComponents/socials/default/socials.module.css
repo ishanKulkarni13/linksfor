@@ -5,7 +5,7 @@
   align-items: var(--links-container-align, center);
   gap: var(--socials-gap, 25px);
   flex-wrap: wrap;
-  color: var(--socials-color, var(--color-accent, #0078d4));
+  color: var(--socials-color);
   background: var(--links-container-bg, none);
   border-radius: var(--links-container-radius, 0);
   border: var(--links-container-border, none);
@@ -37,7 +37,7 @@
 }
 
 .social svg {
-  color: var(--color-social-icons, var(--socials-color, var(--color-text-main, #fff)));
+  color: var(--color-social-icons, var(--socials-color, var(--color-text-main)));
   height: var(--socials-size, 2.5rem);
   width: var(--socials-size, 2.5rem);
 }
