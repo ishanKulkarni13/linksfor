@@ -135,7 +135,7 @@ body:has(> .treeContainer) {
   --color-text-link: var(--color-link, #67434f);
   --border-link: 2px solid rgb(88, 73, 44);
   --link-radius: var(--border-radius-link, 16px);
-  --link-gap: 0px;
+  --link-gap: 20px;
   --link-padding-y: var(--padding-medium, 0.85rem);
   --link-padding-x: var(--padding-large, 1.5rem);
   --link-padding-x-mobile: var(--padding-medium, 1rem);
@@ -250,7 +250,7 @@ body:has(> .treeContainer) {
   );
   --link-featured-overlay-height: 48%;
   --link-featured-overlay-padding: 1.4rem;
-  --featured-container-margin: 0 auto var(--link-featured-gap, 1.2rem) auto;
+  --featured-container-margin: 0 auto var(--link-featured-gap) auto;
   --featured-container-transition: box-shadow 0.2s;
   --featured-container-opacity: 1;
   --featured-container-border: var(--border-link, none);
