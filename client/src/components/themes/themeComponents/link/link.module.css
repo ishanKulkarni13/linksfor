@@ -26,16 +26,17 @@
 }
 
 .container {
-  background: var(--link-container-bg);
-  background-color: var(--bg-color-link, #fff);
-  color: var(--color-text-link, #222);
-  border: var(--border-link, 1px solid #eee);
-  border-radius: var(--link-border-radius, 8px);
+  background: var(--link-container-bg, transparent);
+  background-color: var(--bg-color-link, transparent);
+  color: var(--color-text-link, black);
+  border: var(--border-link, 1px solid white);
+  border-radius: var(--link-border-radius, 32px);
   display: flex;
   flex-direction: var(--link-container-flex-direction, row);
   align-items: var(--link-container-align-items, center);
   justify-content: var(--link-container-justify-content, flex-start);
-  gap: var(--link-gap, 16px);
+  /* gap: var(--link-gap, 16px); */
+  gap: 16px;
   padding: var(--link-padding-y, 0.75rem) var(--link-padding-x, 1.25rem);
   transition: var(--link-container-transition, transform 0.2s, box-shadow 0.2s);
   text-align: var(--link-container-text-align, left);

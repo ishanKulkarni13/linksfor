@@ -269,7 +269,7 @@ body:has(> .treeContainer) {
   );
   --link-featured-overlay-height: 48%;
   --link-featured-overlay-padding: 1.4rem;
-  --link-featured-container-margin: 0 auto var(--link-featured-gap, 1.2rem) auto;
+  --link-featured-container-margin: 0 auto 0 auto;
   --link-featured-container-transition: var(--link-container-transition, box-shadow 0.2s);
   --link-featured-container-opacity: 1;
   --link-featured-container-border: var(--border-link, none);
