@@ -20,7 +20,7 @@ export default function Tree({ tree, styles }) {
             treeName={tree.treeName}
             treePicture={tree.treePicture}
             treeBio={tree.treeBio}
-            isVerified={tree.verified.status}
+            isVerified={tree.verified?.status || false}
           />
         </div>
 
