@@ -3,7 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from 'next-themes'
 import { Toaster } from "sonner";
 import NextTopLoader from "nextjs-toploader";
-
+import { Analytics } from "@vercel/analytics/next";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -30,6 +30,7 @@ export default function RootLayout({ children }) {
           </>
          
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
