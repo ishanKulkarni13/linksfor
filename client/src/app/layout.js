@@ -30,7 +30,8 @@ export default function RootLayout({ children }) {
           </>
          
         </ThemeProvider>
-        <Analytics />
+        <Analytics /> {/* For Vercel Web Analytics tool */}
+        
       </body>
     </html>
   );
