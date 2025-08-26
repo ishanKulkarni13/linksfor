@@ -9,6 +9,7 @@ import TreeThemeSkyMint from "./preDefined/skymint/theme";
 import TreeThemeSpray from "./preDefined/spray/theme";
 
 export default function Tree({ tree }) {
+  // console.log(tree.verified.status);
   if (tree.theme.selectedTheme.themeID === 10000) {
     return <TreeThemeAirBlack tree={tree} />;
   } else if (tree.theme.selectedTheme.themeID === 911111) {

@@ -15,6 +15,7 @@ export default function TreeTheme({ tree }) {
             treeName={tree.treeName}
             treePicture={tree.treePicture}
             treeBio={tree.treeBio}
+            isVerified={tree.verified.status}
           />
         </div>
 

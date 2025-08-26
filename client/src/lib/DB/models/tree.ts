@@ -38,6 +38,10 @@ import mongoose from "mongoose";
             type: String,
         }
     },
+    isVerified: {
+        type: Boolean,
+        default: false
+    },
     treeProfileLayout: {
         type: String,
         required: true,

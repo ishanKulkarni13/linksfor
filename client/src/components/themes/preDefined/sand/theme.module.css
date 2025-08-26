@@ -46,6 +46,9 @@ body:has(> .treeContainer) {
   --color-social-icons: var(--color-text-main);
   --color-text-header: var(--color-text-main);
   --color-text-profile: black;
+  /* --verified-icon-color: ; */
+  --verified-icon-border-color: transparent;
+  --verified-icon-tick-color: white;
 
   /* === Borders & Radius === */
 

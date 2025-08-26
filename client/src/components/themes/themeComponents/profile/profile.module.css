@@ -46,6 +46,10 @@
     font-size: var(--profile-name-font-size, 1.27rem);
     font-weight: var(--profile-name-font-weight, 700);
     color: var(--profile-name-color, var( --color-text-main));
+    gap: 0.25em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 /* .nameContainer p{
   text-align: center;  
@@ -69,4 +73,16 @@
   background: var(--avatar-fallback-bg, var(--profile-picture-bg));
   color: var(--avatar-fallback-color);
   font-size: large;
+}
+
+.verifiedIcon{
+  width: var(--profile-name-font-size, 1.27rem);
+  height:var(--profile-name-font-size, 1.27rem);
+}
+.verifiedIconFill{
+  fill: var(--verified-icon-color, #1DA1F2);
+  stroke: var(--verified-icon-border-color, transparent);
+}
+.verifiedIconTick{
+  fill: var(--verified-icon-tick-color, white);
 }

@@ -1,58 +1,68 @@
-
-
-.profileContainer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap:15px;
-    color: var(--color-text-profile);
+.profileContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+  color: var(--color-text-profile);
 }
 
-.profilePictureContainer{
-    position: relative;
-    min-height: 100px;
-    min-width: 100px;
-    color: white;
-    font-size: 1.3em;
-    border: 2px solid var(--color-border-avatar);
-    box-shadow: var(--shadow-avatar, 0px 10px 20px rgba(0, 0, 0, 0.48));
+.profilePictureContainer {
+  position: relative;
+  min-height: 100px;
+  min-width: 100px;
+  color: white;
+  font-size: 1.3em;
+  border: 2px solid var(--color-border-avatar);
+  box-shadow: var(--shadow-avatar, 0px 10px 20px rgba(0, 0, 0, 0.48));
 }
 
-.profilePicture{
-    border-radius: var(--profilePicture-border-radius);
-    object-fit:cover;
-    object-position: center;
+.profilePicture {
+  border-radius: var(--profilePicture-border-radius);
+  object-fit: cover;
+  object-position: center;
 }
 
-.profileTextContainer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.profileTextContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.nameContainer{
-    font-size: 25px;
-    font-weight: 600;
+.nameContainer {
+  font-size: 25px;
+  font-weight: 600;
+  gap: 0.25em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.nameContainer p{
-  text-align: center;  
+
+.nameContainer p {
+  text-align: center;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.785); /* helps on noisy bg */
 }
 
-.bioContainer{
-    font-size: 20px;
-    font-weight: 600;
+.bioContainer {
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .bioContainer p {
   white-space: pre-line;
-  text-align: center;  
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.785); 
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.785);
 }
 
-.avatarFallback{
-  background: var(--avatar-fallback-bg) ;
+.avatarFallback {
+  background: var(--avatar-fallback-bg);
   color: var(--avatar-fallback-color);
+}
+
+.verifiedIcon {
+  width: var(--profile-name-font-size, 1.5rem);
+  height: var(--profile-name-font-size, 1.5rem);
+  color: var(--verified-icon-color, #1da1f2);
+  fill: var(--verified-icon-fill, #1da1f2);
 }

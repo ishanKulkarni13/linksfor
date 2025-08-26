@@ -124,6 +124,9 @@ body:has(> .treeContainer) {
   --profile-bio-line-height: 1.5;
   --profile-link-color: var(--color-link, #67434f);
   --profile-link-hover-color: var(--color-accent, #4fbfa5);
+  --verified-icon-color: #ffffff;
+  --verified-icon-border-color: transparent;
+  --verified-icon-tick-color: var(--color-bg, #0059ff);
 
   /* === Socials === */
   --border-radius-socials: 12px;
