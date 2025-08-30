@@ -6,7 +6,7 @@ export default function TermsPage() {
     <main style={{ maxWidth: 800, margin: "0 auto", padding: "32px 16px" }}>
       <h1 style={{ fontWeight: 800, fontSize: "2rem", marginBottom: 16 }}>Terms &amp; Conditions</h1>
       <p>
-        Welcome to linksfor! Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using the linksfor website and service (the "Service") operated by linksfor ("us", "we", or "our").
+        Welcome to linksfor! Please read these Terms and Conditions (&quot;Terms&quot;, &quot;Terms and Conditions&quot;) carefully before using the linksfor website and service (the &quot;Service&quot;) operated by linksfor (&quot;us&quot;, &quot;we&quot;, or &quot;our&quot;).
       </p>
 
       <h2>1. Acceptance of Terms</h2>
@@ -26,10 +26,10 @@ export default function TermsPage() {
 
       <h2>4. User Content</h2>
       <p>
-        You are responsible for the content you post or display on or through the Service, including links, images, text, and other materials ("User Content"). You retain all rights to your User Content, but you grant us a worldwide, non-exclusive, royalty-free license to use, display, reproduce, and distribute your User Content solely for the purpose of operating and improving the Service.
+        You are responsible for the content you post or display on or through the Service, including links, images, text, and other materials (&quot;User Content&quot;). You retain all rights to your User Content, but you grant us a worldwide, non-exclusive, royalty-free license to use, display, reproduce, and distribute your User Content solely for the purpose of operating and improving the Service.
       </p>
       <p>
-        You agree not to post User Content that is unlawful, offensive, threatening, libelous, defamatory, obscene, or otherwise objectionable, or that violates any third party's intellectual property or privacy rights.
+        You agree not to post User Content that is unlawful, offensive, threatening, libelous, defamatory, obscene, or otherwise objectionable, or that violates any third party&apos;s intellectual property or privacy rights.
       </p>
 
       <h2>5. Prohibited Uses</h2>
@@ -53,7 +53,7 @@ export default function TermsPage() {
         The Service and its original content, features, and functionality are and will remain the exclusive property of linksfor and its licensors. The Service is protected by copyright, trademark, and other laws of both the country and foreign countries. Our trademarks and trade dress may not be used in connection with any product or service without our prior written consent.
       </p>
 
-      <h2>8. Third-Party Links & Content</h2>
+      <h2>8. Third-Party Links &amp; Content</h2>
       <p>
         Our Service may contain links to third-party web sites or services that are not owned or controlled by linksfor. We have no control over, and assume no responsibility for, the content, privacy policies, or practices of any third party web sites or services. You further acknowledge and agree that linksfor shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with use of or reliance on any such content, goods or services available on or through any such web sites or services.
       </p>
@@ -65,7 +65,7 @@ export default function TermsPage() {
 
       <h2>10. Disclaimers</h2>
       <p>
-        Your use of the Service is at your sole risk. The Service is provided on an "AS IS" and "AS AVAILABLE" basis. The Service is provided without warranties of any kind, whether express or implied, including, but not limited to, implied warranties of merchantability, fitness for a particular purpose, non-infringement or course of performance.
+        Your use of the Service is at your sole risk. The Service is provided on an &quot;AS IS&quot; and &quot;AS AVAILABLE&quot; basis. The Service is provided without warranties of any kind, whether express or implied, including, but not limited to, implied warranties of merchantability, fitness for a particular purpose, non-infringement or course of performance.
       </p>
       <p>
         linksfor, its subsidiaries, affiliates, and its licensors do not warrant that a) the Service will function uninterrupted, secure or available at any particular time or location; b) any errors or defects will be corrected; c) the Service is free of viruses or other harmful components; or d) the results of using the Service will meet your requirements.
@@ -81,7 +81,7 @@ export default function TermsPage() {
 
       <h2>12. Indemnification</h2>
       <p>
-        You agree to defend, indemnify and hold harmless linksfor and its licensee and licensors, and their employees, contractors, agents, officers and directors, from and against any and all claims, damages, obligations, losses, liabilities, costs or debt, and expenses (including but not limited to attorney's fees), resulting from or arising out of a) your use and access of the Service, by you or any person using your account and password, or b) a breach of these Terms.
+        You agree to defend, indemnify and hold harmless linksfor and its licensee and licensors, and their employees, contractors, agents, officers and directors, from and against any and all claims, damages, obligations, losses, liabilities, costs or debt, and expenses (including but not limited to attorney&apos;s fees), resulting from or arising out of a) your use and access of the Service, by you or any person using your account and password, or b) a breach of these Terms.
       </p>
 
       <h2>13. Governing Law</h2>
@@ -91,7 +91,7 @@ export default function TermsPage() {
 
       <h2>14. Changes to Terms</h2>
       <p>
-        We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion. By continuing to access or use our Service after those revisions become effective, you agree to be bound by the revised terms.
+        We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will provide at least 30 days&apos; notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion. By continuing to access or use our Service after those revisions become effective, you agree to be bound by the revised terms.
       </p>
 
       <h2>15. Entire Agreement</h2>
@@ -106,7 +106,7 @@ export default function TermsPage() {
 
       <h2>17. Waiver</h2>
       <p>
-        No waiver of any term of these Terms shall be deemed a further or continuing waiver of such term or any other term, and linksfor’s failure to assert any right or provision under these Terms shall not constitute a waiver of such right or provision.
+        No waiver of any term of these Terms shall be deemed a further or continuing waiver of such term or any other term, and linksfor&apos;s failure to assert any right or provision under these Terms shall not constitute a waiver of such right or provision.
       </p>
 
       <h2>18. Contact Us</h2>
@@ -158,17 +158,14 @@ export default function TermsPage() {
         <strong>19.14. Export Compliance:</strong> You may not use, export, import, or transfer the Service except as authorized by law.
       </p>
       <p>
-        <strong>19.15. DMCA Policy:</strong> If you believe that your copyrighted work has been copied in a way that constitutes copyright infringement and is accessible via the Service, please notify us at <a href="mailto:support@linksfor.app">support@linksfor.app</a> with the subject "DMCA Notice".
+        <strong>19.15. DMCA Policy:</strong> If you believe that your copyrighted work has been copied in a way that constitutes copyright infringement and is accessible via the Service, please notify us at <a href="mailto:support@linksfor.app">support@linksfor.app</a> with the subject &quot;DMCA Notice&quot;.
       </p>
       <p>
-        <strong>19.16. Children’s Privacy:</strong> We do not knowingly collect personally identifiable information from children under 13. If you are a parent or guardian and you are aware that your child has provided us with personal data, please contact us.
+        <strong>19.16. Children&apos;s Privacy:</strong> We do not knowingly collect personally identifiable information from children under 13. If you are a parent or guardian and you are aware that your child has provided us with personal data, please contact us.
       </p>
       <p>
         <strong>19.17. Entire Agreement:</strong> These Terms, together with the Privacy Policy and any amendments and any additional agreements you may enter into with us in connection with the Service, shall constitute the entire agreement between you and us concerning the Service.
       </p>
-      {/* <p>
-        <strong>19.18. Contact:</strong> For any questions about these Terms, please contact us at <a href="mailto:support@linksfor.app">support@linksfor.app</a>.
-      </p> */}
 
       <p style={{ marginTop: 32 }}>
         <Link href="/" style={{ color: "var(--color-primary, #4f46e5)" }}>

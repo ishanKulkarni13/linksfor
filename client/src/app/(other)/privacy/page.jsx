@@ -6,7 +6,7 @@ export default function PrivacyPage() {
     <main style={{ maxWidth: 700, margin: "0 auto", padding: "32px 16px" }}>
       <h1 style={{ fontWeight: 800, fontSize: "2rem", marginBottom: 16 }}>Privacy Policy</h1>
       <p>
-        Your privacy is important to us. This Privacy Policy explains how linksfor ("we", "us", or "our") collects, uses, discloses, and safeguards your information when you use our website and services (the "Service"). Please read this policy carefully. By using the Service, you consent to the practices described herein.
+        Your privacy is important to us. This Privacy Policy explains how linksfor (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) collects, uses, discloses, and safeguards your information when you use our website and services (the &quot;Service&quot;). Please read this policy carefully. By using the Service, you consent to the practices described herein.
       </p>
 
       <h2>1. Information We Collect</h2>
@@ -16,13 +16,13 @@ export default function PrivacyPage() {
           <strong>Account Information:</strong> When you register, we collect your email address, username, password (hashed), and any profile details you choose to provide, such as your display name, bio, and profile image.
         </li>
         <li>
-          <strong>Links & Content:</strong> We store the links, images, descriptions, and other content you add to your page. This includes any customizations, themes, and settings you apply.
+          <strong>Links &amp; Content:</strong> We store the links, images, descriptions, and other content you add to your page. This includes any customizations, themes, and settings you apply.
         </li>
         <li>
           <strong>Usage Data:</strong> We collect information about how you access and use the Service, such as your IP address, browser type, device information, pages visited, referring URLs, and timestamps. We may also collect aggregated statistics about link clicks and page views.
         </li>
         <li>
-          <strong>Cookies & Tracking Technologies:</strong> We use cookies and similar technologies to keep you logged in, remember your preferences, and analyze site usage. Cookies are small data files stored on your device.
+          <strong>Cookies &amp; Tracking Technologies:</strong> We use cookies and similar technologies to keep you logged in, remember your preferences, and analyze site usage. Cookies are small data files stored on your device.
         </li>
         <li>
           <strong>Communications:</strong> If you contact us directly, we may receive additional information about you, such as your name, email address, the contents of your message, and any attachments.
@@ -115,7 +115,7 @@ export default function PrivacyPage() {
         To exercise any of these rights, please contact us at <a href="mailto:support@linksfor.app">support@linksfor.app</a>. We may need to verify your identity before processing your request.
       </p>
 
-      <h2>10. Children's Privacy</h2>
+      <h2>10. Children&apos;s Privacy</h2>
       <p>
         Our Service is not intended for children under 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us so we can remove it.
       </p>
@@ -127,12 +127,12 @@ export default function PrivacyPage() {
 
       <h2>12. Do Not Track</h2>
       <p>
-        Some browsers offer a "Do Not Track" feature. Our Service does not currently respond to Do Not Track signals, but we respect your privacy and do not use tracking for advertising purposes.
+        Some browsers offer a &quot;Do Not Track&quot; feature. Our Service does not currently respond to Do Not Track signals, but we respect your privacy and do not use tracking for advertising purposes.
       </p>
 
       <h2>13. Changes to This Policy</h2>
       <p>
-        We may update our Privacy Policy from time to time. We will notify you of any significant changes by posting the new policy on this page and updating the "Last updated" date below. Your continued use of the Service after changes are posted constitutes your acceptance of the revised policy.
+        We may update our Privacy Policy from time to time. We will notify you of any significant changes by posting the new policy on this page and updating the &quot;Last updated&quot; date below. Your continued use of the Service after changes are posted constitutes your acceptance of the revised policy.
       </p>
       <p>
         <strong>Last updated:</strong> June 2024
