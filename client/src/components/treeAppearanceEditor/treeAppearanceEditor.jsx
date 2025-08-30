@@ -10,7 +10,9 @@ import { toast } from "sonner";
 import axios from "axios";
 import TreePreviewToggleButton from "../treePreview/treePreviewToggleButton/treePreviewToggleButton";
 import useHandelReselectTree from "@/hooks/handelReselectTree";
-import TreeAppearanceEditorSkeleton, { AppearanceEditorSubComponent } from "./skeletons/treeAppearanceEditorSkeleton";
+import TreeAppearanceEditorSkeleton, {
+  AppearanceEditorSubComponent,
+} from "./skeletons/treeAppearanceEditorSkeleton";
 
 const DynamicTreeProfileEditor = dynamic(
   () =>
@@ -18,9 +20,7 @@ const DynamicTreeProfileEditor = dynamic(
       "@/components/treeAppearanceEditor/treeProfileEditor/treeProfileEditor"
     ),
   {
-    loading: () => (
-      <AppearanceEditorSubComponent/>
-    ),
+    loading: () => <AppearanceEditorSubComponent />,
     ssr: false,
   }
 );
@@ -28,9 +28,7 @@ const DynamicTreeProfileEditor = dynamic(
 const DynamicTreeThemeEditor = dynamic(
   () => import("@/components/treeAppearanceEditor/editTreeTheme/editTreeTheme"),
   {
-    loading: () => (
-      <AppearanceEditorSubComponent height={'770px'} />
-    ),
+    loading: () => <AppearanceEditorSubComponent height={"770px"} />,
     ssr: false,
   }
 );
@@ -45,11 +43,9 @@ export default function TreeAppearanceEditor() {
 
   const getTreeProfile = async () => {
     if (!treeUID) {
-      console.log(treeUID);
       return toast.error("didn't got treeUID while getting treeprofile");
     }
     try {
-      console.log(`got treeUId in getTreeProfile as:`, treeUID);
       const res = await axios.get(`/api/tree/profile/${treeUID}`, {
         withCredentials: true,
       });
@@ -59,10 +55,11 @@ export default function TreeAppearanceEditor() {
       console.log(error);
       if (error.response) {
         // if server responded
-        toast.error(error.response.data.message);
         if (error.response.status === 404 || error.response.status === 401) {
+          toast.info("Plese select a tree...", {id: "select-tree"})
           return redirectToSelectTree();
         }
+        // toast.error(error.response.data.message);
       } else if (error.request) {
         //req was made but go no response
         toast.error(`error occured`);
@@ -92,6 +89,7 @@ export default function TreeAppearanceEditor() {
                 treeProfile={treeProfile}
               />
             </div>
+
             <div className={styles.profileThemeEditorContainer}>
               <DynamicTreeThemeEditor
                 treeUID={treeUID}
@@ -102,7 +100,7 @@ export default function TreeAppearanceEditor() {
         </>
       ) : (
         <>
-         <TreeAppearanceEditorSkeleton/>
+          <TreeAppearanceEditorSkeleton />
         </>
       )}
     </>

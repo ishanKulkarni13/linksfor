@@ -1,46 +1,39 @@
-.toggleButton{
-    position: fixed;
-    bottom: 25px;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 50px;
-    width: fit-content;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    z-index: calc( var(--NavContainerZIndex) +  1);
-    background-color: var(--color-primary);
-    color: var(--color-text-contrast-primary);
-    font-weight: 600;
-    border-radius: 50px;
-    box-shadow: var(--shadow-floating);
-    padding: 15px;
-    z-index: var(--NavContainerZIndex);
+.toggleButton {
+  position: fixed;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 50px;
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  z-index: calc(var(--NavContainerZIndex) + 1);
+  background-color: var(--color-primary);
+  color: var(--color-text-contrast-primary);
+  font-weight: 600;
+  border-radius: 50px;
+  box-shadow: var(--shadow-floating);
+  padding: 15px;
+  z-index: var(--NavContainerZIndex);
 }
 
-.icon{
-    width: 1em;
-    height: 1em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.icon {
+  width: 1em;
+  height: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.drawerContent{
-    background: #38383833;
-    border: none;
-    z-index: 1000;
+.drawerContent {
+  background: #38383833;
+  border: none;
+  z-index: 1000;
 }
 
-
- /* .drawerContent > div:nth-child(1) {
-    display: none;
-    background-color: var(--color-surface-2);
-    margin: 15px auto;
-  } */
-  
-  .drawerChildren {
-    height: 100dvh;
-    width: 100vw;
-  }
+.drawerChildren {
+  height: 100dvh;
+  width: 100vw;
+}

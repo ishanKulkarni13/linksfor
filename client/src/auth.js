@@ -23,17 +23,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 },
             },
             authorize: async (credincials) => {
-
-                // let userr = await User.create({ name:'temp', email:"temp@gmail.com" , authMethod:'email', password:'temp123' });
-            
-                // let treee = await Tree.create({ owner: userr._id, treeName: `@${userr.name}`, treePicture: { URL: userr.profilePic.URL } });
-                        
-                // console.log("custome user created");
-                
+                // throw new CredentialsSignin("Credential signin is no longer supported")
 
                 let { email, password } = credincials;
 
-                console.log(email, password);
                 if (!email) {
                     throw new CredentialsSignin("email is not provided")
                 } else if (!password) {
@@ -49,8 +42,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
                     let isPasswordValid = await user.isValidPassword(password, user);
                     if (isPasswordValid) {
-                        // console.log(user);
-                        // console.log("user._id", user._id);
                         return { id: user._id }
                     } else {
                         throw new CredentialsSignin("Password is invalid")
@@ -60,8 +51,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     console.log('error in authorize', error.message);
                     throw new CredentialsSignin("Some error occured in authorize")
                 }
-                // return { name: "uuuuuu", _id: "eau142bdrein242edf" }
-                // throw new CredentialsSignin({cause: "soja bro"})
+                // throw new CredentialsSignin({cause: "j"})
             }
         })
     ],

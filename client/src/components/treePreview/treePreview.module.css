@@ -9,6 +9,17 @@
     height: 100%;
     width: 100%;
     border-radius: inherit;
+    backdrop-filter: blur(30px);
+}
+
+.preview::after {
+  content: "Loading...";
+  font-size: 5em;
+  z-index: -1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0px);
 }
 
 .iframe{
@@ -17,7 +28,6 @@
     border-radius: inherit;
     /* box-shadow: var(--shadow-floating); */
     /* background-color: var(--backgroundSecondary); */
-    backdrop-filter: blur(30px);
   
 }
 

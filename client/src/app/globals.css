@@ -76,7 +76,8 @@
   --NavContainerZIndex: 10;
   --desktopMainUIContainerMaxWidth: 800px;
   --temp-b: 1px solid green;
-  --color-primary: hsl(270, 100%, 50%);;
+  --color-primary: hsl(270, 100%, 50%);
+  --color-primary-hover:  hsl(270, 100%, 41%);
 }
 
 .dark {
