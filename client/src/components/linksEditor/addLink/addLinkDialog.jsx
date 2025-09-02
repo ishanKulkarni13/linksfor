@@ -1,8 +1,7 @@
 "use client";
 import styles from "./addLinkDialog.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { useRef } from "react";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -18,7 +17,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { useState } from "react";
-import Popup from "@/components/popup/popup";
 
 import {
   Dialog,
@@ -155,9 +153,7 @@ export default function AddLinkDialog({ setLinks, treeUID, type, disabled }) {
         {/* <DialogContent> */}
         <DialogContent className={styles.popUpContainer}>
           <DialogHeader className={styles.DialogHeader}>
-            <DialogTitle className={styles.dialogTitle}>
-              Edit profile
-            </DialogTitle>
+            <DialogTitle className={styles.dialogTitle}>Add link</DialogTitle>
             {/* <DialogDescription className={styles.DialogDescription}>
               Make changes to your profile here. Click save when you're done.
             </DialogDescription> */}
@@ -220,26 +216,6 @@ export default function AddLinkDialog({ setLinks, treeUID, type, disabled }) {
                   >
                     <FormField
                       control={AddLinkForm.control}
-                      name="URL"
-                      render={({ field }) => {
-                        return (
-                          <FormItem className={styles.inputContainer}>
-                            <FormLabel className={styles.lable}>URL</FormLabel>
-                            <FormControl>
-                              <Input
-                                className={styles.URLInput}
-                                placeholder="URL"
-                                type="text"
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        );
-                      }}
-                    />
-                    <FormField
-                      control={AddLinkForm.control}
                       name="title"
                       render={({ field }) => {
                         return (
@@ -260,6 +236,27 @@ export default function AddLinkDialog({ setLinks, treeUID, type, disabled }) {
                         );
                       }}
                     />
+                    <FormField
+                      control={AddLinkForm.control}
+                      name="URL"
+                      render={({ field }) => {
+                        return (
+                          <FormItem className={styles.inputContainer}>
+                            <FormLabel className={styles.lable}>URL</FormLabel>
+                            <FormControl>
+                              <Input
+                                className={styles.URLInput}
+                                placeholder="URL"
+                                type="text"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        );
+                      }}
+                    />
+
                     <button
                       disabled={isLoading}
                       type="submit"
