@@ -67,6 +67,7 @@ import mongoose from "mongoose";
                 title: {
                     type: String,
                     require: true,
+                    maxLength: [30, "Cannot save name, name can be at most 30 caracters long"],
                 },
                 URL: {
                     type: String,

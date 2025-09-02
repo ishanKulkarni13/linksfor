@@ -34,8 +34,8 @@ const AddLinkFormSchema = z
     URL: z.string().min(1, { message: `Plesae entre a URL` }).url(), // tempppppp
     title: z
       .string()
-      .min(1, { message: `Title should be if at least 1 character long` })
-      .max(20, { message: `Title must be of at most 20 character long` }),
+      // .min(1, { message: `Title should be if at least 1 character long` })
+      .max(30, { message: `Title must be of at most 30 character long` }),
   })
   .refine(
     (data) => {

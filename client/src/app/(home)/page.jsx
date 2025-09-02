@@ -1,60 +1,17 @@
 import { auth } from "@/auth";
-import React, { Suspense } from "react";
+import React from "react";
 import styles from "./home.module.css";
 import Link from "next/link";
-import { Skeleton } from "@/components/ui/skeleton";
-import Image from "next/image";
 
-async function HeroActions() {
-  const session = await auth();
-  const user = session?.user;
-  return (
-    <>
-      {!user ? (
-        <div className={styles.heroActions}>
-          <Link className={styles.getStarted} href="/login">
-            Get started
-          </Link>
-          <Link className={styles.login} href="/login">
-            Login
-          </Link>
-        </div>
-      ) : (
-        <Link
-          className={styles.adminConsole}
-          href="/admin/tree/edit/appearance"
-        >
-          Admin Console
-        </Link>
-      )}
-    </>
-  );
-}
-
-function HeroActionsSkeleton() {
-  return (
-    <Skeleton
-      className={`h-[51px] w-48 rounded-full  bg-[var(--color-surface-1)]  flex justify-center items-center ${styles.heroActions}`}
-    ></Skeleton>
-  );
-}
-
+// Example profile preview (screenshot)
 function ProfilePreview() {
   return (
-    <div className={styles.profilePreview}>
+    <div classN e={styles.profilePreview}>
       {/* Replace src with your actual screenshot */}
-      {/* <img
+      <img
         src="/tree-mobile-screenshot.png"
         alt="Profile Preview"
         className={styles.profileScreenshot}
-      /> */}
-      <Image
-        className={styles.profileScreenshot}
-        src={
-          "https://res.cloudinary.com/kakashib2k/image/upload/v1756577604/LinksFor/important/homePage/treePreview.png"
-        }
-        alt="tree-preview"
-        fill={true}
       />
     </div>
   );
@@ -189,10 +146,23 @@ export default async function page() {
               Share your socials, websites, shops, and more with a single link.
               Beautiful, fast, and totally free.
             </p>
-            <Suspense fallback={<HeroActionsSkeleton />}>
-              {/* @ts-expect-error Async Server Component */}
-              <HeroActions />
-            </Suspense>
+            {!user ? (
+              <div className={styles.heroActions}>
+                <Link className={styles.getStarted} href="/login">
+                  Get started
+                </Link>
+                <Link className={styles.login} href="/login">
+                  Login
+                </Link>
+              </div>
+            ) : (
+              <Link
+                className={styles.adminConsole}
+                href="/admin/tree/edit/appearance"
+              >
+                Admin Console
+              </Link>
+            )}
           </div>
           <ProfilePreview />
         </div>
