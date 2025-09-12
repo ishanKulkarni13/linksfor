@@ -58,7 +58,7 @@ export default function Page() {
       </form>
       {submitted && (
         <div style={{ marginTop: 16, color: "green" }}>
-          {`saved: ${username} = ${getCookieValue(username)}`}
+          {/* {`saved: ${username} = ${getCookieValue(username)}`} */}
         </div>
       )}
     </div>

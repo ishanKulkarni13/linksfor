@@ -2,16 +2,19 @@ import { auth } from "@/auth";
 import React from "react";
 import styles from "./home.module.css";
 import Link from "next/link";
+import Image from "next/image";
 
 // Example profile preview (screenshot)
 function ProfilePreview() {
   return (
-    <div classN e={styles.profilePreview}>
+    <div className={styles.profilePreview}>
       {/* Replace src with your actual screenshot */}
-      <img
-        src="/tree-mobile-screenshot.png"
-        alt="Profile Preview"
+      <Image
+        src="https://res.cloudinary.com/kakashib2k/image/upload/v1756577604/LinksFor/important/homePage/treePreview.png"
+       alt="Profile Preview" 
         className={styles.profileScreenshot}
+        fill={true}
+        // objectFit="cover"
       />
     </div>
   );

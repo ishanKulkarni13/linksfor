@@ -17,7 +17,7 @@ export default function Page() {
             {/* <span className={styles.brandName}>linksfor</span> */}
             <FontAwesomeIcon className={styles.logo} icon={faLink} />
           </div>
-          <h1 className={styles.title}>Sign in to Your Account</h1>
+          <h1 className={styles.title}>Sign up/Sign in to Your Account</h1>
           <p className={styles.subtitle}>
             Access your dashboard and manage your trees.
             <br />
@@ -25,14 +25,14 @@ export default function Page() {
           </p>
           {/* Divider */}
           <div className={styles.divider}>
-            <span className={styles.dividerText}>Login with</span>
+            <span className={styles.dividerText}>Continue with</span>
           </div>
           {/* Google Button */}
           <GoogleButton />
           {/* Footer */}
           <div className={styles.footer}>
             <span>
-              By signing in, you agree to our{" "}
+              By signing up, you agree to our{" "}
               <Link href="/terms" className={styles.link}>
                 Terms
               </Link>{" "}

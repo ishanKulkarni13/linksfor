@@ -98,14 +98,16 @@
 }
 
 .profilePreview {
+  position: relative;
   margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   /* min-width: 0; */
   width: 320px;
-  max-width: 90vw;
   aspect-ratio: 8/16;
+/* height: 320px; */
+  max-width: 90vw;
   position: relative;
 }
 

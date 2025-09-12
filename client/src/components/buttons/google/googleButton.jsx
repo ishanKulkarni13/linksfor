@@ -26,7 +26,7 @@ function GoogleButton() {
           </>
         ) : (
           <>
-            <span>Login With Google</span>
+            <span>Google</span>
             <div>
               <FaGoogle className={styles.icon} />
             </div>
