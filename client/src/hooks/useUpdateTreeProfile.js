@@ -54,7 +54,7 @@ const useUpdateTreeProfile = (treeUID) => {
         // finally {
         //     setLoading(false);
         // }
-    }, [treeUID]);
+    }, [treeUID,removeItem, push ]);
 
     // return { updateTreeProfile, loading };
     return { updateTreeProfile };

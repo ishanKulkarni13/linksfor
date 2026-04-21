@@ -66,7 +66,7 @@ export const useTreeUID = () => {
         };
 
         updateTreeUID();
-    }, []); // Only run this effect once on component mount
+    }, [setItem, getItem, removeItem , push]); // Only run this effect once on component mount
 
     return treeUID;
 };
