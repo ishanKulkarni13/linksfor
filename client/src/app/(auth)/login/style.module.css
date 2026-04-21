@@ -1,9 +1,8 @@
 .container{
     display: flex;
-    justify-content: center;align-items: center;
-    height: 100vh;
+    justify-content: center;
+    align-items: center;
     height: 100dvh;
-    min-height: 100vh;
     background: var(--color-background);
 }
 .loginBox {
