@@ -57,18 +57,18 @@
 .heroActions {
   display: flex;
   gap: 16px;
-  margin-top: 8px;
+  /* margin-top: 8px; */
 }
 
 .getStarted,
 .adminConsole {
+  min-width: fit-content;
+  padding: 12px 32px;
   background-color: var(--color-primary, #4f46e5);
   color: var(--color-text-contrast-primary, #fff);
   border: none;
   font-size: 1.15em;
   border-radius: 50px;
-  min-width: fit-content;
-  padding: 12px 32px;
   font-weight: 600;
   box-shadow: 0 2px 8px 0 rgba(79, 70, 229, 0.08);
   transition: background 0.15s, box-shadow 0.15s;
@@ -95,6 +95,12 @@
 }
 .login:hover {
   background: rgba(79, 70, 229, 0.07);
+}
+
+.homeAuthLinksSkeleton{
+  height: 50px;
+  width: 170px;
+  border: 2px solid red;
 }
 
 .profilePreview {
@@ -284,10 +290,7 @@
     align-items: center;
     text-align: center;
   }
-  .profilePreview {
-    /* flex: 1 1 0; */
-    /* justify-content: flex-start; */
-  }
+  
   .profileScreenshot {
     width: 100%;
     max-width: 400px;

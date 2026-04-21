@@ -1,8 +1,8 @@
-import { auth } from "@/auth";
 import React from "react";
 import styles from "./home.module.css";
 import Link from "next/link";
 import Image from "next/image";
+import HomeAuthLinks from "./homeAuthLinks";
 
 // Example profile preview (screenshot)
 function ProfilePreview() {
@@ -135,8 +135,7 @@ function Footer() {
 }
 
 export default async function page() {
-  const session = await auth();
-  const user = session?.user;
+
 
   return (
     <main className={styles.main}>
@@ -149,23 +148,7 @@ export default async function page() {
               Share your socials, websites, shops, and more with a single link.
               Beautiful, fast, and totally free.
             </p>
-            {!user ? (
-              <div className={styles.heroActions}>
-                <Link className={styles.getStarted} href="/login">
-                  Get started
-                </Link>
-                <Link className={styles.login} href="/login">
-                  Login
-                </Link>
-              </div>
-            ) : (
-              <Link
-                className={styles.adminConsole}
-                href="/admin/tree/edit/appearance"
-              >
-                Admin Console
-              </Link>
-            )}
+            <HomeAuthLinks/>
           </div>
           <ProfilePreview />
         </div>
