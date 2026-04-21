@@ -30,7 +30,7 @@ export default function Social({ link, deleteSocial, treeUID }) {
   const closePopup = () => setPopup();
   const openPopup = (e) => setPopup(e.currentTarget.getAttribute("data-popup"));
 
-  const debouncelinkData = useDebounce(linkData, 3000);
+  const debouncelinkData = useDebounce(linkData, 1500);
 
   const handelDeleteButtonClick = () => {
     setIsLoading({ ...isLoading, deleting: true });
@@ -62,7 +62,7 @@ export default function Social({ link, deleteSocial, treeUID }) {
   
     useEffect(()=>{
       setIsLoading({...isLoading, mounted: true})
-    }, [])
+    }, [isLoading, sendLinkTitleAndURLToBackend])
 
 
   const sendLinkTitleAndURLToBackend = async () => {

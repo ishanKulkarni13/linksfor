@@ -30,7 +30,7 @@ export default function Link({ link, deleteLink, treeUID }) {
     mounted: false,
   });
 
-  const debouncelinkData = useDebounce(linkData, 3000);
+  const debouncelinkData = useDebounce(linkData, 1500);
 
   const closePopup = () => setPopup();
   const openPopup = (e) => setPopup(e.currentTarget.getAttribute("data-popup"));

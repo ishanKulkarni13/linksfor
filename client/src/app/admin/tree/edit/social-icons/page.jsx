@@ -20,7 +20,7 @@ export default function SocialIconsEditor() {
   const [selectedSocialIconsPlacement, setSelectedSocialIconsPlacement] =
     useState("");
   const [reorderedLinksUID, setReorderedLinksUID] = useState();
-  const debouncelinksUIDOrder = useDebounce(reorderedLinksUID, 3000);
+  const debouncelinksUIDOrder = useDebounce(reorderedLinksUID, 1500);
   const { redirectToSelectTree } = useHandelReselectTree();
 
   const updateSocials = async () => {

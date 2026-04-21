@@ -15,7 +15,7 @@ export default function EditTreeTitleAndBio({ treeUID, treeProfile }) {
     title: treeProfile.treeName,
     bio: treeProfile.treeBio,
   });
-  const debounceTitleAndBio = useDebounce(titleAndBio, 3000);
+  const debounceTitleAndBio = useDebounce(titleAndBio, 1500);
   const [warning, setWarning] = useState("");
   const isServerUpdate = useRef(false);
   const textareaRef = useRef(null);
