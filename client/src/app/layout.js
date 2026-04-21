@@ -5,6 +5,7 @@ import { Toaster } from "sonner";
 import NextTopLoader from "nextjs-toploader";
 import { Analytics } from "@vercel/analytics/next";
 const inter = Inter({ subsets: ["latin"] });
+import { SessionProvider } from "next-auth/react";
 
 export const metadata = {
   title: "Linksfor",
@@ -16,7 +17,8 @@ export default function RootLayout({ children }) {
     <html suppressHydrationWarning lang="en"  >
       <body  className={`${inter.className}`} >
         <ThemeProvider attribute="class"  defaultTheme = 'dark'>
-          < >
+          <SessionProvider>
+          <>
             <>
              {children}
              </>
@@ -28,7 +30,7 @@ export default function RootLayout({ children }) {
              <Toaster position="top-left" richColors closeButton={true} pauseWhenPageIsHidden={true} />
 
           </>
-         
+         </SessionProvider>
         </ThemeProvider>
         <Analytics /> {/* For Vercel Web Analytics tool */}
         
