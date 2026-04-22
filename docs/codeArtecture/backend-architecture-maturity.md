@@ -23,7 +23,7 @@ This plan targets:
 
 ## Step-by-Step Implementation
 
-## Step 1: Route Handler Thinness Contract
+### Step 1: Route Handler Thinness Contract
 
 Implement rules for migrated handlers:
 
@@ -35,7 +35,7 @@ Exit criteria:
 
 - Migrated handlers call only DTO parser + application service + response mapper.
 
-## Step 2: Application Services
+### Step 2: Application Services
 
 Create services by feature verticals:
 
@@ -48,7 +48,7 @@ Service design rules:
 - Inputs and outputs are typed.
 - Return `Result<T, AppError>` and never transport types.
 
-## Step 3: Repository Interfaces
+### Step 3: Repository Interfaces
 
 Create contracts in domain/application boundary:
 
@@ -63,7 +63,7 @@ Each repository should expose intention-revealing methods (examples):
 
 Then add infrastructure implementations using Mongoose.
 
-## Step 4: Unified Result + Error Model
+### Step 4: Unified Result + Error Model
 
 Add shared primitives:
 
@@ -75,7 +75,7 @@ Add API mapper:
 - maps domain/application errors to stable API shape.
 - ensures consistent status codes and payload contract.
 
-## Step 5: Domain Invariants and Value Objects
+### Step 5: Domain Invariants and Value Objects
 
 Model key concepts with typed value objects and validation at creation time:
 

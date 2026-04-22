@@ -23,7 +23,7 @@ This plan targets:
 
 ## Implementation Steps
 
-## Step 1: Type Boundary Baseline
+### Step 1: Type Boundary Baseline
 
 Add typed contracts for each migrated flow:
 
@@ -34,7 +34,7 @@ Add typed contracts for each migrated flow:
 
 Rule: no untyped `req.json()` usage in migrated handlers.
 
-## Step 2: Schema-First DTO Validation
+### Step 2: Schema-First DTO Validation
 
 Adopt schema-first validation for boundary inputs and derive TS types from schema:
 
@@ -45,7 +45,7 @@ Expected outcome:
 
 - runtime validation + compile-time type safety
 
-## Step 3: Shared Type Utilities
+### Step 3: Shared Type Utilities
 
 Add shared type primitives:
 
@@ -55,7 +55,7 @@ Add shared type primitives:
 - typed identifiers (`UserId`, `TreeId`, `TreeUID`, `LinkUID`)
 - `AuthContext` and `SessionContext`
 
-## Step 4: Strictness and Lint Rules
+### Step 4: Strictness and Lint Rules
 
 Evolve strictness in controlled stages:
 
@@ -64,7 +64,7 @@ Evolve strictness in controlled stages:
 3. no untyped exported functions in migrated modules
 4. fail CI on TS regressions
 
-## Step 5: Vertical Slice Playbook
+### Step 5: Vertical Slice Playbook
 
 For each slice:
 

@@ -18,10 +18,10 @@ This plan targets:
 
 Requirements:
 
-1. every request gets a correlation id.
-2. all logs are structured JSON in server context.
-3. logs include event name, severity, timestamp, route, user context (safe), and latency.
-4. avoid logging secrets and PII.
+1. Every request gets a correlation id.
+2. All logs are structured JSON in server context.
+3. Logs include event name, severity, timestamp, route, user context (safe), and latency.
+4. Avoid logging secrets and PII.
 
 Baseline events to capture:
 

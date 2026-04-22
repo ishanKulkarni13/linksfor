@@ -10,7 +10,7 @@ Layered clean architecture with explicit dependency direction:
 
 ## 2. Layer Responsibilities
 
-## Interface Layer
+### Interface Layer
 
 Responsibilities:
 - Accept HTTP requests.
@@ -27,7 +27,7 @@ Forbidden:
 - Direct model queries
 - Business rule branching
 
-## Application Layer
+### Application Layer
 
 Responsibilities:
 - Orchestrate use cases.
@@ -42,7 +42,7 @@ Forbidden:
 - HTTP request/response primitives
 - Framework-specific session APIs
 
-## Domain Layer
+### Domain Layer
 
 Responsibilities:
 - Core business invariants.
@@ -55,7 +55,7 @@ Allowed imports:
 Forbidden:
 - Next.js, Express, Mongoose, auth providers
 
-## Infrastructure Layer
+### Infrastructure Layer
 
 Responsibilities:
 - Mongoose repository implementations.

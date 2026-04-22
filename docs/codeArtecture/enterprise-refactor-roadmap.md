@@ -65,7 +65,7 @@ Optimize fetch/state flow, remove redundant logic, and add observability and reg
 
 ## 5. Phased Execution Plan
 
-## Phase 0 - Rules and Baseline
+### Phase 0 - Rules and Baseline
 
 - Define architecture boundaries and naming conventions.
 - Define commit strategy and code quality gates.
@@ -75,7 +75,7 @@ Exit criteria:
 - Refactor rules documented.
 - Team/agents aligned on layers and boundaries.
 
-## Phase 1 - Security and Reliability Stabilization
+### Phase 1 - Security and Reliability Stabilization
 
 - Fix critical auth/session null-check paths.
 - Normalize error responses.
@@ -86,7 +86,7 @@ Exit criteria:
 - Critical runtime and security hazards resolved.
 - Protected routes fail safely and consistently.
 
-## Phase 2 - Auth Portability Layer
+### Phase 2 - Auth Portability Layer
 
 - Create auth abstraction contract (session access, user identity, sign-in/out triggers).
 - Replace direct provider calls in app code with boundary APIs.
@@ -95,7 +95,7 @@ Exit criteria:
 Exit criteria:
 - Route/service code no longer depends on provider-specific APIs directly.
 
-## Phase 3 - Backend Layering (Repo + Service)
+### Phase 3 - Backend Layering (Repo + Service)
 
 - Extract business logic from route handlers to services.
 - Introduce repository interfaces and implementations.
@@ -104,7 +104,7 @@ Exit criteria:
 Exit criteria:
 - No direct model queries in interface handlers for migrated slices.
 
-## Phase 4 - TypeScript Hardening
+### Phase 4 - TypeScript Hardening
 
 - Convert by vertical slices to TS.
 - Add typed DTOs for inputs/outputs.
@@ -114,7 +114,7 @@ Exit criteria:
 Exit criteria:
 - New and migrated slices compile with strict type checks.
 
-## Phase 5 - State and Data Strategy Modernization
+### Phase 5 - State and Data Strategy Modernization
 
 - Use TanStack Query for server state.
 - Use Zustand for local app/workflow state only.
@@ -123,7 +123,7 @@ Exit criteria:
 Exit criteria:
 - Deterministic state model and reduced data-fetch duplication.
 
-## Phase 6 - Performance and Observability
+### Phase 6 - Performance and Observability
 
 - Add structured logging and error instrumentation.
 - Add key performance budgets and profiling checkpoints.
@@ -131,7 +131,7 @@ Exit criteria:
 Exit criteria:
 - Measurable baselines and no hidden regressions.
 
-## Phase 7 - Framework and Dependency Modernization
+### Phase 7 - Framework and Dependency Modernization
 
 - Upgrade Next.js and critical libs in controlled increments.
 - Validate compatibility with architecture boundaries.
@@ -139,7 +139,7 @@ Exit criteria:
 Exit criteria:
 - Stable app on modern stack with test-backed confidence.
 
-## Phase 8 - Better Auth Integration
+### Phase 8 - Better Auth Integration
 
 - Implement Better Auth adapter behind the auth boundary.
 - Migrate provider integration without rewriting application/domain layers.
@@ -147,7 +147,7 @@ Exit criteria:
 Exit criteria:
 - Provider swap completed with existing behavior preserved.
 
-## Phase 9 - Governance and Scale
+### Phase 9 - Governance and Scale
 
 - Add CI quality gates, architecture checks, and standards enforcement.
 - Maintain ADRs and coding standards for long-term growth.
