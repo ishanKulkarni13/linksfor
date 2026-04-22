@@ -10,10 +10,16 @@ This folder is the source of truth for the enterprise refactor.
   - Target layered architecture for portability (Next.js now, Express-ready later).
 - `codeArtecture/backend-architecture-maturity.md`
   - Future implementation plan for service/repository layering, thin handlers, and unified errors/results.
+- `codeArtecture/backend-maturity-execution-checklist.md`
+  - Practical checklist for migrating backend flows into thin handlers, services, and repositories.
 - `codeArtecture/typescript-maturity.md`
   - Future implementation plan for strict TypeScript, schema-inferred DTOs, and CI type gates.
+- `codeArtecture/typescript-rollout-checklist.md`
+  - Vertical-slice checklist for type-safe migration and strictness gates.
 - `codeArtecture/observability-operability.md`
   - Future implementation plan for logs, tracing, alerts, SLOs, and incident runbooks.
+- `codeArtecture/observability-runbook-template.md`
+  - Incident runbook template for operations, debugging, and postmortems.
 - `ai-agents/agent-operating-manual.md`
   - Execution instructions for AI agents and contributors.
 - `ai-agents/commit-playbook.md`
