@@ -20,6 +20,8 @@ This folder is the source of truth for the enterprise refactor.
   - Future implementation plan for logs, tracing, alerts, SLOs, and incident runbooks.
 - `codeArtecture/observability-runbook-template.md`
   - Incident runbook template for operations, debugging, and postmortems.
+- `codeArtecture/error-handling-and-response-contract.md`
+  - Canonical error-code enum, unified API response envelope, and centralized status mapping plan.
 - `ai-agents/agent-operating-manual.md`
   - Execution instructions for AI agents and contributors.
 - `ai-agents/commit-playbook.md`

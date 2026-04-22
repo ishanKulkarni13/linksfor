@@ -148,6 +148,10 @@ Use a consistent error taxonomy:
 
 Each error maps deterministically to HTTP response shape and status code.
 
+Contract reference:
+
+- `codeArtecture/error-handling-and-response-contract.md`
+
 ## 8. Express Portability Strategy
 
 To move to Express later:

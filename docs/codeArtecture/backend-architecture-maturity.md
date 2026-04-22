@@ -74,6 +74,7 @@ Add API mapper:
 
 - maps domain/application errors to stable API shape.
 - ensures consistent status codes and payload contract.
+- uses canonical error codes and response envelope from `codeArtecture/error-handling-and-response-contract.md`.
 
 ### Step 5: Domain Invariants and Value Objects
 

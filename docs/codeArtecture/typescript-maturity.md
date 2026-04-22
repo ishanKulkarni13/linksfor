@@ -54,6 +54,11 @@ Add shared type primitives:
 - `Paginated<T>`
 - typed identifiers (`UserId`, `TreeId`, `TreeUID`, `LinkUID`)
 - `AuthContext` and `SessionContext`
+- canonical `ErrorCode` enum and standardized API success/failure envelope types
+
+Contract reference:
+
+- `codeArtecture/error-handling-and-response-contract.md`
 
 ### Step 4: Strictness and Lint Rules
 

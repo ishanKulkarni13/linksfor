@@ -30,6 +30,10 @@ Baseline events to capture:
 - DB query latency warning thresholds
 - external service errors (Cloudinary/auth providers)
 
+Contract reference:
+
+- `codeArtecture/error-handling-and-response-contract.md`
+
 ## Pillar 2: Error Tracking and Alerting
 
 Requirements:
@@ -37,6 +41,7 @@ Requirements:
 1. central error ingestion for unhandled exceptions and critical handled failures.
 2. route alerts to ownership groups by domain (auth, api, db, infra).
 3. deduplicate noisy errors and track regression spikes.
+4. log and alert by canonical error codes for reliable triage.
 
 Alert severity:
 
