@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "client"
+		},
+		{
+			"path": "docs"
+		}
+	],
+	"settings": {
+		"prisma-smart-formatter.typescript.defaultFormatter": "esbenp.prettier-vscode",
+		"prisma-smart-formatter.typescriptreact.defaultFormatter": "esbenp.prettier-vscode"
+	}
+}
